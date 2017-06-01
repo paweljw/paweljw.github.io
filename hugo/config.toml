@@ -1,0 +1,18 @@
+baseURL = "https://paweljw.github.io/"
+languageCode = "pl-pl"
+title = "Shenanigans!"
+theme = "beautifulhugo"
+author = "Paweł J. Wal"
+publishDir = "../"
+
+[Params]
+  Subtitle = "ramblings on hacking and science"
+  logo = "img/avatar-icon.png"
+  favicon = "img/favicon.ico"
+
+[Author]
+  name = "Paweł J. Wal"
+  email = "p@steamshard.net"
+  github = "paweljw"
+  twitter = "paweljwal"
+  linkedin = "paweł-wal-a478a785"

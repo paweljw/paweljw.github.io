@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://paweljw.github.io/post/javascript-alien-generator/</loc>
+    <lastmod>2017-05-28T15:47:59+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://paweljw.github.io/post/how-many-cats-can-eat-a-human/</loc>
+    <lastmod>2017-02-28T21:02:24+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://paweljw.github.io/post/cup-of-coins-revisited/</loc>
+    <lastmod>2017-01-03T20:24:17+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://paweljw.github.io/post/ultrasonic-theremin/</loc>
+    <lastmod>2015-02-28T21:17:45+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://paweljw.github.io/tags/aliens/</loc>
+    <lastmod>2017-05-28T15:47:59+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://paweljw.github.io/tags/arduino/</loc>
+    <lastmod>2015-02-28T21:17:45+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://paweljw.github.io/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://paweljw.github.io/tags/cats/</loc>
+    <lastmod>2017-02-28T21:02:24+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://paweljw.github.io/tags/javascript/</loc>
+    <lastmod>2017-05-28T15:47:59+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://paweljw.github.io/tags/music/</loc>
+    <lastmod>2015-02-28T21:17:45+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://paweljw.github.io/post/</loc>
+    <lastmod>2017-05-28T15:47:59+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://paweljw.github.io/tags/saturdayproject/</loc>
+    <lastmod>2017-05-28T15:47:59+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://paweljw.github.io/tags/science/</loc>
+    <lastmod>2017-02-28T21:02:24+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://paweljw.github.io/</loc>
+    <lastmod>2017-05-28T15:47:59+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://paweljw.github.io/tags/</loc>
+    <lastmod>2017-05-28T15:47:59+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+</urlset>

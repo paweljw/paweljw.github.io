@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Ultrasonic theremin | A weblog by Paweł J. Wal</title>
+  <meta property="og:title" content="Ultrasonic theremin" />
+  <meta name="twitter:title" content="Ultrasonic theremin" />
+  <meta name="description" content="I’ve been wanting to construct an instrument in the spirit of a theremin for quite a while. Of course, I have neither the skills to construct a proper theremin, nor the time to master them. What I do have is an Arduino board, some sensors and a couple of spare parts.
+
+">
+  <meta property="og:description" content="I’ve been wanting to construct an instrument in the spirit of a theremin for quite a while. Of course, I have neither the skills to construct a proper theremin, nor the time to master them. What I do have is an Arduino board, some sensors and a couple of spare parts.
+
+">
+  <meta name="twitter:description" content="I’ve been wanting to construct an instrument in the spirit of a theremin for quite a while. Of course, I have neither the skills to construct a proper theremin, nor the time to master them. What I do …">
+  <meta name="author" content="Paweł J. Wal"/>
+  <link href='https://paweljw.github.io/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta property="og:image" content="https://paweljw.github.io/img/avatar-icon.png" />
+  <meta name="twitter:image" content="https://paweljw.github.io/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@paweljwal" />
+  <meta name="twitter:creator" content="@paweljwal" />
+  <meta property="og:url" content="https://paweljw.github.io/post/ultrasonic-theremin/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Shenanigans!" />
+
+  <meta name="generator" content="Hugo 0.21" />
+  <link rel="canonical" href="https://paweljw.github.io/post/ultrasonic-theremin/" />
+  <link rel="alternate" href="https://paweljw.github.io/index.xml" type="application/rss+xml" title="Shenanigans!">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://paweljw.github.io/css/main.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://paweljw.github.io/css/pygment_highlights.css" />
+  <link rel="stylesheet" href="https://paweljw.github.io/css/highlight.min.css" />
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://paweljw.github.io/">Shenanigans!</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="Shenanigans!" href="https://paweljw.github.io/">
+            <img class="avatar-img" src="https://paweljw.github.io/img/avatar-icon.png" alt="Shenanigans!" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://paweljw.github.io/media/theremin_build.jpg" data-img-desc-1="Ultrasonic theremin"></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+              <div class="post-heading">
+                <h1>Ultrasonic theremin</h1>
+                  
+                  
+                    <span class="post-meta">
+  Posted on February 28, 2015
+  
+</span>
+
+
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>Ultrasonic theremin</h1>
+                
+                
+                  <span class="post-meta">
+  Posted on February 28, 2015
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>I’ve been wanting to construct an instrument in the spirit of a theremin for quite a while. Of course, I have neither the skills to construct a proper theremin, nor the time to master them. What I do have is an Arduino board, some sensors and a couple of spare parts.</p>
+
+<p></p>
+
+<h1 id="what-are-we-building">What are we building?</h1>
+
+<p>We’re building a very simple device which will emit different notes based on how far the user’s hand is from the head of the device.</p>
+
+<h1 id="materials">Materials</h1>
+
+<p>Only a couple things are needed. For the sound piece, I used a salvaged PC speaker.</p>
+
+
+
+<div class="box" >
+  <figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <div class="img">
+      <img itemprop="thumbnail" src="/media/theremin_speaker.jpg" />
+    </div>
+    <a href="/media/theremin_speaker.jpg" itemprop="contentUrl"></a>
+  </figure>
+</div>
+
+<p>Speakers. It’s one of those parts that somehow find their way into my room in numbers, and I never notice until I find a pile of, say, five. In a completely random place.</p>
+
+<p>The second part I used is probably much less likely to find it’s way to you as a scrap part:</p>
+
+
+
+<div class="box" >
+  <figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <div class="img">
+      <img itemprop="thumbnail" src="/media/theremin_hc_sr04.jpg" />
+    </div>
+    <a href="/media/theremin_hc_sr04.jpg" itemprop="contentUrl"></a>
+  </figure>
+</div>
+
+<p>It’s a HC-SR04 ultrasonic ranging module. Not only does “ultrasonic ranging module” sound very cool, it’s also pretty accurate.</p>
+
+<h1 id="the-build">The build</h1>
+
+<p>The build is actually pretty simple:</p>
+
+
+
+<div class="box" >
+  <figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <div class="img">
+      <img itemprop="thumbnail" src="/media/theremin_build.jpg" />
+    </div>
+    <a href="/media/theremin_build.jpg" itemprop="contentUrl"></a>
+  </figure>
+</div>
+
+<p>The speaker is connected to pin 11 through a 10k ohm resistor (you could use a much smaller resistor, even 100 ohm will do; I wanted mine extra quiet) and to ground.</p>
+
+<p>5V is connected to a rail, then through two jumpers (one over rail break) to Vcc pin on the HC-SR04. The appropriate ground is connected to GND pin, and trigger pin and echo pin are connected to pins 10 and 8, respectively. Since this is probably confusing, here’s a Fritzing diagram:</p>
+
+
+<link rel="stylesheet" href="/css/hugo-easy-gallery.css" />
+<div class="box" >
+  <figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <div class="img">
+      <img itemprop="thumbnail" src="/media/theremin_bb.png" />
+    </div>
+    <a href="/media/theremin_bb.png" itemprop="contentUrl"></a>
+  </figure>
+</div>
+
+<h1 id="the-code">The code</h1>
+
+<p>The code is also pretty simple. I’m using two libraries - NewPing and TonePlayer. The built-in tone library was too limited, and to my knowledge - clashes drastically with NewPing.</p>
+
+<pre><code>#include &lt;NewPing.h&gt;
+#include &lt;TonePlayer.h&gt;
+
+#define TRIGGER_PIN    10
+#define ECHO_PIN       8
+#define TONE_PIN        2
+
+#define PROBING_DELAY 500 // how often do the ping and play the note
+
+#define RANGE_START   293 // note frequency closest to sensor
+
+#define RANGE_LENGTH   60 // cm
+#define FREQ_PER_SLOT  16 // frequency change per slot
+#define SLOT_LEN        5 // per note, in cm
+
+#define US_PER_CM 57
+
+TonePlayer tone1 (TCCR1A, TCCR1B, OCR1AH, OCR1AL, TCNT1H, TCNT1L);
+NewPing sonar(TRIGGER_PIN, ECHO_PIN, RANGE_LENGTH);
+
+void setup()
+{
+  pinMode(11, OUTPUT);
+}
+
+void loop()
+{
+  unsigned long duration;
+  int distance;
+
+  duration = sonar.ping();
+  distance = duration / US_PER_CM;
+
+  if(distance &gt; 0 &amp;&amp; distance &lt;= RANGE_LENGTH)
+  {
+    distance /= SLOT_LEN;
+    distance += 1;
+    int freq = RANGE_START + FREQ_PER_SLOT * distance;
+    tone1.tone(freq);
+  } else {
+    tone1.noTone();
+  }
+
+  delay(PROBING_DELAY);
+}
+</code></pre>
+
+<p>In every loop, duration of round-trip for the sensor is taken with sonar.ping(). Then, it’s converted to centimeters (using 57 microseconds of round trip per centimeter as base). Then, if the taken reading is not out of range, the frequency for the particular 5cm slot is calculated; the slots are placed with lower pitch closer to the head of the device, changing by 16Hz (approximately a halfnote) every 5cm. Then the note is played, or if reading out of range - playback is stopped.</p>
+
+<h1 id="the-demo">The demo</h1>
+
+<p>And it actually works! Although playing anything on it is a pain in the arse. Here’s an 18 second demo by yours truly (you might need to crank your speakers up):</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/C0EGJaaNFj0" frameborder="0" allowfullscreen></iframe>
+
+<p>All in all, a pretty fun project you can throw together in a couple of hours.</p>
+      </article>
+
+      <ul class="pager blog-pager">
+        
+        
+          <li class="next">
+            <a href="https://paweljw.github.io/post/cup-of-coins-revisited/" data-toggle="tooltip" data-placement="top" title="A Cup of Coins, Revisited">Next Post &rarr;</a>
+          </li>
+        
+      </ul>
+
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:p@steamshard.net" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/paweljw" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/paweljwal" title="Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://linkedin.com/in/pawe%c5%82-wal-a478a785" title="LinkedIn">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          Paweł J. Wal
+          &nbsp;&bull;&nbsp;
+          2017
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://paweljw.github.io/">Shenanigans!</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.21</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://paweljw.github.io/js/main.js"></script>
+<script src="https://paweljw.github.io/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> renderMathInElement(document.body); </script>
+
+
+
+
+
+  </body>
+</html>
+
