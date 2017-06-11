@@ -8,10 +8,21 @@
     <language>pl-pl</language>
     <managingEditor>p@steamshard.net (Paweł J. Wal)</managingEditor>
     <webMaster>p@steamshard.net (Paweł J. Wal)</webMaster>
-    <lastBuildDate>Sun, 28 May 2017 15:47:59 +0200</lastBuildDate>
+    <lastBuildDate>Sun, 11 Jun 2017 11:48:27 +0200</lastBuildDate>
     
 	<atom:link href="https://paweljw.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Saturday Project: Monster Hunting with Vue.js</title>
+      <link>https://paweljw.github.io/post/saturday-project-monster-hunter/</link>
+      <pubDate>Sun, 11 Jun 2017 11:48:27 +0200</pubDate>
+      <author>p@steamshard.net (Paweł J. Wal)</author>
+      <guid>https://paweljw.github.io/post/saturday-project-monster-hunter/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;m studying Vue.js right now - here&amp;rsquo;s a simple app that I made in the process.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Saturday Project: Alien Generator in JavaScript</title>
