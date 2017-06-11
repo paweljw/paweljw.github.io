@@ -8,7 +8,7 @@
     <language>pl-pl</language>
     <managingEditor>p@steamshard.net (Paweł J. Wal)</managingEditor>
     <webMaster>p@steamshard.net (Paweł J. Wal)</webMaster>
-    <lastBuildDate>Sun, 11 Jun 2017 11:48:27 +0200</lastBuildDate>
+    <lastBuildDate>Sun, 28 May 2017 15:47:59 +0200</lastBuildDate>
     
 	<atom:link href="https://paweljw.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -16,7 +16,7 @@
     <item>
       <title>Aliens</title>
       <link>https://paweljw.github.io/tags/aliens/</link>
-      <pubDate>Sun, 11 Jun 2017 11:48:27 +0200</pubDate>
+      <pubDate>Sun, 28 May 2017 15:47:59 +0200</pubDate>
       <author>p@steamshard.net (Paweł J. Wal)</author>
       <guid>https://paweljw.github.io/tags/aliens/</guid>
       <description></description>
@@ -50,6 +50,15 @@
     </item>
     
     <item>
+      <title>Monsters</title>
+      <link>https://paweljw.github.io/tags/monsters/</link>
+      <pubDate>Sun, 11 Jun 2017 11:48:27 +0200</pubDate>
+      <author>p@steamshard.net (Paweł J. Wal)</author>
+      <guid>https://paweljw.github.io/tags/monsters/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Music</title>
       <link>https://paweljw.github.io/tags/music/</link>
       <pubDate>Sat, 28 Feb 2015 21:17:45 +0200</pubDate>
@@ -73,6 +82,15 @@
       <pubDate>Tue, 28 Feb 2017 21:02:24 +0200</pubDate>
       <author>p@steamshard.net (Paweł J. Wal)</author>
       <guid>https://paweljw.github.io/tags/science/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vue.Js</title>
+      <link>https://paweljw.github.io/tags/vue.js/</link>
+      <pubDate>Sun, 11 Jun 2017 11:48:27 +0200</pubDate>
+      <author>p@steamshard.net (Paweł J. Wal)</author>
+      <guid>https://paweljw.github.io/tags/vue.js/</guid>
       <description></description>
     </item>
     

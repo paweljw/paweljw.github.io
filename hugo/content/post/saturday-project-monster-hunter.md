@@ -4,7 +4,8 @@ title: "Saturday Project: Monster Hunting with Vue.js"
 coverImage: /media/monsterhunter.png
 tags:
 - javascript
-- aliens
+- vue.js
+- monsters
 - saturdayproject
 ---
 
