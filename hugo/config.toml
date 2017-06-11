@@ -16,3 +16,7 @@ publishDir = "../"
   github = "paweljw"
   twitter = "paweljwal"
   linkedin = "paweł-wal-a478a785"
+
+[taxonomies]
+  tag = "tags"
+  category = "categories"
