@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Shenanigans!</title>
+    <link>https://paweljw.github.io/tags/</link>
+    <description>Recent content in Tags on Shenanigans!</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pl-pl</language>
+    <managingEditor>p@steamshard.net (Paweł J. Wal)</managingEditor>
+    <webMaster>p@steamshard.net (Paweł J. Wal)</webMaster>
+    <lastBuildDate>Sun, 11 Jun 2017 11:48:27 +0200</lastBuildDate>
+    
+	<atom:link href="https://paweljw.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Aliens</title>
+      <link>https://paweljw.github.io/tags/aliens/</link>
+      <pubDate>Sun, 11 Jun 2017 11:48:27 +0200</pubDate>
+      <author>p@steamshard.net (Paweł J. Wal)</author>
+      <guid>https://paweljw.github.io/tags/aliens/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Arduino</title>
+      <link>https://paweljw.github.io/tags/arduino/</link>
+      <pubDate>Sat, 28 Feb 2015 21:17:45 +0200</pubDate>
+      <author>p@steamshard.net (Paweł J. Wal)</author>
+      <guid>https://paweljw.github.io/tags/arduino/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Cats</title>
+      <link>https://paweljw.github.io/tags/cats/</link>
+      <pubDate>Tue, 28 Feb 2017 21:02:24 +0200</pubDate>
+      <author>p@steamshard.net (Paweł J. Wal)</author>
+      <guid>https://paweljw.github.io/tags/cats/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Javascript</title>
+      <link>https://paweljw.github.io/tags/javascript/</link>
+      <pubDate>Sun, 11 Jun 2017 11:48:27 +0200</pubDate>
+      <author>p@steamshard.net (Paweł J. Wal)</author>
+      <guid>https://paweljw.github.io/tags/javascript/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Music</title>
+      <link>https://paweljw.github.io/tags/music/</link>
+      <pubDate>Sat, 28 Feb 2015 21:17:45 +0200</pubDate>
+      <author>p@steamshard.net (Paweł J. Wal)</author>
+      <guid>https://paweljw.github.io/tags/music/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Saturdayproject</title>
+      <link>https://paweljw.github.io/tags/saturdayproject/</link>
+      <pubDate>Sun, 11 Jun 2017 11:48:27 +0200</pubDate>
+      <author>p@steamshard.net (Paweł J. Wal)</author>
+      <guid>https://paweljw.github.io/tags/saturdayproject/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Science</title>
+      <link>https://paweljw.github.io/tags/science/</link>
+      <pubDate>Tue, 28 Feb 2017 21:02:24 +0200</pubDate>
+      <author>p@steamshard.net (Paweł J. Wal)</author>
+      <guid>https://paweljw.github.io/tags/science/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

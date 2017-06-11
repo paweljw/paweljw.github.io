@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Aliens on Shenanigans!</title>
+    <link>https://paweljw.github.io/tags/aliens/</link>
+    <description>Recent content in Aliens on Shenanigans!</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pl-pl</language>
+    <managingEditor>p@steamshard.net (Paweł J. Wal)</managingEditor>
+    <webMaster>p@steamshard.net (Paweł J. Wal)</webMaster>
+    <lastBuildDate>Sun, 11 Jun 2017 11:48:27 +0200</lastBuildDate>
+    
+	<atom:link href="https://paweljw.github.io/tags/aliens/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Saturday Project: Monster Hunting with Vue.js</title>
+      <link>https://paweljw.github.io/post/saturday-project-monster-hunter/</link>
+      <pubDate>Sun, 11 Jun 2017 11:48:27 +0200</pubDate>
+      <author>p@steamshard.net (Paweł J. Wal)</author>
+      <guid>https://paweljw.github.io/post/saturday-project-monster-hunter/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;m studying Vue.js right now - here&amp;rsquo;s a simple app that I made in the process.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Saturday Project: Alien Generator in JavaScript</title>
+      <link>https://paweljw.github.io/post/javascript-alien-generator/</link>
+      <pubDate>Sun, 28 May 2017 15:47:59 +0200</pubDate>
+      <author>p@steamshard.net (Paweł J. Wal)</author>
+      <guid>https://paweljw.github.io/post/javascript-alien-generator/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve been studying ES6 a lot lately. Here&amp;rsquo;s a fun little project that we can do with it over an hour or so on a Saturday: an alien generator!&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
