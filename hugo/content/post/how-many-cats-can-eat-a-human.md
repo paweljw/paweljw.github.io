@@ -6,6 +6,7 @@ tags:
 - cats
 coverImage: http://cutecatshq.com/wp-content/uploads/2015/03/Cat-horde.jpg
 bigimg: [{src: "http://cutecatshq.com/wp-content/uploads/2015/03/Cat-horde.jpg"}]
+comments: true
 ---
 
 Once again, the love of my life took to asking me weird questions. This time, the question is: how many cats does it take to eat a human?

@@ -6,6 +6,7 @@ tags:
 - science
 coverImage: https://www.colourbox.com/preview/2966762-aluminum-cup-filled-with-coins.jpg
 bigimg: [{src: "https://www.colourbox.com/preview/2966762-aluminum-cup-filled-with-coins.jpg"}]
+comments: true
 ---
 
 It all started out simple, really: I’ve been watching some cartoon - I think it was something in The Penguins of Madagascar series - with my fiancee, Magda, and something to the effect of “I’d like to borrow a cup of coins” was uttered in the show. She looked to me and said jokingly, “I’ll buy a cup of coins off you for 1 [PLN](https://en.wikipedia.org/wiki/Polish_z%C5%82oty)”.

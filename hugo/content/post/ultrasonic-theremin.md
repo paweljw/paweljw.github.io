@@ -7,6 +7,7 @@ tags:
 - saturdayproject
 coverImage: /media/theremin_build.jpg
 bigimg: [{src: "/media/theremin_build.jpg", desc: 'Ultrasonic theremin'}]
+comments: true
 ---
 
 I’ve been wanting to construct an instrument in the spirit of a theremin for quite a while. Of course, I have neither the skills to construct a proper theremin, nor the time to master them. What I do have is an Arduino board, some sensors and a couple of spare parts.

@@ -7,6 +7,7 @@ tags:
 - javascript
 - aliens
 - saturdayproject
+comments: true
 ---
 
 I've been studying ES6 a lot lately. Here's a fun little project that we can do with it over an hour or so on a Saturday: an alien generator!

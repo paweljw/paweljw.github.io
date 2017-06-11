@@ -7,6 +7,7 @@ tags:
 - vue.js
 - monsters
 - saturdayproject
+comments: true
 ---
 
 I'm studying Vue.js right now - here's a simple app that I made in the process.
