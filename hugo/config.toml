@@ -4,6 +4,7 @@ title = "Shenanigans!"
 theme = "beautifulhugo"
 author = "Paweł J. Wal"
 publishDir = "../"
+disqusShortname = "paweljw-github-io"
 
 [Params]
   Subtitle = "ramblings on hacking and science"
