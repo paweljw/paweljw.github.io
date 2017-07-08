@@ -6,10 +6,20 @@
     <description>Recent content in Saturdayproject on Shenanigans! - a blog on programming, technology and science</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pl-pl</language>
-    <lastBuildDate>Thu, 15 Jun 2017 15:47:42 +0200</lastBuildDate>
+    <lastBuildDate>Sat, 08 Jul 2017 15:26:57 +0200</lastBuildDate>
     
 	<atom:link href="https://paweljw.github.io/tags/saturdayproject/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Rails 5.1 API with Vue.js frontend, part 0: stack choices</title>
+      <link>https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/</link>
+      <pubDate>Sat, 08 Jul 2017 15:26:57 +0200</pubDate>
+      
+      <guid>https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/</guid>
+      <description>I&amp;rsquo;ve been rather busy lately, and my progress in learning Vue.js has slowed down. However, I think that I&amp;rsquo;m ready to dive into making something more resembling a real application that Monster Hunter and GalaxyQuest.
+I believe that you learn best when your objective is teaching it to somebody else. Therefore, over the next couple of weeks I&amp;rsquo;ll be making and refining a simple bookstore app1, using Rails 5.1 for the API backend, and vue.</description>
+    </item>
     
     <item>
       <title>Saturday Project: GalaxyQuest - fuzzily searching github stars</title>

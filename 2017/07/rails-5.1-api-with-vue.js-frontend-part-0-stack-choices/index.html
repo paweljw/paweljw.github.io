@@ -23,7 +23,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.21">
     <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
-    <title>How Many Cats Does It Take to Eat a Human?</title>
+    <title>Rails 5.1 API with Vue.js frontend, part 0: stack choices</title>
     <meta name="author" content="Paweł J. Wal">
     <meta name="keywords" content=", development, ruby, ruby on rails, es6, javascript, electronics, arduino, science">
 
@@ -31,21 +31,18 @@
     
 
     
-    <meta name="description" content="Once again, the love of my life took to asking me weird questions. This time, the question is: how many cats does it take to eat a human?
-
-">
-    <meta property="og:description" content="Once again, the love of my life took to asking me weird questions. This time, the question is: how many cats does it take to eat a human?
-
-">
+    <meta name="description" content="I&rsquo;ve been rather busy lately, and my progress in learning Vue.js has slowed down. However, I think that I&rsquo;m ready to dive into making something more resembling a real application that Monster Hunter and GalaxyQuest.
+I believe that you learn best when your objective is teaching it to somebody else. Therefore, over the next couple of weeks I&rsquo;ll be making and refining a simple bookstore app1, using Rails 5.1 for the API backend, and vue.">
+    <meta property="og:description" content="I&rsquo;ve been rather busy lately, and my progress in learning Vue.js has slowed down. However, I think that I&rsquo;m ready to dive into making something more resembling a real application that Monster Hunter and GalaxyQuest.
+I believe that you learn best when your objective is teaching it to somebody else. Therefore, over the next couple of weeks I&rsquo;ll be making and refining a simple bookstore app1, using Rails 5.1 for the API backend, and vue.">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="How Many Cats Does It Take to Eat a Human?">
-    <meta property="og:url" content="/2017/02/how-many-cats-does-it-take-to-eat-a-human/">
+    <meta property="og:title" content="Rails 5.1 API with Vue.js frontend, part 0: stack choices">
+    <meta property="og:url" content="/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/">
     <meta property="og:site_name" content="Shenanigans! - a blog on programming, technology and science">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Shenanigans! - a blog on programming, technology and science">
-    <meta name="twitter:description" content="Once again, the love of my life took to asking me weird questions. This time, the question is: how many cats does it take to eat a human?
-
-">
+    <meta name="twitter:description" content="I&rsquo;ve been rather busy lately, and my progress in learning Vue.js has slowed down. However, I think that I&rsquo;m ready to dive into making something more resembling a real application that Monster Hunter and GalaxyQuest.
+I believe that you learn best when your objective is teaching it to somebody else. Therefore, over the next couple of weeks I&rsquo;ll be making and refining a simple bookstore app1, using Rails 5.1 for the API backend, and vue.">
     
       <meta name="twitter:creator" content="@paweljwal">
     
@@ -60,7 +57,7 @@
 
     
     
-      <meta property="og:image" content="http://cutecatshq.com/wp-content/uploads/2015/03/Cat-horde.jpg">
+      <meta property="og:image" content="https://paweljw.github.io/media/bookstore.jpg">
     
     
 
@@ -223,20 +220,20 @@ ga('send', 'pageview');
   <div class="post-header-cover
               text-left
               "
-       style="background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('http://cutecatshq.com/wp-content/uploads/2015/03/Cat-horde.jpg'); background-size: cover"
+       style="background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('/media/bookstore.jpg'); background-size: cover"
        data-behavior="5">
     
       <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      How Many Cats Does It Take to Eat a Human?
+      Rails 5.1 API with Vue.js frontend, part 0: stack choices
     </h1>
   
   <div class="postShorten-meta post-meta">
   
-    <time itemprop="datePublished" datetime="2017-02-28T21:02:24&#43;02:00">
+    <time itemprop="datePublished" datetime="2017-07-08T15:26:57&#43;02:00">
       
-   28, 2017
+   8, 2017
 
     </time>
   
@@ -258,63 +255,92 @@ ga('send', 'pageview');
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>Once again, the love of my life took to asking me weird questions. This time, the question is: how many cats does it take to eat a human?</p>
+              
 
-<p></p>
+<p>I&rsquo;ve been rather busy lately, and my progress in learning Vue.js has slowed down. However, I think that I&rsquo;m ready to dive into making
+something more resembling a real application that <a href="http://localhost:1313/2017/06/saturday-project-monster-hunting-with-vue.js/">Monster Hunter</a> and <a href="https://paweljw.github.io/2017/06/saturday-project-galaxyquest---fuzzily-searching-github-stars/">GalaxyQuest</a>.</p>
 
-<p>Well, a hell of a lot.</p>
+<p>I believe that you learn best when your objective is teaching it to somebody else. Therefore, over the next couple of weeks
+I&rsquo;ll be making and refining a simple bookstore app<sup><a href="#ft1" name="fr1">1</a></sup>, using Rails 5.1 for the API backend, and <a href="https://vuejs.org/">vue.js</a>
+with <a href="https://github.com/vuejs/vue-router">vue-router</a> and <a href="https://github.com/pagekit/vue-resource">vue-resource</a> on the
+front end. The goal is that you should be able to follow along!</p>
 
-<h1 id="how-much-does-a-cat-eat">How much does a cat eat?</h1>
+<p>We&rsquo;ll only discuss our architecture choices briefly in this article, and then get cracking in the next parts.</p>
 
-<p>As I was researching this part of the question, it became apparent that it would be much easier were the question to be reversed. While it is very easy to figure out appropriate amounts of white meat, red meat - just about any kind of meat, really - for a human of just about any age, there are very little confirmable and verifiable information on cats.</p>
+<h1 id="why-rails-5-1">Why Rails 5.1?</h1>
 
-<h2 id="how-much-should-a-cat-eat">How much <em>should</em> a cat eat?</h2>
+<p>I love Ruby. I also feel strongly about Rails, since it was my first MVC framework. I have some equally strong and not
+entirely positive feelings about the direction the framework is taking recently - these are perhaps better suited to become
+a separate post. Despite this, however, I think that the API mode in Rails 5.1 is huge, and has a chance to save Rails from
+losing steam amidst the push towards Single Page Applications.</p>
 
-<p>Long story short - we probably won’t be able to ascertain how much a cat <em>can</em> eat. Besides, if my two cats are any indication, they can eat just about any amount of food, then ask for more. There’s hardly any information on how much a cat should eat - at least weight-wise. During my search I did, however, find <a href="http://pets.webmd.com/cats/guide/mistakes-people-make-feeding-cats#1">an article</a> in the Pets section of WebMD, which - while I find WebMD dubious at best - trumps the self-proclaimed veterinarian practicioners so common on, say, Yahoo! Answers. Not to mention said article is not ridden with flamewars, which also counts.</p>
+<p>So far, I&rsquo;ve only had a chance to very cursorally play with the API app generation mode, so I&rsquo;d like to do a bit more of
+that. I&rsquo;m also choosing Rails because this is what I&rsquo;m proficient with, while I&rsquo;m still learning Vue.js. I find that tackling
+two new things at once is sometimes harder than necessary, so this is a nice and safe middle ground.</p>
 
-<p>According to the article, a cat should eat between 24 and 35 calories per pound of weight. I’m not crazy about the imperial scale in this answer, but Wolfram|Alpha can be used to convert <a href="http://www.wolframalpha.com/input/?i=Convert+(24+calories+%2F+1+pound)+to+(calories+%2F+kg)">calories per pound to calories per kilogram</a>. Using that we figure out that a cat should eat roughly 52.91 to 77.16 calories per kilogram of body weight.</p>
+<p>Other choices I would entertain, in the order I&rsquo;d like to play with them:</p>
 
-<h2 id="how-much-does-an-average-cat-weigh">How much does an average cat weigh?</h2>
+<ul>
+<li><a href="http://www.phoenixframework.org/">Phoenix</a> - I&rsquo;ve only taken Elixir for a bit of a spin so far, but I&rsquo;d like to explore the
+concepts of functional programming as applied to MVC frameworks.</li>
+<li><a href="http://hanamirb.org/">Hanami</a> - while it&rsquo;s Ruby, it&rsquo;s based around dry-rb concepts, so a step in an entirely different direction than Rails.</li>
+<li><a href="http://www.sinatrarb.com/">Sinatra</a> - perhaps the choice I&rsquo;d find easiest to work with (and also one that I&rsquo;ve used before).
+If I wanted to make a really tiny app, really fast, I&rsquo;d probably choose this one.</li>
+</ul>
 
-<p>According to <a href="http://www.kittencare.com/cat-body-shape-guide.html">this article</a>, an average cat will weigh between 4.5 and 5.5 kilograms. There are of course extremely large breeds, such as Maine Coon cats, which will reach as much as 8 kilograms, and there are tiny breeds like Russian Blue which weigh around 3 kilograms. I did some additional research, and I’d say it’s safe to assume that our average cat will weigh 5 kilograms.</p>
+<p>You might notice I&rsquo;ve put Sinatra last. That is because I know it best of the mentioned frameworks, so the play factor is
+not there. However, following the idea of simplifying the backend code because I might struggle with the frontend anyway,
+Sinatra would probably be my choice of backend framework.</p>
 
-<h2 id="speaking-of-assumptions">Speaking of assumptions…</h2>
+<h1 id="why-vue-js">Why Vue.js?</h1>
 
-<p>As long as we’re assuming that our average cat weighs 5 kilograms, let’s assume some more things. For the purpose of further calculations I will assume that the weight of the food ingested is of no concern to a cat (of which I believe I’ve seen proof on my very own floor). I will also assume that a cat eats as much as it should and then stops eating (about which I’ve seen some scientific discussion and some flamewars). For the sake of the poor cats I will also assume that our human-devouring horde of fluffy felines has an entire day to do it’s task.</p>
+<p><em>It feels like every time someone says &ldquo;I chose X JavaScript framework over Y&rdquo; on the internet, a local holy crusade suddenly
+erupts. Please remember that this is just my personal opinion and not Jerusalem. Thank you.</em></p>
 
-<h2 id="how-much-is-there-to-eat-on-a-human">How much is there to eat on a human?</h2>
+<p>When I decided to learn a frontend framework in JavaScript, I was deciding between Angular, Ember, React (and it&rsquo;s many
+compatible implementations, such as <a href="https://github.com/developit/preact">Preact</a>) and Vue.js. Performance was one of the
+key factors, but I would also decide against learning a more performant framework (right now) if the example code available
+didn&rsquo;t sit right with me. This was the case with, for example, React, whose concept of JSX components seems a tad off to me
+(on a completely instincitve level).</p>
 
-<p>Now it’s getting morbid. I’m finally starting to enjoy myself here. And it seems that I’m not the only one, since there are a <a href="https://www.quora.com/How-many-calories-are-in-a-human-body">couple</a> of <a href="https://www.quora.com/If-I-ate-a-human-how-many-calories-would-I-get-1">answers</a> to this question on Quora. I am somehow not surprised at all. It is also much easier to find the <a href="http://jezebel.com/a-complete-breakdown-of-the-nutritional-content-of-seme-953356816">nutritional contents of semen</a> than the aforementioned Quora answers, which I find hilarious.</p>
+<p>Therefore my argument shall be simple and based in numbers. <a href="http://www.stefankrause.net/wp/?p=431">Stefan Krause</a> has been
+ benchmarking a whole bunch of JS frameworks for a while now, most recently in May 2017. You should <a href="http://www.stefankrause.net/js-frameworks-benchmark6/webdriver-ts-results/table.html">go see</a> the full results for yourself. The short of it
+ is that Vue.js simply outperforms React, Preact, Angular and Ember <strong>in the cases that Stefan threw at it</strong>. I feel that
+ the benchmark he prepared is reasonably representative and chose to trust it.</p>
 
-<p>The general consensus seems to be that there’s about 70% of usable - I mean, edible - meat in a human body. Most people who calculate that seem to do so through analogy to a pig, which has about 70% of edible meat in it’s body. I suppose that human flesh is not called “long pork” for nothing, so let’s roll with it.</p>
+<h1 id="what-s-the-plan">What&rsquo;s the plan?</h1>
 
-<h2 id="how-much-does-an-average-human-weigh">How much does an average human weigh?</h2>
+<p>In theory, you could combine a Vue.js app and a Rails app in a single repository. Rails 5 now supports the
+<a href="https://yarnpkg.com/lang/en/">yarn</a> package manager and <a href="https://webpack.github.io/">webpack</a> through some switches to the
+<code>rails new</code> command.</p>
 
-<p>Thankfully, this is easier to find out than the purrfect mass for a feline. BMC Public Health hosts an article on <a href="https://bmcpublichealth.biomedcentral.com/articles/10.1186/1471-2458-12-439">average human weight per region</a>. It’s a short and sweet read which I recommend tremendously. In the meantime, however, seeing as I’m hailing from Europe, I’m going to assume that our average human due for an untimely death by a horde of cats weighs 70.8 kilograms.</p>
+<p>I&rsquo;ve looked over what Rails generates when these options are enabled, and I&rsquo;m nonplussed. There were generated controllers
+and layouts to include the JavaScript that webpack generates. This makes some sense when you want your HTML to be dynamically
+generated even before JavaScript gets to it, but this is not what we want. Therefore if we went this route, we would just
+be using an application server, such as <a href="https://github.com/puma/puma">Puma</a>, to serve content which is one hundred percent
+static. For what we want, this makes no sense.</p>
 
-<p>Working from that, we can calculate that there’s about</p>
+<p>We&rsquo;ll be making two applications and placing them in two repositories. The API app will live in one, and we&rsquo;ll be deploying
+it to <a href="https://heroku.com">Heroku</a> using the free Hobby Dev plan. The frontend Vue.js app will live in the other repository,
+and we&rsquo;ll walk over how to deploy it to Amazon&rsquo;s S3. I&rsquo;ll also be hosting a copy here on GitHub Pages, so keep in mind that&rsquo;s
+an option.</p>
 
-<p>$$
-70\% \cdot 70.8kg = 49.56kg
-$$</p>
+<p>We could host our front end on Heroku as well, but that would defeat the purpose of learning how to build a modern single
+page application with strong decoupling between the front and back end. If you really want to do it, go for it though. After
+all, this is an experiment for all of us.</p>
 
-<p>of edible meat on a human, assuming that our killer kitties don’t enjoy eating guts. I wouldn’t enjoy that, so let’s assume they don’t either.</p>
+<p>We&rsquo;ll also be using <a href="https://www.docker.com/">Docker</a> for local Rails development, and the
+<a href="https://github.com/vuejs/vue-cli">vue-cli</a> tool to set ourselves up with an app template for the front end.</p>
 
-<h2 id="how-many-calories-are-there-in-a-human">How many calories are there in a human?</h2>
+<p>See you in part 1, where we&rsquo;ll dig into making ourselves a Rails API app!</p>
 
-<p>According to <a href="http://www.livestrong.com/article/339744-how-many-calories-does-meat-have/">this post</a>, pork - which I’m going to use as a reference here, since I can’t get a hold of a butcher who can tell me how many calories are there in a medium fat cut of human - has a high point of 227 calories per 100 grams and a low point of 105 calories per 100 grams, which would place us between roughly 1050 and 2270 calories depending on the cut. If we take another assumption and average this out, it comes out to 1660 calories per kilogram, and that is what we’re going to use.</p>
+<hr />
 
-<p>Using the mass of edible meat on a human we calculated before, we arrive at $$49.56kg \cdot 1660 \frac{calories}{kg} = 82269.6\ calories$$ <em>Now</em> we’re getting somewhere.</p>
+<ol>
+<li><a name="ft1"></a> This could also be a TODO app, a recipe app or one of the other three apps that everybody seems to be
+doing for intros and tutorials. I&rsquo;d rather do a bookstore this time. <a href="#fr1">back</a></li>
+</ol>
 
-<h1 id="tying-it-all-together">Tying it all together</h1>
-
-<p>Now, as we’ve calculated previously, our average at weighs 5 kilograms and should consume an average of 65.035 calories per kilogram of body mass, which works out to 325.175 calories per cat per day. And this isn’t great news, either - you see that number we’ve calculated a while back, for the amount of calories in a human? That number which is two orders of magnitude larger…?</p>
-
-<p>Yeah. So our final answer is $$\frac{82269.6 calories}{325.175 \frac{calories}{cat \cdot day}} = 253.0009 cat \cdot day$$ So <strong>253 cats</strong>, one slightly hungrier than the average, can deal with the edible portion of the human body in a day. Even if we assume that they’re all very hungry and eat the maximum of what a cat should - 77.16 calories per kilogram, so 385.8 calories a cat - it would still take roughly 214 cats.</p>
-
-<p>In conclusion - cats suck at getting rid of bodies, unless you are a crazy cat lady (or otherwise have access to a hell of a lot of cats). And even then, you’re left with the dirty work to do yourself - the bones, hair, nails, guts and all the other unpleasant things aren’t going to dispose of themselves.</p>
-
-<p>Just make sure you don’t use a <a href="https://www.youtube.com/watch?v=hUFbOAIWjJM">metal bathtub full of lye</a>.</p>
               
             </div>
           </div>
@@ -326,9 +352,13 @@ $$</p>
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small"></span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/science/">science</a>
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/javascript/">javascript</a>
 
-  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/cats/">cats</a>
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/es6/">es6</a>
+
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/saturdayproject/">saturdayproject</a>
+
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/follow-me/">follow me</a>
 
                   </div>
                 
@@ -340,7 +370,7 @@ $$</p>
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/05/saturday-project-alien-generator-in-javascript/" data-tooltip="Saturday Project: Alien Generator in JavaScript">
+            <a class="post-action-btn btn btn--disabled">
           
             <i class="fa fa-angle-left"></i>
             <span class="hide-xs hide-sm text-small icon-ml"></span>
@@ -348,7 +378,7 @@ $$</p>
         </li>
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/01/a-cup-of-coins-revisited/" data-tooltip="A Cup of Coins, Revisited">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/06/saturday-project-galaxyquest---fuzzily-searching-github-stars/" data-tooltip="Saturday Project: GalaxyQuest - fuzzily searching github stars">
           
             <span class="hide-xs hide-sm text-small icon-mr"></span>
             <i class="fa fa-angle-right"></i>
@@ -365,17 +395,17 @@ $$</p>
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2017%2f02%2fhow-many-cats-does-it-take-to-eat-a-human%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-0-stack-choices%2f">
           <i class="fa fa-google-plus"></i>
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2017%2f02%2fhow-many-cats-does-it-take-to-eat-a-human%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-0-stack-choices%2f">
           <i class="fa fa-facebook-official"></i>
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2017%2f02%2fhow-many-cats-does-it-take-to-eat-a-human%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-0-stack-choices%2f">
           <i class="fa fa-twitter"></i>
         </a>
       </li>
@@ -421,7 +451,7 @@ $$</p>
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/05/saturday-project-alien-generator-in-javascript/" data-tooltip="Saturday Project: Alien Generator in JavaScript">
+            <a class="post-action-btn btn btn--disabled">
           
             <i class="fa fa-angle-left"></i>
             <span class="hide-xs hide-sm text-small icon-ml"></span>
@@ -429,7 +459,7 @@ $$</p>
         </li>
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/01/a-cup-of-coins-revisited/" data-tooltip="A Cup of Coins, Revisited">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/06/saturday-project-galaxyquest---fuzzily-searching-github-stars/" data-tooltip="Saturday Project: GalaxyQuest - fuzzily searching github stars">
           
             <span class="hide-xs hide-sm text-small icon-mr"></span>
             <i class="fa fa-angle-right"></i>
@@ -446,17 +476,17 @@ $$</p>
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2017%2f02%2fhow-many-cats-does-it-take-to-eat-a-human%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-0-stack-choices%2f">
           <i class="fa fa-google-plus"></i>
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2017%2f02%2fhow-many-cats-does-it-take-to-eat-a-human%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-0-stack-choices%2f">
           <i class="fa fa-facebook-official"></i>
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2017%2f02%2fhow-many-cats-does-it-take-to-eat-a-human%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-0-stack-choices%2f">
           <i class="fa fa-twitter"></i>
         </a>
       </li>
@@ -483,17 +513,17 @@ $$</p>
       <div id="share-options-bar" class="share-options-bar" data-behavior="5">
   <ul class="share-options">
     <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2017%2f02%2fhow-many-cats-does-it-take-to-eat-a-human%2f">
+      <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-0-stack-choices%2f">
         <i class="fa fa-google-plus"></i><span></span>
       </a>
     </li>
     <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2017%2f02%2fhow-many-cats-does-it-take-to-eat-a-human%2f">
+      <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-0-stack-choices%2f">
         <i class="fa fa-facebook-official"></i><span></span>
       </a>
     </li>
     <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2017%2f02%2fhow-many-cats-does-it-take-to-eat-a-human%2f">
+      <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-0-stack-choices%2f">
         <i class="fa fa-twitter"></i><span></span>
       </a>
     </li>
@@ -754,9 +784,9 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = 'https:\/\/paweljw.github.io\/2017\/02\/how-many-cats-does-it-take-to-eat-a-human\/';
+          this.page.url = 'https:\/\/paweljw.github.io\/2017\/07\/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices\/';
           
-            this.page.identifier = '\/2017\/02\/how-many-cats-does-it-take-to-eat-a-human\/'
+            this.page.identifier = '\/2017\/07\/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices\/'
           
         };
         (function() {
