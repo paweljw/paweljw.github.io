@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on Shenanigans!</title>
+    <title>Tags on Shenanigans! - a blog on programming, technology and science</title>
     <link>https://paweljw.github.io/tags/</link>
-    <description>Recent content in Tags on Shenanigans!</description>
+    <description>Recent content in Tags on Shenanigans! - a blog on programming, technology and science</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pl-pl</language>
-    <managingEditor>p@steamshard.net (Paweł J. Wal)</managingEditor>
-    <webMaster>p@steamshard.net (Paweł J. Wal)</webMaster>
     <lastBuildDate>Sun, 28 May 2017 15:47:59 +0200</lastBuildDate>
     
 	<atom:link href="https://paweljw.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
@@ -17,7 +15,7 @@
       <title>Aliens</title>
       <link>https://paweljw.github.io/tags/aliens/</link>
       <pubDate>Sun, 28 May 2017 15:47:59 +0200</pubDate>
-      <author>p@steamshard.net (Paweł J. Wal)</author>
+      
       <guid>https://paweljw.github.io/tags/aliens/</guid>
       <description></description>
     </item>
@@ -26,7 +24,7 @@
       <title>Arduino</title>
       <link>https://paweljw.github.io/tags/arduino/</link>
       <pubDate>Sat, 28 Feb 2015 21:17:45 +0200</pubDate>
-      <author>p@steamshard.net (Paweł J. Wal)</author>
+      
       <guid>https://paweljw.github.io/tags/arduino/</guid>
       <description></description>
     </item>
@@ -35,7 +33,7 @@
       <title>Cats</title>
       <link>https://paweljw.github.io/tags/cats/</link>
       <pubDate>Tue, 28 Feb 2017 21:02:24 +0200</pubDate>
-      <author>p@steamshard.net (Paweł J. Wal)</author>
+      
       <guid>https://paweljw.github.io/tags/cats/</guid>
       <description></description>
     </item>
@@ -44,7 +42,7 @@
       <title>Fuse.Js</title>
       <link>https://paweljw.github.io/tags/fuse.js/</link>
       <pubDate>Thu, 15 Jun 2017 15:47:42 +0200</pubDate>
-      <author>p@steamshard.net (Paweł J. Wal)</author>
+      
       <guid>https://paweljw.github.io/tags/fuse.js/</guid>
       <description></description>
     </item>
@@ -53,7 +51,7 @@
       <title>Javascript</title>
       <link>https://paweljw.github.io/tags/javascript/</link>
       <pubDate>Thu, 15 Jun 2017 15:47:42 +0200</pubDate>
-      <author>p@steamshard.net (Paweł J. Wal)</author>
+      
       <guid>https://paweljw.github.io/tags/javascript/</guid>
       <description></description>
     </item>
@@ -62,7 +60,7 @@
       <title>Monsters</title>
       <link>https://paweljw.github.io/tags/monsters/</link>
       <pubDate>Sun, 11 Jun 2017 11:48:27 +0200</pubDate>
-      <author>p@steamshard.net (Paweł J. Wal)</author>
+      
       <guid>https://paweljw.github.io/tags/monsters/</guid>
       <description></description>
     </item>
@@ -71,7 +69,7 @@
       <title>Music</title>
       <link>https://paweljw.github.io/tags/music/</link>
       <pubDate>Sat, 28 Feb 2015 21:17:45 +0200</pubDate>
-      <author>p@steamshard.net (Paweł J. Wal)</author>
+      
       <guid>https://paweljw.github.io/tags/music/</guid>
       <description></description>
     </item>
@@ -80,7 +78,7 @@
       <title>Saturdayproject</title>
       <link>https://paweljw.github.io/tags/saturdayproject/</link>
       <pubDate>Thu, 15 Jun 2017 15:47:42 +0200</pubDate>
-      <author>p@steamshard.net (Paweł J. Wal)</author>
+      
       <guid>https://paweljw.github.io/tags/saturdayproject/</guid>
       <description></description>
     </item>
@@ -89,7 +87,7 @@
       <title>Science</title>
       <link>https://paweljw.github.io/tags/science/</link>
       <pubDate>Tue, 28 Feb 2017 21:02:24 +0200</pubDate>
-      <author>p@steamshard.net (Paweł J. Wal)</author>
+      
       <guid>https://paweljw.github.io/tags/science/</guid>
       <description></description>
     </item>
@@ -98,7 +96,7 @@
       <title>Vue.Js</title>
       <link>https://paweljw.github.io/tags/vue.js/</link>
       <pubDate>Thu, 15 Jun 2017 15:47:42 +0200</pubDate>
-      <author>p@steamshard.net (Paweł J. Wal)</author>
+      
       <guid>https://paweljw.github.io/tags/vue.js/</guid>
       <description></description>
     </item>

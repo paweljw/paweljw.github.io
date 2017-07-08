@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Vue.Js on Shenanigans!</title>
+    <title>Vue.Js on Shenanigans! - a blog on programming, technology and science</title>
     <link>https://paweljw.github.io/tags/vue.js/</link>
-    <description>Recent content in Vue.Js on Shenanigans!</description>
+    <description>Recent content in Vue.Js on Shenanigans! - a blog on programming, technology and science</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pl-pl</language>
-    <managingEditor>p@steamshard.net (Paweł J. Wal)</managingEditor>
-    <webMaster>p@steamshard.net (Paweł J. Wal)</webMaster>
     <lastBuildDate>Thu, 15 Jun 2017 15:47:42 +0200</lastBuildDate>
     
 	<atom:link href="https://paweljw.github.io/tags/vue.js/index.xml" rel="self" type="application/rss+xml" />
@@ -15,10 +13,10 @@
     
     <item>
       <title>Saturday Project: GalaxyQuest - fuzzily searching github stars</title>
-      <link>https://paweljw.github.io/post/galaxyquest-fuzzily-searching-github-stars/</link>
+      <link>https://paweljw.github.io/2017/06/saturday-project-galaxyquest---fuzzily-searching-github-stars/</link>
       <pubDate>Thu, 15 Jun 2017 15:47:42 +0200</pubDate>
-      <author>p@steamshard.net (Paweł J. Wal)</author>
-      <guid>https://paweljw.github.io/post/galaxyquest-fuzzily-searching-github-stars/</guid>
+      
+      <guid>https://paweljw.github.io/2017/06/saturday-project-galaxyquest---fuzzily-searching-github-stars/</guid>
       <description>&lt;p&gt;&lt;em&gt;Okay, Thursday project. It&amp;rsquo;s my day off this week, what can I do.&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;I&amp;rsquo;m still on this Vue.js kick, so while studying Components, I built myself a little app.&lt;/p&gt;
@@ -28,10 +26,10 @@
     
     <item>
       <title>Saturday Project: Monster Hunting with Vue.js</title>
-      <link>https://paweljw.github.io/post/saturday-project-monster-hunter/</link>
+      <link>https://paweljw.github.io/2017/06/saturday-project-monster-hunting-with-vue.js/</link>
       <pubDate>Sun, 11 Jun 2017 11:48:27 +0200</pubDate>
-      <author>p@steamshard.net (Paweł J. Wal)</author>
-      <guid>https://paweljw.github.io/post/saturday-project-monster-hunter/</guid>
+      
+      <guid>https://paweljw.github.io/2017/06/saturday-project-monster-hunting-with-vue.js/</guid>
       <description>&lt;p&gt;I&amp;rsquo;m studying Vue.js right now - here&amp;rsquo;s a simple app that I made in the process.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>

@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Arduino on Shenanigans!</title>
+    <title>Arduino on Shenanigans! - a blog on programming, technology and science</title>
     <link>https://paweljw.github.io/tags/arduino/</link>
-    <description>Recent content in Arduino on Shenanigans!</description>
+    <description>Recent content in Arduino on Shenanigans! - a blog on programming, technology and science</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pl-pl</language>
-    <managingEditor>p@steamshard.net (Paweł J. Wal)</managingEditor>
-    <webMaster>p@steamshard.net (Paweł J. Wal)</webMaster>
     <lastBuildDate>Sat, 28 Feb 2015 21:17:45 +0200</lastBuildDate>
     
 	<atom:link href="https://paweljw.github.io/tags/arduino/index.xml" rel="self" type="application/rss+xml" />
@@ -15,10 +13,10 @@
     
     <item>
       <title>Ultrasonic theremin</title>
-      <link>https://paweljw.github.io/post/ultrasonic-theremin/</link>
+      <link>https://paweljw.github.io/2015/02/ultrasonic-theremin/</link>
       <pubDate>Sat, 28 Feb 2015 21:17:45 +0200</pubDate>
-      <author>p@steamshard.net (Paweł J. Wal)</author>
-      <guid>https://paweljw.github.io/post/ultrasonic-theremin/</guid>
+      
+      <guid>https://paweljw.github.io/2015/02/ultrasonic-theremin/</guid>
       <description>&lt;p&gt;I’ve been wanting to construct an instrument in the spirit of a theremin for quite a while. Of course, I have neither the skills to construct a proper theremin, nor the time to master them. What I do have is an Arduino board, some sensors and a couple of spare parts.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>

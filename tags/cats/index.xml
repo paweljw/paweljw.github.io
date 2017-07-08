@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Cats on Shenanigans!</title>
+    <title>Cats on Shenanigans! - a blog on programming, technology and science</title>
     <link>https://paweljw.github.io/tags/cats/</link>
-    <description>Recent content in Cats on Shenanigans!</description>
+    <description>Recent content in Cats on Shenanigans! - a blog on programming, technology and science</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pl-pl</language>
-    <managingEditor>p@steamshard.net (Paweł J. Wal)</managingEditor>
-    <webMaster>p@steamshard.net (Paweł J. Wal)</webMaster>
     <lastBuildDate>Tue, 28 Feb 2017 21:02:24 +0200</lastBuildDate>
     
 	<atom:link href="https://paweljw.github.io/tags/cats/index.xml" rel="self" type="application/rss+xml" />
@@ -15,10 +13,10 @@
     
     <item>
       <title>How Many Cats Does It Take to Eat a Human?</title>
-      <link>https://paweljw.github.io/post/how-many-cats-can-eat-a-human/</link>
+      <link>https://paweljw.github.io/2017/02/how-many-cats-does-it-take-to-eat-a-human/</link>
       <pubDate>Tue, 28 Feb 2017 21:02:24 +0200</pubDate>
-      <author>p@steamshard.net (Paweł J. Wal)</author>
-      <guid>https://paweljw.github.io/post/how-many-cats-can-eat-a-human/</guid>
+      
+      <guid>https://paweljw.github.io/2017/02/how-many-cats-does-it-take-to-eat-a-human/</guid>
       <description>&lt;p&gt;Once again, the love of my life took to asking me weird questions. This time, the question is: how many cats does it take to eat a human?&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
