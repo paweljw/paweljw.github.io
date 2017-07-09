@@ -7,6 +7,8 @@ tags:
 - es6
 - saturdayproject
 - follow me
+- rails
+- api
 comments: true
 draft: false
 ---
@@ -18,6 +20,8 @@ I believe that you learn best when your objective is teaching it to somebody els
 I'll be making and refining a simple bookstore app<sup><a href="#ft1" name="fr1">1</a></sup>, using Rails 5.1 for the API backend, and [vue.js](https://vuejs.org/)
 with [vue-router](https://github.com/vuejs/vue-router) and [vue-resource](https://github.com/pagekit/vue-resource) on the
 front end.
+
+<!-- more //-->
 
 The goal is that you should be able to follow along! I'll try to keep it simple, however  good command of your console, 
 a fair grasp on how a "regular" Rails app is put together and understanding of ES6's classes and imports should make for
