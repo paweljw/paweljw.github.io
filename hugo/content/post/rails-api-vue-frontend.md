@@ -17,7 +17,11 @@ something more resembling a real application that [Monster Hunter](http://localh
 I believe that you learn best when your objective is teaching it to somebody else. Therefore, over the next couple of weeks
 I'll be making and refining a simple bookstore app<sup><a href="#ft1" name="fr1">1</a></sup>, using Rails 5.1 for the API backend, and [vue.js](https://vuejs.org/)
 with [vue-router](https://github.com/vuejs/vue-router) and [vue-resource](https://github.com/pagekit/vue-resource) on the
-front end. The goal is that you should be able to follow along!
+front end.
+
+The goal is that you should be able to follow along! I'll try to keep it simple, however  good command of your console, 
+a fair grasp on how a "regular" Rails app is put together and understanding of ES6's classes and imports should make for
+smooth sailing.
 
 We'll only discuss our architecture choices briefly in this article, and then get cracking in the next parts.
 
@@ -25,7 +29,7 @@ We'll only discuss our architecture choices briefly in this article, and then ge
 
 I love Ruby. I also feel strongly about Rails, since it was my first MVC framework. I have some equally strong and not
 entirely positive feelings about the direction the framework is taking recently - these are perhaps better suited to become
-a separate post. Despite this, however, I think that the API mode in Rails 5.1 is huge, and has a chance to save Rails from
+a separate post. Despite this, however, I think that the API mode in Rails 5 is huge, and has a chance to save Rails from
 losing steam amidst the push towards Single Page Applications.
 
 So far, I've only had a chance to very cursorally play with the API app generation mode, so I'd like to do a bit more of
@@ -62,7 +66,7 @@ didn't sit right with me. This was the case with, for example, React, whose conc
 
 # What's the plan?
 
-In theory, you could combine a Vue.js app and a Rails app in a single repository. Rails 5 now supports the 
+In theory, you could combine a Vue.js app and a Rails app in a single repository. Rails 5.1 now supports the 
 [yarn](https://yarnpkg.com/lang/en/) package manager and [webpack](https://webpack.github.io/) through some switches to the
 `rails new` command.
 
@@ -81,7 +85,7 @@ We could host our front end on Heroku as well, but that would defeat the purpose
 page application with strong decoupling between the front and back end. If you really want to do it, go for it though. After
 all, this is an experiment for all of us.
 
-We'll also be using [Docker](https://www.docker.com/) for local Rails development, and the
+We'll also be using [Docker](https://www.docker.com/) for local Rails development (to run PostgreSQL in), and the
 [vue-cli](https://github.com/vuejs/vue-cli) tool to set ourselves up with an app template for the front end.
 
 See you in part 1, where we'll dig into making ourselves a Rails API app!
