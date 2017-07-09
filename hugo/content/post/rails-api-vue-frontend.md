@@ -32,6 +32,9 @@ entirely positive feelings about the direction the framework is taking recently 
 a separate post. Despite this, however, I think that the API mode in Rails 5 is huge, and has a chance to save Rails from
 losing steam amidst the push towards Single Page Applications.
 
+Rails 5.1 is the newest in the 5.x branch at the time of writing, so we'll use that. This version also comes with support for
+yarn and webpacker, which we could use, but will not - we'll discuss why later in the article.
+
 So far, I've only had a chance to very cursorally play with the API app generation mode, so I'd like to do a bit more of
 that. I'm also choosing Rails because this is what I'm proficient with, while I'm still learning Vue.js. I find that tackling
 two new things at once is sometimes harder than necessary, so this is a nice and safe middle ground.
