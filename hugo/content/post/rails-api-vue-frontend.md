@@ -26,7 +26,7 @@ front end.
 _This is an ongoing series. So far, the following parts have been posted:_
 
 * Part 0. Stack choices
-* [Part 1: Setting up a Rails API app](/2017/07/rails-5.1-api-with-vue.js-frontend-part-1-rails-api-app/)
+* [Part 1: Setting up a Rails API app](/2017/07/rails-5.1-api-with-vue.js-frontend-part-1-setting-up-a-rails-api-app/)
 
 The goal is that you should be able to follow along! I'll try to keep it simple, however  good command of your console,
 a fair grasp on how a "regular" Rails app is put together and understanding of ES6's classes and imports should make for
@@ -100,7 +100,7 @@ all, this is an experiment for all of us.
 We'll also be using [Docker](https://www.docker.com/) for local Rails development (to run PostgreSQL in), and the
 [vue-cli](https://github.com/vuejs/vue-cli) tool to set ourselves up with an app template for the front end.
 
-See you in [part 1](/2017/07/rails-5.1-api-with-vue.js-frontend-part-1-rails-api-app/), where we'll dig into making ourselves a Rails API app!
+See you in [part 1](/2017/07/rails-5.1-api-with-vue.js-frontend-part-1-setting-up-a-rails-api-app/), where we'll dig into making ourselves a Rails API app!
 
 ---
 

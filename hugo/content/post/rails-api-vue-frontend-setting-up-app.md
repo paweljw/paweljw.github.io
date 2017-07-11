@@ -13,7 +13,7 @@ comments: true
 draft: false
 ---
 
-It's time to continue with our foray into Rails API app with Vue.js frontend! In [Part 0](/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/) we discussed what technology we'll be using and why. It's time to get our Rails on.
+It's time to continue with our foray into Rails API app with Vue.js frontend! In [Part 0](/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/) we discussed what technology we'll be using and why - I highly recommend you read through it if you haven't already. Now it's time to get our Rails on.
 
 <!--more-->
 
