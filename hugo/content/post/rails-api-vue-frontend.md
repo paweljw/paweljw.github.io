@@ -23,7 +23,12 @@ front end.
 
 <!-- more //-->
 
-The goal is that you should be able to follow along! I'll try to keep it simple, however  good command of your console, 
+_This is an ongoing series. So far, the following parts have been posted:_
+
+* Part 0. Stack choices
+* [Part 1: Setting up a Rails API app](/2017/07/rails-5.1-api-with-vue.js-frontend-part-1-rails-api-app/)
+
+The goal is that you should be able to follow along! I'll try to keep it simple, however  good command of your console,
 a fair grasp on how a "regular" Rails app is put together and understanding of ES6's classes and imports should make for
 smooth sailing.
 
@@ -57,23 +62,23 @@ Sinatra would probably be my choice of backend framework.
 
 # Why Vue.js?
 
-_It feels like every time someone says "I chose X JavaScript framework over Y" on the internet, a local holy crusade suddenly 
+_It feels like every time someone says "I chose X JavaScript framework over Y" on the internet, a local holy crusade suddenly
 erupts. Please remember that this is just my personal opinion and not Jerusalem. Thank you._
 
 When I decided to learn a frontend framework in JavaScript, I was deciding between Angular, Ember, React (and it's many
-compatible implementations, such as [Preact](https://github.com/developit/preact)) and Vue.js. Performance was one of the 
+compatible implementations, such as [Preact](https://github.com/developit/preact)) and Vue.js. Performance was one of the
 key factors, but I would also decide against learning a more performant framework (right now) if the example code available
 didn't sit right with me. This was the case with, for example, React, whose concept of JSX components seems a tad off to me
 (on a completely instincitve level).
 
- Therefore my argument shall be simple and based in numbers. [Stefan Krause](http://www.stefankrause.net/wp/?p=431) has been 
+ Therefore my argument shall be simple and based in numbers. [Stefan Krause](http://www.stefankrause.net/wp/?p=431) has been
  benchmarking a whole bunch of JS frameworks for a while now, most recently in May 2017. You should [go see](http://www.stefankrause.net/js-frameworks-benchmark6/webdriver-ts-results/table.html) the full results for yourself. The short of it
  is that Vue.js simply outperforms React, Preact, Angular and Ember **in the cases that Stefan threw at it**. I feel that
  the benchmark he prepared is reasonably representative and chose to trust it.
 
 # What's the plan?
 
-In theory, you could combine a Vue.js app and a Rails app in a single repository. Rails 5.1 now supports the 
+In theory, you could combine a Vue.js app and a Rails app in a single repository. Rails 5.1 now supports the
 [yarn](https://yarnpkg.com/lang/en/) package manager and [webpack](https://webpack.github.io/) through some switches to the
 `rails new` command.
 
@@ -95,7 +100,7 @@ all, this is an experiment for all of us.
 We'll also be using [Docker](https://www.docker.com/) for local Rails development (to run PostgreSQL in), and the
 [vue-cli](https://github.com/vuejs/vue-cli) tool to set ourselves up with an app template for the front end.
 
-See you in part 1, where we'll dig into making ourselves a Rails API app!
+See you in [part 1](/2017/07/rails-5.1-api-with-vue.js-frontend-part-1-rails-api-app/), where we'll dig into making ourselves a Rails API app!
 
 ---
 

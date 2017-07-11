@@ -83,13 +83,14 @@ theme = "hugo-tranquilpeak-theme"
   url = "/index.xml"
 
 [params]
+  dateFormat = "2006-01-02"
   # Global keywords configuration. Following keywords will be add to every pages
   keywords = ["development", "ruby", "ruby on rails", "es6", "javascript", "electronics", "arduino", "science"]
 
   # Hide sidebar on all article page to let article take full width to improve reading, and enjoy wide images and cover images. (true: enable, false: disable)
   clearReading = true
 
-  # Define categories will create hierarchy between parents: `categories = ["foo", "bar"]` will consider "bar" a sub-category of "foo". 
+  # Define categories will create hierarchy between parents: `categories = ["foo", "bar"]` will consider "bar" a sub-category of "foo".
   # If false it will flat categories.
   hierarchicalCategories = false
 
