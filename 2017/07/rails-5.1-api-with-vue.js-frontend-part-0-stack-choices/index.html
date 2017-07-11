@@ -21,7 +21,7 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.21">
+    <meta name="generator" content="Hugo 0.23">
     <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
     <title>Rails 5.1 API with Vue.js frontend, part 0: stack choices</title>
     <meta name="author" content="Paweł J. Wal">
@@ -93,8 +93,8 @@ ga('send', 'pageview');
     <div id="blog">
       <header id="header" data-behavior="5">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
-  <div class="header-title">
-    <a class="header-title-link" href="https://paweljw.github.io/">Shenanigans! - a blog on programming, technology and science</a>
+  <div class="header-title" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap; width: 70%; max-height: 55px; margin: 0 auto; display: block">
+    <a class="header-title-link" href="https://paweljw.github.io/"  style="text-overflow: ellipsis">Shenanigans! - a blog on programming, technology and science</a>
   </div>
   
     
@@ -233,7 +233,12 @@ ga('send', 'pageview');
   
     <time itemprop="datePublished" datetime="2017-07-08T15:26:57&#43;02:00">
       
-   8, 2017
+  
+  
+  
+  
+    2017-07-08
+  
 
     </time>
   
@@ -266,6 +271,13 @@ with <a href="https://github.com/vuejs/vue-router">vue-router</a> and <a href="h
 front end.</p>
 
 <!-- more //-->
+
+<p><em>This is an ongoing series. So far, the following parts have been posted:</em></p>
+
+<ul>
+<li>Part 0. Stack choices</li>
+<li><a href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-1-rails-api-app/">Part 1: Setting up a Rails API app</a></li>
+</ul>
 
 <p>The goal is that you should be able to follow along! I&rsquo;ll try to keep it simple, however  good command of your console,
 a fair grasp on how a &ldquo;regular&rdquo; Rails app is put together and understanding of ES6&rsquo;s classes and imports should make for
@@ -341,7 +353,7 @@ all, this is an experiment for all of us.</p>
 <p>We&rsquo;ll also be using <a href="https://www.docker.com/">Docker</a> for local Rails development (to run PostgreSQL in), and the
 <a href="https://github.com/vuejs/vue-cli">vue-cli</a> tool to set ourselves up with an app template for the front end.</p>
 
-<p>See you in part 1, where we&rsquo;ll dig into making ourselves a Rails API app!</p>
+<p>See you in <a href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-1-rails-api-app/">part 1</a>, where we&rsquo;ll dig into making ourselves a Rails API app!</p>
 
 <hr />
 
@@ -383,7 +395,7 @@ doing for intros and tutorials. I&rsquo;d rather do a bookstore this time. <a hr
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--disabled">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-1-setting-up-a-rails-api-app/" data-tooltip="Rails 5.1 API with Vue.js frontend, part 1: Setting up a Rails API app">
           
             <i class="fa fa-angle-left"></i>
             <span class="hide-xs hide-sm text-small icon-ml"></span>
@@ -464,7 +476,7 @@ doing for intros and tutorials. I&rsquo;d rather do a bookstore this time. <a hr
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--disabled">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-1-setting-up-a-rails-api-app/" data-tooltip="Rails 5.1 API with Vue.js frontend, part 1: Setting up a Rails API app">
           
             <i class="fa fa-angle-left"></i>
             <span class="hide-xs hide-sm text-small icon-ml"></span>
@@ -592,6 +604,25 @@ doing for intros and tutorials. I&rsquo;d rather do a bookstore this time. <a hr
       <div class="no-result text-color-light text-center"></div>
       <div class="results">
         
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-1-setting-up-a-rails-api-app/">
+                <h3 class="media-heading">Rails 5.1 API with Vue.js frontend, part 1: Setting up a Rails API app</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>It&rsquo;s time to continue with our foray into Rails API app with Vue.js frontend! In <a href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/">Part 0</a> we discussed what technology we&rsquo;ll be using and why. It&rsquo;s time to get our Rails on.</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
         
           <div class="media">
             
@@ -753,7 +784,7 @@ I believe that you learn best when your objective is teaching it to somebody els
          data-message-zero=""
          data-message-one=""
          data-message-other="">
-         8 posts found
+         9 posts found
       </p>
     </div>
   </div>

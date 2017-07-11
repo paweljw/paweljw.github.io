@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-1-setting-up-a-rails-api-app/</loc>
+    <lastmod>2017-07-11T15:26:57+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/</loc>
     <lastmod>2017-07-08T15:26:57+02:00</lastmod>
   </url>
@@ -45,7 +50,7 @@
   
   <url>
     <loc>https://paweljw.github.io/tags/api/</loc>
-    <lastmod>2017-07-08T15:26:57+02:00</lastmod>
+    <lastmod>2017-07-11T15:26:57+02:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -73,13 +78,13 @@
   
   <url>
     <loc>https://paweljw.github.io/tags/es6/</loc>
-    <lastmod>2017-07-08T15:26:57+02:00</lastmod>
+    <lastmod>2017-07-11T15:26:57+02:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://paweljw.github.io/tags/follow-me/</loc>
-    <lastmod>2017-07-08T15:26:57+02:00</lastmod>
+    <lastmod>2017-07-11T15:26:57+02:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -91,7 +96,7 @@
   
   <url>
     <loc>https://paweljw.github.io/tags/javascript/</loc>
-    <lastmod>2017-07-08T15:26:57+02:00</lastmod>
+    <lastmod>2017-07-11T15:26:57+02:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -109,19 +114,19 @@
   
   <url>
     <loc>https://paweljw.github.io/post/</loc>
-    <lastmod>2017-07-08T15:26:57+02:00</lastmod>
+    <lastmod>2017-07-11T15:26:57+02:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://paweljw.github.io/tags/rails/</loc>
-    <lastmod>2017-07-08T15:26:57+02:00</lastmod>
+    <lastmod>2017-07-11T15:26:57+02:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://paweljw.github.io/tags/saturdayproject/</loc>
-    <lastmod>2017-07-08T15:26:57+02:00</lastmod>
+    <lastmod>2017-07-11T15:26:57+02:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -133,7 +138,7 @@
   
   <url>
     <loc>https://paweljw.github.io/</loc>
-    <lastmod>2017-07-08T15:26:57+02:00</lastmod>
+    <lastmod>2017-07-11T15:26:57+02:00</lastmod>
     <priority>0</priority>
   </url>
   

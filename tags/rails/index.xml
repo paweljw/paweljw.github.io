@@ -6,10 +6,21 @@
     <description>Recent content in Rails on Shenanigans! - a blog on programming, technology and science</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pl-pl</language>
-    <lastBuildDate>Sat, 08 Jul 2017 15:26:57 +0200</lastBuildDate>
+    <lastBuildDate>Tue, 11 Jul 2017 15:26:57 +0200</lastBuildDate>
     
 	<atom:link href="https://paweljw.github.io/tags/rails/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Rails 5.1 API with Vue.js frontend, part 1: Setting up a Rails API app</title>
+      <link>https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-1-setting-up-a-rails-api-app/</link>
+      <pubDate>Tue, 11 Jul 2017 15:26:57 +0200</pubDate>
+      
+      <guid>https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-1-setting-up-a-rails-api-app/</guid>
+      <description>&lt;p&gt;It&amp;rsquo;s time to continue with our foray into Rails API app with Vue.js frontend! In &lt;a href=&#34;https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/&#34;&gt;Part 0&lt;/a&gt; we discussed what technology we&amp;rsquo;ll be using and why. It&amp;rsquo;s time to get our Rails on.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Rails 5.1 API with Vue.js frontend, part 0: stack choices</title>

@@ -1,5 +1,9 @@
 
 
+  
+    
+  
+
 
   
 
@@ -19,25 +23,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.23">
     <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
-    <title>Javascript</title>
+    <title>Rails 5.1 API with Vue.js frontend, part 1: Setting up a Rails API app</title>
     <meta name="author" content="Paweł J. Wal">
     <meta name="keywords" content=", development, ruby, ruby on rails, es6, javascript, electronics, arduino, science">
 
     <link rel="icon" href="https://paweljw.github.io/favicon.png">
     
-      <link rel="alternate" type="application/rss+xml" title="RSS" href="https://paweljw.github.io/tags/javascript/index.xml">
-    
 
     
-    <meta name="description" content="ramblings on hacking and science">
-    <meta property="og:description" content="ramblings on hacking and science">
+    <meta name="description" content="It&rsquo;s time to continue with our foray into Rails API app with Vue.js frontend! In Part 0 we discussed what technology we&rsquo;ll be using and why. It&rsquo;s time to get our Rails on.
+
+">
+    <meta property="og:description" content="It&rsquo;s time to continue with our foray into Rails API app with Vue.js frontend! In Part 0 we discussed what technology we&rsquo;ll be using and why. It&rsquo;s time to get our Rails on.
+
+">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Javascript">
-    <meta property="og:url" content="/tags/javascript/">
+    <meta property="og:title" content="Rails 5.1 API with Vue.js frontend, part 1: Setting up a Rails API app">
+    <meta property="og:url" content="/2017/07/rails-5.1-api-with-vue.js-frontend-part-1-setting-up-a-rails-api-app/">
     <meta property="og:site_name" content="Shenanigans! - a blog on programming, technology and science">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Shenanigans! - a blog on programming, technology and science">
-    <meta name="twitter:description" content="ramblings on hacking and science">
+    <meta name="twitter:description" content="It&rsquo;s time to continue with our foray into Rails API app with Vue.js frontend! In Part 0 we discussed what technology we&rsquo;ll be using and why. It&rsquo;s time to get our Rails on.
+
+">
     
       <meta name="twitter:creator" content="@paweljwal">
     
@@ -51,6 +59,8 @@
     
 
     
+    
+      <meta property="og:image" content="https://paweljw.github.io/media/rails.jpg">
     
     
 
@@ -84,7 +94,7 @@ ga('send', 'pageview');
 
   <body>
     <div id="blog">
-      <header id="header" data-behavior="2">
+      <header id="header" data-behavior="5">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
   <div class="header-title" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap; width: 70%; max-height: 55px; margin: 0 auto; display: block">
     <a class="header-title-link" href="https://paweljw.github.io/"  style="text-overflow: ellipsis">Shenanigans! - a blog on programming, technology and science</a>
@@ -104,7 +114,7 @@ ga('send', 'pageview');
   
 </header>
 
-      <nav id="sidebar" data-behavior="2">
+      <nav id="sidebar" data-behavior="5">
   <div class="sidebar-container">
     
       <div class="sidebar-profile">
@@ -210,41 +220,19 @@ ga('send', 'pageview');
 </nav>
 
       
-        
-
-      
-      <div id="main" data-behavior="2"
-        class="
-               hasCoverMetaIn
-               ">
-        
-          <section class="postShorten-group main-content-wrap">
-            
-            
-              
-  
+  <div class="post-header-cover
+              text-left
+              "
+       style="background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('/media/rails.jpg'); background-size: cover"
+       data-behavior="5">
     
-      
-        
-          
-        
-      
-    
+      <div class="post-header main-content-wrap text-left">
   
-
-
+    <h1 class="post-title" itemprop="headline">
+      Rails 5.1 API with Vue.js frontend, part 1: Setting up a Rails API app
+    </h1>
   
-
-<article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-1-setting-up-a-rails-api-app/">
-          Rails 5.1 API with Vue.js frontend, part 1: Setting up a Rails API app
-        </a>
-      </h1>
-      <div class="postShorten-meta post-meta">
+  <div class="postShorten-meta post-meta">
   
     <time itemprop="datePublished" datetime="2017-07-11T15:26:57&#43;02:00">
       
@@ -261,281 +249,233 @@ ga('send', 'pageview');
 
 </div>
 
-    </div>
+</div>
+    
   </div>
-  
-    <a href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-1-setting-up-a-rails-api-app/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://paweljw.github.io/media/rails.jpg"/>
-      </div>
-    </a>
-  
-  <div class="postShorten-excerpt" itemprop="articleBody">
-      <p>
-        It&rsquo;s time to continue with our foray into Rails API app with Vue.js frontend! In <a href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/">Part 0</a> we discussed what technology we&rsquo;ll be using and why. It&rsquo;s time to get our Rails on.</p>
 
-<p>
-        <br>
-        <a href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-1-setting-up-a-rails-api-app/" class="postShorten-excerpt_link link"></a>
-        
-      </p>
-    </div>
-</article>
+
+      <div id="main" data-behavior="5"
+        class="hasCover
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>It&rsquo;s time to continue with our foray into Rails API app with Vue.js frontend! In <a href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/">Part 0</a> we discussed what technology we&rsquo;ll be using and why. It&rsquo;s time to get our Rails on.</p>
+
+<p></p>
+
+<h1 id="installing-the-right-version-of-rails">Installing the right version of Rails</h1>
+
+<p>Since we&rsquo;ve decided to use Rails 5.1, that&rsquo;s what we should get. If you don&rsquo;t have it already,</p>
+
+<pre><code>gem install rails -v '~&gt; 5.1'
+</code></pre>
+
+<p>should do the trick.</p>
+
+<h1 id="setting-up-a-rails-api-app">Setting up a Rails API app</h1>
+
+<p>Let&rsquo;s look at the command first and pick it apart later:</p>
+
+<pre><code>rails new bookstore-backend -T --skip-spring -C -M -d postgresql --api
+</code></pre>
+
+<p>Whew! That&rsquo;s a mouthful. Let&rsquo;s see about all those switches.</p>
+
+<ul>
+<li><code>-T</code> amounts to skipping the builtin testing framework. We&rsquo;ll test our API with something other than MiniTest, so let&rsquo;s drop it for now.</li>
+<li><code>--skip-spring</code> removes Spring from our application; that&rsquo;s a personal preference. If you don&rsquo;t know what <a href="https://github.com/rails/spring">Spring</a> does and whether you should remove it, I urge you to find out and decide for yourself.</li>
+<li><code>-C</code> skips Action Cable. No web socket communication for us!</li>
+<li><code>-M</code> skips Action Mailer, which wouldn&rsquo;t be of any use to us.</li>
+<li><code>-d postgresql</code> of course sets us up for the PostgreSQL database.</li>
+<li><code>--api</code> - now we&rsquo;re talking! This runs the Rails generator in the API mode, which sets us up for reading and writing JSON instead of pumping out HTML.</li>
+</ul>
+
+<p>Now we can run <code>tree</code> on this new app, and&hellip; wow! When you compare that to a regular Rails app, this is really barebones. But we can trim this up a bit more:</p>
+
+<ul>
+<li>An <code>app/jobs</code> directory was generated for us. We know that there will be no jobs in this application for the foreseeable future, so we can drop that.</li>
+<li>There are four initializers that are commented out by default: <code>backtrace_silencers.rb</code>, <code>application_controller_renderer.rb</code>, <code>inflections.rb</code> and <code>mime_types.rb</code>. We may as well remove those.</li>
+</ul>
+
+<p>One of the initializers will come in handy, though: <code>cors.rb</code>. We can uncomment what is already there and modify it to accept all origins:</p>
+
+<pre><code class="language-ruby">Rails.application.config.middleware.insert_before 0, Rack::Cors do
+  allow do
+    origins ENV.fetch('ALLOWED_ORIGINS') { '*' }
+
+    resource '*',
+      headers: :any,
+      methods: [:get, :post, :put, :patch, :delete, :options, :head]
+  end
+end
+</code></pre>
+
+<p>This will make us happy campers in development, and allows us to set it properly for production - when we will know where our front-end lives. As a side note, simply allowing <code>*</code> would also be fine if we were going to call our API from e.g. a mobile application.</p>
+
+<p>To use this, we need to uncomment <code>rack-cors</code> in the Gemfile.</p>
+
+<h1 id="setting-up-the-database">Setting up the database</h1>
+
+<p>As we&rsquo;ve said in Part 0, we&rsquo;ll use <a href="https://docs.docker.com/compose/install/">Docker</a> to isolate our services in development. The easiest way to do this is by far with Docker. Messing around with images by themselves can be a bit cumbersome though, so we&rsquo;ll use <code>docker-compose</code> for that. If you don&rsquo;t have Docker installed yet, now is a great time to click that link and get it.</p>
+
+<p>When we have <code>docker-compose</code> ready, we can just drop a file called <code>docker-compose.yml</code> in the root of our application, set up like this:</p>
+
+<pre><code class="language-yml">postgresql:
+  image: postgres:9.6
+  ports:
+    - 5432:5432
+  environment:
+    - PGDATA=/postgresql
+    - PG_PASSWORD=our-awesome-bookstore-app
+  volumes:
+    - ./tmp/data/postgresql:/postgresql
+</code></pre>
+
+<p>This will set up a container with PostgreSQL 9.6, connect it&rsquo;s port 5432 to our localhost and set up a password on the database. We can run it using <code>docker-compose up</code> in the front, or <code>docker-compose start</code> as a daemon. Don&rsquo;t forget to stop it when you&rsquo;re done! I keep forgetting, so I prefer to run mine in the foreground.</p>
+
+<p>Now we just need to point our Rails app to this instance of PostgreSQL in development and test environments. Our <code>database.yml</code> may look something like this:</p>
+
+<pre><code class="language-yml">default: &amp;default
+  adapter: postgresql
+  encoding: unicode
+  pool: &lt;%= ENV.fetch(&quot;RAILS_MAX_THREADS&quot;) { 5 } %&gt;
+
+development: &amp;development
+  &lt;&lt;: *default
+  database: bookstore-backend_development
+  username: postgres
+  password: our-awesome-bookstore-app
+  host: localhost
+
+test:
+  &lt;&lt;: *development
+  database: bookstore-backend_test
+
+production:
+  url: &lt;%= ENV['DATABASE_URL'] %&gt;
+</code></pre>
+
+<p>You might notice some peculiarities. For example, we&rsquo;ve created an alias <code>&amp;development</code> and are running our <code>test</code> environment off of it. That makes sense, since the only thing we want to differ for the tests is the database they use - they should still hit Docker. Also, we&rsquo;ve already set up a production environment and made it use <code>DATABASE_URL</code>. This is how we&rsquo;ll set it up on Heroku.</p>
+
+<p>As a side note - almost everyone has probably at some (early) point in their career committed credentials to a repository. Most of us probably got chewed out for it. So why are we comfortable doing this for our development and test environments? Simple - the database only exists on our machine and doesn&rsquo;t talk to the outside world. Of course we would never put production creds in a repo.</p>
+
+<p>All right, let&rsquo;s hit it:</p>
+
+<pre><code>bundle install
+bundle exec rails db:create
+bundle exec rails db:migrate
+bundle exec bin/setup
+</code></pre>
+
+<p>Note that in Rails 5 we went to using the <code>rails</code> CLI tool rather than Rake. After several years of using <code>rake</code>, this will probably keep tripping me up for a little while longer :)</p>
+
+<p>If everything went well, our database should be set up!</p>
+
+<p>It might seem like we don&rsquo;t have all that much - but what we have is a very powerful environment to <em>model reality</em> in. We will do exactly that in part 2. See you then!</p>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small"></span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/javascript/">javascript</a>
+
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/es6/">es6</a>
+
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/saturdayproject/">saturdayproject</a>
+
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/follow-me/">follow me</a>
+
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/rails/">rails</a>
+
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/api/">api</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  <nav>
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--disabled">
+          
+            <i class="fa fa-angle-left"></i>
+            <span class="hide-xs hide-sm text-small icon-ml"></span>
+          </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/" data-tooltip="Rails 5.1 API with Vue.js frontend, part 0: stack choices">
+          
+            <span class="hide-xs hide-sm text-small icon-mr"></span>
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </nav>
+  <ul class="post-actions post-action-share">
+    
+      <li class="post-action hide-lg hide-md hide-sm">
+        <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+          <i class="fa fa-share-alt"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-1-setting-up-a-rails-api-app%2f">
+          <i class="fa fa-google-plus"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-1-setting-up-a-rails-api-app%2f">
+          <i class="fa fa-facebook-official"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-1-setting-up-a-rails-api-app%2f">
+          <i class="fa fa-twitter"></i>
+        </a>
+      </li>
+    
+    
+      <li class="post-action">
+        <a class="post-action-btn btn btn--default" href="#disqus_thread">
+          <i class="fa fa-comment-o"></i>
+        </a>
+      </li>
+    
+    <li class="post-action">
+      
+        <a class="post-action-btn btn btn--default" href="#">
+      
+        <i class="fa fa-list"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
 
             
               
-  
-    
-      
-        
-          
-        
-      
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/">
-          Rails 5.1 API with Vue.js frontend, part 0: stack choices
-        </a>
-      </h1>
-      <div class="postShorten-meta post-meta">
-  
-    <time itemprop="datePublished" datetime="2017-07-08T15:26:57&#43;02:00">
-      
-  
-  
-  
-  
-    2017-07-08
-  
-
-    </time>
-  
-  
-
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
-
-    </div>
-  </div>
-  
-    <a href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://paweljw.github.io/media/bookstore.jpg"/>
-      </div>
-    </a>
-  
-  <div class="postShorten-excerpt" itemprop="articleBody">
-      <p>
-        I&rsquo;ve been rather busy lately, and my progress in learning Vue.js has slowed down. However, I think that I&rsquo;m ready to dive into making something more resembling a real application that Monster Hunter and GalaxyQuest.
-I believe that you learn best when your objective is teaching it to somebody else. Therefore, over the next couple of weeks I&rsquo;ll be making and refining a simple bookstore app1, using Rails 5.1 for the API backend, and vue.
-        <br>
-        <a href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/" class="postShorten-excerpt_link link"></a>
-        
-      </p>
-    </div>
-</article>
-
-            
               
-  
-    
-      
-        
-          
-        
-      
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="https://paweljw.github.io/2017/06/saturday-project-galaxyquest---fuzzily-searching-github-stars/">
-          Saturday Project: GalaxyQuest - fuzzily searching github stars
-        </a>
-      </h1>
-      <div class="postShorten-meta post-meta">
-  
-    <time itemprop="datePublished" datetime="2017-06-15T15:47:42&#43;02:00">
-      
-  
-  
-  
-  
-    2017-06-15
-  
-
-    </time>
-  
-  
-
-</div>
-
-    </div>
-  </div>
-  
-    <a href="https://paweljw.github.io/2017/06/saturday-project-galaxyquest---fuzzily-searching-github-stars/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://paweljw.github.io/media/galaxyquest.jpg"/>
-      </div>
-    </a>
-  
-  <div class="postShorten-excerpt" itemprop="articleBody">
-      <p>
-        <em>Okay, Thursday project. It&rsquo;s my day off this week, what can I do.</em></p>
-
-<p>I&rsquo;m still on this Vue.js kick, so while studying Components, I built myself a little app.</p>
-
-<p>
-        <br>
-        <a href="https://paweljw.github.io/2017/06/saturday-project-galaxyquest---fuzzily-searching-github-stars/" class="postShorten-excerpt_link link"></a>
-        
-      </p>
-    </div>
-</article>
-
             
-              
-  
-    
-      
-        
-          
-        
-      
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="https://paweljw.github.io/2017/06/saturday-project-monster-hunting-with-vue.js/">
-          Saturday Project: Monster Hunting with Vue.js
-        </a>
-      </h1>
-      <div class="postShorten-meta post-meta">
-  
-    <time itemprop="datePublished" datetime="2017-06-11T11:48:27&#43;02:00">
-      
-  
-  
-  
-  
-    2017-06-11
-  
-
-    </time>
-  
-  
-
-</div>
-
-    </div>
-  </div>
-  
-    <a href="https://paweljw.github.io/2017/06/saturday-project-monster-hunting-with-vue.js/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://paweljw.github.io/media/monsterhunter.png"/>
-      </div>
-    </a>
-  
-  <div class="postShorten-excerpt" itemprop="articleBody">
-      <p>
-        I&rsquo;m studying Vue.js right now - here&rsquo;s a simple app that I made in the process.</p>
-
-<p>
-        <br>
-        <a href="https://paweljw.github.io/2017/06/saturday-project-monster-hunting-with-vue.js/" class="postShorten-excerpt_link link"></a>
-        
-      </p>
-    </div>
-</article>
-
-            
-              
-  
-    
-      
-        
-          
-        
-      
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="https://paweljw.github.io/2017/05/saturday-project-alien-generator-in-javascript/">
-          Saturday Project: Alien Generator in JavaScript
-        </a>
-      </h1>
-      <div class="postShorten-meta post-meta">
-  
-    <time itemprop="datePublished" datetime="2017-05-28T15:47:59&#43;02:00">
-      
-  
-  
-  
-  
-    2017-05-28
-  
-
-    </time>
-  
-  
-
-</div>
-
-    </div>
-  </div>
-  
-    <a href="https://paweljw.github.io/2017/05/saturday-project-alien-generator-in-javascript/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://paweljw.github.io/media/alien.png"/>
-      </div>
-    </a>
-  
-  <div class="postShorten-excerpt" itemprop="articleBody">
-      <p>
-        I&rsquo;ve been studying ES6 a lot lately. Here&rsquo;s a fun little project that we can do with it over an hour or so on a Saturday: an alien generator!</p>
-
-<p>
-        <br>
-        <a href="https://paweljw.github.io/2017/05/saturday-project-alien-generator-in-javascript/" class="postShorten-excerpt_link link"></a>
-        
-      </p>
-    </div>
-</article>
-
-            
-            
-
-          </section>
-        
+          </div>
+        </article>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
     &copy; 2017 <a href="https://github.com/paweljw">Paweł J. Wal</a>. 
@@ -543,6 +483,92 @@ I believe that you learn best when your objective is teaching it to somebody els
 </footer>
 
       </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        <div class="post-actions-wrap">
+  <nav>
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--disabled">
+          
+            <i class="fa fa-angle-left"></i>
+            <span class="hide-xs hide-sm text-small icon-ml"></span>
+          </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/" data-tooltip="Rails 5.1 API with Vue.js frontend, part 0: stack choices">
+          
+            <span class="hide-xs hide-sm text-small icon-mr"></span>
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </nav>
+  <ul class="post-actions post-action-share">
+    
+      <li class="post-action hide-lg hide-md hide-sm">
+        <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+          <i class="fa fa-share-alt"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-1-setting-up-a-rails-api-app%2f">
+          <i class="fa fa-google-plus"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-1-setting-up-a-rails-api-app%2f">
+          <i class="fa fa-facebook-official"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-1-setting-up-a-rails-api-app%2f">
+          <i class="fa fa-twitter"></i>
+        </a>
+      </li>
+    
+    
+      <li class="post-action">
+        <a class="post-action-btn btn btn--default" href="#disqus_thread">
+          <i class="fa fa-comment-o"></i>
+        </a>
+      </li>
+    
+    <li class="post-action">
+      
+        <a class="post-action-btn btn btn--default" href="#">
+      
+        <i class="fa fa-list"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <ul class="share-options">
+    <li class="share-option">
+      <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-1-setting-up-a-rails-api-app%2f">
+        <i class="fa fa-google-plus"></i><span></span>
+      </a>
+    </li>
+    <li class="share-option">
+      <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-1-setting-up-a-rails-api-app%2f">
+        <i class="fa fa-facebook-official"></i><span></span>
+      </a>
+    </li>
+    <li class="share-option">
+      <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-1-setting-up-a-rails-api-app%2f">
+        <i class="fa fa-twitter"></i><span></span>
+      </a>
+    </li>
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
     </div>
     
     <div id="about">
@@ -811,6 +837,32 @@ $(document).ready(function() {
   });
 });
 </script>
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/paweljw.github.io\/2017\/07\/rails-5.1-api-with-vue.js-frontend-part-1-setting-up-a-rails-api-app\/';
+          
+            this.page.identifier = '\/2017\/07\/rails-5.1-api-with-vue.js-frontend-part-1-setting-up-a-rails-api-app\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'paweljw-github-io';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
 
 
 
