@@ -9,6 +9,7 @@ tags:
 - follow me
 - rails
 - api
+- rails-api-series
 comments: true
 draft: false
 ---
@@ -216,7 +217,9 @@ Nice to have:
 * Images for the books! Our bookstore will look a bit bland, don't you think?
 * A simulated "order" system so the "store" part actually has some sense.
 
-We'll dig into versioning APIs - the how _and_ the why - in part 3 on Tuesday, July 18th, and into auth a bit later. See you then!
+We'll dig into versioning APIs - the how _and_ the why - in part 3 on Tuesday, July 18th, and into auth a bit later. In the meantime, you can check out the repo at this tag: https://github.com/paweljw/bookstore-backend/tree/part-2 to see the complete code.
+
+See you next time!
 
 ---
 

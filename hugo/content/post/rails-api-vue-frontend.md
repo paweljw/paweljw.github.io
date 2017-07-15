@@ -9,6 +9,7 @@ tags:
 - follow me
 - rails
 - api
+- rails-api-series
 comments: true
 draft: false
 ---

@@ -61,7 +61,7 @@ pygmentsstyle = "friendly"
 [[menu.links]]
   weight = 0
   identifier = "github"
-  name = "GitHub"
+  name = "@paweljw"
   pre = "<i class=\"sidebar-button-icon fa fa-lg fa-github\"></i>"
   url = "https://github.com/paweljw"
 [[menu.links]]
@@ -69,6 +69,12 @@ pygmentsstyle = "friendly"
   identifier = "linkedin"
   name = "LinkedIn"
   pre = "<i class=\"sidebar-button-icon fa fa-lg fa-linkedin\"></i>"
+  url = "https://linkedin.com/in/pawe%c5%82-wal-a478a785"
+[[menu.links]]
+  weight = 0
+  identifier = "twitter"
+  name = "@paweljwal"
+  pre = "<i class=\"sidebar-button-icon fa fa-lg fa-twitter\"></i>"
   url = "https://linkedin.com/in/pawe%c5%82-wal-a478a785"
 
 [[menu.misc]]
