@@ -1,6 +1,6 @@
 <h5 class="archive-result text-color-base text-xlarge" data-message-zero="{{ i18n "global.posts_found.zero" }}" data-message-one="{{ i18n "global.posts_found.one" }}" data-message-other="{{ i18n "global.posts_found.other" }}"></h5>
 <section class="boxes">
-  {{ range .GroupByDate "2006" }}
+  {{ range .GroupByDate "January 2006" }}
     {{ $year := .Key }}
     <div class="archive archive-year box" data-date="{{ $year }}">
       <h4 class="archive-title" style="text-decoration: none;">{{ $year }}</h4>

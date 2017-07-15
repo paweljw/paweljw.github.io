@@ -51,7 +51,7 @@ Now we can run `tree` on this new app, and... wow! When you compare that to a re
 
 One of the initializers will come in handy, though: `cors.rb`. We can uncomment what is already there and modify it to accept all origins:
 
-```ruby
+``` ruby
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     origins ENV.fetch('ALLOWED_ORIGINS') { '*' }
@@ -73,7 +73,7 @@ As we've said in Part 0, we'll use [Docker](https://docs.docker.com/compose/inst
 
 When we have `docker-compose` ready, we can just drop a file called `docker-compose.yml` in the root of our application, set up like this:
 
-```yml
+``` yaml
 postgresql:
   image: postgres:9.6
   ports:
@@ -89,7 +89,7 @@ This will set up a container with PostgreSQL 9.6, connect it's port 5432 to our 
 
 Now we just need to point our Rails app to this instance of PostgreSQL in development and test environments. Our `database.yml` may look something like this:
 
-```yml
+``` yaml
 default: &default
   adapter: postgresql
   encoding: unicode
@@ -127,4 +127,8 @@ Note that in Rails 5 we went to using the `rails` CLI tool rather than Rake. Aft
 
 If everything went well, our database should be set up!
 
-It might seem like we don't have all that much - but what we have is a very powerful environment to _model reality_ in. We will do exactly that in part 2. See you then!
+It might seem like we don't have all that much - but what we have is a very powerful environment to _model reality_ in. We will do exactly that in [part 2](/2017/07/rails-5.1-api-with-vue.js-frontend-part-2-modeling-reality/).
+
+---
+
+Top image credit: https://www.pexels.com/photo/industry-rails-train-path-481150/ (CC0 Public Domain)

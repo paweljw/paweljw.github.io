@@ -23,7 +23,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.21">
     <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
-    <title>Rails 5.1 API with Vue.js frontend, part 0: stack choices</title>
+    <title>Rails 5.1 API with Vue.js frontend, part 2: Modeling reality</title>
     <meta name="author" content="Paweł J. Wal">
     <meta name="keywords" content=", development, ruby, ruby on rails, es6, javascript, electronics, arduino, science">
 
@@ -31,18 +31,27 @@
     
 
     
-    <meta name="description" content="I&rsquo;ve been rather busy lately, and my progress in learning Vue.js has slowed down. However, I think that I&rsquo;m ready to dive into making something more resembling a real application that Monster Hunter and GalaxyQuest.
-I believe that you learn best when your objective is teaching it to somebody else. Therefore, over the next couple of weeks I&rsquo;ll be making and refining a simple bookstore app1, using Rails 5.1 for the API backend, and vue.">
-    <meta property="og:description" content="I&rsquo;ve been rather busy lately, and my progress in learning Vue.js has slowed down. However, I think that I&rsquo;m ready to dive into making something more resembling a real application that Monster Hunter and GalaxyQuest.
-I believe that you learn best when your objective is teaching it to somebody else. Therefore, over the next couple of weeks I&rsquo;ll be making and refining a simple bookstore app1, using Rails 5.1 for the API backend, and vue.">
+    <meta name="description" content="Oh yeah. Now we&rsquo;re going hardcore. Well, not really.
+
+While Rails embraces a continuously changing data model, it&rsquo;s always good to stop and think for a minute about the domain we&rsquo;re trying to magically lockwithin an app. We&rsquo;re building a bookstore. So what&rsquo;s in one?
+
+">
+    <meta property="og:description" content="Oh yeah. Now we&rsquo;re going hardcore. Well, not really.
+
+While Rails embraces a continuously changing data model, it&rsquo;s always good to stop and think for a minute about the domain we&rsquo;re trying to magically lockwithin an app. We&rsquo;re building a bookstore. So what&rsquo;s in one?
+
+">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Rails 5.1 API with Vue.js frontend, part 0: stack choices">
-    <meta property="og:url" content="/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/">
+    <meta property="og:title" content="Rails 5.1 API with Vue.js frontend, part 2: Modeling reality">
+    <meta property="og:url" content="/2017/07/rails-5.1-api-with-vue.js-frontend-part-2-modeling-reality/">
     <meta property="og:site_name" content="Shenanigans! - a blog on programming, technology and science">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Shenanigans! - a blog on programming, technology and science">
-    <meta name="twitter:description" content="I&rsquo;ve been rather busy lately, and my progress in learning Vue.js has slowed down. However, I think that I&rsquo;m ready to dive into making something more resembling a real application that Monster Hunter and GalaxyQuest.
-I believe that you learn best when your objective is teaching it to somebody else. Therefore, over the next couple of weeks I&rsquo;ll be making and refining a simple bookstore app1, using Rails 5.1 for the API backend, and vue.">
+    <meta name="twitter:description" content="Oh yeah. Now we&rsquo;re going hardcore. Well, not really.
+
+While Rails embraces a continuously changing data model, it&rsquo;s always good to stop and think for a minute about the domain we&rsquo;re trying to magically lockwithin an app. We&rsquo;re building a bookstore. So what&rsquo;s in one?
+
+">
     
       <meta name="twitter:creator" content="@paweljwal">
     
@@ -57,7 +66,7 @@ I believe that you learn best when your objective is teaching it to somebody els
 
     
     
-      <meta property="og:image" content="https://paweljw.github.io/media/bookstore.jpg">
+      <meta property="og:image" content="https://paweljw.github.io/media/lego.jpg">
     
     
 
@@ -210,24 +219,24 @@ ga('send', 'pageview');
   <div class="post-header-cover
               text-left
               "
-       style="background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('/media/bookstore.jpg'); background-size: cover"
+       style="background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('/media/lego.jpg'); background-size: cover"
        data-behavior="5">
     
       <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      Rails 5.1 API with Vue.js frontend, part 0: stack choices
+      Rails 5.1 API with Vue.js frontend, part 2: Modeling reality
     </h1>
   
   <div class="postShorten-meta post-meta">
   
-    <time itemprop="datePublished" datetime="2017-07-08T15:26:57&#43;02:00">
+    <time itemprop="datePublished" datetime="2017-07-15T15:00:00&#43;02:00">
       
   
   
   
   
-    2017-07-08
+    2017-07-15
   
 
     </time>
@@ -250,113 +259,220 @@ ga('send', 'pageview');
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              
+              <p>Oh yeah. Now we&rsquo;re going <em>hardcore</em>. Well, not really.</p>
 
-<p>I&rsquo;ve been rather busy lately, and my progress in learning Vue.js has slowed down. However, I think that I&rsquo;m ready to dive into making
-something more resembling a real application that <a href="http://localhost:1313/2017/06/saturday-project-monster-hunting-with-vue.js/">Monster Hunter</a> and <a href="https://paweljw.github.io/2017/06/saturday-project-galaxyquest---fuzzily-searching-github-stars/">GalaxyQuest</a>.</p>
+<p>While Rails embraces a continuously changing data model, it&rsquo;s always good to stop and think for a minute about the domain we&rsquo;re trying to magically lockwithin an app. We&rsquo;re building a bookstore. So what&rsquo;s in one?</p>
 
-<p>I believe that you learn best when your objective is teaching it to somebody else. Therefore, over the next couple of weeks
-I&rsquo;ll be making and refining a simple bookstore app<sup><a href="#ft1" name="fr1">1</a></sup>, using Rails 5.1 for the API backend, and <a href="https://vuejs.org/">vue.js</a>
-with <a href="https://github.com/vuejs/vue-router">vue-router</a> and <a href="https://github.com/pagekit/vue-resource">vue-resource</a> on the
-front end.</p>
+<p></p>
 
-<!-- more //-->
+<p><em>This is an onging series of articles. It&rsquo;s highly recommended you start with <a href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/">part 0</a>!</em></p>
 
-<p><em>This is an ongoing series. So far, the following parts have been posted:</em></p>
+<h1 id="books">Books</h1>
+
+<p>There are books in a bookstore. Books have <em>titles</em> and <em>authors</em> at a minimum. We want to sell those books, so they probably have <em>prices</em>, also. This gives us one very important information: we&rsquo;re going to be dealing with money!</p>
+
+<p>One might think that the most natural way to store prices is in a float column - it makes sense, money is floating point after all, right? Not necessarily. When we start thinking about currencies, exchange rates and similar things, it can quickly make one&rsquo;s head spin. The safest way to store price data is in a dedicated column, where it&rsquo;s stored as 1/100s of the base currency, and of course to set the base currency first.</p>
+
+<p>Thankfully, we have the lovely <code>money-rails</code> gem to take care of that for us. Let&rsquo;s drop it in right now into our Gemfile and install with <code>bundle install</code>. Afterwards it will need to be initialized with</p>
+
+<pre><code>rails g money_rails:initializer
+</code></pre>
+
+<p>This will create a <code>money.rb</code> initializer. For now, we can drop in the simplest of configs there:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60add5">MoneyRails</span><span style="color: #666666">.</span>configure <span style="color: #007020; font-weight: bold">do</span> <span style="color: #666666">|</span>config<span style="color: #666666">|</span>
+  config<span style="color: #666666">.</span>default_currency <span style="color: #666666">=</span> <span style="color: #517918">:usd</span>
+<span style="color: #007020; font-weight: bold">end</span>
+</pre></div>
+
+<h1 id="authors">Authors</h1>
+
+<p>What about authors, what do they have? Definitely <em>names</em>. Also an author can have many books, and books belong to an author.</p>
+
+<p>Well, that was easy. 😀</p>
+
+<h1 id="scaffolding">Scaffolding</h1>
+
+<p>Armed with that, we can create ourselves some models. We&rsquo;ll use Rails&rsquo; scaffolding feature for that.</p>
+
+<pre><code>rails g scaffold Author name:string
+rails g scaffold Book author:belongs_to title:string price:monetize
+</code></pre>
+
+<p>Notice how we can use <code>monetize</code> now as a field type? That&rsquo;s all <code>money-rails</code>.</p>
+
+<p>Of course, the generators aren&rsquo;t as smart as we are, so we need to go in and fix a couple of things.</p>
+
+<h1 id="routes">Routes</h1>
+
+<p>Our books cannot exist without authors. We can decide that we&rsquo;ll only browse them in this context.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60add5">Rails</span><span style="color: #666666">.</span>application<span style="color: #666666">.</span>routes<span style="color: #666666">.</span>draw <span style="color: #007020; font-weight: bold">do</span>
+  resources <span style="color: #517918">:authors</span> <span style="color: #007020; font-weight: bold">do</span>
+    resources <span style="color: #517918">:books</span>
+  <span style="color: #007020; font-weight: bold">end</span>
+
+  root <span style="color: #517918">to</span>: <span style="color: #4070a0">&#39;authors#index&#39;</span>
+<span style="color: #007020; font-weight: bold">end</span>
+</pre></div>
+
+<p>This will also make for some slightly more challenging routing on the frontend side of things - since we&rsquo;re here to learn, that&rsquo;s a good thing!</p>
+
+<h1 id="controllers">Controllers</h1>
+
+<p>This also means that we&rsquo;ll want to modify the <code>BooksController</code>:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60a0b0; font-style: italic"># frozen_string_literal: true</span>
+
+<span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">BooksController</span> <span style="color: #666666">&lt;</span> <span style="color: #60add5">ApplicationController</span>
+  before_action <span style="color: #517918">:set_author</span>, <span style="color: #517918">only</span>: <span style="color: #666666">[</span><span style="color: #517918">:show</span>, <span style="color: #517918">:update</span>, <span style="color: #517918">:destroy</span><span style="color: #666666">]</span>
+  before_action <span style="color: #517918">:set_book</span>, <span style="color: #517918">only</span>: <span style="color: #666666">[</span><span style="color: #517918">:show</span>, <span style="color: #517918">:update</span>, <span style="color: #517918">:destroy</span><span style="color: #666666">]</span>
+
+  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">index</span>
+    <span style="color: #bb60d5">@books</span> <span style="color: #666666">=</span> <span style="color: #bb60d5">@author</span><span style="color: #666666">.</span>books<span style="color: #666666">.</span>all
+    render <span style="color: #517918">json</span>: <span style="color: #bb60d5">@books</span>
+  <span style="color: #007020; font-weight: bold">end</span>
+
+  <span style="color: #60a0b0; font-style: italic"># ...</span>
+
+  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">create</span>
+    <span style="color: #bb60d5">@book</span> <span style="color: #666666">=</span> <span style="color: #bb60d5">@author</span><span style="color: #666666">.</span>books<span style="color: #666666">.</span>new(book_params)
+
+    <span style="color: #60a0b0; font-style: italic"># ...</span>
+  <span style="color: #007020; font-weight: bold">end</span>
+
+  <span style="color: #60a0b0; font-style: italic"># ...</span>
+
+  <span style="color: #007020">private</span>
+
+  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">set_book</span>
+    <span style="color: #bb60d5">@book</span> <span style="color: #666666">=</span> <span style="color: #bb60d5">@author</span><span style="color: #666666">.</span>books<span style="color: #666666">.</span>find(params<span style="color: #666666">[</span><span style="color: #517918">:id</span><span style="color: #666666">]</span>)
+  <span style="color: #007020; font-weight: bold">end</span>
+
+  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">set_author</span>
+    <span style="color: #bb60d5">@author</span> <span style="color: #666666">=</span> <span style="color: #60add5">Author</span><span style="color: #666666">.</span>find(params<span style="color: #666666">[</span><span style="color: #517918">:author_id</span><span style="color: #666666">]</span>)
+  <span style="color: #007020; font-weight: bold">end</span>
+
+  <span style="color: #60a0b0; font-style: italic"># ...</span>
+<span style="color: #007020; font-weight: bold">end</span>
+</pre></div>
+
+<p>I&rsquo;ve obviously ommited some parts for brevity. The gist of the changes is that we want to generate our <code>@book</code> with regard to
+the author whom we&rsquo;re browsing.</p>
+
+<h1 id="models">Models</h1>
+
+<p>Some finishing touches to be done here.</p>
+
+<p>Author should be aware that he has books and must have a name. We can also define a <code>to_s</code> method - it&rsquo;ll come in handy later.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">Author</span> <span style="color: #666666">&lt;</span> <span style="color: #60add5">ApplicationRecord</span>
+  has_many <span style="color: #517918">:books</span>
+
+  validates <span style="color: #517918">:name</span>, <span style="color: #517918">presence</span>: <span style="color: #007020">true</span>
+
+  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">to_s</span>
+    <span style="color: #007020">name</span>
+  <span style="color: #007020; font-weight: bold">end</span>
+<span style="color: #007020; font-weight: bold">end</span>
+</pre></div>
+
+<p>Similarly, we can define validations and <code>to_s</code> on Book:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">Book</span> <span style="color: #666666">&lt;</span> <span style="color: #60add5">ApplicationRecord</span>
+  belongs_to <span style="color: #517918">:author</span>
+  monetize <span style="color: #517918">:price_cents</span>
+
+  validates <span style="color: #517918">:title</span>, <span style="color: #517918">presence</span>: <span style="color: #007020">true</span>
+
+  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">to_s</span>
+    title
+  <span style="color: #007020; font-weight: bold">end</span>
+<span style="color: #007020; font-weight: bold">end</span>
+</pre></div>
+
+<h1 id="seeding">Seeding</h1>
+
+<p>I&rsquo;ve decided that instead of typing out a bunch of books, I can just import a Goodreads list. I chose one I thought funny - <a href="http://www.goodreads.com/list/show/643.Guilty_Pleasures_Crap_You_re_Embarrassed_to_Love">http://www.goodreads.com/list/show/643.Guilty_Pleasures_Crap_You_re_Embarrassed_to_Love</a> - and wrote a simple Rake task to parse it using Nokogiri. It&rsquo;s placed in <code>lib/tasks/import.rake</code> and called with <code>rake import:goodreads</code>.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60a0b0; font-style: italic"># frozen_string_literal: true</span>
+
+<span style="color: #007020">require</span> <span style="color: #4070a0">&#39;nokogiri&#39;</span>
+<span style="color: #007020">require</span> <span style="color: #4070a0">&#39;open-uri&#39;</span>
+
+<span style="color: #60add5">GOODREADS_URL</span> <span style="color: #666666">=</span> <span style="color: #4070a0">&#39;http://www.goodreads.com/list/show/643.Guilty_Pleasures_Crap_You_re_Embarrassed_to_Love&#39;</span><span style="color: #666666">.</span>freeze
+
+namespace <span style="color: #517918">:import</span> <span style="color: #007020; font-weight: bold">do</span>
+  task <span style="color: #517918">goodreads</span>: <span style="color: #517918">:environment</span> <span style="color: #007020; font-weight: bold">do</span>
+    doc <span style="color: #666666">=</span> <span style="color: #60add5">Nokogiri</span><span style="color: #666666">::</span><span style="color: #60add5">HTML</span>(<span style="color: #007020">open</span>(<span style="color: #60add5">GOODREADS_URL</span>))
+
+    books <span style="color: #666666">=</span> doc<span style="color: #666666">.</span>xpath(<span style="color: #4070a0">&#39;//*[@itemtype=&quot;http://schema.org/Book&quot;]&#39;</span>)
+
+    books<span style="color: #666666">.</span>each { <span style="color: #666666">|</span>book<span style="color: #666666">|</span> book_from_xml(book) }
+  <span style="color: #007020; font-weight: bold">end</span>
+
+  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">book_from_xml</span>(book)
+    title, author_name <span style="color: #666666">=</span> book<span style="color: #666666">.</span>xpath(<span style="color: #4070a0">&#39;.//*[@itemprop=&quot;name&quot;]&#39;</span>)<span style="color: #666666">.</span>map(<span style="color: #666666">&amp;</span><span style="color: #517918">:content</span>)
+    author <span style="color: #666666">=</span> <span style="color: #60add5">Author</span><span style="color: #666666">.</span>find_or_create_by(<span style="color: #007020">name</span>: author_name)
+
+    book <span style="color: #666666">=</span> create_book(author, title)
+
+    <span style="color: #007020">puts</span> <span style="color: #4070a0">&quot;</span><span style="color: #70a0d0; font-style: italic">#{</span>book<span style="color: #666666">.</span>author<span style="color: #70a0d0; font-style: italic">}</span><span style="color: #4070a0"> - </span><span style="color: #70a0d0; font-style: italic">#{</span>book<span style="color: #70a0d0; font-style: italic">}</span><span style="color: #4070a0"> for </span><span style="color: #70a0d0; font-style: italic">#{</span>book<span style="color: #666666">.</span>price<span style="color: #70a0d0; font-style: italic">}</span><span style="color: #4070a0">&quot;</span>
+  <span style="color: #007020; font-weight: bold">end</span>
+
+  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">create_book</span>(author, title)
+    book <span style="color: #666666">=</span> author<span style="color: #666666">.</span>books<span style="color: #666666">.</span>find_or_create_by(<span style="color: #517918">title</span>: title)
+    book<span style="color: #666666">.</span>price <span style="color: #666666">||=</span> <span style="color: #007020">rand</span> <span style="color: #666666">*</span> <span style="color: #40a070">15</span>
+    book<span style="color: #666666">.</span>save
+    book
+  <span style="color: #007020; font-weight: bold">end</span>
+<span style="color: #007020; font-weight: bold">end</span>
+</pre></div>
+
+<h1 id="quick-sanity-check-is-it-even-responding">Quick sanity check: is it even responding?</h1>
+
+<p>Let&rsquo;s see if our app is responding at all. We can use <a href="https://www.getpostman.com/">Postman</a> for that - it&rsquo;s a very versatile
+tool and I highly recommend it.</p>
+
+<p>Anyway, let&rsquo;s boot up our app with <code>rails s</code>, point Postman at <code>http://localhost:3000</code>, and&hellip;</p>
+
+
+<figure >
+    <a href="https://paweljw.github.io/media/modeling_reality_postman.png">
+        <img src="https://paweljw.github.io/media/modeling_reality_postman.png" alt="Testing our app with Postman" />
+    </a>
+    
+    <figcaption>
+        <p>
+        Testing our app with Postman
+        
+            
+        
+        </p> 
+    </figcaption>
+    
+</figure>
+
+
+<p>Woohoo!</p>
+
+<h1 id="room-for-improvement">Room for improvement</h1>
+
+<p>You&rsquo;ll notice I often discuss this: where can we improve? What can be added or changed in the future? Which improvements we need for a minimum viable product, and which can be saved for later?</p>
+
+<p>I think that the list of things we need for MVP looks something like this:</p>
 
 <ul>
-<li>Part 0. Stack choices</li>
-<li><a href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-1-setting-up-a-rails-api-app/">Part 1: Setting up a Rails API app</a></li>
-<li><a href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-2-modeling-reality/">Part 2: Modeling reality</a></li>
+<li>Reorganize our controllers a bit more, so that we have our API versioned in the url (<code>/v1/books</code> instead of simply <code>/books</code>). his will allow us to iterate on the API and front end independently.</li>
+<li>Locking it down. We should have users and a permissions system (at a minimum, a method to say who is an admin and who is not). Actions such as creating Authors or deleting Books need to be authenticated-admin-only.</li>
 </ul>
 
-<p>The goal is that you should be able to follow along! I&rsquo;ll try to keep it simple, however  good command of your console,
-a fair grasp on how a &ldquo;regular&rdquo; Rails app is put together and understanding of ES6&rsquo;s classes and imports should make for
-smooth sailing.</p>
-
-<p>We&rsquo;ll only discuss our architecture choices briefly in this article, and then get cracking in the next parts.</p>
-
-<h1 id="why-rails-5-1">Why Rails 5.1?</h1>
-
-<p>I love Ruby. I also feel strongly about Rails, since it was my first MVC framework. I have some equally strong and not
-entirely positive feelings about the direction the framework is taking recently - these are perhaps better suited to become
-a separate post. Despite this, however, I think that the API mode in Rails 5 is huge, and has a chance to save Rails from
-losing steam amidst the push towards Single Page Applications.</p>
-
-<p>Rails 5.1 is the newest in the 5.x branch at the time of writing, so we&rsquo;ll use that. This version also comes with support for
-yarn and webpacker, which we could use, but will not - we&rsquo;ll discuss why later in the article.</p>
-
-<p>So far, I&rsquo;ve only had a chance to very cursorally play with the API app generation mode, so I&rsquo;d like to do a bit more of
-that. I&rsquo;m also choosing Rails because this is what I&rsquo;m proficient with, while I&rsquo;m still learning Vue.js. I find that tackling
-two new things at once is sometimes harder than necessary, so this is a nice and safe middle ground.</p>
-
-<p>Other choices I would entertain, in the order I&rsquo;d like to play with them:</p>
+<p>Nice to have:</p>
 
 <ul>
-<li><a href="http://www.phoenixframework.org/">Phoenix</a> - I&rsquo;ve only taken Elixir for a bit of a spin so far, but I&rsquo;d like to explore the
-concepts of functional programming as applied to MVC frameworks.</li>
-<li><a href="http://hanamirb.org/">Hanami</a> - while it&rsquo;s Ruby, it&rsquo;s based around dry-rb concepts, so a step in an entirely different direction than Rails.</li>
-<li><a href="http://www.sinatrarb.com/">Sinatra</a> - perhaps the choice I&rsquo;d find easiest to work with (and also one that I&rsquo;ve used before).
-If I wanted to make a really tiny app, really fast, I&rsquo;d probably choose this one.</li>
+<li>Images for the books! Our bookstore will look a bit bland, don&rsquo;t you think?</li>
+<li>A simulated &ldquo;order&rdquo; system so the &ldquo;store&rdquo; part actually has some sense.</li>
 </ul>
 
-<p>You might notice I&rsquo;ve put Sinatra last. That is because I know it best of the mentioned frameworks, so the play factor is
-not there. However, following the idea of simplifying the backend code because I might struggle with the frontend anyway,
-Sinatra would probably be my choice of backend framework.</p>
-
-<h1 id="why-vue-js">Why Vue.js?</h1>
-
-<p><em>It feels like every time someone says &ldquo;I chose X JavaScript framework over Y&rdquo; on the internet, a local holy crusade suddenly
-erupts. Please remember that this is just my personal opinion and not Jerusalem. Thank you.</em></p>
-
-<p>When I decided to learn a frontend framework in JavaScript, I was deciding between Angular, Ember, React (and it&rsquo;s many
-compatible implementations, such as <a href="https://github.com/developit/preact">Preact</a>) and Vue.js. Performance was one of the
-key factors, but I would also decide against learning a more performant framework (right now) if the example code available
-didn&rsquo;t sit right with me. This was the case with, for example, React, whose concept of JSX components seems a tad off to me
-(on a completely instincitve level).</p>
-
-<p>Therefore my argument shall be simple and based in numbers. <a href="http://www.stefankrause.net/wp/?p=431">Stefan Krause</a> has been
- benchmarking a whole bunch of JS frameworks for a while now, most recently in May 2017. You should <a href="http://www.stefankrause.net/js-frameworks-benchmark6/webdriver-ts-results/table.html">go see</a> the full results for yourself. The short of it
- is that Vue.js simply outperforms React, Preact, Angular and Ember <strong>in the cases that Stefan threw at it</strong>. I feel that
- the benchmark he prepared is reasonably representative and chose to trust it.</p>
-
-<h1 id="what-s-the-plan">What&rsquo;s the plan?</h1>
-
-<p>In theory, you could combine a Vue.js app and a Rails app in a single repository. Rails 5.1 now supports the
-<a href="https://yarnpkg.com/lang/en/">yarn</a> package manager and <a href="https://webpack.github.io/">webpack</a> through some switches to the
-<code>rails new</code> command.</p>
-
-<p>I&rsquo;ve looked over what Rails generates when these options are enabled, and I&rsquo;m nonplussed. There were generated controllers
-and layouts to include the JavaScript that webpack generates. This makes some sense when you want your HTML to be dynamically
-generated even before JavaScript gets to it, but this is not what we want. Therefore if we went this route, we would just
-be using an application server, such as <a href="https://github.com/puma/puma">Puma</a>, to serve content which is one hundred percent
-static. For what we want, this makes no sense.</p>
-
-<p>We&rsquo;ll be making two applications and placing them in two repositories. The API app will live in one, and we&rsquo;ll be deploying
-it to <a href="https://heroku.com">Heroku</a> using the free Hobby Dev plan. The frontend Vue.js app will live in the other repository,
-and we&rsquo;ll walk over how to deploy it to Amazon&rsquo;s S3. I&rsquo;ll also be hosting a copy here on GitHub Pages, so keep in mind that&rsquo;s
-an option.</p>
-
-<p>We could host our front end on Heroku as well, but that would defeat the purpose of learning how to build a modern single
-page application with strong decoupling between the front and back end. If you really want to do it, go for it though. After
-all, this is an experiment for all of us.</p>
-
-<p>We&rsquo;ll also be using <a href="https://www.docker.com/">Docker</a> for local Rails development (to run PostgreSQL in), and the
-<a href="https://github.com/vuejs/vue-cli">vue-cli</a> tool to set ourselves up with an app template for the front end.</p>
-
-<p>See you in <a href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-1-setting-up-a-rails-api-app/">part 1</a>, where we&rsquo;ll dig into making ourselves a Rails API app!</p>
+<p>We&rsquo;ll dig into versioning APIs - the how <em>and</em> the why - in part 3 on Tuesday, July 18th, and into auth a bit later. See you then!</p>
 
 <hr />
 
-<ol>
-<li><a name="ft1"></a> This could also be a TODO app, a recipe app or one of the other three apps that everybody seems to be
-doing for intros and tutorials. I&rsquo;d rather do a bookstore this time. <a href="#fr1">back</a></li>
-</ol>
-
-<hr />
-
-<p>Top image credit: <a href="https://commons.wikimedia.org/wiki/File:Bookstore_(Eugene,_Oregon).JPG">https://commons.wikimedia.org/wiki/File:Bookstore_(Eugene,_Oregon).JPG</a> (CC BY-SA 3.0)</p>
-
+<p>Top image credit: <a href="https://pixabay.com/p-1862109/">https://pixabay.com/p-1862109/</a> (CC0 Public Domain)</p>
               
             </div>
           </div>
@@ -390,7 +506,7 @@ doing for intros and tutorials. I&rsquo;d rather do a bookstore this time. <a hr
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-1-setting-up-a-rails-api-app/" data-tooltip="Rails 5.1 API with Vue.js frontend, part 1: Setting up a Rails API app">
+            <a class="post-action-btn btn btn--disabled">
           
             <i class="fa fa-angle-left"></i>
             <span class="hide-xs hide-sm text-small icon-ml"></span>
@@ -398,7 +514,7 @@ doing for intros and tutorials. I&rsquo;d rather do a bookstore this time. <a hr
         </li>
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/06/saturday-project-galaxyquest---fuzzily-searching-github-stars/" data-tooltip="Saturday Project: GalaxyQuest - fuzzily searching github stars">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-1-setting-up-a-rails-api-app/" data-tooltip="Rails 5.1 API with Vue.js frontend, part 1: Setting up a Rails API app">
           
             <span class="hide-xs hide-sm text-small icon-mr"></span>
             <i class="fa fa-angle-right"></i>
@@ -415,17 +531,17 @@ doing for intros and tutorials. I&rsquo;d rather do a bookstore this time. <a hr
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-0-stack-choices%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-2-modeling-reality%2f">
           <i class="fa fa-google-plus"></i>
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-0-stack-choices%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-2-modeling-reality%2f">
           <i class="fa fa-facebook-official"></i>
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-0-stack-choices%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-2-modeling-reality%2f">
           <i class="fa fa-twitter"></i>
         </a>
       </li>
@@ -471,7 +587,7 @@ doing for intros and tutorials. I&rsquo;d rather do a bookstore this time. <a hr
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-1-setting-up-a-rails-api-app/" data-tooltip="Rails 5.1 API with Vue.js frontend, part 1: Setting up a Rails API app">
+            <a class="post-action-btn btn btn--disabled">
           
             <i class="fa fa-angle-left"></i>
             <span class="hide-xs hide-sm text-small icon-ml"></span>
@@ -479,7 +595,7 @@ doing for intros and tutorials. I&rsquo;d rather do a bookstore this time. <a hr
         </li>
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/06/saturday-project-galaxyquest---fuzzily-searching-github-stars/" data-tooltip="Saturday Project: GalaxyQuest - fuzzily searching github stars">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-1-setting-up-a-rails-api-app/" data-tooltip="Rails 5.1 API with Vue.js frontend, part 1: Setting up a Rails API app">
           
             <span class="hide-xs hide-sm text-small icon-mr"></span>
             <i class="fa fa-angle-right"></i>
@@ -496,17 +612,17 @@ doing for intros and tutorials. I&rsquo;d rather do a bookstore this time. <a hr
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-0-stack-choices%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-2-modeling-reality%2f">
           <i class="fa fa-google-plus"></i>
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-0-stack-choices%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-2-modeling-reality%2f">
           <i class="fa fa-facebook-official"></i>
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-0-stack-choices%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-2-modeling-reality%2f">
           <i class="fa fa-twitter"></i>
         </a>
       </li>
@@ -533,17 +649,17 @@ doing for intros and tutorials. I&rsquo;d rather do a bookstore this time. <a hr
       <div id="share-options-bar" class="share-options-bar" data-behavior="5">
   <ul class="share-options">
     <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-0-stack-choices%2f">
+      <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-2-modeling-reality%2f">
         <i class="fa fa-google-plus"></i><span></span>
       </a>
     </li>
     <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-0-stack-choices%2f">
+      <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-2-modeling-reality%2f">
         <i class="fa fa-facebook-official"></i><span></span>
       </a>
     </li>
     <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-0-stack-choices%2f">
+      <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-2-modeling-reality%2f">
         <i class="fa fa-twitter"></i><span></span>
       </a>
     </li>
@@ -844,9 +960,9 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = 'https:\/\/paweljw.github.io\/2017\/07\/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices\/';
+          this.page.url = 'https:\/\/paweljw.github.io\/2017\/07\/rails-5.1-api-with-vue.js-frontend-part-2-modeling-reality\/';
           
-            this.page.identifier = '\/2017\/07\/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices\/'
+            this.page.identifier = '\/2017\/07\/rails-5.1-api-with-vue.js-frontend-part-2-modeling-reality\/'
           
         };
         (function() {

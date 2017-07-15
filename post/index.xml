@@ -6,10 +6,23 @@
     <description>Recent content in Posts on Shenanigans! - a blog on programming, technology and science</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pl-pl</language>
-    <lastBuildDate>Tue, 11 Jul 2017 15:26:57 +0200</lastBuildDate>
+    <lastBuildDate>Sat, 15 Jul 2017 15:00:00 +0200</lastBuildDate>
     
 	<atom:link href="https://paweljw.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Rails 5.1 API with Vue.js frontend, part 2: Modeling reality</title>
+      <link>https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-2-modeling-reality/</link>
+      <pubDate>Sat, 15 Jul 2017 15:00:00 +0200</pubDate>
+      
+      <guid>https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-2-modeling-reality/</guid>
+      <description>&lt;p&gt;Oh yeah. Now we&amp;rsquo;re going &lt;em&gt;hardcore&lt;/em&gt;. Well, not really.&lt;/p&gt;
+
+&lt;p&gt;While Rails embraces a continuously changing data model, it&amp;rsquo;s always good to stop and think for a minute about the domain we&amp;rsquo;re trying to magically lockwithin an app. We&amp;rsquo;re building a bookstore. So what&amp;rsquo;s in one?&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Rails 5.1 API with Vue.js frontend, part 1: Setting up a Rails API app</title>

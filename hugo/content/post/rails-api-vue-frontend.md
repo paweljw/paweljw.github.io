@@ -27,6 +27,7 @@ _This is an ongoing series. So far, the following parts have been posted:_
 
 * Part 0. Stack choices
 * [Part 1: Setting up a Rails API app](/2017/07/rails-5.1-api-with-vue.js-frontend-part-1-setting-up-a-rails-api-app/)
+* [Part 2: Modeling reality](/2017/07/rails-5.1-api-with-vue.js-frontend-part-2-modeling-reality/)
 
 The goal is that you should be able to follow along! I'll try to keep it simple, however  good command of your console,
 a fair grasp on how a "regular" Rails app is put together and understanding of ES6's classes and imports should make for
@@ -106,3 +107,7 @@ See you in [part 1](/2017/07/rails-5.1-api-with-vue.js-frontend-part-1-setting-u
 
 1. <a name="ft1"></a> This could also be a TODO app, a recipe app or one of the other three apps that everybody seems to be
 doing for intros and tutorials. I'd rather do a bookstore this time. <a href="#fr1">back</a>
+
+---
+
+Top image credit: https://commons.wikimedia.org/wiki/File:Bookstore_(Eugene,_Oregon).JPG (CC BY-SA 3.0)

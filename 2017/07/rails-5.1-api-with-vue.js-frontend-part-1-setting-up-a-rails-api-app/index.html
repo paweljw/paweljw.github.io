@@ -21,7 +21,7 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.23">
+    <meta name="generator" content="Hugo 0.21">
     <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
     <title>Rails 5.1 API with Vue.js frontend, part 1: Setting up a Rails API app</title>
     <meta name="author" content="Paweł J. Wal">
@@ -129,16 +129,6 @@ ga('send', 'pageview');
     
     <ul class="sidebar-buttons">
       
-  <li class="sidebar-button">
-    
-      <a class="sidebar-button-link " href="https://paweljw.github.io/categories">
-    
-      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
-      
-      <span class="sidebar-button-desc">Categories</span>
-    </a>
-  </li>
-
   <li class="sidebar-button">
     
       <a class="sidebar-button-link " href="https://paweljw.github.io/tags">
@@ -302,17 +292,16 @@ ga('send', 'pageview');
 </ul>
 
 <p>One of the initializers will come in handy, though: <code>cors.rb</code>. We can uncomment what is already there and modify it to accept all origins:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60add5">Rails</span><span style="color: #666666">.</span>application<span style="color: #666666">.</span>config<span style="color: #666666">.</span>middleware<span style="color: #666666">.</span>insert_before <span style="color: #40a070">0</span>, <span style="color: #60add5">Rack</span><span style="color: #666666">::</span><span style="color: #60add5">Cors</span> <span style="color: #007020; font-weight: bold">do</span>
+  allow <span style="color: #007020; font-weight: bold">do</span>
+    origins <span style="color: #60add5">ENV</span><span style="color: #666666">.</span>fetch(<span style="color: #4070a0">&#39;ALLOWED_ORIGINS&#39;</span>) { <span style="color: #4070a0">&#39;*&#39;</span> }
 
-<pre><code class="language-ruby">Rails.application.config.middleware.insert_before 0, Rack::Cors do
-  allow do
-    origins ENV.fetch('ALLOWED_ORIGINS') { '*' }
-
-    resource '*',
-      headers: :any,
-      methods: [:get, :post, :put, :patch, :delete, :options, :head]
-  end
-end
-</code></pre>
+    resource <span style="color: #4070a0">&#39;*&#39;</span>,
+      <span style="color: #517918">headers</span>: <span style="color: #517918">:any</span>,
+      <span style="color: #007020">methods</span>: <span style="color: #666666">[</span><span style="color: #517918">:get</span>, <span style="color: #517918">:post</span>, <span style="color: #517918">:put</span>, <span style="color: #517918">:patch</span>, <span style="color: #517918">:delete</span>, <span style="color: #517918">:options</span>, <span style="color: #517918">:head</span><span style="color: #666666">]</span>
+  <span style="color: #007020; font-weight: bold">end</span>
+<span style="color: #007020; font-weight: bold">end</span>
+</pre></div>
 
 <p>This will make us happy campers in development, and allows us to set it properly for production - when we will know where our front-end lives. As a side note, simply allowing <code>*</code> would also be fine if we were going to call our API from e.g. a mobile application.</p>
 
@@ -323,8 +312,7 @@ end
 <p>As we&rsquo;ve said in Part 0, we&rsquo;ll use <a href="https://docs.docker.com/compose/install/">Docker</a> to isolate our services in development. The easiest way to do this is by far with Docker. Messing around with images by themselves can be a bit cumbersome though, so we&rsquo;ll use <code>docker-compose</code> for that. If you don&rsquo;t have Docker installed yet, now is a great time to click that link and get it.</p>
 
 <p>When we have <code>docker-compose</code> ready, we can just drop a file called <code>docker-compose.yml</code> in the root of our application, set up like this:</p>
-
-<pre><code class="language-yml">postgresql:
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>postgresql:
   image: postgres:9.6
   ports:
     - 5432:5432
@@ -333,31 +321,30 @@ end
     - PG_PASSWORD=our-awesome-bookstore-app
   volumes:
     - ./tmp/data/postgresql:/postgresql
-</code></pre>
+</pre></div>
 
 <p>This will set up a container with PostgreSQL 9.6, connect it&rsquo;s port 5432 to our localhost and set up a password on the database. We can run it using <code>docker-compose up</code> in the front, or <code>docker-compose start</code> as a daemon. Don&rsquo;t forget to stop it when you&rsquo;re done! I keep forgetting, so I prefer to run mine in the foreground.</p>
 
 <p>Now we just need to point our Rails app to this instance of PostgreSQL in development and test environments. Our <code>database.yml</code> may look something like this:</p>
-
-<pre><code class="language-yml">default: &amp;default
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>default: <span style="color: #002070; font-weight: bold">&amp;default</span>
   adapter: postgresql
   encoding: unicode
   pool: &lt;%= ENV.fetch(&quot;RAILS_MAX_THREADS&quot;) { 5 } %&gt;
 
-development: &amp;development
-  &lt;&lt;: *default
+development: <span style="color: #002070; font-weight: bold">&amp;development</span>
+  &lt;&lt;: <span style="color: #bb60d5">*default</span>
   database: bookstore-backend_development
   username: postgres
   password: our-awesome-bookstore-app
   host: localhost
 
 test:
-  &lt;&lt;: *development
+  &lt;&lt;: <span style="color: #bb60d5">*development</span>
   database: bookstore-backend_test
 
 production:
-  url: &lt;%= ENV['DATABASE_URL'] %&gt;
-</code></pre>
+  url: &lt;%= ENV[&#39;DATABASE_URL&#39;] %&gt;
+</pre></div>
 
 <p>You might notice some peculiarities. For example, we&rsquo;ve created an alias <code>&amp;development</code> and are running our <code>test</code> environment off of it. That makes sense, since the only thing we want to differ for the tests is the database they use - they should still hit Docker. Also, we&rsquo;ve already set up a production environment and made it use <code>DATABASE_URL</code>. This is how we&rsquo;ll set it up on Heroku.</p>
 
@@ -375,7 +362,11 @@ bundle exec bin/setup
 
 <p>If everything went well, our database should be set up!</p>
 
-<p>It might seem like we don&rsquo;t have all that much - but what we have is a very powerful environment to <em>model reality</em> in. We will do exactly that in part 2. See you then!</p>
+<p>It might seem like we don&rsquo;t have all that much - but what we have is a very powerful environment to <em>model reality</em> in. We will do exactly that in <a href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-2-modeling-reality/">part 2</a>.</p>
+
+<hr />
+
+<p>Top image credit: <a href="https://www.pexels.com/photo/industry-rails-train-path-481150/">https://www.pexels.com/photo/industry-rails-train-path-481150/</a> (CC0 Public Domain)</p>
               
             </div>
           </div>
@@ -409,7 +400,7 @@ bundle exec bin/setup
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--disabled">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-2-modeling-reality/" data-tooltip="Rails 5.1 API with Vue.js frontend, part 2: Modeling reality">
           
             <i class="fa fa-angle-left"></i>
             <span class="hide-xs hide-sm text-small icon-ml"></span>
@@ -478,7 +469,7 @@ bundle exec bin/setup
         </article>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
-    &copy; 2017 <a href="https://github.com/paweljw">Paweł J. Wal</a>. 
+    Created by <a href="https://github.com/paweljw">Paweł J. Wal</a> | <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
   </span>
 </footer>
 
@@ -490,7 +481,7 @@ bundle exec bin/setup
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--disabled">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-2-modeling-reality/" data-tooltip="Rails 5.1 API with Vue.js frontend, part 2: Modeling reality">
           
             <i class="fa fa-angle-left"></i>
             <span class="hide-xs hide-sm text-small icon-ml"></span>
@@ -618,6 +609,27 @@ bundle exec bin/setup
       <div class="no-result text-color-light text-center"></div>
       <div class="results">
         
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-2-modeling-reality/">
+                <h3 class="media-heading">Rails 5.1 API with Vue.js frontend, part 2: Modeling reality</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>Oh yeah. Now we&rsquo;re going <em>hardcore</em>. Well, not really.</p>
+
+<p>While Rails embraces a continuously changing data model, it&rsquo;s always good to stop and think for a minute about the domain we&rsquo;re trying to magically lockwithin an app. We&rsquo;re building a bookstore. So what&rsquo;s in one?</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
         
           <div class="media">
             
@@ -798,7 +810,7 @@ I believe that you learn best when your objective is teaching it to somebody els
          data-message-zero=""
          data-message-one=""
          data-message-other="">
-         9 posts found
+         10 posts found
       </p>
     </div>
   </div>
