@@ -17,6 +17,8 @@ It's time to continue with our foray into Rails API app with Vue.js frontend! In
 
 <!--more-->
 
+_This is an onging series of articles. It's highly recommended you start with [part 0](/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/)!_
+
 # Installing the right version of Rails
 
 Since we've decided to use Rails 5.1, that's what we should get. If you don't have it already,
