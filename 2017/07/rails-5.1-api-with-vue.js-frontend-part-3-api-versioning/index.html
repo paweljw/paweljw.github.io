@@ -295,14 +295,16 @@ ga('send', 'pageview');
 
 <h1 id="namespacing-our-api">Namespacing our API</h1>
 
-<p>It&rsquo;s actually pretty straightforward. We need to change our routes:</p>
-namespace :api do
+<p>It&rsquo;s actually pretty straightforward. We need to change our routes</p>
+
+<pre><code>namespace :api do
   namespace :v1 do
     resources :authors do
       resources :books
     end
   end
 end
+</code></pre>
 
 <p>Then move our controllers into <code>app/controllers/api/v1</code>, so that we keep with the Rails convention.</p>
 

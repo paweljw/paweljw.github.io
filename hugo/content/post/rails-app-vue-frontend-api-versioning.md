@@ -46,9 +46,10 @@ However, if we decided that `/books` should now be served under `/książki` (wh
 
 # Namespacing our API
 
-It's actually pretty straightforward. We need to change our routes:
+It's actually pretty straightforward. We need to change our routes
 
-``` ruby
+
+```
 namespace :api do
   namespace :v1 do
     resources :authors do
