@@ -108,6 +108,8 @@ end
 
 Of course, this means that when we phase out V1 completely and drop the now-dead code, this file will have to change. It could be argued that this would be confusing e.g. during code review - "why does this V2 thing change if all we're doing is kill V1?". Phasing out V1 is now no longer a matter of deleting `app/controllers/v1` and updating routes, too. However, I believe that code quality is something to be considered right now, so keeping two copies of exactly the same code in the app seems a no-go to me, even if the price is a slightly more complex refactor later.
 
+As always, you can see what the code looks like now on GitHub at [paweljw/bookstore-backend](https://github.com/paweljw/bookstore-backend/tree/part-3).
+
 What do you think about this? Let me know down below, and I'll see you in part 4, where we'll tackle token authentication in Rails!
 
 ---
