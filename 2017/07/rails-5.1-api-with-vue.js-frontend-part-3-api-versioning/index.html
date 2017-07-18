@@ -23,7 +23,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.21">
     <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
-    <title>Ultrasonic theremin</title>
+    <title>Rails 5.1 API with Vue.js frontend, part 3: API versioning</title>
     <meta name="author" content="Paweł J. Wal">
     <meta name="keywords" content=", development, ruby, ruby on rails, es6, javascript, electronics, arduino, science">
 
@@ -31,19 +31,19 @@
     
 
     
-    <meta name="description" content="I’ve been wanting to construct an instrument in the spirit of a theremin for quite a while. Of course, I have neither the skills to construct a proper theremin, nor the time to master them. What I do have is an Arduino board, some sensors and a couple of spare parts.
+    <meta name="description" content="We have two more things to tackle before our Rails API app is an MVP: namespacing the controllers and creating an authentication mechanism. We&rsquo;ll tackle namespacing the controllers in this article - it might seem wordy, but it&rsquo;s for a good reason.
 
 ">
-    <meta property="og:description" content="I’ve been wanting to construct an instrument in the spirit of a theremin for quite a while. Of course, I have neither the skills to construct a proper theremin, nor the time to master them. What I do have is an Arduino board, some sensors and a couple of spare parts.
+    <meta property="og:description" content="We have two more things to tackle before our Rails API app is an MVP: namespacing the controllers and creating an authentication mechanism. We&rsquo;ll tackle namespacing the controllers in this article - it might seem wordy, but it&rsquo;s for a good reason.
 
 ">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Ultrasonic theremin">
-    <meta property="og:url" content="/2015/02/ultrasonic-theremin/">
+    <meta property="og:title" content="Rails 5.1 API with Vue.js frontend, part 3: API versioning">
+    <meta property="og:url" content="/2017/07/rails-5.1-api-with-vue.js-frontend-part-3-api-versioning/">
     <meta property="og:site_name" content="Shenanigans! - a blog on programming, technology and science">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Shenanigans! - a blog on programming, technology and science">
-    <meta name="twitter:description" content="I’ve been wanting to construct an instrument in the spirit of a theremin for quite a while. Of course, I have neither the skills to construct a proper theremin, nor the time to master them. What I do have is an Arduino board, some sensors and a couple of spare parts.
+    <meta name="twitter:description" content="We have two more things to tackle before our Rails API app is an MVP: namespacing the controllers and creating an authentication mechanism. We&rsquo;ll tackle namespacing the controllers in this article - it might seem wordy, but it&rsquo;s for a good reason.
 
 ">
     
@@ -60,7 +60,7 @@
 
     
     
-      <meta property="og:image" content="https://paweljw.github.io/media/theremin_build.jpg">
+      <meta property="og:image" content="https://paweljw.github.io/media/forking.jpg">
     
     
 
@@ -223,24 +223,24 @@ ga('send', 'pageview');
   <div class="post-header-cover
               text-left
               "
-       style="background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('/media/theremin_build.jpg'); background-size: cover"
+       style="background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('/media/forking.jpg'); background-size: cover"
        data-behavior="5">
     
       <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      Ultrasonic theremin
+      Rails 5.1 API with Vue.js frontend, part 3: API versioning
     </h1>
   
   <div class="postShorten-meta post-meta">
   
-    <time itemprop="datePublished" datetime="2015-02-28T21:17:45&#43;02:00">
+    <time itemprop="datePublished" datetime="2017-07-18T15:00:00&#43;02:00">
       
   
   
   
   
-    2015-02-28
+    2017-07-18
   
 
     </time>
@@ -263,128 +263,96 @@ ga('send', 'pageview');
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>I’ve been wanting to construct an instrument in the spirit of a theremin for quite a while. Of course, I have neither the skills to construct a proper theremin, nor the time to master them. What I do have is an Arduino board, some sensors and a couple of spare parts.</p>
+              <p>We have two more things to tackle before our Rails API app is an MVP: namespacing the controllers and creating an authentication mechanism. We&rsquo;ll tackle namespacing the controllers in this article - it might seem wordy, but it&rsquo;s for a good reason.</p>
 
 <p></p>
 
-<h1 id="what-are-we-building">What are we building?</h1>
+<p><em>This is an onging series of articles. It&rsquo;s highly recommended you start with <a href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/">part 0</a>!</em></p>
 
-<p>We’re building a very simple device which will emit different notes based on how far the user’s hand is from the head of the device.</p>
+<h1 id="why-namespace-the-api">Why namespace the API?</h1>
 
-<h1 id="materials">Materials</h1>
+<p>You might ask yourself that, and I get it. I used to ask myself the very same thing. When we&rsquo;re building a regular web app we never namespace anything, so why start now? Consider the following example.</p>
 
-<p>Only a couple things are needed. For the sound piece, I used a salvaged PC speaker.</p>
+<hr />
 
+<p>You deploy your app and it&rsquo;s a smash hit - takes off almost overnight. You&rsquo;ve made it big - you have users now! And they have demands. They want the front end to do so, so much more. You bring a buddy on the project with you - you crank out the back end, he cranks out the front. You hack side by side on weekends, so specifying APIs is done mostly by yelling to each other over pizza boxes. Life is good.</p>
 
-<figure >
-    
-        <img src="https://paweljw.github.io/media/theremin_speaker.jpg" />
-    
-    
-</figure>
+<p>Time goes on. The app is now your day job. The users keep coming, and are now clamoring for a mobile app. You hire two bright kids to work on the mobile app. There&rsquo;s also now two more people on the backend team, and three more are hacking on the front. There is now a formal spec for the API and everyone follows it. There&rsquo;s tweaks to the API all the time, but it mostly just evolves - nothing changes drastically. Life is still good.</p>
 
+<p>Then one day, at a planning meeting, a change request shows up. It doesn&rsquo;t matter what&rsquo;s in it: it means that a fundamental, breaking change will have to be introduced to the API. But your ecosystem is now distributed: you have a front end which may or may not be ready on time for the big release. You also have a mobile install base, which will probably not update in a millisecond. Life is not all that good anymore.</p>
 
-<p>Speakers. It’s one of those parts that somehow find their way into my room in numbers, and I never notice until I find a pile of, say, five. In a completely random place.</p>
+<p>If your API is versioned, this is easy as pie: you create a new namespace, <code>v2</code>, under your API root, and all new features and the myriad apps that use the backend will use this new version. When your metrics show that no one hits the old v1 API anymore, you will simply sunset it and remove it from your code. If your API was not designed as versioned from the get go&hellip; you will have to do the same - but will suffer way more.</p>
 
-<p>The second part I used is probably much less likely to find it’s way to you as a scrap part:</p>
+<hr />
 
+<p>In &ldquo;regular&rdquo; MVC apps which spit out generated HTML the views are rather tightly coupled with the underlying controllers, and by proxy - with the underlying models. An API consumer is, for our purposes anyway, decoupled completely from our app. The consumer might be anything: a JS single page app, a mobile app, a desktop app, or maybe even a bot. We don&rsquo;t care what consumes the API as long as it behaves how we expect it to: reads the right fields, provides the right parameters. Similarly, our consumers don&rsquo;t care whether our backend is in Rails or we just rewrote it in Node (<em><em>shudder</em></em>), as long as it still speaks the same language.</p>
 
-<figure >
-    
-        <img src="https://paweljw.github.io/media/theremin_hc_sr04.jpg" />
-    
-    
-</figure>
+<p>It can then be inferred from the above that by providing an API, we create a contract to uphold with all these different consumers of our code. We certify that our service will work in predictable ways when provided expected inputs. We may expand on what is already there, but we shouldn&rsquo;t break backwards compatibility <em>implicitly</em>.</p>
 
+<p>The v1 <code>books</code> endpoint will always serve books, with titles and author names. It may expand: we may start serving images of covers, for example, at some later date. This is fine: a consumer which uses just the title and author name will still work just fine, and newer consumers may also use the image. What is important that <em>the basic fields and structure hasn&rsquo;t changed</em>.</p>
 
-<p>It’s a HC-SR04 ultrasonic ranging module. Not only does “ultrasonic ranging module” sound very cool, it’s also pretty accurate.</p>
+<p>However, if we decided that <code>/books</code> should now be served under <code>/książki</code> (which is the Polish word for books), that is a good reason to release a new version of the API. If you&rsquo;re hanging around the Ruby gems ecosystem (and since we&rsquo;re talking Rails here, I sure hope you do), you probably know about <a href="http://semver.org/">semantic versioning</a>. The very same principle applies to APIs - you just have only the major version. If you want to break something - bump the major version and let consumers adopt it at their preferred rate.</p>
 
-<h1 id="the-build">The build</h1>
+<h1 id="namespacing-our-api">Namespacing our API</h1>
 
-<p>The build is actually pretty simple:</p>
+<p>It&rsquo;s actually pretty straightforward. We need to change our routes:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>namespace <span style="color: #517918">:api</span> <span style="color: #007020; font-weight: bold">do</span>
+  namespace <span style="color: #517918">:v1</span> <span style="color: #007020; font-weight: bold">do</span>
+    resources <span style="color: #517918">:authors</span> <span style="color: #007020; font-weight: bold">do</span>
+      resources <span style="color: #517918">:books</span>
+    <span style="color: #007020; font-weight: bold">end</span>
+  <span style="color: #007020; font-weight: bold">end</span>
+<span style="color: #007020; font-weight: bold">end</span>
+</pre></div>
 
+<p>Then move our controllers into <code>app/controllers/api/v1</code>, so that we keep with the Rails convention.</p>
 
-<figure >
-    
-        <img src="https://paweljw.github.io/media/theremin_build.jpg" />
-    
-    
-</figure>
-
-
-<p>The speaker is connected to pin 11 through a 10k ohm resistor (you could use a much smaller resistor, even 100 ohm will do; I wanted mine extra quiet) and to ground.</p>
-
-<p>5V is connected to a rail, then through two jumpers (one over rail break) to Vcc pin on the HC-SR04. The appropriate ground is connected to GND pin, and trigger pin and echo pin are connected to pins 10 and 8, respectively. Since this is probably confusing, here’s a Fritzing diagram:</p>
-
-
-<figure >
-    
-        <img src="https://paweljw.github.io/media/theremin_bb.png" />
-    
-    
-</figure>
-
-
-<h1 id="the-code">The code</h1>
-
-<p>The code is also pretty simple. I’m using two libraries - NewPing and TonePlayer. The built-in tone library was too limited, and to my knowledge - clashes drastically with NewPing.</p>
-
-<pre><code>#include &lt;NewPing.h&gt;
-#include &lt;TonePlayer.h&gt;
-
-#define TRIGGER_PIN    10
-#define ECHO_PIN       8
-#define TONE_PIN        2
-
-#define PROBING_DELAY 500 // how often do the ping and play the note
-
-#define RANGE_START   293 // note frequency closest to sensor
-
-#define RANGE_LENGTH   60 // cm
-#define FREQ_PER_SLOT  16 // frequency change per slot
-#define SLOT_LEN        5 // per note, in cm
-
-#define US_PER_CM 57
-
-TonePlayer tone1 (TCCR1A, TCCR1B, OCR1AH, OCR1AL, TCNT1H, TCNT1L);
-NewPing sonar(TRIGGER_PIN, ECHO_PIN, RANGE_LENGTH);
-
-void setup()
-{
-  pinMode(11, OUTPUT);
-}
-
-void loop()
-{
-  unsigned long duration;
-  int distance;
-
-  duration = sonar.ping();
-  distance = duration / US_PER_CM;
-
-  if(distance &gt; 0 &amp;&amp; distance &lt;= RANGE_LENGTH)
-  {
-    distance /= SLOT_LEN;
-    distance += 1;
-    int freq = RANGE_START + FREQ_PER_SLOT * distance;
-    tone1.tone(freq);
-  } else {
-    tone1.noTone();
-  }
-
-  delay(PROBING_DELAY);
-}
+<pre><code>app/controllers
+├── api
+│   └── v1
+│       ├── authors_controller.rb
+│       └── books_controller.rb
+├── application_controller.rb
+└── concerns
 </code></pre>
 
-<p>In every loop, duration of round-trip for the sensor is taken with sonar.ping(). Then, it’s converted to centimeters (using 57 microseconds of round trip per centimeter as base). Then, if the taken reading is not out of range, the frequency for the particular 5cm slot is calculated; the slots are placed with lower pitch closer to the head of the device, changing by 16Hz (approximately a halfnote) every 5cm. Then the note is played, or if reading out of range - playback is stopped.</p>
+<p>And finally, namespace the controllers themselves:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">module</span> <span style="color: #0e84b5; font-weight: bold">Api</span>
+  <span style="color: #007020; font-weight: bold">module</span> <span style="color: #0e84b5; font-weight: bold">V1</span>
+    <span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">AuthorsController</span> <span style="color: #666666">&lt;</span> <span style="color: #60add5">ApplicationController</span>
+      <span style="color: #60a0b0; font-style: italic"># ...</span>
+    <span style="color: #007020; font-weight: bold">end</span>
+  <span style="color: #007020; font-weight: bold">end</span>
+<span style="color: #007020; font-weight: bold">end</span>
+</pre></div>
 
-<h1 id="the-demo">The demo</h1>
+<p>Now when we need to provide a non-backwards-compatible version of <code>AuthorsController</code>, we simply create a new module:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">module</span> <span style="color: #0e84b5; font-weight: bold">Api</span>
+  <span style="color: #007020; font-weight: bold">module</span> <span style="color: #0e84b5; font-weight: bold">V2</span>
+    <span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">AuthorsController</span> <span style="color: #666666">&lt;</span> <span style="color: #60add5">ApplicationController</span>
+      <span style="color: #60a0b0; font-style: italic"># some non-compatible changes</span>
+    <span style="color: #007020; font-weight: bold">end</span>
+  <span style="color: #007020; font-weight: bold">end</span>
+<span style="color: #007020; font-weight: bold">end</span>
+</pre></div>
 
-<p>And it actually works! Although playing anything on it is a pain in the arse. Here’s an 18 second demo by yours truly (you might need to crank your speakers up):</p>
+<p>But what about the controllers that do not change? What if just the <code>AuthorsController</code> changed, but the <code>BooksController</code> is just fine and dandy, and should just be the same?</p>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/C0EGJaaNFj0" frameborder="0" allowfullscreen></iframe>
+<p>This could be approached from a couple of different sides, I think. I find that doing what seems easiest (and sometimes, even laziest) in Ruby works more often than not. If I was faced with a requirement of providing a V2 <code>BooksController</code> that was exactly identical to V1, I&rsquo;d probably do something like this:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">module</span> <span style="color: #0e84b5; font-weight: bold">Api</span>
+  <span style="color: #007020; font-weight: bold">module</span> <span style="color: #0e84b5; font-weight: bold">V2</span>
+    <span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">BooksController</span> <span style="color: #666666">&lt;</span> <span style="color: #60add5">Api</span><span style="color: #666666">::</span><span style="color: #60add5">V1</span><span style="color: #666666">::</span><span style="color: #60add5">BooksController</span>; <span style="color: #007020; font-weight: bold">end</span>
+  <span style="color: #007020; font-weight: bold">end</span>
+<span style="color: #007020; font-weight: bold">end</span>
+</pre></div>
 
-<p>All in all, a pretty fun project you can throw together in a couple of hours.</p>
+<p>Of course, this means that when we phase out V1 completely and drop the now-dead code, this file will have to change. It could be argued that this would be confusing e.g. during code review - &ldquo;why does this V2 thing change if all we&rsquo;re doing is kill V1?&rdquo;. Phasing out V1 is now no longer a matter of deleting <code>app/controllers/v1</code> and updating routes, too. However, I believe that code quality is something to be considered right now, so keeping two copies of exactly the same code in the app seems a no-go to me, even if the price is a slightly more complex refactor later.</p>
+
+<p>What do you think about this? Let me know down below, and I&rsquo;ll see you in part 4, where we&rsquo;ll tackle token authentication in Rails!</p>
+
+<hr />
+
+<p>Top image credit: <a href="https://commons.wikimedia.org/wiki/File:Line5066_-_Flickr_-_NOAA_Photo_Library.jpg">https://commons.wikimedia.org/wiki/File:Line5066_-_Flickr_-_NOAA_Photo_Library.jpg</a> (CC-BY 2.0)</p>
               
             </div>
           </div>
@@ -396,11 +364,19 @@ void loop()
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small"></span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/arduino/">arduino</a>
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/javascript/">javascript</a>
 
-  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/music/">music</a>
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/es6/">es6</a>
 
   <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/saturdayproject/">saturdayproject</a>
+
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/follow-me/">follow me</a>
+
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/rails/">rails</a>
+
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/api/">api</a>
+
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/rails-api-series/">rails-api-series</a>
 
                   </div>
                 
@@ -412,7 +388,7 @@ void loop()
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/01/a-cup-of-coins-revisited/" data-tooltip="A Cup of Coins, Revisited">
+            <a class="post-action-btn btn btn--disabled">
           
             <i class="fa fa-angle-left"></i>
             <span class="hide-xs hide-sm text-small icon-ml"></span>
@@ -420,7 +396,7 @@ void loop()
         </li>
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--disabled">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-2-modeling-reality/" data-tooltip="Rails 5.1 API with Vue.js frontend, part 2: Modeling reality">
           
             <span class="hide-xs hide-sm text-small icon-mr"></span>
             <i class="fa fa-angle-right"></i>
@@ -437,17 +413,17 @@ void loop()
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2015%2f02%2fultrasonic-theremin%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-3-api-versioning%2f">
           <i class="fa fa-google-plus"></i>
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2015%2f02%2fultrasonic-theremin%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-3-api-versioning%2f">
           <i class="fa fa-facebook-official"></i>
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2015%2f02%2fultrasonic-theremin%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-3-api-versioning%2f">
           <i class="fa fa-twitter"></i>
         </a>
       </li>
@@ -493,7 +469,7 @@ void loop()
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/01/a-cup-of-coins-revisited/" data-tooltip="A Cup of Coins, Revisited">
+            <a class="post-action-btn btn btn--disabled">
           
             <i class="fa fa-angle-left"></i>
             <span class="hide-xs hide-sm text-small icon-ml"></span>
@@ -501,7 +477,7 @@ void loop()
         </li>
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--disabled">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-2-modeling-reality/" data-tooltip="Rails 5.1 API with Vue.js frontend, part 2: Modeling reality">
           
             <span class="hide-xs hide-sm text-small icon-mr"></span>
             <i class="fa fa-angle-right"></i>
@@ -518,17 +494,17 @@ void loop()
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2015%2f02%2fultrasonic-theremin%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-3-api-versioning%2f">
           <i class="fa fa-google-plus"></i>
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2015%2f02%2fultrasonic-theremin%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-3-api-versioning%2f">
           <i class="fa fa-facebook-official"></i>
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2015%2f02%2fultrasonic-theremin%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-3-api-versioning%2f">
           <i class="fa fa-twitter"></i>
         </a>
       </li>
@@ -555,17 +531,17 @@ void loop()
       <div id="share-options-bar" class="share-options-bar" data-behavior="5">
   <ul class="share-options">
     <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2015%2f02%2fultrasonic-theremin%2f">
+      <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-3-api-versioning%2f">
         <i class="fa fa-google-plus"></i><span></span>
       </a>
     </li>
     <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2015%2f02%2fultrasonic-theremin%2f">
+      <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-3-api-versioning%2f">
         <i class="fa fa-facebook-official"></i><span></span>
       </a>
     </li>
     <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2015%2f02%2fultrasonic-theremin%2f">
+      <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-3-api-versioning%2f">
         <i class="fa fa-twitter"></i><span></span>
       </a>
     </li>
@@ -868,9 +844,9 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = 'https:\/\/paweljw.github.io\/2015\/02\/ultrasonic-theremin\/';
+          this.page.url = 'https:\/\/paweljw.github.io\/2017\/07\/rails-5.1-api-with-vue.js-frontend-part-3-api-versioning\/';
           
-            this.page.identifier = '\/2015\/02\/ultrasonic-theremin\/'
+            this.page.identifier = '\/2017\/07\/rails-5.1-api-with-vue.js-frontend-part-3-api-versioning\/'
           
         };
         (function() {

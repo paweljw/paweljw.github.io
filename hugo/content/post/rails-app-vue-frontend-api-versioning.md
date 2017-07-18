@@ -11,7 +11,7 @@ tags:
 - api
 - rails-api-series
 comments: true
-draft: true
+draft: false
 ---
 
 We have two more things to tackle before our Rails API app is an MVP: namespacing the controllers and creating an authentication mechanism. We'll tackle namespacing the controllers in this article - it might seem wordy, but it's for a good reason.
