@@ -289,9 +289,10 @@ ga('send', 'pageview');
 </code></pre>
 
 <p>This will create a <code>money.rb</code> initializer. For now, we can drop in the simplest of configs there:</p>
-MoneyRails.configure do |config|
-  config.default_currency = :usd
-end
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60add5">MoneyRails</span><span style="color: #666666">.</span>configure <span style="color: #007020; font-weight: bold">do</span> <span style="color: #666666">|</span>config<span style="color: #666666">|</span>
+  config<span style="color: #666666">.</span>default_currency <span style="color: #666666">=</span> <span style="color: #517918">:usd</span>
+<span style="color: #007020; font-weight: bold">end</span>
+</pre></div>
 
 <h1 id="authors">Authors</h1>
 
@@ -314,52 +315,54 @@ rails g scaffold Book author:belongs_to title:string price:monetize
 <h1 id="routes">Routes</h1>
 
 <p>Our books cannot exist without authors. We can decide that we&rsquo;ll only browse them in this context.</p>
-Rails.application.routes.draw do
-  resources :authors do
-    resources :books
-  end
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60add5">Rails</span><span style="color: #666666">.</span>application<span style="color: #666666">.</span>routes<span style="color: #666666">.</span>draw <span style="color: #007020; font-weight: bold">do</span>
+  resources <span style="color: #517918">:authors</span> <span style="color: #007020; font-weight: bold">do</span>
+    resources <span style="color: #517918">:books</span>
+  <span style="color: #007020; font-weight: bold">end</span>
 
-  root to: 'authors#index'
-end
+  root <span style="color: #517918">to</span>: <span style="color: #4070a0">&#39;authors#index&#39;</span>
+<span style="color: #007020; font-weight: bold">end</span>
+</pre></div>
 
 <p>This will also make for some slightly more challenging routing on the frontend side of things - since we&rsquo;re here to learn, that&rsquo;s a good thing!</p>
 
 <h1 id="controllers">Controllers</h1>
 
 <p>This also means that we&rsquo;ll want to modify the <code>BooksController</code>:</p>
-# frozen_string_literal: true
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60a0b0; font-style: italic"># frozen_string_literal: true</span>
 
-class BooksController < ApplicationController
-  before_action :set_author, only: [:show, :update, :destroy]
-  before_action :set_book, only: [:show, :update, :destroy]
+<span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">BooksController</span> <span style="color: #666666">&lt;</span> <span style="color: #60add5">ApplicationController</span>
+  before_action <span style="color: #517918">:set_author</span>, <span style="color: #517918">only</span>: <span style="color: #666666">[</span><span style="color: #517918">:show</span>, <span style="color: #517918">:update</span>, <span style="color: #517918">:destroy</span><span style="color: #666666">]</span>
+  before_action <span style="color: #517918">:set_book</span>, <span style="color: #517918">only</span>: <span style="color: #666666">[</span><span style="color: #517918">:show</span>, <span style="color: #517918">:update</span>, <span style="color: #517918">:destroy</span><span style="color: #666666">]</span>
 
-  def index
-    @books = @author.books.all
-    render json: @books
-  end
+  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">index</span>
+    <span style="color: #bb60d5">@books</span> <span style="color: #666666">=</span> <span style="color: #bb60d5">@author</span><span style="color: #666666">.</span>books<span style="color: #666666">.</span>all
+    render <span style="color: #517918">json</span>: <span style="color: #bb60d5">@books</span>
+  <span style="color: #007020; font-weight: bold">end</span>
 
-  # ...
+  <span style="color: #60a0b0; font-style: italic"># ...</span>
 
-  def create
-    @book = @author.books.new(book_params)
+  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">create</span>
+    <span style="color: #bb60d5">@book</span> <span style="color: #666666">=</span> <span style="color: #bb60d5">@author</span><span style="color: #666666">.</span>books<span style="color: #666666">.</span>new(book_params)
 
-    # ...
-  end
+    <span style="color: #60a0b0; font-style: italic"># ...</span>
+  <span style="color: #007020; font-weight: bold">end</span>
 
-  # ...
+  <span style="color: #60a0b0; font-style: italic"># ...</span>
 
-  private
+  <span style="color: #007020">private</span>
 
-  def set_book
-    @book = @author.books.find(params[:id])
-  end
+  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">set_book</span>
+    <span style="color: #bb60d5">@book</span> <span style="color: #666666">=</span> <span style="color: #bb60d5">@author</span><span style="color: #666666">.</span>books<span style="color: #666666">.</span>find(params<span style="color: #666666">[</span><span style="color: #517918">:id</span><span style="color: #666666">]</span>)
+  <span style="color: #007020; font-weight: bold">end</span>
 
-  def set_author
-    @author = Author.find(params[:author_id])
-  end
+  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">set_author</span>
+    <span style="color: #bb60d5">@author</span> <span style="color: #666666">=</span> <span style="color: #60add5">Author</span><span style="color: #666666">.</span>find(params<span style="color: #666666">[</span><span style="color: #517918">:author_id</span><span style="color: #666666">]</span>)
+  <span style="color: #007020; font-weight: bold">end</span>
 
-  # ...
-end
+  <span style="color: #60a0b0; font-style: italic"># ...</span>
+<span style="color: #007020; font-weight: bold">end</span>
+</pre></div>
 
 <p>I&rsquo;ve obviously ommited some parts for brevity. The gist of the changes is that we want to generate our <code>@book</code> with regard to
 the author whom we&rsquo;re browsing.</p>
@@ -369,63 +372,66 @@ the author whom we&rsquo;re browsing.</p>
 <p>Some finishing touches to be done here.</p>
 
 <p>Author should be aware that he has books and must have a name. We can also define a <code>to_s</code> method - it&rsquo;ll come in handy later.</p>
-class Author < ApplicationRecord
-  has_many :books
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">Author</span> <span style="color: #666666">&lt;</span> <span style="color: #60add5">ApplicationRecord</span>
+  has_many <span style="color: #517918">:books</span>
 
-  validates :name, presence: true
+  validates <span style="color: #517918">:name</span>, <span style="color: #517918">presence</span>: <span style="color: #007020">true</span>
 
-  def to_s
-    name
-  end
-end
+  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">to_s</span>
+    <span style="color: #007020">name</span>
+  <span style="color: #007020; font-weight: bold">end</span>
+<span style="color: #007020; font-weight: bold">end</span>
+</pre></div>
 
 <p>Similarly, we can define validations and <code>to_s</code> on Book:</p>
-class Book < ApplicationRecord
-  belongs_to :author
-  monetize :price_cents
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">Book</span> <span style="color: #666666">&lt;</span> <span style="color: #60add5">ApplicationRecord</span>
+  belongs_to <span style="color: #517918">:author</span>
+  monetize <span style="color: #517918">:price_cents</span>
 
-  validates :title, presence: true
+  validates <span style="color: #517918">:title</span>, <span style="color: #517918">presence</span>: <span style="color: #007020">true</span>
 
-  def to_s
+  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">to_s</span>
     title
-  end
-end
+  <span style="color: #007020; font-weight: bold">end</span>
+<span style="color: #007020; font-weight: bold">end</span>
+</pre></div>
 
 <h1 id="seeding">Seeding</h1>
 
 <p>I&rsquo;ve decided that instead of typing out a bunch of books, I can just import a Goodreads list. I chose one I thought funny - <a href="http://www.goodreads.com/list/show/643.Guilty_Pleasures_Crap_You_re_Embarrassed_to_Love">http://www.goodreads.com/list/show/643.Guilty_Pleasures_Crap_You_re_Embarrassed_to_Love</a> - and wrote a simple Rake task to parse it using Nokogiri. It&rsquo;s placed in <code>lib/tasks/import.rake</code> and called with <code>rake import:goodreads</code>.</p>
-# frozen_string_literal: true
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60a0b0; font-style: italic"># frozen_string_literal: true</span>
 
-require 'nokogiri'
-require 'open-uri'
+<span style="color: #007020">require</span> <span style="color: #4070a0">&#39;nokogiri&#39;</span>
+<span style="color: #007020">require</span> <span style="color: #4070a0">&#39;open-uri&#39;</span>
 
-GOODREADS_URL = 'http://www.goodreads.com/list/show/643.Guilty_Pleasures_Crap_You_re_Embarrassed_to_Love'.freeze
+<span style="color: #60add5">GOODREADS_URL</span> <span style="color: #666666">=</span> <span style="color: #4070a0">&#39;http://www.goodreads.com/list/show/643.Guilty_Pleasures_Crap_You_re_Embarrassed_to_Love&#39;</span><span style="color: #666666">.</span>freeze
 
-namespace :import do
-  task goodreads: :environment do
-    doc = Nokogiri::HTML(open(GOODREADS_URL))
+namespace <span style="color: #517918">:import</span> <span style="color: #007020; font-weight: bold">do</span>
+  task <span style="color: #517918">goodreads</span>: <span style="color: #517918">:environment</span> <span style="color: #007020; font-weight: bold">do</span>
+    doc <span style="color: #666666">=</span> <span style="color: #60add5">Nokogiri</span><span style="color: #666666">::</span><span style="color: #60add5">HTML</span>(<span style="color: #007020">open</span>(<span style="color: #60add5">GOODREADS_URL</span>))
 
-    books = doc.xpath('//*[@itemtype="http://schema.org/Book"]')
+    books <span style="color: #666666">=</span> doc<span style="color: #666666">.</span>xpath(<span style="color: #4070a0">&#39;//*[@itemtype=&quot;http://schema.org/Book&quot;]&#39;</span>)
 
-    books.each { |book| book_from_xml(book) }
-  end
+    books<span style="color: #666666">.</span>each { <span style="color: #666666">|</span>book<span style="color: #666666">|</span> book_from_xml(book) }
+  <span style="color: #007020; font-weight: bold">end</span>
 
-  def book_from_xml(book)
-    title, author_name = book.xpath('.//*[@itemprop="name"]').map(&:content)
-    author = Author.find_or_create_by(name: author_name)
+  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">book_from_xml</span>(book)
+    title, author_name <span style="color: #666666">=</span> book<span style="color: #666666">.</span>xpath(<span style="color: #4070a0">&#39;.//*[@itemprop=&quot;name&quot;]&#39;</span>)<span style="color: #666666">.</span>map(<span style="color: #666666">&amp;</span><span style="color: #517918">:content</span>)
+    author <span style="color: #666666">=</span> <span style="color: #60add5">Author</span><span style="color: #666666">.</span>find_or_create_by(<span style="color: #007020">name</span>: author_name)
 
-    book = create_book(author, title)
+    book <span style="color: #666666">=</span> create_book(author, title)
 
-    puts "#{book.author} - #{book} for #{book.price}"
-  end
+    <span style="color: #007020">puts</span> <span style="color: #4070a0">&quot;</span><span style="color: #70a0d0; font-style: italic">#{</span>book<span style="color: #666666">.</span>author<span style="color: #70a0d0; font-style: italic">}</span><span style="color: #4070a0"> - </span><span style="color: #70a0d0; font-style: italic">#{</span>book<span style="color: #70a0d0; font-style: italic">}</span><span style="color: #4070a0"> for </span><span style="color: #70a0d0; font-style: italic">#{</span>book<span style="color: #666666">.</span>price<span style="color: #70a0d0; font-style: italic">}</span><span style="color: #4070a0">&quot;</span>
+  <span style="color: #007020; font-weight: bold">end</span>
 
-  def create_book(author, title)
-    book = author.books.find_or_create_by(title: title)
-    book.price ||= rand * 15
-    book.save
+  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">create_book</span>(author, title)
+    book <span style="color: #666666">=</span> author<span style="color: #666666">.</span>books<span style="color: #666666">.</span>find_or_create_by(<span style="color: #517918">title</span>: title)
+    book<span style="color: #666666">.</span>price <span style="color: #666666">||=</span> <span style="color: #007020">rand</span> <span style="color: #666666">*</span> <span style="color: #40a070">15</span>
+    book<span style="color: #666666">.</span>save
     book
-  end
-end
+  <span style="color: #007020; font-weight: bold">end</span>
+<span style="color: #007020; font-weight: bold">end</span>
+</pre></div>
 
 <h1 id="quick-sanity-check-is-it-even-responding">Quick sanity check: is it even responding?</h1>
 

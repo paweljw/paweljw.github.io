@@ -304,15 +304,16 @@ ga('send', 'pageview');
 </ul>
 
 <p>One of the initializers will come in handy, though: <code>cors.rb</code>. We can uncomment what is already there and modify it to accept all origins:</p>
-Rails.application.config.middleware.insert_before 0, Rack::Cors do
-  allow do
-    origins ENV.fetch('ALLOWED_ORIGINS') { '*' }
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60add5">Rails</span><span style="color: #666666">.</span>application<span style="color: #666666">.</span>config<span style="color: #666666">.</span>middleware<span style="color: #666666">.</span>insert_before <span style="color: #40a070">0</span>, <span style="color: #60add5">Rack</span><span style="color: #666666">::</span><span style="color: #60add5">Cors</span> <span style="color: #007020; font-weight: bold">do</span>
+  allow <span style="color: #007020; font-weight: bold">do</span>
+    origins <span style="color: #60add5">ENV</span><span style="color: #666666">.</span>fetch(<span style="color: #4070a0">&#39;ALLOWED_ORIGINS&#39;</span>) { <span style="color: #4070a0">&#39;*&#39;</span> }
 
-    resource '*',
-      headers: :any,
-      methods: [:get, :post, :put, :patch, :delete, :options, :head]
-  end
-end
+    resource <span style="color: #4070a0">&#39;*&#39;</span>,
+      <span style="color: #517918">headers</span>: <span style="color: #517918">:any</span>,
+      <span style="color: #007020">methods</span>: <span style="color: #666666">[</span><span style="color: #517918">:get</span>, <span style="color: #517918">:post</span>, <span style="color: #517918">:put</span>, <span style="color: #517918">:patch</span>, <span style="color: #517918">:delete</span>, <span style="color: #517918">:options</span>, <span style="color: #517918">:head</span><span style="color: #666666">]</span>
+  <span style="color: #007020; font-weight: bold">end</span>
+<span style="color: #007020; font-weight: bold">end</span>
+</pre></div>
 
 <p>This will make us happy campers in development, and allows us to set it properly for production - when we will know where our front-end lives. As a side note, simply allowing <code>*</code> would also be fine if we were going to call our API from e.g. a mobile application.</p>
 
@@ -323,7 +324,7 @@ end
 <p>As we&rsquo;ve said in Part 0, we&rsquo;ll use <a href="https://docs.docker.com/compose/install/">Docker</a> to isolate our services in development. The easiest way to do this is by far with Docker. Messing around with images by themselves can be a bit cumbersome though, so we&rsquo;ll use <code>docker-compose</code> for that. If you don&rsquo;t have Docker installed yet, now is a great time to click that link and get it.</p>
 
 <p>When we have <code>docker-compose</code> ready, we can just drop a file called <code>docker-compose.yml</code> in the root of our application, set up like this:</p>
-postgresql:
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>postgresql:
   image: postgres:9.6
   ports:
     - 5432:5432
@@ -332,28 +333,30 @@ postgresql:
     - PG_PASSWORD=our-awesome-bookstore-app
   volumes:
     - ./tmp/data/postgresql:/postgresql
+</pre></div>
 
 <p>This will set up a container with PostgreSQL 9.6, connect it&rsquo;s port 5432 to our localhost and set up a password on the database. We can run it using <code>docker-compose up</code> in the front, or <code>docker-compose start</code> as a daemon. Don&rsquo;t forget to stop it when you&rsquo;re done! I keep forgetting, so I prefer to run mine in the foreground.</p>
 
 <p>Now we just need to point our Rails app to this instance of PostgreSQL in development and test environments. Our <code>database.yml</code> may look something like this:</p>
-default: &default
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>default: <span style="color: #002070; font-weight: bold">&amp;default</span>
   adapter: postgresql
   encoding: unicode
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  pool: &lt;%= ENV.fetch(&quot;RAILS_MAX_THREADS&quot;) { 5 } %&gt;
 
-development: &development
-  <<: *default
+development: <span style="color: #002070; font-weight: bold">&amp;development</span>
+  &lt;&lt;: <span style="color: #bb60d5">*default</span>
   database: bookstore-backend_development
   username: postgres
   password: our-awesome-bookstore-app
   host: localhost
 
 test:
-  <<: *development
+  &lt;&lt;: <span style="color: #bb60d5">*development</span>
   database: bookstore-backend_test
 
 production:
-  url: <%= ENV['DATABASE_URL'] %>
+  url: &lt;%= ENV[&#39;DATABASE_URL&#39;] %&gt;
+</pre></div>
 
 <p>You might notice some peculiarities. For example, we&rsquo;ve created an alias <code>&amp;development</code> and are running our <code>test</code> environment off of it. That makes sense, since the only thing we want to differ for the tests is the database they use - they should still hit Docker. Also, we&rsquo;ve already set up a production environment and made it use <code>DATABASE_URL</code>. This is how we&rsquo;ll set it up on Heroku.</p>
 
