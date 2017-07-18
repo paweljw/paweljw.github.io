@@ -21,7 +21,7 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.21">
+    <meta name="generator" content="Hugo 0.23">
     <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
     <title>Rails 5.1 API with Vue.js frontend, part 3: API versioning</title>
     <meta name="author" content="Paweł J. Wal">
@@ -42,7 +42,7 @@
     <meta property="og:url" content="/2017/07/rails-5.1-api-with-vue.js-frontend-part-3-api-versioning/">
     <meta property="og:site_name" content="Shenanigans! - a blog on programming, technology and science">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Shenanigans! - a blog on programming, technology and science">
+    <meta name="twitter:title" content="Rails 5.1 API with Vue.js frontend, part 3: API versioning">
     <meta name="twitter:description" content="We have two more things to tackle before our Rails API app is an MVP: namespacing the controllers and creating an authentication mechanism. We&rsquo;ll tackle namespacing the controllers in this article - it might seem wordy, but it&rsquo;s for a good reason.
 
 ">
@@ -296,14 +296,13 @@ ga('send', 'pageview');
 <h1 id="namespacing-our-api">Namespacing our API</h1>
 
 <p>It&rsquo;s actually pretty straightforward. We need to change our routes:</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>namespace <span style="color: #517918">:api</span> <span style="color: #007020; font-weight: bold">do</span>
-  namespace <span style="color: #517918">:v1</span> <span style="color: #007020; font-weight: bold">do</span>
-    resources <span style="color: #517918">:authors</span> <span style="color: #007020; font-weight: bold">do</span>
-      resources <span style="color: #517918">:books</span>
-    <span style="color: #007020; font-weight: bold">end</span>
-  <span style="color: #007020; font-weight: bold">end</span>
-<span style="color: #007020; font-weight: bold">end</span>
-</pre></div>
+namespace :api do
+  namespace :v1 do
+    resources :authors do
+      resources :books
+    end
+  end
+end
 
 <p>Then move our controllers into <code>app/controllers/api/v1</code>, so that we keep with the Rails convention.</p>
 
@@ -317,34 +316,31 @@ ga('send', 'pageview');
 </code></pre>
 
 <p>And finally, namespace the controllers themselves:</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">module</span> <span style="color: #0e84b5; font-weight: bold">Api</span>
-  <span style="color: #007020; font-weight: bold">module</span> <span style="color: #0e84b5; font-weight: bold">V1</span>
-    <span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">AuthorsController</span> <span style="color: #666666">&lt;</span> <span style="color: #60add5">ApplicationController</span>
-      <span style="color: #60a0b0; font-style: italic"># ...</span>
-    <span style="color: #007020; font-weight: bold">end</span>
-  <span style="color: #007020; font-weight: bold">end</span>
-<span style="color: #007020; font-weight: bold">end</span>
-</pre></div>
+module Api
+  module V1
+    class AuthorsController < ApplicationController
+      # ...
+    end
+  end
+end
 
 <p>Now when we need to provide a non-backwards-compatible version of <code>AuthorsController</code>, we simply create a new module:</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">module</span> <span style="color: #0e84b5; font-weight: bold">Api</span>
-  <span style="color: #007020; font-weight: bold">module</span> <span style="color: #0e84b5; font-weight: bold">V2</span>
-    <span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">AuthorsController</span> <span style="color: #666666">&lt;</span> <span style="color: #60add5">ApplicationController</span>
-      <span style="color: #60a0b0; font-style: italic"># some non-compatible changes</span>
-    <span style="color: #007020; font-weight: bold">end</span>
-  <span style="color: #007020; font-weight: bold">end</span>
-<span style="color: #007020; font-weight: bold">end</span>
-</pre></div>
+module Api
+  module V2
+    class AuthorsController < ApplicationController
+      # some non-compatible changes
+    end
+  end
+end
 
 <p>But what about the controllers that do not change? What if just the <code>AuthorsController</code> changed, but the <code>BooksController</code> is just fine and dandy, and should just be the same?</p>
 
 <p>This could be approached from a couple of different sides, I think. I find that doing what seems easiest (and sometimes, even laziest) in Ruby works more often than not. If I was faced with a requirement of providing a V2 <code>BooksController</code> that was exactly identical to V1, I&rsquo;d probably do something like this:</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">module</span> <span style="color: #0e84b5; font-weight: bold">Api</span>
-  <span style="color: #007020; font-weight: bold">module</span> <span style="color: #0e84b5; font-weight: bold">V2</span>
-    <span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">BooksController</span> <span style="color: #666666">&lt;</span> <span style="color: #60add5">Api</span><span style="color: #666666">::</span><span style="color: #60add5">V1</span><span style="color: #666666">::</span><span style="color: #60add5">BooksController</span>; <span style="color: #007020; font-weight: bold">end</span>
-  <span style="color: #007020; font-weight: bold">end</span>
-<span style="color: #007020; font-weight: bold">end</span>
-</pre></div>
+module Api
+  module V2
+    class BooksController < Api::V1::BooksController; end
+  end
+end
 
 <p>Of course, this means that when we phase out V1 completely and drop the now-dead code, this file will have to change. It could be argued that this would be confusing e.g. during code review - &ldquo;why does this V2 thing change if all we&rsquo;re doing is kill V1?&rdquo;. Phasing out V1 is now no longer a matter of deleting <code>app/controllers/v1</code> and updating routes, too. However, I believe that code quality is something to be considered right now, so keeping two copies of exactly the same code in the app seems a no-go to me, even if the price is a slightly more complex refactor later.</p>
 

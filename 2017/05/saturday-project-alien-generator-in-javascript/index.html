@@ -21,7 +21,7 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.21">
+    <meta name="generator" content="Hugo 0.23">
     <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
     <title>Saturday Project: Alien Generator in JavaScript</title>
     <meta name="author" content="Paweł J. Wal">
@@ -42,7 +42,7 @@
     <meta property="og:url" content="/2017/05/saturday-project-alien-generator-in-javascript/">
     <meta property="og:site_name" content="Shenanigans! - a blog on programming, technology and science">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Shenanigans! - a blog on programming, technology and science">
+    <meta name="twitter:title" content="Saturday Project: Alien Generator in JavaScript">
     <meta name="twitter:description" content="I&rsquo;ve been studying ES6 a lot lately. Here&rsquo;s a fun little project that we can do with it over an hour or so on a Saturday: an alien generator!
 
 ">
@@ -300,57 +300,53 @@ ga('send', 'pageview');
 <p>Since this is a Saturday Project, we&rsquo;re not going to get as deep into it, and instead base our generation on a simple observation. Pastels tend to hover around the middle of the <code>1..255</code> range in every color component. Thus, if we mix a random color with white in equal proportions, for a good amount of input colors we&rsquo;ll get a pastel that actually makes sense.</p>
 
 <p>Edge cases be damned, let&rsquo;s rock. I want a simple <code>Color</code> class that can store R, G and B values for a color, and I also want to be able to call <code>Color.random()</code> and get an instance of <code>Color</code> with random values for those. Simple:</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">class</span> Color {
+class Color {
   constructor (r, g, b) {
-    <span style="color: #007020; font-weight: bold">this</span>.r <span style="color: #666666">=</span> r
-    <span style="color: #007020; font-weight: bold">this</span>.g <span style="color: #666666">=</span> g
-    <span style="color: #007020; font-weight: bold">this</span>.b <span style="color: #666666">=</span> b
+    this.r = r
+    this.g = g
+    this.b = b
   }
 
-  <span style="color: #007020; font-weight: bold">static</span> random () {
-    <span style="color: #007020; font-weight: bold">let</span> red <span style="color: #666666">=</span> <span style="color: #007020">Math</span>.floor(<span style="color: #007020">Math</span>.random() <span style="color: #666666">*</span> <span style="color: #40a070">255</span>)
-    <span style="color: #007020; font-weight: bold">let</span> green <span style="color: #666666">=</span> <span style="color: #007020">Math</span>.floor(<span style="color: #007020">Math</span>.random() <span style="color: #666666">*</span> <span style="color: #40a070">255</span>)
-    <span style="color: #007020; font-weight: bold">let</span> blue <span style="color: #666666">=</span> <span style="color: #007020">Math</span>.floor(<span style="color: #007020">Math</span>.random() <span style="color: #666666">*</span> <span style="color: #40a070">255</span>)
+  static random () {
+    let red = Math.floor(Math.random() * 255)
+    let green = Math.floor(Math.random() * 255)
+    let blue = Math.floor(Math.random() * 255)
 
-    <span style="color: #007020; font-weight: bold">return</span> <span style="color: #007020; font-weight: bold">new</span> Color(red, green, blue)
+    return new Color(red, green, blue)
   }
 }
-</pre></div>
 
 <p>Now I also want to mix my color with any other color in &ldquo;equal parts&rdquo;. The method to do it is add every pair of base color values together and halve the sum. To make sure we still get integer values for base colors, we&rsquo;ll use <code>Math.floor</code>.</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">class</span> Color {
-  <span style="color: #60a0b0; font-style: italic">// ...</span>
+class Color {
+  // ...
   mix (otherColor) {
-    <span style="color: #007020; font-weight: bold">let</span> red <span style="color: #666666">=</span> <span style="color: #007020">Math</span>.floor((<span style="color: #007020; font-weight: bold">this</span>.r <span style="color: #666666">+</span> otherColor.r) <span style="color: #666666">/</span> <span style="color: #40a070">2</span>)
-    <span style="color: #007020; font-weight: bold">let</span> green <span style="color: #666666">=</span> <span style="color: #007020">Math</span>.floor((<span style="color: #007020; font-weight: bold">this</span>.g <span style="color: #666666">+</span> otherColor.g) <span style="color: #666666">/</span> <span style="color: #40a070">2</span>)
-    <span style="color: #007020; font-weight: bold">let</span> blue <span style="color: #666666">=</span> <span style="color: #007020">Math</span>.floor((<span style="color: #007020; font-weight: bold">this</span>.b <span style="color: #666666">+</span> otherColor.b) <span style="color: #666666">/</span> <span style="color: #40a070">2</span>)
-    <span style="color: #007020; font-weight: bold">return</span> <span style="color: #007020; font-weight: bold">new</span> Color(red, green, blue)
+    let red = Math.floor((this.r + otherColor.r) / 2)
+    let green = Math.floor((this.g + otherColor.g) / 2)
+    let blue = Math.floor((this.b + otherColor.b) / 2)
+    return new Color(red, green, blue)
   }
-  <span style="color: #60a0b0; font-style: italic">// ...</span>
+  // ...
 }
-</pre></div>
 
 <p>You may notice that this method is in <code>operator-style</code>, that is - it takes a right-hand-side operator, treating self as left hand side, and returns a new instance of it&rsquo;s class with the result. The benefit here is that we can add (&ldquo;mix&rdquo;) two colors together and not mess up the instances we&rsquo;ve been adding.</p>
 
 <p>Now, all I&rsquo;ll be using this <code>Color</code> class for will be pastel colors, and I don&rsquo;t want to type <code>Color.random().mix(new Color(255, 255, 255))</code> all the time. I&rsquo;m just lazy like that. So let&rsquo;s add a <code>toPastel()</code> method which will shorthand that for me:</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">class</span> Color {
-  <span style="color: #60a0b0; font-style: italic">// ...</span>
+class Color {
+  // ...
   toPastel () {
-    <span style="color: #007020; font-weight: bold">return</span> <span style="color: #007020; font-weight: bold">this</span>.mix(<span style="color: #007020; font-weight: bold">new</span> Color(<span style="color: #40a070">255</span>, <span style="color: #40a070">255</span>, <span style="color: #40a070">255</span>))
+    return this.mix(new Color(255, 255, 255))
   }
-  <span style="color: #60a0b0; font-style: italic">// ...</span>
+  // ...
 }
-</pre></div>
 
 <p>One last thing: we&rsquo;ll want to get the values of the color in a string formatted like <code>rgb(10, 20, 30)</code> for use with Two.js. So let&rsquo;s add in a method to cast our color to string.</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">class</span> Color {
-  <span style="color: #60a0b0; font-style: italic">// ...</span>
+class Color {
+  // ...
   toString () {
-    <span style="color: #007020; font-weight: bold">return</span> <span style="color: #4070a0">`rgb(</span><span style="color: #70a0d0; font-style: italic">${</span><span style="color: #007020; font-weight: bold">this</span>.r<span style="color: #70a0d0; font-style: italic">}</span><span style="color: #4070a0">, </span><span style="color: #70a0d0; font-style: italic">${</span><span style="color: #007020; font-weight: bold">this</span>.g<span style="color: #70a0d0; font-style: italic">}</span><span style="color: #4070a0">, </span><span style="color: #70a0d0; font-style: italic">${</span><span style="color: #007020; font-weight: bold">this</span>.b<span style="color: #70a0d0; font-style: italic">}</span><span style="color: #4070a0">)`</span>
+    return `rgb(${this.r}, ${this.g}, ${this.b})`
   }
-  <span style="color: #60a0b0; font-style: italic">// ...</span>
+  // ...
 }
-</pre></div>
 
 <p>Great, that&rsquo;s our <code>Color</code> class done! If you haven&rsquo;t been following along, here&rsquo;s the complete product <a href="https://gist.github.com/paweljw/c2c850dc5e9b74f071610fdfbc13fa83">as a Gist</a>.</p>
 
@@ -374,16 +370,15 @@ ga('send', 'pageview');
 <p>Right, we can see easily how our Alien constructor needs to be made, so let&rsquo;s jump straight in!</p>
 
 <h3 id="construction-warning-men-at-work">Construction (warning, men at work!)</h3>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">class</span> Alien {
-  constructor (attachTo, size <span style="color: #666666">=</span> <span style="color: #40a070">600</span>, parts <span style="color: #666666">=</span> <span style="color: #40a070">16</span>, frequency <span style="color: #666666">=</span> <span style="color: #40a070">0.5</span>) {
-    <span style="color: #007020; font-weight: bold">this</span>.two <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">new</span> Two({ width<span style="color: #666666">:</span> size, height<span style="color: #666666">:</span> size }).appendTo(attachTo)
-    <span style="color: #007020; font-weight: bold">this</span>.size <span style="color: #666666">=</span> size
-    <span style="color: #007020; font-weight: bold">this</span>.parts <span style="color: #666666">=</span> parts
-    <span style="color: #007020; font-weight: bold">this</span>.partSize <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">this</span>.size <span style="color: #666666">/</span> <span style="color: #007020; font-weight: bold">this</span>.parts
-    <span style="color: #007020; font-weight: bold">this</span>.frequency <span style="color: #666666">=</span> frequency
+class Alien {
+  constructor (attachTo, size = 600, parts = 16, frequency = 0.5) {
+    this.two = new Two({ width: size, height: size }).appendTo(attachTo)
+    this.size = size
+    this.parts = parts
+    this.partSize = this.size / this.parts
+    this.frequency = frequency
   }
 }
-</pre></div>
 
 <p>I decided to give my constructor some default values (I&rsquo;m lazy, remember?). So I&rsquo;ll have an alien at 600 pixels in size, 16x16 cells, and I want a (statistical) half of them to be filled with a color. I&rsquo;ll pass in an element later.</p>
 
@@ -423,10 +418,9 @@ $$</p>
 <p>For clearing the canvas, Two has a <code>clear()</code> method, and for drawing we have an <code>update()</code> method.</p>
 
 <p>Drawing a rectangle is a three step process, which can be summarised as follows:</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">var</span> rectangle <span style="color: #666666">=</span> two.makeRectangle(center_x, center_y, width, height) <span style="color: #60a0b0; font-style: italic">// make rectangle width by height in size, with it&#39;s center at center_x and center_y</span>
-rectangle.fill <span style="color: #666666">=</span> <span style="color: #4070a0">&#39;rgb(r, g, b)&#39;</span> <span style="color: #60a0b0; font-style: italic">// fill it with some color</span>
-rectangle.noStroke() <span style="color: #60a0b0; font-style: italic">// make it have no border</span>
-</pre></div>
+var rectangle = two.makeRectangle(center_x, center_y, width, height) // make rectangle width by height in size, with it's center at center_x and center_y
+rectangle.fill = 'rgb(r, g, b)' // fill it with some color
+rectangle.noStroke() // make it have no border
 
 <p>Spot the catch yet? Some graphics libraries define their rectangles by their top left corner; Two defines them with the center. So when we want to calculate the x and y position for an alien&rsquo;s cell, we need to solve this equation:</p>
 
@@ -435,46 +429,43 @@ center(x) = x \times alienPartSize + \frac{alienPartSize}{2}
 $$</p>
 
 <p>It&rsquo;s the same for <code>y</code>, of course. We can wrap this in two handy functions. I&rsquo;ve used <code>_</code> prefix to denote &ldquo;private&rdquo; functions, since JavaScript doesn&rsquo;t really have that notion - even in ES6 - which is a bloody shame.</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">class</span> Alien {
-  <span style="color: #60a0b0; font-style: italic">// ...</span>
+class Alien {
+  // ...
   _x (i) {
-    <span style="color: #007020; font-weight: bold">return</span> i <span style="color: #666666">*</span> <span style="color: #007020; font-weight: bold">this</span>.partSize <span style="color: #666666">+</span> <span style="color: #007020; font-weight: bold">this</span>.partSize <span style="color: #666666">/</span> <span style="color: #40a070">2</span>
+    return i * this.partSize + this.partSize / 2
   }
 
   _y (j) {
-    <span style="color: #007020; font-weight: bold">return</span> <span style="color: #007020; font-weight: bold">this</span>._x(j)
+    return this._x(j)
   }
 }
-</pre></div>
 
 <p>So putting all of this together, we&rsquo;ll get something like this:</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">class</span> Alien {
-  <span style="color: #60a0b0; font-style: italic">// ...</span>
+class Alien {
+  // ...
   draw () {
-    <span style="color: #007020; font-weight: bold">const</span> fill <span style="color: #666666">=</span> Color.random().toPastel().toString()
-    <span style="color: #007020; font-weight: bold">this</span>.two.clear()
+    const fill = Color.random().toPastel().toString()
+    this.two.clear()
     
-    <span style="color: #007020; font-weight: bold">for</span> (<span style="color: #007020; font-weight: bold">var</span> i <span style="color: #666666">=</span> <span style="color: #40a070">0</span>; i <span style="color: #666666">&lt;</span> <span style="color: #007020; font-weight: bold">this</span>.parts <span style="color: #666666">/</span> <span style="color: #40a070">2</span>; i<span style="color: #666666">++</span>) {
-      <span style="color: #007020; font-weight: bold">for</span> (<span style="color: #007020; font-weight: bold">var</span> j <span style="color: #666666">=</span> <span style="color: #40a070">0</span>; j <span style="color: #666666">&lt;</span> <span style="color: #007020; font-weight: bold">this</span>.parts; j<span style="color: #666666">++</span>) {
-        <span style="color: #007020; font-weight: bold">if</span> (<span style="color: #007020">Math</span>.random() <span style="color: #666666">&lt;</span> <span style="color: #007020; font-weight: bold">this</span>.frequency) {
-          <span style="color: #007020; font-weight: bold">var</span> rect <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">this</span>.two.makeRectangle(<span style="color: #007020; font-weight: bold">this</span>._x(i), <span style="color: #007020; font-weight: bold">this</span>._y(j), <span style="color: #007020; font-weight: bold">this</span>.partSize, <span style="color: #007020; font-weight: bold">this</span>.partSize)
-          rect.fill <span style="color: #666666">=</span> rect2.fill <span style="color: #666666">=</span> fill
+    for (var i = 0; i < this.parts / 2; i++) {
+      for (var j = 0; j < this.parts; j++) {
+        if (Math.random() < this.frequency) {
+          var rect = this.two.makeRectangle(this._x(i), this._y(j), this.partSize, this.partSize)
+          rect.fill = rect2.fill = fill
           rect.noStroke()
         }
       }
     }
 
-    <span style="color: #007020; font-weight: bold">this</span>.two.update()
+    this.two.update()
   }
-  <span style="color: #60a0b0; font-style: italic">// ...</span>
+  // ...
 }
-</pre></div>
 
 <p>Let&rsquo;s test it right now! We can attach our Alien to a DOM node and call <code>draw()</code> on it.</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">const</span> elem <span style="color: #666666">=</span> <span style="color: #007020">document</span>.getElementById(<span style="color: #4070a0">&#39;two-container&#39;</span>)
-<span style="color: #007020; font-weight: bold">var</span> alien <span style="color: #666666">=</span> (<span style="color: #007020; font-weight: bold">new</span> Alien(elem))
+const elem = document.getElementById('two-container')
+var alien = (new Alien(elem))
 alien.draw()
-</pre></div>
 
 <p>Drum roll, please&hellip;</p>
 
@@ -505,13 +496,12 @@ mirrorCenter(x) = size - center(x) - alienPartSize
 $$</p>
 
 <p>Don&rsquo;t believe me? Do the math yourself. Believe me? Let&rsquo;s add this to our class:</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">class</span> Alien {
-  <span style="color: #60a0b0; font-style: italic">// ...</span>
+class Alien {
+  // ...
   _mirroredX (i) {
-    <span style="color: #007020; font-weight: bold">return</span> <span style="color: #007020; font-weight: bold">this</span>.size <span style="color: #666666">-</span> <span style="color: #007020; font-weight: bold">this</span>._x(i) <span style="color: #666666">-</span> <span style="color: #007020; font-weight: bold">this</span>.partSize
+    return this.size - this._x(i) - this.partSize
   }
 }
-</pre></div>
 
 <p>Now we can make our <em>ULTIMATE DRAW FUNCTION</em>:</p>
 
@@ -541,18 +531,16 @@ $$</p>
 <h2 id="finishing-touches-a-k-a-the-button">Finishing touches a.k.a. The Button</h2>
 
 <p>We can make ourselves some super-simple HTML with a redraw button:</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;<span style="color: #062873; font-weight: bold">button</span> <span style="color: #4070a0">id</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;redraw&quot;</span>&gt;new alien&lt;/<span style="color: #062873; font-weight: bold">button</span>&gt;
-&lt;<span style="color: #062873; font-weight: bold">hr</span> /&gt;
-&lt;<span style="color: #062873; font-weight: bold">div</span> <span style="color: #4070a0">id</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;two-container&quot;</span>&gt;&lt;/<span style="color: #062873; font-weight: bold">div</span>&gt;
-</pre></div>
+<button id="redraw">new alien</button>
+<hr />
+<div id="two-container"></div>
 
 <p>And update our testing code so it draws on click:</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">const</span> elem <span style="color: #666666">=</span> <span style="color: #007020">document</span>.getElementById(<span style="color: #4070a0">&#39;two-container&#39;</span>);
-<span style="color: #007020; font-weight: bold">var</span> alien <span style="color: #666666">=</span> (<span style="color: #007020; font-weight: bold">new</span> Alien(elem))
+const elem = document.getElementById('two-container');
+var alien = (new Alien(elem))
 alien.draw()
 
-<span style="color: #007020">document</span>.getElementById(<span style="color: #4070a0">&#39;redraw&#39;</span>).addEventListener(<span style="color: #4070a0">&#39;click&#39;</span>, <span style="color: #007020; font-weight: bold">function</span>() { alien.draw() })
-</pre></div>
+document.getElementById('redraw').addEventListener('click', function() { alien.draw() })
 
 <h1 id="all-done">All done!</h1>
 
