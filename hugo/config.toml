@@ -75,7 +75,7 @@ pygmentsstyle = "friendly"
   identifier = "twitter"
   name = "@paweljwal"
   pre = "<i class=\"sidebar-button-icon fa fa-lg fa-twitter\"></i>"
-  url = "https://linkedin.com/in/pawe%c5%82-wal-a478a785"
+  url = "https://twitter.com/paweljwal"
 
 [[menu.misc]]
   weight = 0
