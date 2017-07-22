@@ -46,7 +46,7 @@
     <meta property="og:url" content="{{ .URL }}">
     <meta property="og:site_name" content="{{ .Site.Title }}">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="{{ with .Title }}{{ . }}{{ else }}{{ .Site.Title }}{{ end }}">
+    <meta name="twitter:title" content="{{ with .Params.twitterTitle }}{{ . }}{{ else }}{{ with .Title }}{{ . }}{{ else }}{{ .Site.Title }}{{ end }}{{ end }}">
     <meta name="twitter:description" content="{{ if .Description }}{{ .Description }}{{ else if .IsPage }}{{ .Summary }}{{ else }}{{ .Site.Params.description }}{{ end }}">
     {{ with .Site.Author.twitter }}
       <meta name="twitter:creator" content="@{{ . }}">

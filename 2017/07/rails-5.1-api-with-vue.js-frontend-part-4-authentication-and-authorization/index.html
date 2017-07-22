@@ -1,0 +1,1208 @@
+
+
+  
+    
+  
+
+
+  
+
+
+
+
+  
+
+
+  
+
+<!DOCTYPE html>
+<html lang="pl-pl">
+  <head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hugo 0.23">
+    <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
+    <title>Rails 5.1 API with Vue.js frontend, part 4: Authentication and authorization</title>
+    <meta name="author" content="Paweł J. Wal">
+    <meta name="keywords" content=", development, ruby, ruby on rails, es6, javascript, electronics, arduino, science">
+
+    <link rel="icon" href="https://paweljw.github.io/favicon.png">
+    
+
+    
+    <meta name="description" content="Time to deal with authenticating users in our bookstore application.
+
+">
+    <meta property="og:description" content="Time to deal with authenticating users in our bookstore application.
+
+">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Rails 5.1 API with Vue.js frontend, part 4: Authentication and authorization">
+    <meta property="og:url" content="/2017/07/rails-5.1-api-with-vue.js-frontend-part-4-authentication-and-authorization/">
+    <meta property="og:site_name" content="Shenanigans! - a blog on programming, technology and science">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Authentication and authorization in Rails 5 API apps">
+    <meta name="twitter:description" content="Time to deal with authenticating users in our bookstore application.
+
+">
+    
+      <meta name="twitter:creator" content="@paweljwal">
+    
+    
+
+    
+    
+
+    
+      <meta property="og:image" content="//www.gravatar.com/avatar/5a78de40753ba5abf8fcf3a46c748d53?s=640">
+    
+
+    
+    
+      <meta property="og:image" content="https://paweljw.github.io/media/padlock.jpg">
+    
+    
+
+    
+
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" />
+    
+    
+    <link rel="stylesheet" href="https://paweljw.github.io/css/style-u6mk0ojoywresbx8iepslrmmhl4stuhrsxuwhkpwrkrx7mryjcaimasnk4pi.min.css" />
+    
+    
+
+    
+      
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-51524008-2', 'auto');
+ga('send', 'pageview');
+</script>
+
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap; width: 70%; max-height: 55px; margin: 0 auto; display: block">
+    <a class="header-title-link" href="https://paweljw.github.io/"  style="text-overflow: ellipsis">Shenanigans! - a blog on programming, technology and science</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://paweljw.github.io/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="//www.gravatar.com/avatar/5a78de40753ba5abf8fcf3a46c748d53?s=90" alt="" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://paweljw.github.io/#about">
+          <img class="sidebar-profile-picture" src="//www.gravatar.com/avatar/5a78de40753ba5abf8fcf3a46c748d53?s=110" alt="" />
+        </a>
+        <h4 class="sidebar-profile-name">Paweł J. Wal</h4>
+        
+          <h5 class="sidebar-profile-bio">Hi, I&rsquo;m Paweł. I <a href="https://github.com/paweljw">hack on stuff</a> and write about things.</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://paweljw.github.io/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://paweljw.github.io/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://paweljw.github.io/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://paweljw.github.io/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://linkedin.com/in/pawe%c5%82-wal-a478a785" target="_blank">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+      
+      <span class="sidebar-button-desc">LinkedIn</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/paweljw" target="_blank">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">@paweljw</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://twitter.com/paweljwal" target="_blank">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-twitter"></i>
+      
+      <span class="sidebar-button-desc">@paweljwal</span>
+    </a>
+  </li>
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://paweljw.github.io/index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+    </ul>
+  </div>
+</nav>
+
+      
+  <div class="post-header-cover
+              text-left
+              "
+       style="background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('/media/padlock.jpg'); background-size: cover"
+       data-behavior="5">
+    
+      <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      Rails 5.1 API with Vue.js frontend, part 4: Authentication and authorization
+    </h1>
+  
+  <div class="postShorten-meta post-meta">
+  
+    <time itemprop="datePublished" datetime="2017-07-22T17:00:00&#43;02:00">
+      
+  
+  
+  
+  
+    2017-07-22
+  
+
+    </time>
+  
+  
+
+</div>
+
+</div>
+    
+  </div>
+
+
+      <div id="main" data-behavior="5"
+        class="hasCover
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>Time to deal with authenticating users in our bookstore application.</p>
+
+<p></p>
+
+<p><em>This is an onging series of articles. It&rsquo;s highly recommended you start with <a href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/">part 0</a>!</em></p>
+
+<h2 id="what-is-token-authentication">What is token authentication?</h2>
+
+<p><em>&ldquo;And why do we even need it?&rdquo;</em> are two questions you might be asking yourself right now. You&rsquo;re probably familiar how a simple authentication flow might work in a &ldquo;regular&rdquo; Rails app:</p>
+
+<ul>
+<li>User provides login and password,</li>
+<li>The credentials are checked against a list (e.g. a database) of approved users,</li>
+<li>If the credentials match, a cookie is set on the user&rsquo;s browser.</li>
+</ul>
+
+<p>This list is of course simplified, but that&rsquo;s the general idea. But for an API app we can&rsquo;t use cookies for a couple of reasons:</p>
+
+<ul>
+<li>The frontend app is completely separate from our API backend - the cookies we set in the browser won&rsquo;t hit the backend at all.</li>
+<li><strong>There might not even be a browser.</strong> I keep stressing this across this whole series of articles, but I feel this bears repeating: anything that can parse JSON should be able to use our app.</li>
+</ul>
+
+<h2 id="enter-jwt">Enter JWT</h2>
+
+<p>For the above reasons we will use <a href="https://en.wikipedia.org/wiki/JSON_Web_Token">JSON Web Tokens</a> for passing around credentials in our app. A JWT consists of three parts:</p>
+
+<ul>
+<li>A header, which contains information about the type of the token and the algorithm used. It looks something like this:</li>
+</ul>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>{
+  <span style="color: #062873; font-weight: bold">&quot;alg&quot;</span>: <span style="color: #4070a0">&quot;HS256&quot;</span>,
+  <span style="color: #062873; font-weight: bold">&quot;typ&quot;</span>:<span style="color: #4070a0">&quot;JWT&quot;</span>
+}
+</pre></div>
+
+<ul>
+<li>A payload - that&rsquo;s whatever we want the token to carry around, for example a user&rsquo;s ID.</li>
+</ul>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>{
+  <span style="color: #062873; font-weight: bold">&quot;userId&quot;</span>: <span style="color: #40a070">1</span>
+}
+</pre></div>
+
+<ul>
+<li>A signature, used to ensure that the communication has not been tampered with. A signature is calculated using the <a href="https://en.wikipedia.org/wiki/Hash-based_message_authentication_code">HMAC-SHA256</a> algorithm; without going too deep into the implementation of this, it&rsquo;s a hash that&rsquo;s signed with a server-side secret, so the server can verify that it was indeed the one to produce a token.</li>
+</ul>
+
+<p>Thankfully, there&rsquo;s a Ruby gem to deal with a lot of this for us. It&rsquo;s called, somewhat unimaginatively for a Ruby gem, <a href="https://rubygems.org/gems/jwt">jwt</a>. Let&rsquo;s look at how we can make use of it.</p>
+
+<h2 id="user-model">User model</h2>
+
+<p>We all knew this had to happen. It happens in almost every Rails project. We need to create a <code>User</code> model and all the stuff around it.</p>
+
+<p>Since this is a very simple app - and we&rsquo;re learning, so we want to do as much of this by hand as possible! - we&rsquo;re not going to use anything ready-made. That&rsquo;s right, remove that <code>gem 'devise'</code> from your Gemfile please.</p>
+
+<p>Rails 4 added the <code>has_secure_password</code> helper to ActiveRecord models, so we&rsquo;ll use that to extract some pain out of managing passwords. Make sure <code>gem 'bcrypt'</code> is in your Gemfile, because it is required. I&rsquo;ll lock mine to <code>3.1.11</code>, but in the future the newest applicable version may of course change.</p>
+
+<p>That&rsquo;s all we need to create a very simple User:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>$ rails g model User email password_digest admin:boolean
+</pre></div>
+
+<p>Very barebones, but that&rsquo;s all we need. The migration needs a couple tweaks to look something like this:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">CreateUsers</span> <span style="color: #666666">&lt;</span> <span style="color: #60add5">ActiveRecord</span><span style="color: #666666">::</span><span style="color: #60add5">Migration</span><span style="color: #666666">[</span><span style="color: #40a070">5</span><span style="color: #666666">.</span><span style="color: #40a070">1</span><span style="color: #666666">]</span>
+  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">change</span>
+    create_table <span style="color: #517918">:users</span> <span style="color: #007020; font-weight: bold">do</span> <span style="color: #666666">|</span>t<span style="color: #666666">|</span>
+      t<span style="color: #666666">.</span>string <span style="color: #517918">:email</span>, <span style="color: #517918">null</span>: <span style="color: #007020">false</span>
+      t<span style="color: #666666">.</span>string <span style="color: #517918">:password_digest</span>, <span style="color: #517918">null</span>: <span style="color: #007020">false</span>
+      t<span style="color: #666666">.</span>boolean <span style="color: #517918">:admin</span>, <span style="color: #517918">default</span>: <span style="color: #007020">false</span>
+
+      t<span style="color: #666666">.</span>timestamps
+    <span style="color: #007020; font-weight: bold">end</span>
+  <span style="color: #007020; font-weight: bold">end</span>
+<span style="color: #007020; font-weight: bold">end</span>
+</pre></div>
+
+<p>Note the NOT NULLs and defaulting to false on the admin flag.</p>
+
+<p>We also need a couple more things in the User model:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">User</span> <span style="color: #666666">&lt;</span> <span style="color: #60add5">ApplicationRecord</span>
+  has_secure_password
+  validates <span style="color: #517918">:email</span>, <span style="color: #517918">presence</span>: <span style="color: #007020">true</span>
+<span style="color: #007020; font-weight: bold">end</span>
+</pre></div>
+
+<p>And we&rsquo;re done here!</p>
+
+<h2 id="jwt-encoding">JWT encoding</h2>
+
+<p>Reading through the docs, we can see that to encode a token using HMAC-SHA256 with a particular secret, we need to do something like this:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60add5">JWT</span><span style="color: #666666">.</span>encode payload, hmac_secret, <span style="color: #4070a0">&#39;HS256&#39;</span>
+</pre></div>
+
+<p>And to decode,</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60add5">JWT</span><span style="color: #666666">.</span>decode token, hmac_secret, <span style="color: #007020">true</span>, { <span style="color: #517918">:algorithm</span> <span style="color: #666666">=&gt;</span> <span style="color: #4070a0">&#39;HS256&#39;</span> }
+</pre></div>
+
+<p>Slightly unwieldy! We can wrap this into a service object.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60a0b0; font-style: italic"># frozen_string_literal: true</span>
+
+<span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">JwtService</span>
+  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #0e84b5; font-weight: bold">self</span><span style="color: #666666">.</span><span style="color: #06287e">encode</span>(payload)
+    <span style="color: #60add5">JWT</span><span style="color: #666666">.</span>encode(payload, <span style="color: #60add5">Rails</span><span style="color: #666666">.</span>application<span style="color: #666666">.</span>secrets<span style="color: #666666">.</span>secret_key_base, <span style="color: #4070a0">&#39;HS256&#39;</span>)
+  <span style="color: #007020; font-weight: bold">end</span>
+
+  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #0e84b5; font-weight: bold">self</span><span style="color: #666666">.</span><span style="color: #06287e">decode</span>(token)
+    body, <span style="color: #666666">=</span> <span style="color: #60add5">JWT</span><span style="color: #666666">.</span>decode(token, <span style="color: #60add5">Rails</span><span style="color: #666666">.</span>application<span style="color: #666666">.</span>secrets<span style="color: #666666">.</span>secret_key_base,
+                       <span style="color: #007020">true</span>, <span style="color: #517918">algorithm</span>: <span style="color: #4070a0">&#39;HS256&#39;</span>)
+    <span style="color: #60add5">HashWithIndifferentAccess</span><span style="color: #666666">.</span>new(body)
+  <span style="color: #007020; font-weight: bold">end</span>
+<span style="color: #007020; font-weight: bold">end</span>
+</pre></div>
+
+<p>We&rsquo;ll just use the <code>secret_key_base</code> as our secret - it&rsquo;s used for cookie signing in regular apps, so it makes sense here. Notice how in decode we&rsquo;re skipping the second part of what <code>JWT.decode</code> returns - the second part is the header, and we&rsquo;re not really interested in that. We&rsquo;re also wrapping it in a <code>HashWithIndifferentAccess</code> - JWT returns hashes that are string-keyed, but I guarantee you that one of us will forget about that later and spend a good long while getting mad.</p>
+
+<p>Let&rsquo;s drop in a quick test to check everything works:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>describe <span style="color: #60add5">JwtService</span> <span style="color: #007020; font-weight: bold">do</span>
+  subject { described_class }
+
+  let(<span style="color: #517918">:payload</span>) { { <span style="color: #4070a0">&#39;one&#39;</span> <span style="color: #666666">=&gt;</span> <span style="color: #4070a0">&#39;two&#39;</span> } }
+  let(<span style="color: #517918">:token</span>) { <span style="color: #4070a0">&#39;...&#39;</span> }
+
+  describe <span style="color: #4070a0">&#39;.encode&#39;</span> <span style="color: #007020; font-weight: bold">do</span>
+    it { expect(subject<span style="color: #666666">.</span>encode(payload))<span style="color: #666666">.</span>to eq(token) }
+  <span style="color: #007020; font-weight: bold">end</span>
+
+  describe <span style="color: #4070a0">&#39;.decode&#39;</span> <span style="color: #007020; font-weight: bold">do</span>
+    it { expect(subject<span style="color: #666666">.</span>decode(token))<span style="color: #666666">.</span>to eq(payload) }
+  <span style="color: #007020; font-weight: bold">end</span>
+<span style="color: #007020; font-weight: bold">end</span>
+</pre></div>
+
+<p>It should pass, of course. Okay, on to the next thing:</p>
+
+<h2 id="giving-out-an-authentication-token">Giving out an authentication token</h2>
+
+<p>We need to check an email and password against Users, and if everything is fine - give out an access token. We&rsquo;ll also add an expiration timestamp to our tokens so they aren&rsquo;t everliving.</p>
+
+<p>We can use a command object for the authentication and token-generation portion. The command object exposes a simple pattern:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60add5">CommandObject</span><span style="color: #666666">.</span>call(arguments)
+</pre></div>
+
+<p>We&rsquo;ll decide that our command objects should return an instance of themselves after calling a payload function. They will also publish a <code>result</code>, <code>errors</code> and a <code>success?</code> predicate.</p>
+
+<p>We&rsquo;ll make ourselves a little <code>BaseCommand</code> class so we don&rsquo;t repeat ourselves:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">BaseCommand</span>
+  <span style="color: #007020">attr_reader</span> <span style="color: #517918">:result</span>
+
+  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #0e84b5; font-weight: bold">self</span><span style="color: #666666">.</span><span style="color: #06287e">call</span>(<span style="color: #666666">*</span>args)
+    <span style="color: #007020">new</span>(<span style="color: #666666">*</span>args)<span style="color: #666666">.</span>call
+  <span style="color: #007020; font-weight: bold">end</span>
+
+  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">call</span>
+    <span style="color: #bb60d5">@result</span> <span style="color: #666666">=</span> <span style="color: #007020">nil</span>
+    payload
+    <span style="color: #007020">self</span>
+  <span style="color: #007020; font-weight: bold">end</span>
+
+  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">success?</span>
+    errors<span style="color: #666666">.</span>empty?
+  <span style="color: #007020; font-weight: bold">end</span>
+
+  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">errors</span>
+    <span style="color: #bb60d5">@errors</span> <span style="color: #666666">||=</span> <span style="color: #60add5">ActiveModel</span><span style="color: #666666">::</span><span style="color: #60add5">Errors</span><span style="color: #666666">.</span>new(<span style="color: #007020">self</span>)
+  <span style="color: #007020; font-weight: bold">end</span>
+
+  <span style="color: #007020">private</span>
+
+  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">initialize</span>(<span style="color: #666666">*</span>_)
+    not_implemented
+  <span style="color: #007020; font-weight: bold">end</span>
+
+  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">payload</span>
+    not_implemented
+  <span style="color: #007020; font-weight: bold">end</span>
+<span style="color: #007020; font-weight: bold">end</span>
+</pre></div>
+
+<p>We&rsquo;ll use <code>ActiveModel::Errors</code> to provide us with a nice clean way to collect errors that might arise in our commands.</p>
+
+<p>Let&rsquo;s look at the <code>AuthenticateUserCommand</code> now:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">AuthenticateUserCommand</span> <span style="color: #666666">&lt;</span> <span style="color: #60add5">BaseCommand</span>
+  <span style="color: #007020">private</span>
+
+  <span style="color: #007020">attr_reader</span> <span style="color: #517918">:email</span>, <span style="color: #517918">:password</span>
+
+  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">initialize</span>(email, password)
+    <span style="color: #bb60d5">@email</span> <span style="color: #666666">=</span> email
+    <span style="color: #bb60d5">@password</span> <span style="color: #666666">=</span> password
+  <span style="color: #007020; font-weight: bold">end</span>
+
+  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">user</span>
+    <span style="color: #bb60d5">@user</span> <span style="color: #666666">||=</span> <span style="color: #60add5">User</span><span style="color: #666666">.</span>find_by(<span style="color: #517918">email</span>: email)
+  <span style="color: #007020; font-weight: bold">end</span>
+
+  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">password_valid?</span>
+    user <span style="color: #666666">&amp;&amp;</span> user<span style="color: #666666">.</span>authenticate(password)
+  <span style="color: #007020; font-weight: bold">end</span>
+
+  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">payload</span>
+    <span style="color: #007020; font-weight: bold">if</span> password_valid?
+      <span style="color: #bb60d5">@result</span> <span style="color: #666666">=</span> <span style="color: #60add5">JwtService</span><span style="color: #666666">.</span>encode(contents)
+    <span style="color: #007020; font-weight: bold">else</span>
+      errors<span style="color: #666666">.</span>add(<span style="color: #517918">:base</span>, <span style="color: #60add5">I18n</span><span style="color: #666666">.</span>t(<span style="color: #4070a0">&#39;authenticate_user_command.invalid_credentials&#39;</span>))
+    <span style="color: #007020; font-weight: bold">end</span>
+  <span style="color: #007020; font-weight: bold">end</span>
+
+  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">contents</span>
+    {
+      <span style="color: #517918">user_id</span>: user<span style="color: #666666">.</span>id,
+      <span style="color: #517918">expiration</span>: <span style="color: #40a070">24</span><span style="color: #666666">.</span>hours<span style="color: #666666">.</span>from_now<span style="color: #666666">.</span>to_i
+    }
+  <span style="color: #007020; font-weight: bold">end</span>
+<span style="color: #007020; font-weight: bold">end</span>
+</pre></div>
+
+<p>It&rsquo;s a mouthful, but the internals are simple as pie: if an user for the e-mail provided exists and the password matches, return a JSON Web Token with a payload of user ID and an expiration timer. Otherwise, append to errors and return <code>nil</code>.</p>
+
+<p>Note that since the payload is time sensitive with the addition of expiration timestamp, to test it properly we&rsquo;ll need something like <a href="https://rubygems.org/gems/timecop">Timecop</a>.</p>
+
+<p>With this command object, our auth controller is very simple:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">module</span> <span style="color: #0e84b5; font-weight: bold">Api</span>
+  <span style="color: #007020; font-weight: bold">module</span> <span style="color: #0e84b5; font-weight: bold">V1</span>
+    <span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">AuthsController</span> <span style="color: #666666">&lt;</span> <span style="color: #60add5">ApplicationController</span>
+      <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">create</span>
+        token_command <span style="color: #666666">=</span> <span style="color: #60add5">AuthenticateUserCommand</span><span style="color: #666666">.</span>call(<span style="color: #666666">*</span>params<span style="color: #666666">.</span>slice(<span style="color: #517918">:user</span>, <span style="color: #517918">:password</span>)<span style="color: #666666">.</span>values)
+
+        <span style="color: #007020; font-weight: bold">if</span> token_command<span style="color: #666666">.</span>success?
+          render <span style="color: #517918">json</span>: { <span style="color: #517918">token</span>: token_command<span style="color: #666666">.</span>result }
+        <span style="color: #007020; font-weight: bold">else</span>
+          render <span style="color: #517918">json</span>: { <span style="color: #517918">error</span>: token_command<span style="color: #666666">.</span>errors }, <span style="color: #517918">status</span>: <span style="color: #517918">:unauthorized</span>
+        <span style="color: #007020; font-weight: bold">end</span>
+      <span style="color: #007020; font-weight: bold">end</span>
+    <span style="color: #007020; font-weight: bold">end</span>
+  <span style="color: #007020; font-weight: bold">end</span>
+<span style="color: #007020; font-weight: bold">end</span>
+</pre></div>
+
+<p>Add a route and you&rsquo;re golden:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>resource <span style="color: #517918">:auth</span>, <span style="color: #517918">only</span>: <span style="color: #666666">%</span>i<span style="color: #666666">[</span>create<span style="color: #666666">]</span>
+</pre></div>
+
+<p>Now when I try to log in with a nonexistent user, I get an <code>Unauthorized status</code>:</p>
+
+
+<figure >
+    <a href="https://paweljw.github.io/media/auth_1.png">
+        <img src="https://paweljw.github.io/media/auth_1.png" />
+    </a>
+    
+</figure>
+
+
+<p>But when I create this user in the console,</p>
+
+<pre><code>User.create(email: 'p@p.local', password: 'password123')
+</code></pre>
+
+<p>and try again,</p>
+
+
+<figure >
+    <a href="https://paweljw.github.io/media/auth_2.png">
+        <img src="https://paweljw.github.io/media/auth_2.png" />
+    </a>
+    
+</figure>
+
+
+<p>Sweet! A token!</p>
+
+<h2 id="locking-it-down">Locking it down</h2>
+
+<p>We need to do a couple more things:</p>
+
+<ul>
+<li>decode the token from headers,</li>
+<li>check it against database for users,</li>
+<li>check if it&rsquo;s not expired.</li>
+</ul>
+
+<p>We can confine this to another command:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60a0b0; font-style: italic"># frozen_string_literal: true</span>
+
+<span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">DecodeAuthenticationCommand</span> <span style="color: #666666">&lt;</span> <span style="color: #60add5">BaseCommand</span>
+  <span style="color: #007020">private</span>
+
+  <span style="color: #007020">attr_reader</span> <span style="color: #517918">:headers</span>
+
+  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">initialize</span>(headers)
+    <span style="color: #bb60d5">@headers</span> <span style="color: #666666">=</span> headers
+    <span style="color: #bb60d5">@user</span> <span style="color: #666666">=</span> <span style="color: #007020">nil</span>
+  <span style="color: #007020; font-weight: bold">end</span>
+
+  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">payload</span>
+    <span style="color: #007020; font-weight: bold">return</span> <span style="color: #007020; font-weight: bold">unless</span> token_present?
+    <span style="color: #bb60d5">@result</span> <span style="color: #666666">=</span> user <span style="color: #007020; font-weight: bold">if</span> user <span style="color: #666666">&amp;&amp;</span> token_not_expired?
+  <span style="color: #007020; font-weight: bold">end</span>
+
+  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">user</span>
+    <span style="color: #bb60d5">@user</span> <span style="color: #666666">||=</span> <span style="color: #60add5">User</span><span style="color: #666666">.</span>find_by(<span style="color: #007020">id</span>: decoded_id)
+    <span style="color: #bb60d5">@user</span> <span style="color: #666666">||</span> errors<span style="color: #666666">.</span>add(<span style="color: #517918">:token</span>, <span style="color: #60add5">I18n</span><span style="color: #666666">.</span>t(<span style="color: #4070a0">&#39;decode_authentication_command.token_invalid&#39;</span>)) <span style="color: #666666">&amp;&amp;</span> <span style="color: #007020">nil</span>
+  <span style="color: #007020; font-weight: bold">end</span>
+
+  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">token_not_expired?</span>
+    decoded_expiration_timestamp <span style="color: #666666">&gt;=</span> <span style="color: #60add5">Time</span><span style="color: #666666">.</span>now<span style="color: #666666">.</span>to_i <span style="color: #666666">||</span>
+      errors<span style="color: #666666">.</span>add(<span style="color: #517918">:token</span>, <span style="color: #60add5">I18n</span><span style="color: #666666">.</span>t(<span style="color: #4070a0">&#39;decode_authentication_command.token_expired&#39;</span>)) <span style="color: #666666">&amp;&amp;</span> <span style="color: #007020">nil</span>
+  <span style="color: #007020; font-weight: bold">end</span>
+
+  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">token_present?</span>
+    token<span style="color: #666666">.</span>present?
+  <span style="color: #007020; font-weight: bold">end</span>
+
+  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">token</span>
+    <span style="color: #007020; font-weight: bold">return</span> authorization_header<span style="color: #666666">.</span>split(<span style="color: #4070a0">&#39; &#39;</span>)<span style="color: #666666">.</span>last <span style="color: #007020; font-weight: bold">if</span> authorization_header<span style="color: #666666">.</span>present?
+    errors<span style="color: #666666">.</span>add(<span style="color: #517918">:token</span>, <span style="color: #4070a0">&#39;Missing token&#39;</span>)
+    <span style="color: #007020">nil</span>
+  <span style="color: #007020; font-weight: bold">end</span>
+
+  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">authorization_header</span>
+    headers<span style="color: #666666">[</span><span style="color: #4070a0">&#39;Authorization&#39;</span><span style="color: #666666">]</span>
+  <span style="color: #007020; font-weight: bold">end</span>
+
+  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">token_contents</span>
+    <span style="color: #bb60d5">@token_contents</span> <span style="color: #666666">||=</span> <span style="color: #60add5">JwtService</span><span style="color: #666666">.</span>decode(token)
+  <span style="color: #007020; font-weight: bold">end</span>
+
+  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">decoded_id</span>
+    token_contents<span style="color: #666666">[</span><span style="color: #4070a0">&#39;user_id&#39;</span><span style="color: #666666">]</span>
+  <span style="color: #007020; font-weight: bold">end</span>
+
+  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">decoded_expiration_timestamp</span>
+    token_contents<span style="color: #666666">[</span><span style="color: #4070a0">&#39;expiration&#39;</span><span style="color: #666666">]</span> <span style="color: #666666">||</span> <span style="color: #40a070">0</span>
+  <span style="color: #007020; font-weight: bold">end</span>
+<span style="color: #007020; font-weight: bold">end</span>
+</pre></div>
+
+<p>Whew, another mouthful! It extracts the contents of the <code>Authorization</code> header (expecting it to contain something like <code>Bearer token.goes.here</code>, checks whether a user with a given ID exists and whether the expiration timestamp hasn&rsquo;t passed already. If anything goes wrong at all, it just registers an error and bails.</p>
+
+<p>We can then get ourselves a nice concern to include in our application controller:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">NotAuthorizedException</span> <span style="color: #666666">&lt;</span> <span style="color: #60add5">StandardError</span>; <span style="color: #007020; font-weight: bold">end</span>
+
+<span style="color: #007020; font-weight: bold">module</span> <span style="color: #0e84b5; font-weight: bold">TokenAuthenticatable</span>
+  <span style="color: #007020">extend</span> <span style="color: #60add5">ActiveSupport</span><span style="color: #666666">::</span><span style="color: #60add5">Concern</span>
+
+  included <span style="color: #007020; font-weight: bold">do</span>
+    <span style="color: #007020">attr_reader</span> <span style="color: #517918">:current_user</span>
+
+    before_action <span style="color: #517918">:authenticate_user</span>
+
+    rescue_from <span style="color: #60add5">NotAuthorizedException</span>, <span style="color: #517918">with</span>: <span style="color: #666666">-&gt;</span> { render <span style="color: #517918">json</span>: { <span style="color: #517918">error</span>: <span style="color: #4070a0">&#39;Not Authorized&#39;</span> }, <span style="color: #517918">status</span>: <span style="color: #40a070">401</span> }
+  <span style="color: #007020; font-weight: bold">end</span>
+
+  <span style="color: #007020">private</span>
+
+  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">authenticate_user</span>
+    <span style="color: #bb60d5">@current_user</span> <span style="color: #666666">=</span> <span style="color: #60add5">DecodeAuthenticationCommand</span><span style="color: #666666">.</span>call(request<span style="color: #666666">.</span>headers)<span style="color: #666666">.</span>result
+    <span style="color: #007020; font-weight: bold">raise</span> <span style="color: #60add5">NotAuthorizedException</span> <span style="color: #007020; font-weight: bold">unless</span> <span style="color: #bb60d5">@current_user</span>
+  <span style="color: #007020; font-weight: bold">end</span>
+<span style="color: #007020; font-weight: bold">end</span>
+</pre></div>
+
+<p>It&rsquo;s also important to add</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>skip_before_action <span style="color: #517918">:authenticate_user</span>
+</pre></div>
+
+<p>to our AuthsController, or we will reject users trying to authenticate because they aren&rsquo;t authenticated.</p>
+
+<p>Now if I try to get a list of authors in Postman not passing in an authentication header, I get rejected:</p>
+
+
+<figure >
+    <a href="https://paweljw.github.io/media/auth_3.png">
+        <img src="https://paweljw.github.io/media/auth_3.png" />
+    </a>
+    
+</figure>
+
+
+<p>But if I do pass this header, I&rsquo;m approved!</p>
+
+
+<figure >
+    <a href="https://paweljw.github.io/media/auth_4.png">
+        <img src="https://paweljw.github.io/media/auth_4.png" />
+    </a>
+    
+</figure>
+
+
+<h2 id="administrative-access">Administrative access</h2>
+
+<p>One more thing: currently any logged in user can edit books. That&rsquo;s not great. We&rsquo;ll need to check for admin privileges before that.</p>
+
+<p>We&rsquo;ll add a simple authorization-checking function in another concern:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">module</span> <span style="color: #0e84b5; font-weight: bold">AdminAuthorizable</span>
+  <span style="color: #007020">extend</span> <span style="color: #60add5">ActiveSupport</span><span style="color: #666666">::</span><span style="color: #60add5">Concern</span>
+
+  included <span style="color: #007020; font-weight: bold">do</span>
+    rescue_from <span style="color: #60add5">NotPermittedException</span>, <span style="color: #517918">with</span>: <span style="color: #666666">-&gt;</span> { render <span style="color: #517918">json</span>: { <span style="color: #517918">error</span>: <span style="color: #4070a0">&#39;Not Permitted&#39;</span> }, <span style="color: #517918">status</span>: <span style="color: #517918">:forbidden</span> }
+  <span style="color: #007020; font-weight: bold">end</span>
+
+  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">authorize!</span>(action)
+    <span style="color: #007020; font-weight: bold">raise</span> <span style="color: #60add5">NotPermittedException</span> <span style="color: #007020; font-weight: bold">unless</span> action <span style="color: #666666">!=</span> <span style="color: #517918">:read</span> <span style="color: #666666">&amp;&amp;</span> <span style="color: #666666">!</span>current_user<span style="color: #666666">.</span>admin?
+    <span style="color: #007020">true</span>
+  <span style="color: #007020; font-weight: bold">end</span>
+<span style="color: #007020; font-weight: bold">end</span>
+</pre></div>
+
+<p>Now we can use <code>authorize! :read</code> in our index and show actions, and <code>authorize! :create</code>, <code>authorize! :update</code> and <code>authorize! :destroy</code> elsewhere. Simple yet effective!</p>
+
+<h2 id="closing-thoughts">Closing thoughts</h2>
+
+<p>We did a lot of things by hand today. We could have plonked in Devise, <a href="https://rubygems.org/gems/simple_command">simple_command</a> for the command objects (I recommend you look it over if you haven&rsquo;t already - our commands are heavily modeled after what they&rsquo;re doing!), and e.g. <a href="https://rubygems.org/gems/cancancan">cancancan</a> for the role-based auth. The point, however, is to learn how to do things yourself, especially in fun-time projects - it removes a lot of magic from the gems you&rsquo;re using in large, production-level apps.</p>
+
+<p>As always, the state of the project after this part can be found on GitHub at <a href="https://github.com/paweljw/bookstore-backend/tree/part-4">paweljw/bookstore-backend</a>.</p>
+
+<p>We&rsquo;ve started adding tests in this part, too. We&rsquo;re not exactly doing <abbr title="Test-Driven Development">TDD</abbr> here - and that&rsquo;s totally fine when learning (unless you&rsquo;re learning TDD, of course!). It was important to get the basic API and auth working in the first place so that we know what we&rsquo;re testing. We&rsquo;ll talk about testing Rails API apps next time. See you then!</p>
+
+<hr />
+
+<p>Top image credit: <a href="https://pixabay.com/p-406986/">https://pixabay.com/p-406986/</a> (CC0)</p>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small"></span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/javascript/">javascript</a>
+
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/es6/">es6</a>
+
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/saturdayproject/">saturdayproject</a>
+
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/follow-me/">follow me</a>
+
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/rails/">rails</a>
+
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/api/">api</a>
+
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/rails-api-series/">rails-api-series</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  <nav>
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--disabled">
+          
+            <i class="fa fa-angle-left"></i>
+            <span class="hide-xs hide-sm text-small icon-ml"></span>
+          </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-3-api-versioning/" data-tooltip="Rails 5.1 API with Vue.js frontend, part 3: API versioning">
+          
+            <span class="hide-xs hide-sm text-small icon-mr"></span>
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </nav>
+  <ul class="post-actions post-action-share">
+    
+      <li class="post-action hide-lg hide-md hide-sm">
+        <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+          <i class="fa fa-share-alt"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-4-authentication-and-authorization%2f">
+          <i class="fa fa-google-plus"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-4-authentication-and-authorization%2f">
+          <i class="fa fa-facebook-official"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-4-authentication-and-authorization%2f">
+          <i class="fa fa-twitter"></i>
+        </a>
+      </li>
+    
+    
+      <li class="post-action">
+        <a class="post-action-btn btn btn--default" href="#disqus_thread">
+          <i class="fa fa-comment-o"></i>
+        </a>
+      </li>
+    
+    <li class="post-action">
+      
+        <a class="post-action-btn btn btn--default" href="#">
+      
+        <i class="fa fa-list"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    Created by <a href="https://github.com/paweljw">Paweł J. Wal</a> | <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        <div class="post-actions-wrap">
+  <nav>
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--disabled">
+          
+            <i class="fa fa-angle-left"></i>
+            <span class="hide-xs hide-sm text-small icon-ml"></span>
+          </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-3-api-versioning/" data-tooltip="Rails 5.1 API with Vue.js frontend, part 3: API versioning">
+          
+            <span class="hide-xs hide-sm text-small icon-mr"></span>
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </nav>
+  <ul class="post-actions post-action-share">
+    
+      <li class="post-action hide-lg hide-md hide-sm">
+        <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+          <i class="fa fa-share-alt"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-4-authentication-and-authorization%2f">
+          <i class="fa fa-google-plus"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-4-authentication-and-authorization%2f">
+          <i class="fa fa-facebook-official"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-4-authentication-and-authorization%2f">
+          <i class="fa fa-twitter"></i>
+        </a>
+      </li>
+    
+    
+      <li class="post-action">
+        <a class="post-action-btn btn btn--default" href="#disqus_thread">
+          <i class="fa fa-comment-o"></i>
+        </a>
+      </li>
+    
+    <li class="post-action">
+      
+        <a class="post-action-btn btn btn--default" href="#">
+      
+        <i class="fa fa-list"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <ul class="share-options">
+    <li class="share-option">
+      <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-4-authentication-and-authorization%2f">
+        <i class="fa fa-google-plus"></i><span></span>
+      </a>
+    </li>
+    <li class="share-option">
+      <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-4-authentication-and-authorization%2f">
+        <i class="fa fa-facebook-official"></i><span></span>
+      </a>
+    </li>
+    <li class="share-option">
+      <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-with-vue.js-frontend-part-4-authentication-and-authorization%2f">
+        <i class="fa fa-twitter"></i><span></span>
+      </a>
+    </li>
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="//www.gravatar.com/avatar/5a78de40753ba5abf8fcf3a46c748d53?s=110" alt="" />
+    
+    <h4 id="about-card-name">Paweł J. Wal</h4>
+    
+      <div id="about-card-bio">Hi, I&rsquo;m Paweł. I <a href="https://github.com/paweljw">hack on stuff</a> and write about things.</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Sofware Magician
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        Poland
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center"></div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-4-authentication-and-authorization/">
+                <h3 class="media-heading">Rails 5.1 API with Vue.js frontend, part 4: Authentication and authorization</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>Time to deal with authenticating users in our bookstore application.</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-3-api-versioning/">
+                <h3 class="media-heading">Rails 5.1 API with Vue.js frontend, part 3: API versioning</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>We have two more things to tackle before our Rails API app is an MVP: namespacing the controllers and creating an authentication mechanism. We&rsquo;ll tackle namespacing the controllers in this article - it might seem wordy, but it&rsquo;s for a good reason.</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-2-modeling-reality/">
+                <h3 class="media-heading">Rails 5.1 API with Vue.js frontend, part 2: Modeling reality</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>Oh yeah. Now we&rsquo;re going <em>hardcore</em>. Well, not really.</p>
+
+<p>While Rails embraces a continuously changing data model, it&rsquo;s always good to stop and think for a minute about the domain we&rsquo;re trying to magically lockwithin an app. We&rsquo;re building a bookstore. So what&rsquo;s in one?</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-1-setting-up-a-rails-api-app/">
+                <h3 class="media-heading">Rails 5.1 API with Vue.js frontend, part 1: Setting up a Rails API app</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>It&rsquo;s time to continue with our foray into Rails API app with Vue.js frontend! In <a href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/">Part 0</a> we discussed what technology we&rsquo;ll be using and why - I highly recommend you read through it if you haven&rsquo;t already. Now it&rsquo;s time to get our Rails on.</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/">
+                <h3 class="media-heading">Rails 5.1 API with Vue.js frontend, part 0: stack choices</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">I&rsquo;ve been rather busy lately, and my progress in learning Vue.js has slowed down. However, I think that I&rsquo;m ready to dive into making something more resembling a real application than Monster Hunter and GalaxyQuest.
+I believe that you learn best when your objective is teaching it to somebody else. Therefore, over the next couple of weeks I&rsquo;ll be making and refining a simple bookstore app1, using Rails 5.1 for the API backend, and vue.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/06/saturday-project-galaxyquest---fuzzily-searching-github-stars/">
+                <h3 class="media-heading">Saturday Project: GalaxyQuest - fuzzily searching github stars</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jun 6, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p><em>Okay, Thursday project. It&rsquo;s my day off this week, what can I do.</em></p>
+
+<p>I&rsquo;m still on this Vue.js kick, so while studying Components, I built myself a little app.</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/06/saturday-project-monster-hunting-with-vue.js/">
+                <h3 class="media-heading">Saturday Project: Monster Hunting with Vue.js</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jun 6, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>I&rsquo;m studying Vue.js right now - here&rsquo;s a simple app that I made in the process.</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/05/saturday-project-alien-generator-in-javascript/">
+                <h3 class="media-heading">Saturday Project: Alien Generator in JavaScript</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>I&rsquo;ve been studying ES6 a lot lately. Here&rsquo;s a fun little project that we can do with it over an hour or so on a Saturday: an alien generator!</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/02/how-many-cats-does-it-take-to-eat-a-human/">
+                <h3 class="media-heading">How Many Cats Does It Take to Eat a Human?</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Feb 2, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>Once again, the love of my life took to asking me weird questions. This time, the question is: how many cats does it take to eat a human?</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/01/a-cup-of-coins-revisited/">
+                <h3 class="media-heading">A Cup of Coins, Revisited</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jan 1, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>It all started out simple, really: I’ve been watching some cartoon - I think it was something in The Penguins of Madagascar series - with my fiancee, Magda, and something to the effect of “I’d like to borrow a cup of coins” was uttered in the show. She looked to me and said jokingly, “I’ll buy a cup of coins off you for 1 <a href="https://en.wikipedia.org/wiki/Polish_z%C5%82oty">PLN</a>”.</p>
+
+<p>I’ve been looking long and hard to turn a profit on this hypothetical sale.</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero=""
+         data-message-one=""
+         data-message-other="">
+         12 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('https://paweljw.github.io/images/cover2.jpeg');"></div>
+  
+
+
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.js"></script>
+
+
+<script src="https://paweljw.github.io/js/script-wl33z0n6ocaypepiqrazthtivfrliqijej4rq8ek8gvrv1awftmgjuv8k4zc.min.js"></script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight').each(function(i, block) {
+    var code = "";
+    hljs.highlightAuto(block.innerText).value.split(/\r\n|\r|\n/).forEach(function(line) {
+      code += "<span class=\"line\">" + line + "</span><br>";
+    });
+    if (code.length > 0) {
+      block.innerHTML = code;  
+    }
+  });
+  $('pre > code').each(function(i, block) {
+    $(this).addClass('codeblock');
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/paweljw.github.io\/2017\/07\/rails-5.1-api-with-vue.js-frontend-part-4-authentication-and-authorization\/';
+          
+            this.page.identifier = '\/2017\/07\/rails-5.1-api-with-vue.js-frontend-part-4-authentication-and-authorization\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'paweljw-github-io';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+
+    
+  </body>
+</html>
+
