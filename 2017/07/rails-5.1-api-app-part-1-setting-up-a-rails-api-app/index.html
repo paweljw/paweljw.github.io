@@ -1,0 +1,907 @@
+
+
+  
+    
+  
+
+
+  
+
+
+
+
+  
+
+
+  
+
+<!DOCTYPE html>
+<html lang="pl-pl">
+  <head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hugo 0.25.1">
+    <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
+    <title>Rails 5.1 API app, part 1: Setting up a Rails API app</title>
+    <meta name="author" content="Paweł J. Wal">
+    <meta name="keywords" content=", development, ruby, ruby on rails, es6, javascript, electronics, arduino, science">
+
+    <link rel="icon" href="https://paweljw.github.io/favicon.png">
+    
+
+    
+    <meta name="description" content="It&rsquo;s time to continue with our foray into Rails API app with Vue.js frontend! In Part 0 we discussed what technology we&rsquo;ll be using and why - I highly recommend you read through it if you haven&rsquo;t already. Now it&rsquo;s time to get our Rails on.
+
+">
+    <meta property="og:description" content="It&rsquo;s time to continue with our foray into Rails API app with Vue.js frontend! In Part 0 we discussed what technology we&rsquo;ll be using and why - I highly recommend you read through it if you haven&rsquo;t already. Now it&rsquo;s time to get our Rails on.
+
+">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Rails 5.1 API app, part 1: Setting up a Rails API app">
+    <meta property="og:url" content="/2017/07/rails-5.1-api-app-part-1-setting-up-a-rails-api-app/">
+    <meta property="og:site_name" content="Shenanigans! - a blog on programming, technology and science">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Rails 5.1 API app, part 1: Setting up a Rails API app">
+    <meta name="twitter:description" content="It&rsquo;s time to continue with our foray into Rails API app with Vue.js frontend! In Part 0 we discussed what technology we&rsquo;ll be using and why - I highly recommend you read through it if you haven&rsquo;t already. Now it&rsquo;s time to get our Rails on.
+
+">
+    
+      <meta name="twitter:creator" content="@paweljwal">
+    
+    
+
+    
+    
+
+    
+      <meta property="og:image" content="//www.gravatar.com/avatar/5a78de40753ba5abf8fcf3a46c748d53?s=640">
+    
+
+    
+    
+      <meta property="og:image" content="https://paweljw.github.io/media/rails.jpg">
+    
+    
+
+    
+
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" />
+    
+    
+    <link rel="stylesheet" href="https://paweljw.github.io/css/style-u6mk0ojoywresbx8iepslrmmhl4stuhrsxuwhkpwrkrx7mryjcaimasnk4pi.min.css" />
+    
+    
+
+    
+      
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-51524008-2', 'auto');
+ga('send', 'pageview');
+</script>
+
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap; width: 70%; max-height: 55px; margin: 0 auto; display: block">
+    <a class="header-title-link" href="https://paweljw.github.io/"  style="text-overflow: ellipsis">Shenanigans! - a blog on programming, technology and science</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://paweljw.github.io/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="//www.gravatar.com/avatar/5a78de40753ba5abf8fcf3a46c748d53?s=90" alt="" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://paweljw.github.io/#about">
+          <img class="sidebar-profile-picture" src="//www.gravatar.com/avatar/5a78de40753ba5abf8fcf3a46c748d53?s=110" alt="" />
+        </a>
+        <h4 class="sidebar-profile-name">Paweł J. Wal</h4>
+        
+          <h5 class="sidebar-profile-bio">Hi, I&rsquo;m Paweł. I <a href="https://github.com/paweljw">hack on stuff</a> and write about things.</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://paweljw.github.io/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://paweljw.github.io/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://paweljw.github.io/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://paweljw.github.io/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://linkedin.com/in/pawe%c5%82-wal-a478a785" target="_blank">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+      
+      <span class="sidebar-button-desc">LinkedIn</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/paweljw" target="_blank">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">@paweljw</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://twitter.com/paweljwal" target="_blank">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-twitter"></i>
+      
+      <span class="sidebar-button-desc">@paweljwal</span>
+    </a>
+  </li>
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://paweljw.github.io/index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+    </ul>
+  </div>
+</nav>
+
+      
+  <div class="post-header-cover
+              text-left
+              "
+       style="background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('/media/rails.jpg'); background-size: cover"
+       data-behavior="5">
+    
+      <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      Rails 5.1 API app, part 1: Setting up a Rails API app
+    </h1>
+  
+  <div class="postShorten-meta post-meta">
+  
+    <time itemprop="datePublished" datetime="2017-07-11T15:26:57&#43;02:00">
+      
+  
+  
+  
+  
+    2017-07-11
+  
+
+    </time>
+  
+  
+
+</div>
+
+</div>
+    
+  </div>
+
+
+      <div id="main" data-behavior="5"
+        class="hasCover
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>It&rsquo;s time to continue with our foray into Rails API app with Vue.js frontend! In <a href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/">Part 0</a> we discussed what technology we&rsquo;ll be using and why - I highly recommend you read through it if you haven&rsquo;t already. Now it&rsquo;s time to get our Rails on.</p>
+
+<p></p>
+
+<p><details>
+  <summary><em>This series is composed of six articles! Click here for a table of contents.</em></summary></p>
+
+<ul>
+<li><a href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/">Part 0: Stack choices</a></li>
+<li><a href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-1-setting-up-a-rails-api-app/">Part 1: Setting up a Rails API app</a></li>
+<li><a href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-2-modeling-reality/">Part 2: Modeling reality</a></li>
+<li><a href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-3-api-versioning/">Part 3: API versioning</a></li>
+<li><a href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-4-authentication-and-authorization/">Part 4: Authentication and authorization</a></li>
+<li><a href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-4-deploying-with-confidence/">Part 5: Deploying with confidence</a>
+</details></li>
+</ul>
+
+<h1 id="installing-the-right-version-of-rails">Installing the right version of Rails</h1>
+
+<p>Since we&rsquo;ve decided to use Rails 5.1, that&rsquo;s what we should get. If you don&rsquo;t have it already,</p>
+
+<pre><code>gem install rails -v '~&gt; 5.1'
+</code></pre>
+
+<p>should do the trick.</p>
+
+<h1 id="setting-up-a-rails-api-app">Setting up a Rails API app</h1>
+
+<p>Let&rsquo;s look at the command first and pick it apart later:</p>
+
+<pre><code>rails new bookstore-backend -T --skip-spring -C -M -d postgresql --api
+</code></pre>
+
+<p>Whew! That&rsquo;s a mouthful. Let&rsquo;s see about all those switches.</p>
+
+<ul>
+<li><code>-T</code> amounts to skipping the builtin testing framework. We&rsquo;ll test our API with something other than MiniTest, so let&rsquo;s drop it for now.</li>
+<li><code>--skip-spring</code> removes Spring from our application; that&rsquo;s a personal preference. If you don&rsquo;t know what <a href="https://github.com/rails/spring">Spring</a> does and whether you should remove it, I urge you to find out and decide for yourself.</li>
+<li><code>-C</code> skips Action Cable. No web socket communication for us!</li>
+<li><code>-M</code> skips Action Mailer, which wouldn&rsquo;t be of any use to us.</li>
+<li><code>-d postgresql</code> of course sets us up for the PostgreSQL database.</li>
+<li><code>--api</code> - now we&rsquo;re talking! This runs the Rails generator in the API mode, which sets us up for reading and writing JSON instead of pumping out HTML.</li>
+</ul>
+
+<p>Now we can run <code>tree</code> on this new app, and&hellip; wow! When you compare that to a regular Rails app, this is really barebones. But we can trim this up a bit more:</p>
+
+<ul>
+<li>An <code>app/jobs</code> directory was generated for us. We know that there will be no jobs in this application for the foreseeable future, so we can drop that.</li>
+<li>There are four initializers that are commented out by default: <code>backtrace_silencers.rb</code>, <code>application_controller_renderer.rb</code>, <code>inflections.rb</code> and <code>mime_types.rb</code>. We may as well remove those.</li>
+</ul>
+
+<p>One of the initializers will come in handy, though: <code>cors.rb</code>. We can uncomment what is already there and modify it to accept all origins:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60add5">Rails</span><span style="color: #666666">.</span>application<span style="color: #666666">.</span>config<span style="color: #666666">.</span>middleware<span style="color: #666666">.</span>insert_before <span style="color: #40a070">0</span>, <span style="color: #60add5">Rack</span><span style="color: #666666">::</span><span style="color: #60add5">Cors</span> <span style="color: #007020; font-weight: bold">do</span>
+  allow <span style="color: #007020; font-weight: bold">do</span>
+    origins <span style="color: #60add5">ENV</span><span style="color: #666666">.</span>fetch(<span style="color: #4070a0">&#39;ALLOWED_ORIGINS&#39;</span>) { <span style="color: #4070a0">&#39;*&#39;</span> }
+
+    resource <span style="color: #4070a0">&#39;*&#39;</span>,
+      <span style="color: #517918">headers</span>: <span style="color: #517918">:any</span>,
+      <span style="color: #007020">methods</span>: <span style="color: #666666">[</span><span style="color: #517918">:get</span>, <span style="color: #517918">:post</span>, <span style="color: #517918">:put</span>, <span style="color: #517918">:patch</span>, <span style="color: #517918">:delete</span>, <span style="color: #517918">:options</span>, <span style="color: #517918">:head</span><span style="color: #666666">]</span>
+  <span style="color: #007020; font-weight: bold">end</span>
+<span style="color: #007020; font-weight: bold">end</span>
+</pre></div>
+
+<p>This will make us happy campers in development, and allows us to set it properly for production - when we will know where our front-end lives. As a side note, simply allowing <code>*</code> would also be fine if we were going to call our API from e.g. a mobile application.</p>
+
+<p>To use this, we need to uncomment <code>rack-cors</code> in the Gemfile.</p>
+
+<h1 id="setting-up-the-database">Setting up the database</h1>
+
+<p>As we&rsquo;ve said in Part 0, we&rsquo;ll use <a href="https://docs.docker.com/compose/install/">Docker</a> to isolate our services in development. The easiest way to do this is by far with Docker. Messing around with images by themselves can be a bit cumbersome though, so we&rsquo;ll use <code>docker-compose</code> for that. If you don&rsquo;t have Docker installed yet, now is a great time to click that link and get it.</p>
+
+<p>When we have <code>docker-compose</code> ready, we can just drop a file called <code>docker-compose.yml</code> in the root of our application, set up like this:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>postgresql:
+  image: postgres:9.6
+  ports:
+    - 5432:5432
+  environment:
+    - PGDATA=/postgresql
+    - PG_PASSWORD=our-awesome-bookstore-app
+  volumes:
+    - ./tmp/data/postgresql:/postgresql
+</pre></div>
+
+<p>This will set up a container with PostgreSQL 9.6, connect it&rsquo;s port 5432 to our localhost and set up a password on the database. We can run it using <code>docker-compose up</code> in the front, or <code>docker-compose start</code> as a daemon. Don&rsquo;t forget to stop it when you&rsquo;re done! I keep forgetting, so I prefer to run mine in the foreground.</p>
+
+<p>Now we just need to point our Rails app to this instance of PostgreSQL in development and test environments. Our <code>database.yml</code> may look something like this:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>default: <span style="color: #002070; font-weight: bold">&amp;default</span>
+  adapter: postgresql
+  encoding: unicode
+  pool: &lt;%= ENV.fetch(&quot;RAILS_MAX_THREADS&quot;) { 5 } %&gt;
+
+development: <span style="color: #002070; font-weight: bold">&amp;development</span>
+  &lt;&lt;: <span style="color: #bb60d5">*default</span>
+  database: bookstore-backend_development
+  username: postgres
+  password: our-awesome-bookstore-app
+  host: localhost
+
+test:
+  &lt;&lt;: <span style="color: #bb60d5">*development</span>
+  database: bookstore-backend_test
+
+production:
+  url: &lt;%= ENV[&#39;DATABASE_URL&#39;] %&gt;
+</pre></div>
+
+<p>You might notice some peculiarities. For example, we&rsquo;ve created an alias <code>&amp;development</code> and are running our <code>test</code> environment off of it. That makes sense, since the only thing we want to differ for the tests is the database they use - they should still hit Docker. Also, we&rsquo;ve already set up a production environment and made it use <code>DATABASE_URL</code>. This is how we&rsquo;ll set it up on Heroku.</p>
+
+<p>As a side note - almost everyone has probably at some (early) point in their career committed credentials to a repository. Most of us probably got chewed out for it. So why are we comfortable doing this for our development and test environments? Simple - the database only exists on our machine and doesn&rsquo;t talk to the outside world. Of course we would never put production creds in a repo.</p>
+
+<p>All right, let&rsquo;s hit it:</p>
+
+<pre><code>bundle install
+bundle exec rails db:create
+bundle exec rails db:migrate
+bundle exec bin/setup
+</code></pre>
+
+<p>Note that in Rails 5 we went to using the <code>rails</code> CLI tool rather than Rake. After several years of using <code>rake</code>, this will probably keep tripping me up for a little while longer :)</p>
+
+<p>If everything went well, our database should be set up!</p>
+
+<p>It might seem like we don&rsquo;t have all that much - but what we have is a very powerful environment to <em>model reality</em> in. We will do exactly that in <a href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-2-modeling-reality/">part 2</a>.</p>
+
+<hr />
+
+<p>Top image credit: <a href="https://www.pexels.com/photo/industry-rails-train-path-481150/">https://www.pexels.com/photo/industry-rails-train-path-481150/</a> (CC0 Public Domain)</p>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small"></span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/saturdayproject/">saturdayproject</a>
+
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/follow-me/">follow me</a>
+
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/rails/">rails</a>
+
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/api/">api</a>
+
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/rails-api-series/">rails-api-series</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  <nav>
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-2-modeling-reality/" data-tooltip="Rails 5.1 API app, part 2: Modeling reality">
+          
+            <i class="fa fa-angle-left"></i>
+            <span class="hide-xs hide-sm text-small icon-ml"></span>
+          </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/" data-tooltip="Rails 5.1 API with Vue.js frontend, part 0: stack choices">
+          
+            <span class="hide-xs hide-sm text-small icon-mr"></span>
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </nav>
+  <ul class="post-actions post-action-share">
+    
+      <li class="post-action hide-lg hide-md hide-sm">
+        <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+          <i class="fa fa-share-alt"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-app-part-1-setting-up-a-rails-api-app%2f">
+          <i class="fa fa-google-plus"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-app-part-1-setting-up-a-rails-api-app%2f">
+          <i class="fa fa-facebook-official"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-app-part-1-setting-up-a-rails-api-app%2f">
+          <i class="fa fa-twitter"></i>
+        </a>
+      </li>
+    
+    
+      <li class="post-action">
+        <a class="post-action-btn btn btn--default" href="#disqus_thread">
+          <i class="fa fa-comment-o"></i>
+        </a>
+      </li>
+    
+    <li class="post-action">
+      
+        <a class="post-action-btn btn btn--default" href="#">
+      
+        <i class="fa fa-list"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    Created by <a href="https://github.com/paweljw">Paweł J. Wal</a> | <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        <div class="post-actions-wrap">
+  <nav>
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-2-modeling-reality/" data-tooltip="Rails 5.1 API app, part 2: Modeling reality">
+          
+            <i class="fa fa-angle-left"></i>
+            <span class="hide-xs hide-sm text-small icon-ml"></span>
+          </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/" data-tooltip="Rails 5.1 API with Vue.js frontend, part 0: stack choices">
+          
+            <span class="hide-xs hide-sm text-small icon-mr"></span>
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </nav>
+  <ul class="post-actions post-action-share">
+    
+      <li class="post-action hide-lg hide-md hide-sm">
+        <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+          <i class="fa fa-share-alt"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-app-part-1-setting-up-a-rails-api-app%2f">
+          <i class="fa fa-google-plus"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-app-part-1-setting-up-a-rails-api-app%2f">
+          <i class="fa fa-facebook-official"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-app-part-1-setting-up-a-rails-api-app%2f">
+          <i class="fa fa-twitter"></i>
+        </a>
+      </li>
+    
+    
+      <li class="post-action">
+        <a class="post-action-btn btn btn--default" href="#disqus_thread">
+          <i class="fa fa-comment-o"></i>
+        </a>
+      </li>
+    
+    <li class="post-action">
+      
+        <a class="post-action-btn btn btn--default" href="#">
+      
+        <i class="fa fa-list"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <ul class="share-options">
+    <li class="share-option">
+      <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-app-part-1-setting-up-a-rails-api-app%2f">
+        <i class="fa fa-google-plus"></i><span></span>
+      </a>
+    </li>
+    <li class="share-option">
+      <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-app-part-1-setting-up-a-rails-api-app%2f">
+        <i class="fa fa-facebook-official"></i><span></span>
+      </a>
+    </li>
+    <li class="share-option">
+      <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-app-part-1-setting-up-a-rails-api-app%2f">
+        <i class="fa fa-twitter"></i><span></span>
+      </a>
+    </li>
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="//www.gravatar.com/avatar/5a78de40753ba5abf8fcf3a46c748d53?s=110" alt="" />
+    
+    <h4 id="about-card-name">Paweł J. Wal</h4>
+    
+      <div id="about-card-bio">Hi, I&rsquo;m Paweł. I <a href="https://github.com/paweljw">hack on stuff</a> and write about things.</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Sofware Magician
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        Poland
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center"></div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-5-deploying-with-confidence/">
+                <h3 class="media-heading">Rails 5.1 API app, part 5: Deploying with confidence</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>In this final part of our Rails API app series we&rsquo;ll talk about specs, code coverage, continuous integration and deployment - and how to be certain your application is working.</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-4-authentication-and-authorization/">
+                <h3 class="media-heading">Rails 5.1 API app, part 4: Authentication and authorization</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>Time to deal with authenticating users in our bookstore application.</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-3-api-versioning/">
+                <h3 class="media-heading">Rails 5.1 API app, part 3: API versioning</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>We have two more things to tackle before our Rails API app is an MVP: namespacing the controllers and creating an authentication mechanism. We&rsquo;ll tackle namespacing the controllers in this article - it might seem wordy, but it&rsquo;s for a good reason.</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-2-modeling-reality/">
+                <h3 class="media-heading">Rails 5.1 API app, part 2: Modeling reality</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>Oh yeah. Now we&rsquo;re going <em>hardcore</em>. Well, not really.</p>
+
+<p>While Rails embraces a continuously changing data model, it&rsquo;s always good to stop and think for a minute about the domain we&rsquo;re trying to magically lockwithin an app. We&rsquo;re building a bookstore. So what&rsquo;s in one?</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-1-setting-up-a-rails-api-app/">
+                <h3 class="media-heading">Rails 5.1 API app, part 1: Setting up a Rails API app</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>It&rsquo;s time to continue with our foray into Rails API app with Vue.js frontend! In <a href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/">Part 0</a> we discussed what technology we&rsquo;ll be using and why - I highly recommend you read through it if you haven&rsquo;t already. Now it&rsquo;s time to get our Rails on.</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/">
+                <h3 class="media-heading">Rails 5.1 API with Vue.js frontend, part 0: stack choices</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">I&rsquo;ve been rather busy lately, and my progress in learning Vue.js has slowed down. However, I think that I&rsquo;m ready to dive into making something more resembling a real application than Monster Hunter and GalaxyQuest.
+I believe that you learn best when your objective is teaching it to somebody else. Therefore, over the next couple of weeks I&rsquo;ll be making and refining a simple bookstore app1, using Rails 5.1 for the API backend, and vue.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/06/saturday-project-galaxyquest---fuzzily-searching-github-stars/">
+                <h3 class="media-heading">Saturday Project: GalaxyQuest - fuzzily searching github stars</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jun 6, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p><em>Okay, Thursday project. It&rsquo;s my day off this week, what can I do.</em></p>
+
+<p>I&rsquo;m still on this Vue.js kick, so while studying Components, I built myself a little app.</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/06/saturday-project-monster-hunting-with-vue.js/">
+                <h3 class="media-heading">Saturday Project: Monster Hunting with Vue.js</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jun 6, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>I&rsquo;m studying Vue.js right now - here&rsquo;s a simple app that I made in the process.</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/05/saturday-project-alien-generator-in-javascript/">
+                <h3 class="media-heading">Saturday Project: Alien Generator in JavaScript</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>I&rsquo;ve been studying ES6 a lot lately. Here&rsquo;s a fun little project that we can do with it over an hour or so on a Saturday: an alien generator!</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/02/how-many-cats-does-it-take-to-eat-a-human/">
+                <h3 class="media-heading">How Many Cats Does It Take to Eat a Human?</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Feb 2, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>Once again, the love of my life took to asking me weird questions. This time, the question is: how many cats does it take to eat a human?</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero=""
+         data-message-one=""
+         data-message-other="">
+         13 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('https://paweljw.github.io/images/cover2.jpeg');"></div>
+  
+
+
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.js"></script>
+
+
+<script src="https://paweljw.github.io/js/script-wl33z0n6ocaypepiqrazthtivfrliqijej4rq8ek8gvrv1awftmgjuv8k4zc.min.js"></script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight').each(function(i, block) {
+    var code = "";
+    hljs.highlightAuto(block.innerText).value.split(/\r\n|\r|\n/).forEach(function(line) {
+      code += "<span class=\"line\">" + line + "</span><br>";
+    });
+    if (code.length > 0) {
+      block.innerHTML = code;  
+    }
+  });
+  $('pre > code').each(function(i, block) {
+    $(this).addClass('codeblock');
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/paweljw.github.io\/2017\/07\/rails-5.1-api-app-part-1-setting-up-a-rails-api-app\/';
+          
+            this.page.identifier = '\/2017\/07\/rails-5.1-api-app-part-1-setting-up-a-rails-api-app\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'paweljw-github-io';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+
+    
+  </body>
+</html>
+

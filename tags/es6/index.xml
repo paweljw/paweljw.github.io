@@ -6,56 +6,10 @@
     <description>Recent content in Es6 on Shenanigans! - a blog on programming, technology and science</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pl-pl</language>
-    <lastBuildDate>Sat, 22 Jul 2017 17:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Sat, 08 Jul 2017 15:26:57 +0200</lastBuildDate>
     
 	<atom:link href="https://paweljw.github.io/tags/es6/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Rails 5.1 API with Vue.js frontend, part 4: Authentication and authorization</title>
-      <link>https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-4-authentication-and-authorization/</link>
-      <pubDate>Sat, 22 Jul 2017 17:00:00 +0200</pubDate>
-      
-      <guid>https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-4-authentication-and-authorization/</guid>
-      <description>&lt;p&gt;Time to deal with authenticating users in our bookstore application.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Rails 5.1 API with Vue.js frontend, part 3: API versioning</title>
-      <link>https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-3-api-versioning/</link>
-      <pubDate>Tue, 18 Jul 2017 15:00:00 +0200</pubDate>
-      
-      <guid>https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-3-api-versioning/</guid>
-      <description>&lt;p&gt;We have two more things to tackle before our Rails API app is an MVP: namespacing the controllers and creating an authentication mechanism. We&amp;rsquo;ll tackle namespacing the controllers in this article - it might seem wordy, but it&amp;rsquo;s for a good reason.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Rails 5.1 API with Vue.js frontend, part 2: Modeling reality</title>
-      <link>https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-2-modeling-reality/</link>
-      <pubDate>Sat, 15 Jul 2017 15:00:00 +0200</pubDate>
-      
-      <guid>https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-2-modeling-reality/</guid>
-      <description>&lt;p&gt;Oh yeah. Now we&amp;rsquo;re going &lt;em&gt;hardcore&lt;/em&gt;. Well, not really.&lt;/p&gt;
-
-&lt;p&gt;While Rails embraces a continuously changing data model, it&amp;rsquo;s always good to stop and think for a minute about the domain we&amp;rsquo;re trying to magically lockwithin an app. We&amp;rsquo;re building a bookstore. So what&amp;rsquo;s in one?&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Rails 5.1 API with Vue.js frontend, part 1: Setting up a Rails API app</title>
-      <link>https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-1-setting-up-a-rails-api-app/</link>
-      <pubDate>Tue, 11 Jul 2017 15:26:57 +0200</pubDate>
-      
-      <guid>https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-1-setting-up-a-rails-api-app/</guid>
-      <description>&lt;p&gt;It&amp;rsquo;s time to continue with our foray into Rails API app with Vue.js frontend! In &lt;a href=&#34;https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/&#34;&gt;Part 0&lt;/a&gt; we discussed what technology we&amp;rsquo;ll be using and why - I highly recommend you read through it if you haven&amp;rsquo;t already. Now it&amp;rsquo;s time to get our Rails on.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
-    </item>
     
     <item>
       <title>Rails 5.1 API with Vue.js frontend, part 0: stack choices</title>
