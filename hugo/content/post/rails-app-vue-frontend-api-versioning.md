@@ -1,10 +1,8 @@
 ---
 date: "2017-07-18T15:00:00+02:00"
-title: "Rails 5.1 API with Vue.js frontend, part 3: API versioning"
+title: "Rails 5.1 API app, part 3: API versioning"
 coverImage: /media/forking.jpg
 tags:
-- javascript
-- es6
 - saturdayproject
 - follow me
 - rails
@@ -18,7 +16,16 @@ We have two more things to tackle before our Rails API app is an MVP: namespacin
 
 <!--more-->
 
-_This is an onging series of articles. It's highly recommended you start with [part 0](/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/)!_
+<details>
+  <summary>_This series is composed of six articles! Click here for a table of contents._</summary>
+
+  * [Part 0: Stack choices](/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/)
+  * [Part 1: Setting up a Rails API app](/2017/07/rails-5.1-api-with-vue.js-frontend-part-1-setting-up-a-rails-api-app/)
+  * [Part 2: Modeling reality](/2017/07/rails-5.1-api-with-vue.js-frontend-part-2-modeling-reality/)
+  * [Part 3: API versioning](/2017/07/rails-5.1-api-with-vue.js-frontend-part-3-api-versioning/)
+  * [Part 4: Authentication and authorization](/2017/07/rails-5.1-api-with-vue.js-frontend-part-4-authentication-and-authorization/)
+  * [Part 5: Deploying with confidence](/2017/07/rails-5.1-api-app-part-4-deploying-with-confidence/)
+</details>
 
 # Why namespace the API?
 
