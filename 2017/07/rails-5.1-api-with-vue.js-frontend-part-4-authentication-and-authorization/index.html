@@ -21,7 +21,7 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.23">
+    <meta name="generator" content="Hugo 0.25.1">
     <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
     <title>Rails 5.1 API with Vue.js frontend, part 4: Authentication and authorization</title>
     <meta name="author" content="Paweł J. Wal">
@@ -361,9 +361,7 @@ ga('send', 'pageview');
 </pre></div>
 
 <p>Slightly unwieldy! We can wrap this into a service object.</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60a0b0; font-style: italic"># frozen_string_literal: true</span>
-
-<span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">JwtService</span>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">JwtService</span>
   <span style="color: #007020; font-weight: bold">def</span> <span style="color: #0e84b5; font-weight: bold">self</span><span style="color: #666666">.</span><span style="color: #06287e">encode</span>(payload)
     <span style="color: #60add5">JWT</span><span style="color: #666666">.</span>encode(payload, <span style="color: #60add5">Rails</span><span style="color: #666666">.</span>application<span style="color: #666666">.</span>secrets<span style="color: #666666">.</span>secret_key_base, <span style="color: #4070a0">&#39;HS256&#39;</span>)
   <span style="color: #007020; font-weight: bold">end</span>
@@ -372,11 +370,19 @@ ga('send', 'pageview');
     body, <span style="color: #666666">=</span> <span style="color: #60add5">JWT</span><span style="color: #666666">.</span>decode(token, <span style="color: #60add5">Rails</span><span style="color: #666666">.</span>application<span style="color: #666666">.</span>secrets<span style="color: #666666">.</span>secret_key_base,
                        <span style="color: #007020">true</span>, <span style="color: #517918">algorithm</span>: <span style="color: #4070a0">&#39;HS256&#39;</span>)
     <span style="color: #60add5">HashWithIndifferentAccess</span><span style="color: #666666">.</span>new(body)
+  <span style="color: #007020; font-weight: bold">rescue</span> <span style="color: #60add5">JWT</span><span style="color: #666666">::</span><span style="color: #60add5">ExpiredSignature</span>
+    <span style="color: #007020">nil</span>
   <span style="color: #007020; font-weight: bold">end</span>
 <span style="color: #007020; font-weight: bold">end</span>
 </pre></div>
 
 <p>We&rsquo;ll just use the <code>secret_key_base</code> as our secret - it&rsquo;s used for cookie signing in regular apps, so it makes sense here. Notice how in decode we&rsquo;re skipping the second part of what <code>JWT.decode</code> returns - the second part is the header, and we&rsquo;re not really interested in that. We&rsquo;re also wrapping it in a <code>HashWithIndifferentAccess</code> - JWT returns hashes that are string-keyed, but I guarantee you that one of us will forget about that later and spend a good long while getting mad.</p>
+
+<p>Note that we&rsquo;re rescuing from <code>JWT::ExpiredSignature</code>. JSON Web Tokens have some reserved &ldquo;claims&rdquo; (keys) - one of those is the <code>exp</code>
+claim. When that is set to a timestamp, and it is past that timestamp, JWT will raise this exception. We&rsquo;ll simply opt to return
+<code>nil</code> in such a case and utilize it later.</p>
+
+<p><em>Big thank you to <a href="https://twitter.com/ylansegal/status/890642103813816320">Ylan Segal</a> for pointing reserved claims out to me!</em></p>
 
 <p>Let&rsquo;s drop in a quick test to check everything works:</p>
 <div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>describe <span style="color: #60add5">JwtService</span> <span style="color: #007020; font-weight: bold">do</span>
@@ -473,7 +479,7 @@ ga('send', 'pageview');
   <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">contents</span>
     {
       <span style="color: #517918">user_id</span>: user<span style="color: #666666">.</span>id,
-      <span style="color: #517918">expiration</span>: <span style="color: #40a070">24</span><span style="color: #666666">.</span>hours<span style="color: #666666">.</span>from_now<span style="color: #666666">.</span>to_i
+      <span style="color: #517918">exp</span>: <span style="color: #40a070">24</span><span style="color: #666666">.</span>hours<span style="color: #666666">.</span>from_now<span style="color: #666666">.</span>to_i
     }
   <span style="color: #007020; font-weight: bold">end</span>
 <span style="color: #007020; font-weight: bold">end</span>
@@ -545,9 +551,7 @@ ga('send', 'pageview');
 </ul>
 
 <p>We can confine this to another command:</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60a0b0; font-style: italic"># frozen_string_literal: true</span>
-
-<span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">DecodeAuthenticationCommand</span> <span style="color: #666666">&lt;</span> <span style="color: #60add5">BaseCommand</span>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">DecodeAuthenticationCommand</span> <span style="color: #666666">&lt;</span> <span style="color: #60add5">BaseCommand</span>
   <span style="color: #007020">private</span>
 
   <span style="color: #007020">attr_reader</span> <span style="color: #517918">:headers</span>
@@ -559,7 +563,7 @@ ga('send', 'pageview');
 
   <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">payload</span>
     <span style="color: #007020; font-weight: bold">return</span> <span style="color: #007020; font-weight: bold">unless</span> token_present?
-    <span style="color: #bb60d5">@result</span> <span style="color: #666666">=</span> user <span style="color: #007020; font-weight: bold">if</span> user <span style="color: #666666">&amp;&amp;</span> token_not_expired?
+    <span style="color: #bb60d5">@result</span> <span style="color: #666666">=</span> user <span style="color: #007020; font-weight: bold">if</span> user
   <span style="color: #007020; font-weight: bold">end</span>
 
   <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">user</span>
@@ -567,18 +571,13 @@ ga('send', 'pageview');
     <span style="color: #bb60d5">@user</span> <span style="color: #666666">||</span> errors<span style="color: #666666">.</span>add(<span style="color: #517918">:token</span>, <span style="color: #60add5">I18n</span><span style="color: #666666">.</span>t(<span style="color: #4070a0">&#39;decode_authentication_command.token_invalid&#39;</span>)) <span style="color: #666666">&amp;&amp;</span> <span style="color: #007020">nil</span>
   <span style="color: #007020; font-weight: bold">end</span>
 
-  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">token_not_expired?</span>
-    decoded_expiration_timestamp <span style="color: #666666">&gt;=</span> <span style="color: #60add5">Time</span><span style="color: #666666">.</span>now<span style="color: #666666">.</span>to_i <span style="color: #666666">||</span>
-      errors<span style="color: #666666">.</span>add(<span style="color: #517918">:token</span>, <span style="color: #60add5">I18n</span><span style="color: #666666">.</span>t(<span style="color: #4070a0">&#39;decode_authentication_command.token_expired&#39;</span>)) <span style="color: #666666">&amp;&amp;</span> <span style="color: #007020">nil</span>
-  <span style="color: #007020; font-weight: bold">end</span>
-
   <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">token_present?</span>
-    token<span style="color: #666666">.</span>present?
+    token<span style="color: #666666">.</span>present? <span style="color: #666666">&amp;&amp;</span> token_contents<span style="color: #666666">.</span>present?
   <span style="color: #007020; font-weight: bold">end</span>
 
   <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">token</span>
     <span style="color: #007020; font-weight: bold">return</span> authorization_header<span style="color: #666666">.</span>split(<span style="color: #4070a0">&#39; &#39;</span>)<span style="color: #666666">.</span>last <span style="color: #007020; font-weight: bold">if</span> authorization_header<span style="color: #666666">.</span>present?
-    errors<span style="color: #666666">.</span>add(<span style="color: #517918">:token</span>, <span style="color: #4070a0">&#39;Missing token&#39;</span>)
+    errors<span style="color: #666666">.</span>add(<span style="color: #517918">:token</span>, <span style="color: #60add5">I18n</span><span style="color: #666666">.</span>t(<span style="color: #4070a0">&#39;decode_authentication_command.token_missing&#39;</span>))
     <span style="color: #007020">nil</span>
   <span style="color: #007020; font-weight: bold">end</span>
 
@@ -587,20 +586,21 @@ ga('send', 'pageview');
   <span style="color: #007020; font-weight: bold">end</span>
 
   <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">token_contents</span>
-    <span style="color: #bb60d5">@token_contents</span> <span style="color: #666666">||=</span> <span style="color: #60add5">JwtService</span><span style="color: #666666">.</span>decode(token)
+    <span style="color: #bb60d5">@token_contents</span> <span style="color: #666666">||=</span> <span style="color: #007020; font-weight: bold">begin</span>
+      decoded <span style="color: #666666">=</span> <span style="color: #60add5">JwtService</span><span style="color: #666666">.</span>decode(token)
+      errors<span style="color: #666666">.</span>add(<span style="color: #517918">:token</span>, <span style="color: #60add5">I18n</span><span style="color: #666666">.</span>t(<span style="color: #4070a0">&#39;decode_authentication_command.token_expired&#39;</span>)) <span style="color: #007020; font-weight: bold">unless</span> decoded
+      decoded
+    <span style="color: #007020; font-weight: bold">end</span>
   <span style="color: #007020; font-weight: bold">end</span>
 
   <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">decoded_id</span>
     token_contents<span style="color: #666666">[</span><span style="color: #4070a0">&#39;user_id&#39;</span><span style="color: #666666">]</span>
   <span style="color: #007020; font-weight: bold">end</span>
-
-  <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">decoded_expiration_timestamp</span>
-    token_contents<span style="color: #666666">[</span><span style="color: #4070a0">&#39;expiration&#39;</span><span style="color: #666666">]</span> <span style="color: #666666">||</span> <span style="color: #40a070">0</span>
-  <span style="color: #007020; font-weight: bold">end</span>
 <span style="color: #007020; font-weight: bold">end</span>
 </pre></div>
 
-<p>Whew, another mouthful! It extracts the contents of the <code>Authorization</code> header (expecting it to contain something like <code>Bearer token.goes.here</code>, checks whether a user with a given ID exists and whether the expiration timestamp hasn&rsquo;t passed already. If anything goes wrong at all, it just registers an error and bails.</p>
+<p>Whew, another mouthful! It extracts the contents of the <code>Authorization</code> header (expecting it to contain something like <code>Bearer token.goes.here</code>, checks whether a user with a given ID exists. We&rsquo;re also assuming that when <code>JwtService</code> returns <code>nil</code>, it&rsquo;s
+because the token has already expired (according to the <code>exp</code> reserved claim). If anything goes wrong at all, it just registers an error and bails.</p>
 
 <p>We can then get ourselves a nice concern to include in our application controller:</p>
 <div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">NotAuthorizedException</span> <span style="color: #666666">&lt;</span> <span style="color: #60add5">StandardError</span>; <span style="color: #007020; font-weight: bold">end</span>
@@ -666,11 +666,13 @@ ga('send', 'pageview');
   <span style="color: #007020; font-weight: bold">end</span>
 
   <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">authorize!</span>(action)
-    <span style="color: #007020; font-weight: bold">raise</span> <span style="color: #60add5">NotPermittedException</span> <span style="color: #007020; font-weight: bold">unless</span> action <span style="color: #666666">!=</span> <span style="color: #517918">:read</span> <span style="color: #666666">&amp;&amp;</span> <span style="color: #666666">!</span>current_user<span style="color: #666666">.</span>admin?
+    <span style="color: #007020; font-weight: bold">raise</span> <span style="color: #60add5">NotPermittedException</span> <span style="color: #007020; font-weight: bold">if</span> action <span style="color: #666666">!=</span> <span style="color: #517918">:read</span> <span style="color: #666666">&amp;&amp;</span> <span style="color: #666666">!</span>current_user<span style="color: #666666">.</span>admin?
     <span style="color: #007020">true</span>
   <span style="color: #007020; font-weight: bold">end</span>
 <span style="color: #007020; font-weight: bold">end</span>
 </pre></div>
+
+<p><em>Big thank you to <span style="font-family: sans-serif">Никита Василевский</span> for pointing out that I left a bug in this code!</em></p>
 
 <p>Now we can use <code>authorize! :read</code> in our index and show actions, and <code>authorize! :create</code>, <code>authorize! :update</code> and <code>authorize! :destroy</code> elsewhere. Simple yet effective!</p>
 
@@ -681,6 +683,8 @@ ga('send', 'pageview');
 <p>As always, the state of the project after this part can be found on GitHub at <a href="https://github.com/paweljw/bookstore-backend/tree/part-4">paweljw/bookstore-backend</a>.</p>
 
 <p>We&rsquo;ve started adding tests in this part, too. We&rsquo;re not exactly doing <abbr title="Test-Driven Development">TDD</abbr> here - and that&rsquo;s totally fine when learning (unless you&rsquo;re learning TDD, of course!). It was important to get the basic API and auth working in the first place so that we know what we&rsquo;re testing. We&rsquo;ll talk about testing Rails API apps next time. See you then!</p>
+
+<p><em>And once again, special thanks go out to <span style="font-family: sans-serif">Никита Василевский</span> and <a href="https://twitter.com/ylansegal/status/890642103813816320">Ylan Segal</a> for corrections!</em></p>
 
 <hr />
 

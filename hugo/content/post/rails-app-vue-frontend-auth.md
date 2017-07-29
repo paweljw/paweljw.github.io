@@ -119,8 +119,6 @@ JWT.decode token, hmac_secret, true, { :algorithm => 'HS256' }
 Slightly unwieldy! We can wrap this into a service object.
 
 ``` ruby
-# frozen_string_literal: true
-
 class JwtService
   def self.encode(payload)
     JWT.encode(payload, Rails.application.secrets.secret_key_base, 'HS256')
@@ -130,11 +128,19 @@ class JwtService
     body, = JWT.decode(token, Rails.application.secrets.secret_key_base,
                        true, algorithm: 'HS256')
     HashWithIndifferentAccess.new(body)
+  rescue JWT::ExpiredSignature
+    nil
   end
 end
 ```
 
 We'll just use the `secret_key_base` as our secret - it's used for cookie signing in regular apps, so it makes sense here. Notice how in decode we're skipping the second part of what `JWT.decode` returns - the second part is the header, and we're not really interested in that. We're also wrapping it in a `HashWithIndifferentAccess` - JWT returns hashes that are string-keyed, but I guarantee you that one of us will forget about that later and spend a good long while getting mad.
+
+Note that we're rescuing from `JWT::ExpiredSignature`. JSON Web Tokens have some reserved "claims" (keys) - one of those is the `exp`
+claim. When that is set to a timestamp, and it is past that timestamp, JWT will raise this exception. We'll simply opt to return
+`nil` in such a case and utilize it later.
+
+_Big thank you to [Ylan Segal](https://twitter.com/ylansegal/status/890642103813816320) for pointing reserved claims out to me!_
 
 Let's drop in a quick test to check everything works:
 
@@ -240,7 +246,7 @@ class AuthenticateUserCommand < BaseCommand
   def contents
     {
       user_id: user.id,
-      expiration: 24.hours.from_now.to_i
+      exp: 24.hours.from_now.to_i
     }
   end
 end
@@ -304,8 +310,6 @@ We need to do a couple more things:
 We can confine this to another command:
 
 ``` ruby
-# frozen_string_literal: true
-
 class DecodeAuthenticationCommand < BaseCommand
   private
 
@@ -318,7 +322,7 @@ class DecodeAuthenticationCommand < BaseCommand
 
   def payload
     return unless token_present?
-    @result = user if user && token_not_expired?
+    @result = user if user
   end
 
   def user
@@ -326,18 +330,13 @@ class DecodeAuthenticationCommand < BaseCommand
     @user || errors.add(:token, I18n.t('decode_authentication_command.token_invalid')) && nil
   end
 
-  def token_not_expired?
-    decoded_expiration_timestamp >= Time.now.to_i ||
-      errors.add(:token, I18n.t('decode_authentication_command.token_expired')) && nil
-  end
-
   def token_present?
-    token.present?
+    token.present? && token_contents.present?
   end
 
   def token
     return authorization_header.split(' ').last if authorization_header.present?
-    errors.add(:token, 'Missing token')
+    errors.add(:token, I18n.t('decode_authentication_command.token_missing'))
     nil
   end
 
@@ -346,20 +345,21 @@ class DecodeAuthenticationCommand < BaseCommand
   end
 
   def token_contents
-    @token_contents ||= JwtService.decode(token)
+    @token_contents ||= begin
+      decoded = JwtService.decode(token)
+      errors.add(:token, I18n.t('decode_authentication_command.token_expired')) unless decoded
+      decoded
+    end
   end
 
   def decoded_id
     token_contents['user_id']
   end
-
-  def decoded_expiration_timestamp
-    token_contents['expiration'] || 0
-  end
 end
 ```
 
-Whew, another mouthful! It extracts the contents of the `Authorization` header (expecting it to contain something like `Bearer token.goes.here`, checks whether a user with a given ID exists and whether the expiration timestamp hasn't passed already. If anything goes wrong at all, it just registers an error and bails.
+Whew, another mouthful! It extracts the contents of the `Authorization` header (expecting it to contain something like `Bearer token.goes.here`, checks whether a user with a given ID exists. We're also assuming that when `JwtService` returns `nil`, it's
+because the token has already expired (according to the `exp` reserved claim). If anything goes wrong at all, it just registers an error and bails.
 
 We can then get ourselves a nice concern to include in our application controller:
 
@@ -417,11 +417,13 @@ module AdminAuthorizable
   end
 
   def authorize!(action)
-    raise NotPermittedException unless action != :read && !current_user.admin?
+    raise NotPermittedException if action != :read && !current_user.admin?
     true
   end
 end
 ```
+
+_Big thank you to <span style="font-family: sans-serif">Никита Василевский</span> for pointing out that I left a bug in this code!_
 
 Now we can use `authorize! :read` in our index and show actions, and `authorize! :create`, `authorize! :update` and `authorize! :destroy` elsewhere. Simple yet effective!
 
@@ -433,6 +435,7 @@ As always, the state of the project after this part can be found on GitHub at [p
 
 We've started adding tests in this part, too. We're not exactly doing <abbr title="Test-Driven Development">TDD</abbr> here - and that's totally fine when learning (unless you're learning TDD, of course!). It was important to get the basic API and auth working in the first place so that we know what we're testing. We'll talk about testing Rails API apps next time. See you then!
 
+_And once again, special thanks go out to <span style="font-family: sans-serif">Никита Василевский</span> and [Ylan Segal](https://twitter.com/ylansegal/status/890642103813816320) for corrections!_
 
 ---
 
