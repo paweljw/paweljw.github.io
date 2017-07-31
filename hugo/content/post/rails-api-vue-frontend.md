@@ -31,7 +31,7 @@ _In this series, the following articles have been posted:_
 * [Part 2: Modeling reality](/2017/07/rails-5.1-api-with-vue.js-frontend-part-2-modeling-reality/)
 * [Part 3: API versioning](/2017/07/rails-5.1-api-with-vue.js-frontend-part-3-api-versioning/)
 * [Part 4: Authentication and authorization](/2017/07/rails-5.1-api-with-vue.js-frontend-part-4-authentication-and-authorization/)
-* [Part 5: Deploying with confidence](/2017/07/rails-5.1-api-app-part-4-deploying-with-confidence/)
+* [Part 5: Deploying with confidence](/2017/07/rails-5.1-api-app-part-5-deploying-with-confidence/)
 
 The goal is that you should be able to follow along! I'll try to keep it simple, however  good command of your console,
 a fair grasp on how a "regular" Rails app is put together and understanding of ES6's classes and imports should make for

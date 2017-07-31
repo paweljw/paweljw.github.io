@@ -26,7 +26,7 @@ While Rails embraces a continuously changing data model, it's always good to sto
   * [Part 2: Modeling reality](/2017/07/rails-5.1-api-with-vue.js-frontend-part-2-modeling-reality/)
   * [Part 3: API versioning](/2017/07/rails-5.1-api-with-vue.js-frontend-part-3-api-versioning/)
   * [Part 4: Authentication and authorization](/2017/07/rails-5.1-api-with-vue.js-frontend-part-4-authentication-and-authorization/)
-  * [Part 5: Deploying with confidence](/2017/07/rails-5.1-api-app-part-4-deploying-with-confidence/)
+  * [Part 5: Deploying with confidence](/2017/07/rails-5.1-api-app-part-5-deploying-with-confidence/)
 </details>
 
 # Books
