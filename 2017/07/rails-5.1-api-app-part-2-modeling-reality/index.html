@@ -343,7 +343,7 @@ rails g scaffold Book author:belongs_to title:string price:monetize
 <div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60a0b0; font-style: italic"># frozen_string_literal: true</span>
 
 <span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">BooksController</span> <span style="color: #666666">&lt;</span> <span style="color: #60add5">ApplicationController</span>
-  before_action <span style="color: #517918">:set_author</span>, <span style="color: #517918">only</span>: <span style="color: #666666">[</span><span style="color: #517918">:show</span>, <span style="color: #517918">:update</span>, <span style="color: #517918">:destroy</span><span style="color: #666666">]</span>
+  before_action <span style="color: #517918">:set_author</span>
   before_action <span style="color: #517918">:set_book</span>, <span style="color: #517918">only</span>: <span style="color: #666666">[</span><span style="color: #517918">:show</span>, <span style="color: #517918">:update</span>, <span style="color: #517918">:destroy</span><span style="color: #666666">]</span>
 
   <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">index</span>
