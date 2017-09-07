@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Fuse.Js on Shenanigans! - a blog on programming, technology and science</title>
+    <title>Fuse.js on Shenanigans! - a blog on programming, technology and science</title>
     <link>https://paweljw.github.io/tags/fuse.js/</link>
-    <description>Recent content in Fuse.Js on Shenanigans! - a blog on programming, technology and science</description>
+    <description>Recent content in Fuse.js on Shenanigans! - a blog on programming, technology and science</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>pl-pl</language>
+    <language>en-us</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
     <lastBuildDate>Thu, 15 Jun 2017 15:47:42 +0200</lastBuildDate>
     
 	<atom:link href="https://paweljw.github.io/tags/fuse.js/index.xml" rel="self" type="application/rss+xml" />

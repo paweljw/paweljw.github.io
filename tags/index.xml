@@ -5,7 +5,8 @@
     <link>https://paweljw.github.io/tags/</link>
     <description>Recent content in Tags on Shenanigans! - a blog on programming, technology and science</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>pl-pl</language>
+    <language>en-us</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
     <lastBuildDate>Sun, 28 May 2017 15:47:59 +0200</lastBuildDate>
     
 	<atom:link href="https://paweljw.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
@@ -50,7 +51,7 @@
     <item>
       <title>Es6</title>
       <link>https://paweljw.github.io/tags/es6/</link>
-      <pubDate>Sat, 08 Jul 2017 15:26:57 +0200</pubDate>
+      <pubDate>Thu, 07 Sep 2017 17:00:00 +0200</pubDate>
       
       <guid>https://paweljw.github.io/tags/es6/</guid>
       <description></description>
@@ -59,14 +60,14 @@
     <item>
       <title>Follow Me</title>
       <link>https://paweljw.github.io/tags/follow-me/</link>
-      <pubDate>Sat, 29 Jul 2017 15:00:00 +0200</pubDate>
+      <pubDate>Thu, 07 Sep 2017 17:00:00 +0200</pubDate>
       
       <guid>https://paweljw.github.io/tags/follow-me/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Fuse.Js</title>
+      <title>Fuse.js</title>
       <link>https://paweljw.github.io/tags/fuse.js/</link>
       <pubDate>Thu, 15 Jun 2017 15:47:42 +0200</pubDate>
       
@@ -77,7 +78,7 @@
     <item>
       <title>Javascript</title>
       <link>https://paweljw.github.io/tags/javascript/</link>
-      <pubDate>Sat, 08 Jul 2017 15:26:57 +0200</pubDate>
+      <pubDate>Thu, 07 Sep 2017 17:00:00 +0200</pubDate>
       
       <guid>https://paweljw.github.io/tags/javascript/</guid>
       <description></description>
@@ -122,7 +123,7 @@
     <item>
       <title>Saturdayproject</title>
       <link>https://paweljw.github.io/tags/saturdayproject/</link>
-      <pubDate>Sat, 29 Jul 2017 15:00:00 +0200</pubDate>
+      <pubDate>Thu, 07 Sep 2017 17:00:00 +0200</pubDate>
       
       <guid>https://paweljw.github.io/tags/saturdayproject/</guid>
       <description></description>
@@ -138,9 +139,18 @@
     </item>
     
     <item>
-      <title>Vue.Js</title>
+      <title>Vue Frontend Series</title>
+      <link>https://paweljw.github.io/tags/vue-frontend-series/</link>
+      <pubDate>Thu, 07 Sep 2017 17:00:00 +0200</pubDate>
+      
+      <guid>https://paweljw.github.io/tags/vue-frontend-series/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vue.js</title>
       <link>https://paweljw.github.io/tags/vue.js/</link>
-      <pubDate>Thu, 15 Jun 2017 15:47:42 +0200</pubDate>
+      <pubDate>Thu, 07 Sep 2017 17:00:00 +0200</pubDate>
       
       <guid>https://paweljw.github.io/tags/vue.js/</guid>
       <description></description>

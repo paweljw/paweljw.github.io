@@ -1,5 +1,5 @@
 baseURL = "https://paweljw.github.io/"
-languageCode = "pl-pl"
+languageCode = "en-us"
 title = "Shenanigans! - a blog on programming, technology and science"
 publishDir = "../"
 disqusShortname = "paweljw-github-io"
@@ -9,6 +9,7 @@ canonifyurls = true
 theme = "hugo-tranquilpeak-theme"
 PygmentsCodeFences = true
 pygmentsstyle = "friendly"
+copyright = "This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License."
 
 [permalinks]
   post = "/:year/:month/:slug/"

@@ -5,11 +5,23 @@
     <link>https://paweljw.github.io/tags/javascript/</link>
     <description>Recent content in Javascript on Shenanigans! - a blog on programming, technology and science</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>pl-pl</language>
-    <lastBuildDate>Sat, 08 Jul 2017 15:26:57 +0200</lastBuildDate>
+    <language>en-us</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
+    <lastBuildDate>Thu, 07 Sep 2017 17:00:00 +0200</lastBuildDate>
     
 	<atom:link href="https://paweljw.github.io/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Vue.js front end app, part 1: Setting up the app</title>
+      <link>https://paweljw.github.io/2017/09/vue.js-front-end-app-part-1-setting-up-the-app/</link>
+      <pubDate>Thu, 07 Sep 2017 17:00:00 +0200</pubDate>
+      
+      <guid>https://paweljw.github.io/2017/09/vue.js-front-end-app-part-1-setting-up-the-app/</guid>
+      <description>&lt;p&gt;Last time we’ve seen each other, we’ve just deployed our Rails 5.1 API app. Time to put an end to this! A &lt;em&gt;front&lt;/em&gt; end, of course.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Rails 5.1 API with Vue.js frontend, part 0: stack choices</title>

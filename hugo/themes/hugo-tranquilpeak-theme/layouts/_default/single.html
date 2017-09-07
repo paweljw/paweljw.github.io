@@ -22,6 +22,7 @@
             </div>
           </div>
           <div id="post-footer" class="post-footer main-content-wrap">
+            {{ partial "post/coffee-please.html" . }}
             {{ if (not (eq .Params.showTags false)) }}
               {{ with .Params.tags }}
                 {{ $tagsLength := len . }}
