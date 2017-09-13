@@ -22,6 +22,11 @@ _We'll be using a Rails API backend which we've made in a previous series of pos
 
 In this part we'll go over the basics: how to get everything related to Vue.js installed, how to set up our app, and how the different bits and pieces fit together. This might seem like starting a step lower than my Rails series - and it is, since I've done a lot with Rails previously but I'm just starting with Vue. If you're already a pro, this part might be safe to skip, and if you're just starting like me - we'll do it together!
 
+_In this series, the following articles have been posted:_
+
+  * [Part 1: Setting up the app](/2017/09/vue.js-front-end-app-part-1-setting-up-the-app/)
+  * [Part 2: Design is (not) hard](/2017/09/vue.js-front-end-app-part-2-design-is-not-hard/)
+
 ## But first: thanks!
 
 Many people have shown their support for this series by explaining some concepts to me, tweeting, opening issues and pull requests on GitHub - at this point the back end app really is _ours_, not just mine. Even more people have posted links to my articles all over the internet. While doing research for this new series, I’ve even stumbled upon a [Stack Overflow answer](https://twitter.com/paweljwal/status/904819908848091137) linking back to my posts!
