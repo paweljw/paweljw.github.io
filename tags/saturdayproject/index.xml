@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Thu, 07 Sep 2017 17:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Sun, 17 Sep 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://paweljw.github.io/tags/saturdayproject/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Saturday project: temperature and humidity meter with Onion Omega2&#43;</title>
+      <link>https://paweljw.github.io/2017/09/saturday-project-temperature-and-humidity-meter-with-onion-omega2-/</link>
+      <pubDate>Sun, 17 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://paweljw.github.io/2017/09/saturday-project-temperature-and-humidity-meter-with-onion-omega2-/</guid>
+      <description>&lt;p&gt;Quick thing I threw together in about an hour: an IoT temperature and humidity meter!&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Vue.js front end app, part 1: Setting up the app</title>

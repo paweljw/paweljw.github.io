@@ -23,7 +23,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.26">
     <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
-    <title>Rails 5.1 API app, part 3: API versioning</title>
+    <title>Saturday project: temperature and humidity meter with Onion Omega2&#43;</title>
     <meta name="author" content="Paweł J. Wal">
     <meta name="keywords" content=", development, ruby, ruby on rails, es6, javascript, electronics, arduino, science">
 
@@ -31,19 +31,19 @@
     
 
     
-    <meta name="description" content="We have two more things to tackle before our Rails API app is an MVP: namespacing the controllers and creating an authentication mechanism. We&rsquo;ll tackle namespacing the controllers in this article - it might seem wordy, but it&rsquo;s for a good reason.
+    <meta name="description" content="Quick thing I threw together in about an hour: an IoT temperature and humidity meter!
 
 ">
-    <meta property="og:description" content="We have two more things to tackle before our Rails API app is an MVP: namespacing the controllers and creating an authentication mechanism. We&rsquo;ll tackle namespacing the controllers in this article - it might seem wordy, but it&rsquo;s for a good reason.
+    <meta property="og:description" content="Quick thing I threw together in about an hour: an IoT temperature and humidity meter!
 
 ">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Rails 5.1 API app, part 3: API versioning">
-    <meta property="og:url" content="/2017/07/rails-5.1-api-app-part-3-api-versioning/">
+    <meta property="og:title" content="Saturday project: temperature and humidity meter with Onion Omega2&#43;">
+    <meta property="og:url" content="/2017/09/saturday-project-temperature-and-humidity-meter-with-onion-omega2-/">
     <meta property="og:site_name" content="Shenanigans! - a blog on programming, technology and science">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Rails 5.1 API app, part 3: API versioning">
-    <meta name="twitter:description" content="We have two more things to tackle before our Rails API app is an MVP: namespacing the controllers and creating an authentication mechanism. We&rsquo;ll tackle namespacing the controllers in this article - it might seem wordy, but it&rsquo;s for a good reason.
+    <meta name="twitter:title" content="Saturday project: temperature and humidity meter with Onion Omega2&#43;">
+    <meta name="twitter:description" content="Quick thing I threw together in about an hour: an IoT temperature and humidity meter!
 
 ">
     
@@ -60,7 +60,7 @@
 
     
     
-      <meta property="og:image" content="https://paweljw.github.io/media/forking.jpg">
+      <meta property="og:image" content="https://paweljw.github.io/media/weather_station/setup.jpg">
     
     
 
@@ -223,24 +223,24 @@ ga('send', 'pageview');
   <div class="post-header-cover
               text-left
               "
-       style="background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('/media/forking.jpg'); background-size: cover"
+       style="background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('/media/weather_station/setup.jpg'); background-size: cover"
        data-behavior="5">
     
       <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      Rails 5.1 API app, part 3: API versioning
+      Saturday project: temperature and humidity meter with Onion Omega2&#43;
     </h1>
   
   <div class="postShorten-meta post-meta">
   
-    <time itemprop="datePublished" datetime="2017-07-18T15:00:00&#43;02:00">
+    <time itemprop="datePublished" datetime="2017-09-17T00:00:00Z">
       
   
   
   
   
-    2017-07-18
+    2017-09-17
   
 
     </time>
@@ -263,109 +263,103 @@ ga('send', 'pageview');
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>We have two more things to tackle before our Rails API app is an MVP: namespacing the controllers and creating an authentication mechanism. We&rsquo;ll tackle namespacing the controllers in this article - it might seem wordy, but it&rsquo;s for a good reason.</p>
+              <p>Quick thing I threw together in about an hour: an IoT temperature and humidity meter!</p>
 
 <p></p>
 
-<p><details>
-  <summary><em>This series is composed of six articles! Click here for a table of contents.</em></summary></p>
+<p>I&rsquo;ve very recently sourced an Omega2+ WiFi board from <a href="https://onion.io">Onion</a>. I&rsquo;ve previously only played with Arduino (skipped Raspberry Pi completely), so grabbing something that runs actual Linux on a hefty .5GHz was a whole new world for me.</p>
 
-<ul>
-<li><a href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/">Part 0: Stack choices</a></li>
-<li><a href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-1-setting-up-a-rails-api-app/">Part 1: Setting up a Rails API app</a></li>
-<li><a href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-2-modeling-reality/">Part 2: Modeling reality</a></li>
-<li><a href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-3-api-versioning/">Part 3: API versioning</a></li>
-<li><a href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-4-authentication-and-authorization/">Part 4: Authentication and authorization</a></li>
-<li><a href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-5-deploying-with-confidence/">Part 5: Deploying with confidence</a>
-</details></li>
-</ul>
 
-<h1 id="why-namespace-the-api">Why namespace the API?</h1>
+<figure >
+    
+        <img src="https://paweljw.github.io/media/weather_station/omega.jpg" />
+    
+    
+</figure>
 
-<p>You might ask yourself that, and I get it. I used to ask myself the very same thing. When we&rsquo;re building a regular web app we never namespace anything, so why start now? Consider the following example.</p>
 
-<hr />
+<p>While rummaging through my electronics supplies (which are in much more disarray that I remember leaving them - that&rsquo;s interesting) I&rsquo;ve found this DHT11 brick-form module from, well - the board was made by Xinda probably, and the sensor pack itself by Aosong. Suffice it to say it&rsquo;s extremely chinese in it&rsquo;s quality.</p>
 
-<p>You deploy your app and it&rsquo;s a smash hit - takes off almost overnight. You&rsquo;ve made it big - you have users now! And they have demands. They want the front end to do so, so much more. You bring a buddy on the project with you - you crank out the back end, he cranks out the front. You hack side by side on weekends, so specifying APIs is done mostly by yelling to each other over pizza boxes. Life is good.</p>
+<p>After a couple of soldering misadventures, I managed to get this going (thumbs up for botched soldering jobs!)</p>
 
-<p>Time goes on. The app is now your day job. The users keep coming, and are now clamoring for a mobile app. You hire two bright kids to work on the mobile app. There&rsquo;s also now two more people on the backend team, and three more are hacking on the front. There is now a formal spec for the API and everyone follows it. There&rsquo;s tweaks to the API all the time, but it mostly just evolves - nothing changes drastically. Life is still good.</p>
 
-<p>Then one day, at a planning meeting, a change request shows up. It doesn&rsquo;t matter what&rsquo;s in it: it means that a fundamental, breaking change will have to be introduced to the API. But your ecosystem is now distributed: you have a front end which may or may not be ready on time for the big release. You also have a mobile install base, which will probably not update in a millisecond. Life is not all that good anymore.</p>
+<figure >
+    
+        <img src="https://paweljw.github.io/media/weather_station/dht.jpg" />
+    
+    
+</figure>
 
-<p>If your API is versioned, this is easy as pie: you create a new namespace, <code>v2</code>, under your API root, and all new features and the myriad apps that use the backend will use this new version. When your metrics show that no one hits the old v1 API anymore, you will simply sunset it and remove it from your code. If your API was not designed as versioned from the get go&hellip; you will have to do the same - but will suffer way more.</p>
 
-<hr />
+<p>It&rsquo;s interesting to note that this board has only three pins instead of the four traditional for DHT bricks. Also the order feels weird to me (left-to-right it&rsquo;s data, Vcc and GND; Vcc, data, GND would make more sense IMHO).</p>
 
-<p>In &ldquo;regular&rdquo; MVC apps which spit out generated HTML the views are rather tightly coupled with the underlying controllers, and by proxy - with the underlying models. An API consumer is, for our purposes anyway, decoupled completely from our app. The consumer might be anything: a JS single page app, a mobile app, a desktop app, or maybe even a bot. We don&rsquo;t care what consumes the API as long as it behaves how we expect it to: reads the right fields, provides the right parameters. Similarly, our consumers don&rsquo;t care whether our backend is in Rails or we just rewrote it in Node (<em><em>shudder</em></em>), as long as it still speaks the same language.</p>
+<p>I&rsquo;m running the Omega2 through their <a href="https://onion.io/store/power-dock/">Power Dock</a>, which - aside from breaking out a bunch of the pins into a header - can both power the board through microUSB (it has a regulator), and it serves as a charge/discharge circuit for a 3.7V LiPo battery.</p>
 
-<p>It can then be inferred from the above that by providing an API, we create a contract to uphold with all these different consumers of our code. We certify that our service will work in predictable ways when provided expected inputs. We may expand on what is already there, but we shouldn&rsquo;t break backwards compatibility <em>implicitly</em>.</p>
+<p>I&rsquo;ve realized, somewhat belatedly, that I did have a battery, and the right connector for the board, but that the battery itself has the wrong connector! It&rsquo;s a JST-BEC connector, where the dock just has a regular 2mm raster connection.</p>
 
-<p>The v1 <code>books</code> endpoint will always serve books, with titles and author names. It may expand: we may start serving images of covers, for example, at some later date. This is fine: a consumer which uses just the title and author name will still work just fine, and newer consumers may also use the image. What is important that <em>the basic fields and structure hasn&rsquo;t changed</em>.</p>
+<p>Some last-minute jury rigging (thumbs up for not having the right size thermal shrink!) and here we go:</p>
 
-<p>However, if we decided that <code>/books</code> should now be served under <code>/książki</code> (which is the Polish word for books), that is a good reason to release a new version of the API. If you&rsquo;re hanging around the Ruby gems ecosystem (and since we&rsquo;re talking Rails here, I sure hope you do), you probably know about <a href="http://semver.org/">semantic versioning</a>. The very same principle applies to APIs - you just have only the major version. If you want to break something - bump the major version and let consumers adopt it at their preferred rate.</p>
 
-<h1 id="namespacing-our-api">Namespacing our API</h1>
+<figure >
+    
+        <img src="https://paweljw.github.io/media/weather_station/battery.jpg" />
+    
+    
+</figure>
 
-<p>It&rsquo;s actually pretty straightforward. We need to change our routes</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>namespace <span style="color: #517918">:api</span> <span style="color: #007020; font-weight: bold">do</span>
-  namespace <span style="color: #517918">:v1</span> <span style="color: #007020; font-weight: bold">do</span>
-    resources <span style="color: #517918">:authors</span> <span style="color: #007020; font-weight: bold">do</span>
-      resources <span style="color: #517918">:books</span>
-    <span style="color: #007020; font-weight: bold">end</span>
-  <span style="color: #007020; font-weight: bold">end</span>
-<span style="color: #007020; font-weight: bold">end</span>
+
+<p>And here&rsquo;s everything connected together:</p>
+
+
+<figure >
+    
+        <img src="https://paweljw.github.io/media/weather_station/setup.jpg" />
+    
+    
+</figure>
+
+
+<p>I&rsquo;m using the <code>dht-sensor</code> program (I&rsquo;ll probably create my own version for study purposes, but I was pressed for time). Once everything is attached how it should be, it&rsquo;s just a matter of <code>dht-sensor PIN-NUMBER PROTOCOL-VERSION</code>:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>root@Omega-ABCD:~# dht-sensor <span style="color: #40a070">3</span> DHT11
+humidity: <span style="color: #40a070">58</span>.000000
+temperature: <span style="color: #40a070">20</span>.000000
 </pre></div>
 
-<p>Then move our controllers into <code>app/controllers/api/v1</code>, so that we keep with the Rails convention.</p>
-
-<pre><code>app/controllers
-├── api
-│   └── v1
-│       ├── authors_controller.rb
-│       └── books_controller.rb
-├── application_controller.rb
-└── concerns
-</code></pre>
-
-<p>And finally, namespace the controllers themselves:</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">module</span> <span style="color: #0e84b5; font-weight: bold">Api</span>
-  <span style="color: #007020; font-weight: bold">module</span> <span style="color: #0e84b5; font-weight: bold">V1</span>
-    <span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">AuthorsController</span> <span style="color: #666666">&lt;</span> <span style="color: #60add5">ApplicationController</span>
-      <span style="color: #60a0b0; font-style: italic"># ...</span>
-    <span style="color: #007020; font-weight: bold">end</span>
-  <span style="color: #007020; font-weight: bold">end</span>
-<span style="color: #007020; font-weight: bold">end</span>
+<p>What&rsquo;s interesting is it can output JSON, though I&rsquo;m not using this currently. Maybe at a later stage.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>root@Omega-ABCD:~# dht-sensor <span style="color: #40a070">3</span> DHT11 json
+<span style="color: #666666">{</span><span style="color: #4070a0">&quot;humidity&quot;</span>: <span style="color: #40a070">58</span>.000000, <span style="color: #4070a0">&quot;temperature&quot;</span>: <span style="color: #40a070">20</span>.000000<span style="color: #666666">}</span>
 </pre></div>
 
-<p>Now when we need to provide a non-backwards-compatible version of <code>AuthorsController</code>, we simply create a new module:</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">module</span> <span style="color: #0e84b5; font-weight: bold">Api</span>
-  <span style="color: #007020; font-weight: bold">module</span> <span style="color: #0e84b5; font-weight: bold">V2</span>
-    <span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">AuthorsController</span> <span style="color: #666666">&lt;</span> <span style="color: #60add5">ApplicationController</span>
-      <span style="color: #60a0b0; font-style: italic"># some non-compatible changes</span>
-    <span style="color: #007020; font-weight: bold">end</span>
-  <span style="color: #007020; font-weight: bold">end</span>
-<span style="color: #007020; font-weight: bold">end</span>
+<p>Since this is an IoT device, it would not be complete without spilling sensitive information onto the internet. I&rsquo;ve decided to use <a href="https://thingspeak.com">ThingSpeak</a> for the purpose of collecting and graphing that information until I have something useful to do with it.</p>
+
+
+<figure >
+    
+        <img src="https://paweljw.github.io/media/weather_station/thingspeak.png" />
+    
+    
+</figure>
+
+
+<p>Another place you can tell from that this is a hurried weekend plaything is this script I&rsquo;m using for reporting:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60a0b0; font-style: italic">#!/bin/sh -e</span>
+
+<span style="color: #bb60d5">res</span><span style="color: #666666">=</span><span style="color: #4070a0">`</span>dht-sensor <span style="color: #40a070">3</span> DHT11<span style="color: #4070a0">`</span>
+<span style="color: #bb60d5">hum</span><span style="color: #666666">=</span><span style="color: #4070a0">`</span><span style="color: #007020">echo</span> <span style="color: #bb60d5">$res</span> | awk <span style="color: #4070a0">&#39;{print $2}&#39;`</span>
+<span style="color: #bb60d5">temp</span><span style="color: #666666">=</span><span style="color: #4070a0">`</span><span style="color: #007020">echo</span> <span style="color: #bb60d5">$res</span> | awk <span style="color: #4070a0">&#39;{print $4}&#39;`</span>
+
+curl --insecure https://api.thingspeak.com/update <span style="color: #4070a0; font-weight: bold">\</span>
+    --data <span style="color: #4070a0">&quot;api_key=GETYOUROWN&quot;</span> <span style="color: #4070a0; font-weight: bold">\</span>
+    --data <span style="color: #4070a0">&quot;field1=</span><span style="color: #bb60d5">$temp</span><span style="color: #4070a0">&quot;</span> <span style="color: #4070a0; font-weight: bold">\</span>
+    --data <span style="color: #4070a0">&quot;field2=</span><span style="color: #bb60d5">$hum</span><span style="color: #4070a0">&quot;</span>
+
+<span style="color: #007020">echo</span> oneshot &gt; /sys/class/leds/omega2p<span style="color: #4070a0; font-weight: bold">\:</span>amber<span style="color: #4070a0; font-weight: bold">\:</span>system/trigger
+<span style="color: #007020">echo</span> <span style="color: #40a070">1</span> &gt; /sys/class/leds/omega2p<span style="color: #4070a0; font-weight: bold">\:</span>amber<span style="color: #4070a0; font-weight: bold">\:</span>system/shot
 </pre></div>
 
-<p>But what about the controllers that do not change? What if just the <code>AuthorsController</code> changed, but the <code>BooksController</code> is just fine and dandy, and should just be the same?</p>
+<p>Interesting sidenote - the last two lines allow me to blink the on-board led when the data has been collected and sent.</p>
 
-<p>This could be approached from a couple of different sides, I think. I find that doing what seems easiest (and sometimes, even laziest) in Ruby works more often than not. If I was faced with a requirement of providing a V2 <code>BooksController</code> that was exactly identical to V1, I&rsquo;d probably do something like this:</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">module</span> <span style="color: #0e84b5; font-weight: bold">Api</span>
-  <span style="color: #007020; font-weight: bold">module</span> <span style="color: #0e84b5; font-weight: bold">V2</span>
-    <span style="color: #007020; font-weight: bold">class</span> <span style="color: #0e84b5; font-weight: bold">BooksController</span> <span style="color: #666666">&lt;</span> <span style="color: #60add5">Api</span><span style="color: #666666">::</span><span style="color: #60add5">V1</span><span style="color: #666666">::</span><span style="color: #60add5">BooksController</span>; <span style="color: #007020; font-weight: bold">end</span>
-  <span style="color: #007020; font-weight: bold">end</span>
-<span style="color: #007020; font-weight: bold">end</span>
-</pre></div>
-
-<p>Of course, this means that when we phase out V1 completely and drop the now-dead code, this file will have to change. It could be argued that this would be confusing e.g. during code review - &ldquo;why does this V2 thing change if all we&rsquo;re doing is kill V1?&rdquo;. Phasing out V1 is now no longer a matter of deleting <code>app/controllers/v1</code> and updating routes, too. However, I believe that code quality is something to be considered right now, so keeping two copies of exactly the same code in the app seems a no-go to me, even if the price is a slightly more complex refactor later.</p>
-
-<p>As always, you can see what the code looks like now on GitHub at <a href="https://github.com/paweljw/bookstore-backend/tree/part-3">paweljw/bookstore-backend</a>.</p>
-
-<p>What do you think about this? Let me know down below, and I&rsquo;ll see you in part 4, where we&rsquo;ll tackle token authentication in Rails!</p>
-
-<hr />
-
-<p>Top image credit: <a href="https://commons.wikimedia.org/wiki/File:Line5066_-_Flickr_-_NOAA_Photo_Library.jpg">https://commons.wikimedia.org/wiki/File:Line5066_-_Flickr_-_NOAA_Photo_Library.jpg</a> (CC-BY 2.0)</p>
+<p>And that&rsquo;s it for now! We&rsquo;re returning to our regularly-scheduled Vue.js programming soon, probably towards the end of next week. 😉</p>
               
             </div>
           </div>
@@ -386,13 +380,7 @@ ga('send', 'pageview');
                     
   <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/saturdayproject/">saturdayproject</a>
 
-  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/follow-me/">follow me</a>
-
-  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/rails/">rails</a>
-
-  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/api/">api</a>
-
-  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/rails-api-series/">rails-api-series</a>
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/electronics/">electronics</a>
 
                   </div>
                 
@@ -404,7 +392,7 @@ ga('send', 'pageview');
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-4-authentication-and-authorization/" data-tooltip="Rails 5.1 API app, part 4: Authentication and authorization">
+            <a class="post-action-btn btn btn--disabled">
           
             <i class="fa fa-angle-left"></i>
             <span class="hide-xs hide-sm text-small icon-ml"></span>
@@ -412,7 +400,7 @@ ga('send', 'pageview');
         </li>
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-2-modeling-reality/" data-tooltip="Rails 5.1 API app, part 2: Modeling reality">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/09/vue.js-front-end-app-part-1-setting-up-the-app/" data-tooltip="Vue.js front end app, part 1: Setting up the app">
           
             <span class="hide-xs hide-sm text-small icon-mr"></span>
             <i class="fa fa-angle-right"></i>
@@ -429,17 +417,17 @@ ga('send', 'pageview');
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-app-part-3-api-versioning%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2017%2f09%2fsaturday-project-temperature-and-humidity-meter-with-onion-omega2-%2f">
           <i class="fa fa-google-plus"></i>
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-app-part-3-api-versioning%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2017%2f09%2fsaturday-project-temperature-and-humidity-meter-with-onion-omega2-%2f">
           <i class="fa fa-facebook-official"></i>
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-app-part-3-api-versioning%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2017%2f09%2fsaturday-project-temperature-and-humidity-meter-with-onion-omega2-%2f">
           <i class="fa fa-twitter"></i>
         </a>
       </li>
@@ -485,7 +473,7 @@ ga('send', 'pageview');
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-4-authentication-and-authorization/" data-tooltip="Rails 5.1 API app, part 4: Authentication and authorization">
+            <a class="post-action-btn btn btn--disabled">
           
             <i class="fa fa-angle-left"></i>
             <span class="hide-xs hide-sm text-small icon-ml"></span>
@@ -493,7 +481,7 @@ ga('send', 'pageview');
         </li>
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-2-modeling-reality/" data-tooltip="Rails 5.1 API app, part 2: Modeling reality">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/09/vue.js-front-end-app-part-1-setting-up-the-app/" data-tooltip="Vue.js front end app, part 1: Setting up the app">
           
             <span class="hide-xs hide-sm text-small icon-mr"></span>
             <i class="fa fa-angle-right"></i>
@@ -510,17 +498,17 @@ ga('send', 'pageview');
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-app-part-3-api-versioning%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2017%2f09%2fsaturday-project-temperature-and-humidity-meter-with-onion-omega2-%2f">
           <i class="fa fa-google-plus"></i>
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-app-part-3-api-versioning%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2017%2f09%2fsaturday-project-temperature-and-humidity-meter-with-onion-omega2-%2f">
           <i class="fa fa-facebook-official"></i>
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-app-part-3-api-versioning%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2017%2f09%2fsaturday-project-temperature-and-humidity-meter-with-onion-omega2-%2f">
           <i class="fa fa-twitter"></i>
         </a>
       </li>
@@ -547,17 +535,17 @@ ga('send', 'pageview');
       <div id="share-options-bar" class="share-options-bar" data-behavior="5">
   <ul class="share-options">
     <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-app-part-3-api-versioning%2f">
+      <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2017%2f09%2fsaturday-project-temperature-and-humidity-meter-with-onion-omega2-%2f">
         <i class="fa fa-google-plus"></i><span></span>
       </a>
     </li>
     <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-app-part-3-api-versioning%2f">
+      <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2017%2f09%2fsaturday-project-temperature-and-humidity-meter-with-onion-omega2-%2f">
         <i class="fa fa-facebook-official"></i><span></span>
       </a>
     </li>
     <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-app-part-3-api-versioning%2f">
+      <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2017%2f09%2fsaturday-project-temperature-and-humidity-meter-with-onion-omega2-%2f">
         <i class="fa fa-twitter"></i><span></span>
       </a>
     </li>
@@ -858,9 +846,9 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = 'https:\/\/paweljw.github.io\/2017\/07\/rails-5.1-api-app-part-3-api-versioning\/';
+          this.page.url = 'https:\/\/paweljw.github.io\/2017\/09\/saturday-project-temperature-and-humidity-meter-with-onion-omega2-\/';
           
-            this.page.identifier = '\/2017\/07\/rails-5.1-api-app-part-3-api-versioning\/'
+            this.page.identifier = '\/2017\/09\/saturday-project-temperature-and-humidity-meter-with-onion-omega2-\/'
           
         };
         (function() {

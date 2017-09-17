@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://paweljw.github.io/2017/09/saturday-project-temperature-and-humidity-meter-with-onion-omega2-/</loc>
+    <lastmod>2017-09-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://paweljw.github.io/2017/09/vue.js-front-end-app-part-1-setting-up-the-app/</loc>
     <lastmod>2017-09-07T17:00:00+02:00</lastmod>
   </url>
@@ -102,6 +107,12 @@
   </url>
   
   <url>
+    <loc>https://paweljw.github.io/tags/electronics/</loc>
+    <lastmod>2017-09-17T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://paweljw.github.io/tags/es6/</loc>
     <lastmod>2017-09-07T17:00:00+02:00</lastmod>
     <priority>0</priority>
@@ -139,7 +150,7 @@
   
   <url>
     <loc>https://paweljw.github.io/post/</loc>
-    <lastmod>2017-09-07T17:00:00+02:00</lastmod>
+    <lastmod>2017-09-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -157,7 +168,7 @@
   
   <url>
     <loc>https://paweljw.github.io/tags/saturdayproject/</loc>
-    <lastmod>2017-09-07T17:00:00+02:00</lastmod>
+    <lastmod>2017-09-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -169,7 +180,7 @@
   
   <url>
     <loc>https://paweljw.github.io/</loc>
-    <lastmod>2017-09-07T17:00:00+02:00</lastmod>
+    <lastmod>2017-09-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

@@ -5,6 +5,7 @@ tags:
 - arduino
 - music
 - saturdayproject
+- electronics
 coverImage: /media/theremin_build.jpg
 bigimg: [{src: "/media/theremin_build.jpg", desc: 'Ultrasonic theremin'}]
 comments: true
