@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Sat, 23 Sep 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 30 Sep 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://paweljw.github.io/tags/vue-frontend-series/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Vue.js front end app, part 3: Authentication</title>
+      <link>https://paweljw.github.io/2017/09/vue.js-front-end-app-part-3-authentication/</link>
+      <pubDate>Sat, 30 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://paweljw.github.io/2017/09/vue.js-front-end-app-part-3-authentication/</guid>
+      <description>&lt;p&gt;In this part we&amp;rsquo;ll allow the user to log in to our frontend app, using the &lt;a href=&#34;http://localhost:1313/2017/07/rails-5.1-api-app-part-4-authentication-and-authorization/&#34;&gt;auth mechanism&lt;/a&gt; we&amp;rsquo;ve built on the back end earlier. A lot of topics in this one, so jump right in!&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Vue.js front end app, part 2: Design is (not) hard</title>

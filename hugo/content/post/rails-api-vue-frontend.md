@@ -5,7 +5,6 @@ coverImage: /media/bookstore.jpg
 tags:
 - javascript
 - es6
-- saturdayproject
 - follow me
 - rails
 - api

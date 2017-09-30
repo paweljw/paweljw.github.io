@@ -3,7 +3,6 @@ date: "2017-07-29T15:00:00+02:00"
 title: "Rails 5.1 API app, part 5: Deploying with confidence"
 coverImage: /media/launch.jpg
 tags:
-- saturdayproject
 - follow me
 - rails
 - api

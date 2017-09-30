@@ -1,0 +1,1327 @@
+
+
+  
+    
+  
+
+
+  
+
+
+
+
+  
+
+
+  
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hugo 0.27.1">
+    <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
+    <title>Vue.js front end app, part 3: Authentication</title>
+    <meta name="author" content="Paweł J. Wal">
+    <meta name="keywords" content=", development, ruby, ruby on rails, es6, javascript, electronics, arduino, science">
+
+    <link rel="icon" href="https://paweljw.github.io/favicon.png">
+    
+
+    
+    <meta name="description" content="In this part we&rsquo;ll allow the user to log in to our frontend app, using the auth mechanism we&rsquo;ve built on the back end earlier. A lot of topics in this one, so jump right in!
+
+">
+    <meta property="og:description" content="In this part we&rsquo;ll allow the user to log in to our frontend app, using the auth mechanism we&rsquo;ve built on the back end earlier. A lot of topics in this one, so jump right in!
+
+">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Vue.js front end app, part 3: Authentication">
+    <meta property="og:url" content="/2017/09/vue.js-front-end-app-part-3-authentication/">
+    <meta property="og:site_name" content="Shenanigans! - a blog on programming, technology and science">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Vue.js front end app: JWT auth">
+    <meta name="twitter:description" content="In this part we&rsquo;ll allow the user to log in to our frontend app, using the auth mechanism we&rsquo;ve built on the back end earlier. A lot of topics in this one, so jump right in!
+
+">
+    
+      <meta name="twitter:creator" content="@paweljwal">
+    
+    
+
+    
+    
+
+    
+      <meta property="og:image" content="//www.gravatar.com/avatar/5a78de40753ba5abf8fcf3a46c748d53?s=640">
+    
+
+    
+    
+      <meta property="og:image" content="https://paweljw.github.io/media/odoor.jpeg">
+    
+    
+
+    
+
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" />
+    
+    
+    <link rel="stylesheet" href="https://paweljw.github.io/css/style-u6mk0ojoywresbx8iepslrmmhl4stuhrsxuwhkpwrkrx7mryjcaimasnk4pi.min.css" />
+    
+    
+
+    
+      
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-51524008-2', 'auto');
+ga('send', 'pageview');
+</script>
+
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap; width: 70%; max-height: 55px; margin: 0 auto; display: block">
+    <a class="header-title-link" href="https://paweljw.github.io/"  style="text-overflow: ellipsis">Shenanigans! - a blog on programming, technology and science</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://paweljw.github.io/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="//www.gravatar.com/avatar/5a78de40753ba5abf8fcf3a46c748d53?s=90" alt="" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://paweljw.github.io/#about">
+          <img class="sidebar-profile-picture" src="//www.gravatar.com/avatar/5a78de40753ba5abf8fcf3a46c748d53?s=110" alt="" />
+        </a>
+        <h4 class="sidebar-profile-name">Paweł J. Wal</h4>
+        
+          <h5 class="sidebar-profile-bio">Hi, I&rsquo;m Paweł. I <a href="https://github.com/paweljw">hack on stuff</a> and write about things.</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://paweljw.github.io/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://paweljw.github.io/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://paweljw.github.io/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://paweljw.github.io/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://linkedin.com/in/pawe%c5%82-wal-a478a785" target="_blank">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+      
+      <span class="sidebar-button-desc">LinkedIn</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/paweljw" target="_blank">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">@paweljw</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://twitter.com/paweljwal" target="_blank">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-twitter"></i>
+      
+      <span class="sidebar-button-desc">@paweljwal</span>
+    </a>
+  </li>
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://paweljw.github.io/index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+    </ul>
+  </div>
+</nav>
+
+      
+  <div class="post-header-cover
+              text-left
+              "
+       style="background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('/media/odoor.jpeg'); background-size: cover"
+       data-behavior="5">
+    
+      <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      Vue.js front end app, part 3: Authentication
+    </h1>
+  
+  <div class="postShorten-meta post-meta">
+  
+    <time itemprop="datePublished" datetime="2017-09-30T00:00:00Z">
+      
+  
+  
+  
+  
+    2017-09-30
+  
+
+    </time>
+  
+  
+
+</div>
+
+</div>
+    
+  </div>
+
+
+      <div id="main" data-behavior="5"
+        class="hasCover
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>In this part we&rsquo;ll allow the user to log in to our frontend app, using the <a href="http://localhost:1313/2017/07/rails-5.1-api-app-part-4-authentication-and-authorization/">auth mechanism</a> we&rsquo;ve built on the back end earlier. A lot of topics in this one, so jump right in!</p>
+
+<p></p>
+
+<p><details>
+  <summary><em>This series is composed of multiple articles! Click here for a table of contents.</em></summary></p>
+
+<ul>
+<li><a href="https://paweljw.github.io/2017/09/vue.js-front-end-app-part-1-setting-up-the-app/">Part 1: Setting up the app</a></li>
+<li><a href="https://paweljw.github.io/2017/09/vue.js-front-end-app-part-2-design-is-not-hard/">Part 2: Design is (not) hard</a></li>
+<li>Part 3: Authentication
+</details></li>
+</ul>
+
+<p>We did a lot of talking in the previous post, a bunch of drawing squares, and almost zero coding. And with good reason, too. But I&rsquo;m raring to code already, and I guess so are you! No worries: today&rsquo;s post is all code, all the time.</p>
+
+<p>When we&rsquo;ve last parted ways with our app, it looked like this:</p>
+
+
+<figure >
+    <a href="https://paweljw.github.io/media/hello.png">
+        <img src="https://paweljw.github.io/media/hello.png" />
+    </a>
+    
+</figure>
+
+
+<p>Well - that&rsquo;s no bookstore, is it. We need to do something about it, and as we&rsquo;ve discussed last time the first thing we need is a login screen.</p>
+
+<p>Usually a log-in screen might be located at <code>/login</code>, <code>/sign-in</code> or other such URL. But our app cannot be used at all without logging in - that&rsquo;s how we designed the API - so we&rsquo;ll be justified in just putting the log in screen on <code>/</code> in this case.</p>
+
+<p>So what needs to happen when the user arrives at the app is:</p>
+
+<ul>
+<li>If they are not logged in, they are redirected to <code>/</code></li>
+<li>When they provide their username and password, an AJAX request is made to the backend</li>
+<li>If the backend responds with a token, store the token for future use and redirect the user to <code>/authors</code></li>
+<li>If the backend responds with an error, display an error message</li>
+</ul>
+
+<p>Let&rsquo;s start somewhat in the middle and build the login form first.</p>
+
+<h2 id="login-form">Login form</h2>
+
+<p>Right now our <code>src/router/index.js</code> file looks something like this:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">import</span> Vue from <span style="color: #4070a0">&#39;vue&#39;</span>
+<span style="color: #007020; font-weight: bold">import</span> Router from <span style="color: #4070a0">&#39;vue-router&#39;</span>
+<span style="color: #007020; font-weight: bold">import</span> Hello from <span style="color: #4070a0">&#39;@/components/Hello&#39;</span>
+
+Vue.use(Router)
+
+<span style="color: #007020; font-weight: bold">export</span> <span style="color: #007020; font-weight: bold">default</span> <span style="color: #007020; font-weight: bold">new</span> Router({
+  routes<span style="color: #666666">:</span> [
+    {
+      path<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;/&#39;</span>,
+      name<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;Hello&#39;</span>,
+      component<span style="color: #666666">:</span> Hello
+    }
+  ]
+})
+</pre></div>
+
+<p>The default route renders the <code>Hello</code> component within the <code>&lt;router-view&gt;</code> container within <code>App</code>. Let&rsquo;s see what <code>App</code> looks like:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;<span style="color: #062873; font-weight: bold">template</span>&gt;
+  &lt;<span style="color: #062873; font-weight: bold">div</span> <span style="color: #4070a0">id</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;app&quot;</span>&gt;
+    &lt;<span style="color: #062873; font-weight: bold">img</span> <span style="color: #4070a0">src</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;./assets/logo.png&quot;</span>&gt;
+    &lt;<span style="color: #062873; font-weight: bold">router-view</span>&gt;&lt;/<span style="color: #062873; font-weight: bold">router-view</span>&gt;
+  &lt;/<span style="color: #062873; font-weight: bold">div</span>&gt;
+&lt;/<span style="color: #062873; font-weight: bold">template</span>&gt;
+
+&lt;<span style="color: #062873; font-weight: bold">script</span>&gt;
+<span style="color: #007020; font-weight: bold">export</span> <span style="color: #007020; font-weight: bold">default</span> {
+  name<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;app&#39;</span>
+}
+&lt;/<span style="color: #062873; font-weight: bold">script</span>&gt;
+
+&lt;<span style="color: #062873; font-weight: bold">style</span>&gt;
+#<span style="color: #0e84b5; font-weight: bold">app</span> {
+  <span style="color: #007020; font-weight: bold">font-family</span>: <span style="color: #4070a0">&#39;Avenir&#39;</span>, Helvetica, Arial, <span style="color: #007020; font-weight: bold">sans-serif</span>;
+  <span style="color: #007020">-webkit-</span>font-smoothing: antialiased;
+  <span style="color: #007020">-moz-</span>osx-font-smoothing: grayscale;
+  <span style="color: #007020; font-weight: bold">text-align</span>: <span style="color: #007020; font-weight: bold">center</span>;
+  <span style="color: #007020; font-weight: bold">color</span>: <span style="color: #40a070">#2c3e50</span>;
+  <span style="color: #007020; font-weight: bold">margin-top</span>: <span style="color: #40a070">60</span><span style="color: #902000">px</span>;
+}
+&lt;/<span style="color: #062873; font-weight: bold">style</span>&gt;
+</pre></div>
+
+<p>We&rsquo;ll rip all that out, drop in Bootstrap and make a <code>Login</code> component.</p>
+
+<h3 id="bootstrap">Bootstrap</h3>
+
+<p>We&rsquo;ll just go the fastest and easiest route and import Bootstrap from a CDN. You can get a link at Bootstrap&rsquo;s <a href="https://getbootstrap.com/docs/4.0/getting-started/introduction/">Quick Start</a> guide. After that, just place it in <code>/index.html</code> file within the <code>&lt;head&gt;</code> section.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020">&lt;!DOCTYPE html&gt;</span>
+&lt;<span style="color: #062873; font-weight: bold">html</span>&gt;
+  &lt;<span style="color: #062873; font-weight: bold">head</span>&gt;
+    <span style="color: #60a0b0; font-style: italic">&lt;!-- ... //--&gt;</span>
+    &lt;<span style="color: #062873; font-weight: bold">link</span> <span style="color: #4070a0">rel</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;stylesheet&quot;</span> <span style="color: #4070a0">href</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css&quot;</span> <span style="color: #4070a0">integrity</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M&quot;</span> <span style="color: #4070a0">crossorigin</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;anonymous&quot;</span>&gt;
+  &lt;/<span style="color: #062873; font-weight: bold">head</span>&gt;
+  <span style="color: #60a0b0; font-style: italic">&lt;!-- ... //--&gt;</span>
+&lt;/<span style="color: #062873; font-weight: bold">html</span>&gt;
+</pre></div>
+
+<p>Let&rsquo;s also put a <code>#container</code> div in the <code>App</code> component. While we&rsquo;re doing it, we can get rid of the unnecessary default styling, so it looks like this:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;<span style="color: #062873; font-weight: bold">template</span>&gt;
+  &lt;<span style="color: #062873; font-weight: bold">div</span> <span style="color: #4070a0">id</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;app&quot;</span>&gt;
+    &lt;<span style="color: #062873; font-weight: bold">div</span> <span style="color: #4070a0">class</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;container&quot;</span>&gt;
+      &lt;<span style="color: #062873; font-weight: bold">router-view</span>&gt;&lt;/<span style="color: #062873; font-weight: bold">router-view</span>&gt;
+    &lt;/<span style="color: #062873; font-weight: bold">div</span>&gt;
+  &lt;/<span style="color: #062873; font-weight: bold">div</span>&gt;
+&lt;/<span style="color: #062873; font-weight: bold">template</span>&gt;
+
+&lt;<span style="color: #062873; font-weight: bold">script</span>&gt;
+<span style="color: #007020; font-weight: bold">export</span> <span style="color: #007020; font-weight: bold">default</span> {
+  name<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;app&#39;</span>
+}
+&lt;/<span style="color: #062873; font-weight: bold">script</span>&gt;
+
+&lt;<span style="color: #062873; font-weight: bold">style</span>&gt;
+&lt;/<span style="color: #062873; font-weight: bold">style</span>&gt;
+</pre></div>
+
+<h3 id="login-component">Login component</h3>
+
+<p>Let&rsquo;s take a look at a first version of the <code>Login</code> component in it&rsquo;s entirety, and then drill down to the important bits.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;<span style="color: #062873; font-weight: bold">template</span>&gt;
+  &lt;<span style="color: #062873; font-weight: bold">div</span> <span style="color: #4070a0">class</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;login-wrapper border border-light&quot;</span>&gt;
+    &lt;<span style="color: #062873; font-weight: bold">form</span> <span style="color: #4070a0">class</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;form-signin&quot;</span> <span style="border: 1px solid #FF0000">@</span><span style="color: #4070a0">submit</span><span style="border: 1px solid #FF0000">.</span><span style="color: #4070a0">prevent</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;login&quot;</span>&gt;
+      &lt;<span style="color: #062873; font-weight: bold">h2</span> <span style="color: #4070a0">class</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;form-signin-heading&quot;</span>&gt;Please sign in&lt;/<span style="color: #062873; font-weight: bold">h2</span>&gt;
+      &lt;<span style="color: #062873; font-weight: bold">label</span> <span style="color: #4070a0">for</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;inputEmail&quot;</span> <span style="color: #4070a0">class</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;sr-only&quot;</span>&gt;Email address&lt;/<span style="color: #062873; font-weight: bold">label</span>&gt;
+      &lt;<span style="color: #062873; font-weight: bold">input</span> <span style="color: #4070a0">v-model</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;email&quot;</span> <span style="color: #4070a0">type</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;email&quot;</span> <span style="color: #4070a0">id</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;inputEmail&quot;</span> <span style="color: #4070a0">class</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;form-control&quot;</span> <span style="color: #4070a0">placeholder</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;Email address&quot;</span> <span style="color: #4070a0">required</span> <span style="color: #4070a0">autofocus</span>&gt;
+      &lt;<span style="color: #062873; font-weight: bold">label</span> <span style="color: #4070a0">for</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;inputPassword&quot;</span> <span style="color: #4070a0">class</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;sr-only&quot;</span>&gt;Password&lt;/<span style="color: #062873; font-weight: bold">label</span>&gt;
+      &lt;<span style="color: #062873; font-weight: bold">input</span> <span style="color: #4070a0">v-model</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;password&quot;</span> <span style="color: #4070a0">type</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;password&quot;</span> <span style="color: #4070a0">id</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;inputPassword&quot;</span> <span style="color: #4070a0">class</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;form-control&quot;</span> <span style="color: #4070a0">placeholder</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;Password&quot;</span> <span style="color: #4070a0">required</span>&gt;
+      &lt;<span style="color: #062873; font-weight: bold">button</span> <span style="color: #4070a0">class</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;btn btn-lg btn-primary btn-block&quot;</span> <span style="color: #4070a0">type</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;submit&quot;</span>&gt;Sign in&lt;/<span style="color: #062873; font-weight: bold">button</span>&gt;
+    &lt;/<span style="color: #062873; font-weight: bold">form</span>&gt;
+  &lt;/<span style="color: #062873; font-weight: bold">div</span>&gt;
+&lt;/<span style="color: #062873; font-weight: bold">template</span>&gt;
+
+&lt;<span style="color: #062873; font-weight: bold">script</span>&gt;
+<span style="color: #007020; font-weight: bold">export</span> <span style="color: #007020; font-weight: bold">default</span> {
+  name<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;Login&#39;</span>,
+  data () {
+    <span style="color: #007020; font-weight: bold">return</span> {
+      email<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;&#39;</span>,
+      password<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;&#39;</span>
+    }
+  },
+  methods<span style="color: #666666">:</span> {
+    login () {
+      console.log(<span style="color: #007020; font-weight: bold">this</span>.email)
+      console.log(<span style="color: #007020; font-weight: bold">this</span>.password)
+    }
+  }
+}
+&lt;/<span style="color: #062873; font-weight: bold">script</span>&gt;
+
+&lt;<span style="color: #062873; font-weight: bold">style</span> <span style="color: #4070a0">lang</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;css&quot;</span>&gt;
+<span style="color: #062873; font-weight: bold">body</span> {
+  <span style="color: #007020; font-weight: bold">background</span>: <span style="color: #40a070">#605B56</span>;
+}
+
+.<span style="color: #0e84b5; font-weight: bold">login-wrapper</span> {
+  <span style="color: #007020; font-weight: bold">background</span>: <span style="color: #40a070">#fff</span>;
+  <span style="color: #007020; font-weight: bold">width</span>: <span style="color: #40a070">70</span><span style="color: #902000">%</span>;
+  <span style="color: #007020; font-weight: bold">margin</span>: <span style="color: #40a070">12</span><span style="color: #902000">%</span> <span style="color: #007020; font-weight: bold">auto</span>;
+}
+
+.<span style="color: #0e84b5; font-weight: bold">form-signin</span> {
+  <span style="color: #007020; font-weight: bold">max-width</span>: <span style="color: #40a070">330</span><span style="color: #902000">px</span>;
+  <span style="color: #007020; font-weight: bold">padding</span>: <span style="color: #40a070">10</span><span style="color: #902000">%</span> <span style="color: #40a070">15</span><span style="color: #902000">px</span>;
+  <span style="color: #007020; font-weight: bold">margin</span>: <span style="color: #40a070">0</span> <span style="color: #007020; font-weight: bold">auto</span>;
+}
+.<span style="color: #0e84b5; font-weight: bold">form-signin</span> .<span style="color: #0e84b5; font-weight: bold">form-signin-heading</span><span style="color: #666666">,</span>
+.<span style="color: #0e84b5; font-weight: bold">form-signin</span> .<span style="color: #0e84b5; font-weight: bold">checkbox</span> {
+  <span style="color: #007020; font-weight: bold">margin-bottom</span>: <span style="color: #40a070">10</span><span style="color: #902000">px</span>;
+}
+.<span style="color: #0e84b5; font-weight: bold">form-signin</span> .<span style="color: #0e84b5; font-weight: bold">checkbox</span> {
+  <span style="color: #007020; font-weight: bold">font-weight</span>: <span style="color: #007020; font-weight: bold">normal</span>;
+}
+.<span style="color: #0e84b5; font-weight: bold">form-signin</span> .<span style="color: #0e84b5; font-weight: bold">form-control</span> {
+  <span style="color: #007020; font-weight: bold">position</span>: <span style="color: #007020; font-weight: bold">relative</span>;
+  <span style="color: #007020; font-weight: bold">height</span>: <span style="color: #007020; font-weight: bold">auto</span>;
+  <span style="color: #007020">-webkit-</span><span style="color: #007020; font-weight: bold">box-sizing</span>: <span style="color: #007020; font-weight: bold">border-box</span>;
+          <span style="color: #007020; font-weight: bold">box-sizing</span>: <span style="color: #007020; font-weight: bold">border-box</span>;
+  <span style="color: #007020; font-weight: bold">padding</span>: <span style="color: #40a070">10</span><span style="color: #902000">px</span>;
+  <span style="color: #007020; font-weight: bold">font-size</span>: <span style="color: #40a070">16</span><span style="color: #902000">px</span>;
+}
+.<span style="color: #0e84b5; font-weight: bold">form-signin</span> .<span style="color: #0e84b5; font-weight: bold">form-control</span>:<span style="color: #555555; font-weight: bold">focus</span> {
+  <span style="color: #007020; font-weight: bold">z-index</span>: <span style="color: #40a070">2</span>;
+}
+.<span style="color: #0e84b5; font-weight: bold">form-signin</span> <span style="color: #062873; font-weight: bold">input</span><span style="color: #666666">[</span><span style="color: #062873; font-weight: bold">type</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;email&quot;</span><span style="color: #666666">]</span> {
+  <span style="color: #007020; font-weight: bold">margin-bottom</span>: <span style="color: #40a070">-1</span><span style="color: #902000">px</span>;
+  <span style="color: #007020; font-weight: bold">border-bottom-right-radius</span>: <span style="color: #40a070">0</span>;
+  <span style="color: #007020; font-weight: bold">border-bottom-left-radius</span>: <span style="color: #40a070">0</span>;
+}
+.<span style="color: #0e84b5; font-weight: bold">form-signin</span> <span style="color: #062873; font-weight: bold">input</span><span style="color: #666666">[</span><span style="color: #062873; font-weight: bold">type</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;password&quot;</span><span style="color: #666666">]</span> {
+  <span style="color: #007020; font-weight: bold">margin-bottom</span>: <span style="color: #40a070">10</span><span style="color: #902000">px</span>;
+  <span style="color: #007020; font-weight: bold">border-top-left-radius</span>: <span style="color: #40a070">0</span>;
+  <span style="color: #007020; font-weight: bold">border-top-right-radius</span>: <span style="color: #40a070">0</span>;
+}
+&lt;/<span style="color: #062873; font-weight: bold">style</span>&gt;
+</pre></div>
+
+<p>Let&rsquo;s look closer at the script itself:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">export</span> <span style="color: #007020; font-weight: bold">default</span> {
+  name<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;Login&#39;</span>,
+  data () {
+    <span style="color: #007020; font-weight: bold">return</span> {
+      email<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;&#39;</span>,
+      password<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;&#39;</span>
+    }
+  },
+  methods<span style="color: #666666">:</span> {
+    login () {
+      console.log(<span style="color: #007020; font-weight: bold">this</span>.email)
+      console.log(<span style="color: #007020; font-weight: bold">this</span>.password)
+    }
+  }
+}
+</pre></div>
+
+<p>We&rsquo;re adding placeholders in the <code>data()</code> section (remember that this needs to be a function - it&rsquo;s something that tended to trip me up!) for the email and password. We also have a super-simple <code>login()</code> method - it&rsquo;s just something to verify that the form works.</p>
+
+<p>We need to tell Vue to bind the inputs to the placeholder values. We can do that with the <code>v-model</code> directive:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;<span style="color: #062873; font-weight: bold">input</span> <span style="color: #4070a0">v-model</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;email&quot;</span> <span style="color: #4070a0">type</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;email&quot;</span> <span style="border: 1px solid #FF0000">...</span>&gt;
+&lt;<span style="color: #062873; font-weight: bold">input</span> <span style="color: #4070a0">v-model</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;password&quot;</span> <span style="color: #4070a0">type</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;password&quot;</span> <span style="border: 1px solid #FF0000">...</span>&gt;
+</pre></div>
+
+<p>That&rsquo;s it - Vue will update the fields of the component automatically now.</p>
+
+<p>When the form submits, we don&rsquo;t really want the browser to perform the regular submit action - rather, we&rsquo;d like to run the <code>login()</code> method we&rsquo;ve defined. One more directive and we&rsquo;re golden:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;<span style="color: #062873; font-weight: bold">form</span> <span style="color: #4070a0">class</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;form-signin&quot;</span> <span style="border: 1px solid #FF0000">@</span><span style="color: #4070a0">submit</span><span style="border: 1px solid #FF0000">.</span><span style="color: #4070a0">prevent</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;login&quot;</span>&gt;
+</pre></div>
+
+<p>Pay attention to the <code>prevent</code> qualifier: if we omitted it, Vue would run our method, but after that allow the event to bubble up to the browser, messing up our flow.</p>
+
+<h3 id="mounting-it">Mounting it</h3>
+
+<p>Now that we have the <code>Login</code> component in place and <code>App</code> changed for Bootstrap, let&rsquo;s change the routing so that we route to <code>Login</code> on the path <code>/</code>:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">import</span> Vue from <span style="color: #4070a0">&#39;vue&#39;</span>
+<span style="color: #007020; font-weight: bold">import</span> Router from <span style="color: #4070a0">&#39;vue-router&#39;</span>
+<span style="color: #007020; font-weight: bold">import</span> Login from <span style="color: #4070a0">&#39;@/components/Login&#39;</span>
+
+Vue.use(Router)
+
+<span style="color: #007020; font-weight: bold">export</span> <span style="color: #007020; font-weight: bold">default</span> <span style="color: #007020; font-weight: bold">new</span> Router({
+  routes<span style="color: #666666">:</span> [
+    {
+      path<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;/&#39;</span>,
+      name<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;Login&#39;</span>,
+      component<span style="color: #666666">:</span> Login
+    }
+  ]
+})
+</pre></div>
+
+<p>If we check the browser now, this is the reward for our efforts:</p>
+
+
+<figure >
+    <a href="https://paweljw.github.io/media/vue-auth/login.png">
+        <img src="https://paweljw.github.io/media/vue-auth/login.png" />
+    </a>
+    
+</figure>
+
+
+<p>Yay! Now, to actually make it <em>do</em> something.</p>
+
+<h2 id="vue-axios">vue-axios</h2>
+
+<p>A couple months back when I wrote the original post on <a href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/">stack choices</a> I said that we will use vue-resource. Since then it has come to my attention that the creator of Vue decided to <a href="https://medium.com/the-vue-point/retiring-vue-resource-871a82880af4">retire vue-resource</a> as far back as November 2016.</p>
+
+<p>Because of that I&rsquo;ve decided to replace it with <a href="https://github.com/imcvampire/vue-axios">vue-axios</a> which provides Vue-style binding to the <a href="https://github.com/axios/axios">axios</a> library. Let&rsquo;s drop that into our project:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>$ npm install --save axios vue-axios
+</pre></div>
+
+<p>We will need to tell Vue to use axios, and we will need to tell axios where our API is and how to authorize itself properly.</p>
+
+<p>I like all my things neatly tucked away in obvious locations (well, obvious to me at least) - I guess it&rsquo;s a Rails-person thing. Anyway, I tucked the files we&rsquo;ll discuss momentarily in <code>src/backend/vue-axios</code>. That way I know this talks to the backend and has to do with this library by glancing at the directory structure itself.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>$ tree src/backend
+src/backend
+└── vue-axios
+    ├── axios.js
+    └── index.js
+
+<span style="color: #40a070">1</span> directory, <span style="color: #40a070">2</span> files
+</pre></div>
+
+<h3 id="configuring-axios">Configuring axios</h3>
+
+<p>axios has a couple of configuration options we can leverage here.</p>
+
+<p>First off, there&rsquo;s <code>baseURL</code>. When we tell axios to contact e.g. <code>/authors</code>, it will prepend the <code>baseURL</code> automatically. Thanks to this we can easily switch between local development (seen here as default value), staging and production. And if we ever need to change it, it&rsquo;s in one place.</p>
+
+<p>Secondly we have the headers. Right now we only want JSON responses, and we will attach a JWT token to each of our calls. Note that while the user is not authorized (and we didn&rsquo;t set up the <code>token</code> variable in localStorage) this will still be sent with just a space and nothing more after <code>Bearer</code>. That&rsquo;s fine: our backend can deal with this situation and properly bail on such a request if need be.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60a0b0; font-style: italic">/* global localStorage */</span>
+
+<span style="color: #007020; font-weight: bold">import</span> axios from <span style="color: #4070a0">&#39;axios&#39;</span>
+
+<span style="color: #007020; font-weight: bold">const</span> API_URL <span style="color: #666666">=</span> process.env.API_URL <span style="color: #666666">||</span> <span style="color: #4070a0">&#39;http://localhost:3000/api/v1&#39;</span>
+
+<span style="color: #007020; font-weight: bold">export</span> <span style="color: #007020; font-weight: bold">default</span> axios.create({
+  baseURL<span style="color: #666666">:</span> API_URL,
+  headers<span style="color: #666666">:</span> {
+    <span style="color: #4070a0">&#39;Content-Type&#39;</span><span style="color: #666666">:</span> <span style="color: #4070a0">&#39;application/json&#39;</span>,
+    <span style="color: #4070a0">&#39;Authorization&#39;</span><span style="color: #666666">:</span> <span style="color: #4070a0">&#39;Bearer &#39;</span> <span style="color: #666666">+</span> localStorage.token
+  }
+})
+</pre></div>
+
+<h3 id="configuring-vue-axios-with-our-axios">Configuring vue-axios with &ldquo;our&rdquo; axios</h3>
+
+<p>The contents of <code>index.js</code> are basically boilerplate Vue-extension-to-Vue-connection code:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">import</span> Vue from <span style="color: #4070a0">&#39;vue&#39;</span>
+<span style="color: #007020; font-weight: bold">import</span> VueAxios from <span style="color: #4070a0">&#39;vue-axios&#39;</span>
+
+<span style="color: #007020; font-weight: bold">import</span> axios from <span style="color: #4070a0">&#39;./axios&#39;</span>
+
+Vue.use(VueAxios, axios)
+</pre></div>
+
+<p>There is one important twist. We instruct vue-axios to use <em>our configured axios instance</em> and attach to Vue. If we just used boilerplate code from GitHub, the <code>axios</code> instance that attaches to vue-axios would just have default settings.</p>
+
+<h3 id="acquainting-vue-with-axios">Acquainting Vue with axios</h3>
+
+<p>One last thing to do: we need to make sure it actually attaches to our instance. We can to this in <code>src/main.js</code> by adding two new lines:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60a0b0; font-style: italic">// ... other imports ...</span>
+<span style="color: #007020; font-weight: bold">import</span> axios from <span style="color: #4070a0">&#39;./backend/vue-axios&#39;</span>
+
+<span style="color: #60a0b0; font-style: italic">// ...</span>
+
+<span style="color: #007020; font-weight: bold">new</span> Vue({
+  el<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;#app&#39;</span>,
+  router,
+  axios,
+  <span style="color: #60a0b0; font-style: italic">// ...</span>
+})
+</pre></div>
+
+<p>Now our Vue instance knows it has two extensions: <code>router</code> and <code>axios</code>. Let&rsquo;s do something with it, shall we?</p>
+
+<h2 id="getting-a-token">Getting a token</h2>
+
+<p>Let&rsquo;s go back to our <code>Login</code> component and its <code>login</code> method. We will expand it a bit to call axios:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>login () {
+  <span style="color: #007020; font-weight: bold">this</span>.$http.post(<span style="color: #4070a0">&#39;/auth&#39;</span>, { user<span style="color: #666666">:</span> <span style="color: #007020; font-weight: bold">this</span>.email, password<span style="color: #666666">:</span> <span style="color: #007020; font-weight: bold">this</span>.password })
+    .then(request =&gt; <span style="color: #007020; font-weight: bold">this</span>.loginSuccessful(request))
+    .<span style="color: #007020; font-weight: bold">catch</span>(() =&gt; <span style="color: #007020; font-weight: bold">this</span>.loginFailed())
+}
+</pre></div>
+
+<p>vue-axios mounted our axios instance under <code>$http</code> - it&rsquo;s available in all components. With it we make a POST request to our <code>/auth</code> endpoint, passing <code>user</code> and <code>password</code> along.</p>
+
+<p>axios returns <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promises</a>. It&rsquo;s a catch worth knowing about: if you expect to run in an environment where they are not supported, you may need to e.g. polyfill them.</p>
+
+<p>Anyway, we&rsquo;re telling axios that the promise it returns should call <code>loginSuccessful</code> with the request object if everything goes well, and if it does not - <code>loginFailed</code> should be called. Let&rsquo;s implement those methods now.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>loginSuccessful (req) {
+  <span style="color: #007020; font-weight: bold">if</span> (<span style="color: #666666">!</span>req.data.token) {
+    <span style="color: #007020; font-weight: bold">this</span>.loginFailed()
+    <span style="color: #007020; font-weight: bold">return</span>
+  }
+
+  localStorage.token <span style="color: #666666">=</span> req.data.token
+  <span style="color: #007020; font-weight: bold">this</span>.error <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">false</span>
+
+  <span style="color: #007020; font-weight: bold">this</span>.$router.replace(<span style="color: #007020; font-weight: bold">this</span>.$route.query.redirect <span style="color: #666666">||</span> <span style="color: #4070a0">&#39;/authors&#39;</span>)
+}
+
+loginFailed () {
+  <span style="color: #007020; font-weight: bold">this</span>.error <span style="color: #666666">=</span> <span style="color: #4070a0">&#39;Login failed!&#39;</span>
+  <span style="color: #007020; font-weight: bold">delete</span> localStorage.token
+}
+</pre></div>
+
+<p>You will notice that if the server decides to respond with 200, but does not generate a token, we fail either way. If we <em>do</em> get a proper token, we put it into local storage and redirect to <code>/authors</code>. You will notice that we&rsquo;ve also prepared ourselves for a <code>redirect</code> parameter that might happen to be present on the query. We&rsquo;ll use it for clean redirection after an auth failure later. For all our routing needs we use <code>$router</code> - it was mounted by the <code>vue-router</code> extension we generated our app with.</p>
+
+<p>When the login fails we delete whatever there might be in the <code>localStorage</code>. We also set an error message. But wait, we didn&rsquo;t define it yet! We should let the component know that we require it to have such a variable. We can do this in the <code>data</code> section, expanding it to look like so:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>data () {
+  <span style="color: #007020; font-weight: bold">return</span> {
+    email<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;&#39;</span>,
+    password<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;&#39;</span>,
+    error<span style="color: #666666">:</span> <span style="color: #007020; font-weight: bold">false</span>
+  }
+}
+</pre></div>
+
+<p>One finishing touch: displaying the error to the user. We can use a Bootstrap alert with a div that will only display if there is an error to be shown:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;<span style="color: #062873; font-weight: bold">h2</span> <span style="color: #4070a0">class</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;form-signin-heading&quot;</span>&gt;Please sign in&lt;/<span style="color: #062873; font-weight: bold">h2</span>&gt;
+&lt;<span style="color: #062873; font-weight: bold">div</span> <span style="color: #4070a0">class</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;alert alert-danger&quot;</span> <span style="color: #4070a0">v-if</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;error&quot;</span>&gt;{{ error }}&lt;/<span style="color: #062873; font-weight: bold">div</span>&gt;
+</pre></div>
+
+<p>How shall we test it? Let&rsquo;s just attach something under <code>/authors</code>. We do have a perfectly good <code>Hello</code> component laying around after all:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60a0b0; font-style: italic">// src/router/index.js</span>
+
+<span style="color: #60a0b0; font-style: italic">// ...</span>
+    {
+      path<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;/authors&#39;</span>,
+      name<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;Authors&#39;</span>,
+      component<span style="color: #666666">:</span> Hello
+    }
+</pre></div>
+
+<p>We can run the API in the background, try to log in and it should show the (slightly mangled, but that&rsquo;s just for testing) contents of <code>Hello</code>!</p>
+
+<h2 id="locking-it-down">Locking it down</h2>
+
+<p>We know that our login works and we got redirected to <code>/books</code> after logging in. Now that I&rsquo;m logged in, let me just go to <code>/</code> real quick&hellip;</p>
+
+
+<figure >
+    <a href="https://paweljw.github.io/media/vue-auth/login.png">
+        <img src="https://paweljw.github.io/media/vue-auth/login.png" alt="Huh. That again." />
+    </a>
+    
+    <figcaption>
+        <p>
+        Huh. That again.
+        
+            
+        
+        </p> 
+    </figcaption>
+    
+</figure>
+
+
+<p>From a modern web application I&rsquo;d expect a redirect if I&rsquo;m already logged in. I am, right? Let&rsquo;s go to <code>/authors</code>&hellip;</p>
+
+
+<figure >
+    <a href="https://paweljw.github.io/media/vue-auth/authors.png">
+        <img src="https://paweljw.github.io/media/vue-auth/authors.png" alt="Okay, I think I&#39;m logged in." />
+    </a>
+    
+    <figcaption>
+        <p>
+        Okay, I think I&#39;m logged in.
+        
+            
+        
+        </p> 
+    </figcaption>
+    
+</figure>
+
+
+<p>Good, so that works. Let&rsquo;s check it once more, somewhere where my <code>localStorage</code> cannot follow me: in incognito mode. We&rsquo;ll copy the direct link to authors and&hellip;</p>
+
+
+<figure >
+    <a href="https://paweljw.github.io/media/vue-auth/authors_private.png">
+        <img src="https://paweljw.github.io/media/vue-auth/authors_private.png" />
+    </a>
+    
+</figure>
+
+
+<p>Dang. That&rsquo;s not very secure, is it. Let&rsquo;s fix it.</p>
+
+<h3 id="where-should-i-actually-go">Where should I actually go?</h3>
+
+<p>The proper routing can be summarized to two sentences:</p>
+
+<ul>
+<li>If I am logged in, and on <code>/</code>, I should be redirected to <code>/authors</code>.</li>
+<li>If I am not logged in, and not on <code>/</code>, I should be redirected to <code>/</code>.</li>
+</ul>
+
+<p>The first sentence we can implement directly in the <code>Login</code> component, since that&rsquo;s where I will end up if I go to <code>/</code> - whether I am logged in or not.</p>
+
+<h3 id="redirecting-to-app-when-logged-in">Redirecting to app when logged in</h3>
+
+<p>When a Vue component is updated, it fires it&rsquo;s <code>updated()</code> method. Note that this does not go into the <code>methods</code> section, instead being a top level method. We can make ourselves a very simple one:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>updated () {
+  <span style="color: #007020; font-weight: bold">if</span> (localStorage.token) {
+    <span style="color: #007020; font-weight: bold">this</span>.$router.replace(<span style="color: #007020; font-weight: bold">this</span>.$route.query.redirect <span style="color: #666666">||</span> <span style="color: #4070a0">&#39;/authors&#39;</span>)
+  }
+}
+</pre></div>
+
+<p><em>Note: if you&rsquo;ve a keen eye, you will have noticed something wrong with this code. We&rsquo;ll talk about it - please carry on reading for now.</em></p>
+
+<p>Anyway: if I have a token set and I happen to go to <code>/</code>, I get redirected to <code>/authors</code>.</p>
+
+<h3 id="redirecting-to-login-when-not-logged-in">Redirecting to login when not logged in</h3>
+
+<p>We definitely do not want to have to check whether we&rsquo;re logged in in every component. We&rsquo;ll have a bunch of them down the line and we might slip up. Besides, that&rsquo;s not very <a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY</a>.</p>
+
+<p>There is however one component through which <em>every</em> request must come through: <code>App</code>. We can put the kick-you-out logic there.</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>updated () {
+  <span style="color: #007020; font-weight: bold">if</span> (<span style="color: #666666">!</span>localStorage.token <span style="color: #666666">&amp;&amp;</span> <span style="color: #007020; font-weight: bold">this</span>.$route.path <span style="color: #666666">!==</span> <span style="color: #4070a0">&#39;/&#39;</span>) {
+    <span style="color: #007020; font-weight: bold">this</span>.$router.push(<span style="color: #4070a0">&#39;/?redirect=&#39;</span> <span style="color: #666666">+</span> <span style="color: #007020; font-weight: bold">this</span>.$route.path)
+  }
+}
+</pre></div>
+
+<p>That&rsquo;s where the <code>redirect</code> parameter comes into play: if I go to <code>/authors</code> and get redirected to login, after logging in I will continue to <code>/authors</code> again - similarly with <code>/books</code> etc.</p>
+
+<h2 id="closing-thoughts">Closing thoughts</h2>
+
+<p>Remember that mistake I talked about earlier, that you might have spotted? It was in this function:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>updated () {
+  <span style="color: #007020; font-weight: bold">if</span> (localStorage.token) {
+    <span style="color: #007020; font-weight: bold">this</span>.$router.replace(<span style="color: #007020; font-weight: bold">this</span>.$route.query.redirect <span style="color: #666666">||</span> <span style="color: #4070a0">&#39;/authors&#39;</span>)
+  }
+}
+</pre></div>
+
+<p>Let&rsquo;s do an experiment: I&rsquo;ll open a new incognito window where I have no <code>localStorage.token</code> and I have not logged in. I&rsquo;ll go into the developer tools and set it to <code>nonsense</code>.</p>
+
+
+<figure >
+    <a href="https://paweljw.github.io/media/vue-auth/nonsense.png">
+        <img src="https://paweljw.github.io/media/vue-auth/nonsense.png" />
+    </a>
+    
+</figure>
+
+
+<p>Now let me just refresh, and&hellip;</p>
+
+
+<figure >
+    <a href="https://paweljw.github.io/media/vue-auth/nonsense_authors.png">
+        <img src="https://paweljw.github.io/media/vue-auth/nonsense_authors.png" />
+    </a>
+    
+</figure>
+
+
+<p>Congratulations to us, we have a huge auth bug! We shouldn&rsquo;t be checking <em>whether</em> the token exists, but <em>what</em> it contains. We will need to pry open the JWT token and see whether it&rsquo;s valid We would have to do that kind of often, though - on pretty much every component update - and that can&rsquo;t be cheap.</p>
+
+<p>It would make a lot of sense if we could store our state somewhere and just look at it every now and again - and change it very rarely. Guess what - that&rsquo;s what we&rsquo;re going to do in the next part, which will focus on storing state with <a href="https://github.com/vuejs/vuex/">vuex</a>.</p>
+
+<p>As always, the code for this part is available on GitHub at <a href="https://github.com/paweljw/bookstore-frontend/releases/tag/part-2">paweljw/bookstore-frontend</a>. See you next time!</p>
+
+<hr />
+
+<p>Top image credit: <a href="https://pixabay.com/en/old-church-door-architecture-1341628/">Gallila-Photo via PixaBay</a> (CC0)</p>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            <div id="i-like-beer" style="text-align: center; margin: 0 auto; display: block; color: #999; font-size: 90%">
+  <hr/>
+  <br/>
+  <p>Hey there! I hope you found the post above useful. If you feel it's worth it, and are capable of doing so, please consider <a href="https://paypal.me/paweljw">buying me a beer</a> through PayPal, or tweet <a href="https://twitter.com/paweljwal">@paweljwal</a> if you want to grab one offline when you're in Kraków, MA, Poland.</p>
+  <small>If you want to remove this text with your adblocker, the selector is <code>#i-like-beer</code>.</small>
+  <hr/>
+</div>
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small"></span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/frontend/">frontend</a>
+
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/vue.js/">vue.js</a>
+
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/vue-router/">vue-router</a>
+
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/vue-axios/">vue-axios</a>
+
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/vue-frontend-series/">vue-frontend-series</a>
+
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/follow-me/">follow me</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  <nav>
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--disabled">
+          
+            <i class="fa fa-angle-left"></i>
+            <span class="hide-xs hide-sm text-small icon-ml"></span>
+          </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/09/vue.js-front-end-app-part-2-design-is-not-hard/" data-tooltip="Vue.js front end app, part 2: Design is (not) hard">
+          
+            <span class="hide-xs hide-sm text-small icon-mr"></span>
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </nav>
+  <ul class="post-actions post-action-share">
+    
+      <li class="post-action hide-lg hide-md hide-sm">
+        <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+          <i class="fa fa-share-alt"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2017%2f09%2fvue.js-front-end-app-part-3-authentication%2f">
+          <i class="fa fa-google-plus"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2017%2f09%2fvue.js-front-end-app-part-3-authentication%2f">
+          <i class="fa fa-facebook-official"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2017%2f09%2fvue.js-front-end-app-part-3-authentication%2f">
+          <i class="fa fa-twitter"></i>
+        </a>
+      </li>
+    
+    
+      <li class="post-action">
+        <a class="post-action-btn btn btn--default" href="#disqus_thread">
+          <i class="fa fa-comment-o"></i>
+        </a>
+      </li>
+    
+    <li class="post-action">
+      
+        <a class="post-action-btn btn btn--default" href="#">
+      
+        <i class="fa fa-list"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    Created by <a href="https://github.com/paweljw">Paweł J. Wal</a> | <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        <div class="post-actions-wrap">
+  <nav>
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--disabled">
+          
+            <i class="fa fa-angle-left"></i>
+            <span class="hide-xs hide-sm text-small icon-ml"></span>
+          </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/09/vue.js-front-end-app-part-2-design-is-not-hard/" data-tooltip="Vue.js front end app, part 2: Design is (not) hard">
+          
+            <span class="hide-xs hide-sm text-small icon-mr"></span>
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </nav>
+  <ul class="post-actions post-action-share">
+    
+      <li class="post-action hide-lg hide-md hide-sm">
+        <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+          <i class="fa fa-share-alt"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2017%2f09%2fvue.js-front-end-app-part-3-authentication%2f">
+          <i class="fa fa-google-plus"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2017%2f09%2fvue.js-front-end-app-part-3-authentication%2f">
+          <i class="fa fa-facebook-official"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2017%2f09%2fvue.js-front-end-app-part-3-authentication%2f">
+          <i class="fa fa-twitter"></i>
+        </a>
+      </li>
+    
+    
+      <li class="post-action">
+        <a class="post-action-btn btn btn--default" href="#disqus_thread">
+          <i class="fa fa-comment-o"></i>
+        </a>
+      </li>
+    
+    <li class="post-action">
+      
+        <a class="post-action-btn btn btn--default" href="#">
+      
+        <i class="fa fa-list"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <ul class="share-options">
+    <li class="share-option">
+      <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2017%2f09%2fvue.js-front-end-app-part-3-authentication%2f">
+        <i class="fa fa-google-plus"></i><span></span>
+      </a>
+    </li>
+    <li class="share-option">
+      <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2017%2f09%2fvue.js-front-end-app-part-3-authentication%2f">
+        <i class="fa fa-facebook-official"></i><span></span>
+      </a>
+    </li>
+    <li class="share-option">
+      <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2017%2f09%2fvue.js-front-end-app-part-3-authentication%2f">
+        <i class="fa fa-twitter"></i><span></span>
+      </a>
+    </li>
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="//www.gravatar.com/avatar/5a78de40753ba5abf8fcf3a46c748d53?s=110" alt="" />
+    
+    <h4 id="about-card-name">Paweł J. Wal</h4>
+    
+      <div id="about-card-bio">Hi, I&rsquo;m Paweł. I <a href="https://github.com/paweljw">hack on stuff</a> and write about things.</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Sofware Magician
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        Poland
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center"></div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/09/vue.js-front-end-app-part-3-authentication/">
+                <h3 class="media-heading">Vue.js front end app, part 3: Authentication</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Sep 9, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>In this part we&rsquo;ll allow the user to log in to our frontend app, using the <a href="http://localhost:1313/2017/07/rails-5.1-api-app-part-4-authentication-and-authorization/">auth mechanism</a> we&rsquo;ve built on the back end earlier. A lot of topics in this one, so jump right in!</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/09/vue.js-front-end-app-part-2-design-is-not-hard/">
+                <h3 class="media-heading">Vue.js front end app, part 2: Design is (not) hard</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Sep 9, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>Now that we have our environment running, the app is initialized, and we know a little bit about what&rsquo;s going on in there, it&rsquo;s time to take a little bit of time to design our front end.</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/09/saturday-project-temperature-and-humidity-meter-with-onion-omega2-/">
+                <h3 class="media-heading">Saturday project: temperature and humidity meter with Onion Omega2&#43;</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Sep 9, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>Quick thing I threw together in about an hour: an IoT temperature and humidity meter!</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/09/vue.js-front-end-app-part-1-setting-up-the-app/">
+                <h3 class="media-heading">Vue.js front end app, part 1: Setting up the app</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Sep 9, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>Last time we’ve seen each other, we’ve just deployed our Rails 5.1 API app. Time to put an end to this! A <em>front</em> end, of course.</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-5-deploying-with-confidence/">
+                <h3 class="media-heading">Rails 5.1 API app, part 5: Deploying with confidence</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>In this final part of our Rails API app series we&rsquo;ll talk about specs, code coverage, continuous integration and deployment - and how to be certain your application is working.</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-4-authentication-and-authorization/">
+                <h3 class="media-heading">Rails 5.1 API app, part 4: Authentication and authorization</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>Time to deal with authenticating users in our bookstore application.</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-3-api-versioning/">
+                <h3 class="media-heading">Rails 5.1 API app, part 3: API versioning</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>We have two more things to tackle before our Rails API app is an MVP: namespacing the controllers and creating an authentication mechanism. We&rsquo;ll tackle namespacing the controllers in this article - it might seem wordy, but it&rsquo;s for a good reason.</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-2-modeling-reality/">
+                <h3 class="media-heading">Rails 5.1 API app, part 2: Modeling reality</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>Oh yeah. Now we&rsquo;re going <em>hardcore</em>. Well, not really.</p>
+
+<p>While Rails embraces a continuously changing data model, it&rsquo;s always good to stop and think for a minute about the domain we&rsquo;re trying to magically lockwithin an app. We&rsquo;re building a bookstore. So what&rsquo;s in one?</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-1-setting-up-a-rails-api-app/">
+                <h3 class="media-heading">Rails 5.1 API app, part 1: Setting up a Rails API app</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>It&rsquo;s time to continue with our foray into Rails API app with Vue.js frontend! In <a href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/">Part 0</a> we discussed what technology we&rsquo;ll be using and why - I highly recommend you read through it if you haven&rsquo;t already. Now it&rsquo;s time to get our Rails on.</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/">
+                <h3 class="media-heading">Rails 5.1 API with Vue.js frontend, part 0: stack choices</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">I&rsquo;ve been rather busy lately, and my progress in learning Vue.js has slowed down. However, I think that I&rsquo;m ready to dive into making something more resembling a real application than Monster Hunter and GalaxyQuest.
+I believe that you learn best when your objective is teaching it to somebody else. Therefore, over the next couple of weeks I&rsquo;ll be making and refining a simple bookstore app1, using Rails 5.1 for the API backend, and vue.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero=""
+         data-message-one=""
+         data-message-other="">
+         17 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('https://paweljw.github.io/images/cover2.jpeg');"></div>
+  
+
+
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.js"></script>
+
+
+<script src="https://paweljw.github.io/js/script-wl33z0n6ocaypepiqrazthtivfrliqijej4rq8ek8gvrv1awftmgjuv8k4zc.min.js"></script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight').each(function(i, block) {
+    var code = "";
+    hljs.highlightAuto(block.innerText).value.split(/\r\n|\r|\n/).forEach(function(line) {
+      code += "<span class=\"line\">" + line + "</span><br>";
+    });
+    if (code.length > 0) {
+      block.innerHTML = code;  
+    }
+  });
+  $('pre > code').each(function(i, block) {
+    $(this).addClass('codeblock');
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/paweljw.github.io\/2017\/09\/vue.js-front-end-app-part-3-authentication\/';
+          
+            this.page.identifier = '\/2017\/09\/vue.js-front-end-app-part-3-authentication\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'paweljw-github-io';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+
+    
+  </body>
+</html>
+

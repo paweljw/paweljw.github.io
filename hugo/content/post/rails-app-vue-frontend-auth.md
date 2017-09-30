@@ -3,7 +3,6 @@ date: "2017-07-22T17:00:00+02:00"
 title: "Rails 5.1 API app, part 4: Authentication and authorization"
 coverImage: /media/padlock.jpg
 tags:
-- saturdayproject
 - follow me
 - rails
 - api

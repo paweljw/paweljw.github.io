@@ -3,7 +3,6 @@ date: "2017-07-18T15:00:00+02:00"
 title: "Rails 5.1 API app, part 3: API versioning"
 coverImage: /media/forking.jpg
 tags:
-- saturdayproject
 - follow me
 - rails
 - api

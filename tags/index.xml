@@ -78,7 +78,7 @@
     <item>
       <title>Follow Me</title>
       <link>https://paweljw.github.io/tags/follow-me/</link>
-      <pubDate>Thu, 07 Sep 2017 17:00:00 +0200</pubDate>
+      <pubDate>Sat, 30 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>https://paweljw.github.io/tags/follow-me/</guid>
       <description></description>
@@ -87,7 +87,7 @@
     <item>
       <title>Frontend</title>
       <link>https://paweljw.github.io/tags/frontend/</link>
-      <pubDate>Sat, 23 Sep 2017 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 30 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>https://paweljw.github.io/tags/frontend/</guid>
       <description></description>
@@ -166,18 +166,36 @@
     </item>
     
     <item>
+      <title>Vue Axios</title>
+      <link>https://paweljw.github.io/tags/vue-axios/</link>
+      <pubDate>Sat, 30 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://paweljw.github.io/tags/vue-axios/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Vue Frontend Series</title>
       <link>https://paweljw.github.io/tags/vue-frontend-series/</link>
-      <pubDate>Sat, 23 Sep 2017 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 30 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>https://paweljw.github.io/tags/vue-frontend-series/</guid>
       <description></description>
     </item>
     
     <item>
+      <title>Vue Router</title>
+      <link>https://paweljw.github.io/tags/vue-router/</link>
+      <pubDate>Sat, 30 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://paweljw.github.io/tags/vue-router/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Vue.js</title>
       <link>https://paweljw.github.io/tags/vue.js/</link>
-      <pubDate>Sat, 23 Sep 2017 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 30 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>https://paweljw.github.io/tags/vue.js/</guid>
       <description></description>

@@ -3,7 +3,6 @@ date: "2017-07-15T15:00:00+02:00"
 title: "Rails 5.1 API app, part 2: Modeling reality"
 coverImage: /media/lego.jpg
 tags:
-- saturdayproject
 - follow me
 - rails
 - api

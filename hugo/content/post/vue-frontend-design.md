@@ -7,6 +7,7 @@ tags:
 - frontend
 - vue.js
 - vue-frontend-series
+- follow me
 comments: true
 draft: false
 twitterTitle: "Vue.js front end app: Design"
@@ -21,6 +22,7 @@ Now that we have our environment running, the app is initialized, and we know a 
 
   * [Part 1: Setting up the app](/2017/09/vue.js-front-end-app-part-1-setting-up-the-app/)
   * Part 2: Design is (not) hard
+  * [Part 3: Authentication](/2017/09/vue.js-front-end-app-part-3-authentication/)
 </details>
 
 My relationship with web design (as opposed to web development) is of a somewhat... _rotary_ nature. I started by banging out simple web apps (though we called them pages back then) in PHP way-back-when. It was a hobby, so obviously any front end design was also done by yours truly.

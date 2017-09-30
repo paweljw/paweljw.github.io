@@ -3,7 +3,6 @@ date: "2017-07-11T15:26:57+02:00"
 title: "Rails 5.1 API app, part 1: Setting up a Rails API app"
 coverImage: /media/rails.jpg
 tags:
-- saturdayproject
 - follow me
 - rails
 - api

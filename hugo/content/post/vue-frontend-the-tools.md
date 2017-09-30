@@ -3,7 +3,6 @@ date: "2017-09-07T17:00:00+02:00"
 title: "Vue.js front end app, part 1: Setting up the app"
 coverImage: /media/tools.jpg
 tags:
-- saturdayproject
 - follow me
 - javascript
 - es6
@@ -26,6 +25,7 @@ _In this series, the following articles have been posted:_
 
   * [Part 1: Setting up the app](/2017/09/vue.js-front-end-app-part-1-setting-up-the-app/)
   * [Part 2: Design is (not) hard](/2017/09/vue.js-front-end-app-part-2-design-is-not-hard/)
+  * [Part 3: Authentication](/2017/09/vue.js-front-end-app-part-3-authentication/)
 
 ## But first: thanks!
 
