@@ -14,7 +14,7 @@ draft: false
 ---
 
 I've been rather busy lately, and my progress in learning Vue.js has slowed down. However, I think that I'm ready to dive into making
-something more resembling a real application than [Monster Hunter](http://localhost:1313/2017/06/saturday-project-monster-hunting-with-vue.js/) and [GalaxyQuest](/2017/06/saturday-project-galaxyquest---fuzzily-searching-github-stars/).
+something more resembling a real application than [Monster Hunter](/2017/06/saturday-project-monster-hunting-with-vue.js/) and [GalaxyQuest](/2017/06/saturday-project-galaxyquest---fuzzily-searching-github-stars/).
 
 I believe that you learn best when your objective is teaching it to somebody else. Therefore, over the next couple of weeks
 I'll be making and refining a simple bookstore app<sup><a href="#ft1" name="fr1">1</a></sup>, using Rails 5.1 for the API backend, and [vue.js](https://vuejs.org/)
