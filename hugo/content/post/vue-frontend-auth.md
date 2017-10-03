@@ -14,7 +14,7 @@ draft: false
 twitterTitle: "Vue.js front end app: JWT auth"
 ---
 
-In this part we'll allow the user to log in to our frontend app, using the [auth mechanism](http://localhost:1313/2017/07/rails-5.1-api-app-part-4-authentication-and-authorization/) we've built on the back end earlier. A lot of topics in this one, so jump right in!
+In this part we'll allow the user to log in to our frontend app, using the [auth mechanism](/2017/07/rails-5.1-api-app-part-4-authentication-and-authorization/) we've built on the back end earlier. A lot of topics in this one, so jump right in!
 
 <!--more-->
 
