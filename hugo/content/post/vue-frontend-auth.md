@@ -466,13 +466,39 @@ The first sentence we can implement directly in the `Login` component, since tha
 
 ### Redirecting to app when logged in
 
-When a Vue component is updated, it fires it's `updated()` method. Note that this does not go into the `methods` section, instead being a top level method. We can make ourselves a very simple one:
+_Note: the next paragraph originally only talked about the `updated()` method, which created a bug when revisiting the app while being logged in. Thanks to Michiel Schukking for continuously poking at my code and finding things like these!_
+
+When a Vue component is updated, it fires it's `updated()` method. We also need to take care of what happens when it's created. We'll add simple `created()` and `updated()` methods which will take care of the redirect:
 
 ``` javascript
 updated () {
   if (localStorage.token) {
     this.$router.replace(this.$route.query.redirect || '/authors')
   }
+},
+created () {
+  if (localStorage.token) {
+    this.$router.replace(this.$route.query.redirect || '/authors')
+  }
+}
+```
+
+We shouldn't be repeating ourselves though, so let's kick the body of those out to a method and call that instead:
+
+``` javascript
+created () {
+  this.checkCurrentLogin()
+},
+updated () {
+  this.checkCurrentLogin()
+},
+methods: {
+  checkCurrentLogin () {
+    if (localStorage.token) {
+      this.$router.replace(this.$route.query.redirect || '/authors')
+    }
+  },
+  // ...
 }
 ```
 

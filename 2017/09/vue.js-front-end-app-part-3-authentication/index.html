@@ -698,12 +698,34 @@ loginFailed () {
 
 <h3 id="redirecting-to-app-when-logged-in">Redirecting to app when logged in</h3>
 
-<p>When a Vue component is updated, it fires it&rsquo;s <code>updated()</code> method. Note that this does not go into the <code>methods</code> section, instead being a top level method. We can make ourselves a very simple one:</p>
+<p><em>Note: the next paragraph originally only talked about the <code>updated()</code> method, which created a bug when revisiting the app while being logged in. Thanks to Michiel Schukking for continuously poking at my code and finding things like these!</em></p>
+
+<p>When a Vue component is updated, it fires it&rsquo;s <code>updated()</code> method. We also need to take care of what happens when it&rsquo;s created. We&rsquo;ll add simple <code>created()</code> and <code>updated()</code> methods which will take care of the redirect:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">updated () {
   <span style="color:#007020;font-weight:bold">if</span> (localStorage.token) {
     <span style="color:#007020;font-weight:bold">this</span>.$router.replace(<span style="color:#007020;font-weight:bold">this</span>.$route.query.redirect <span style="color:#666">||</span> <span style="color:#4070a0">&#39;/authors&#39;</span>)
   }
+},
+created () {
+  <span style="color:#007020;font-weight:bold">if</span> (localStorage.token) {
+    <span style="color:#007020;font-weight:bold">this</span>.$router.replace(<span style="color:#007020;font-weight:bold">this</span>.$route.query.redirect <span style="color:#666">||</span> <span style="color:#4070a0">&#39;/authors&#39;</span>)
+  }
 }</code></pre></div>
+<p>We shouldn&rsquo;t be repeating ourselves though, so let&rsquo;s kick the body of those out to a method and call that instead:</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">created () {
+  <span style="color:#007020;font-weight:bold">this</span>.checkCurrentLogin()
+},
+updated () {
+  <span style="color:#007020;font-weight:bold">this</span>.checkCurrentLogin()
+},
+methods<span style="color:#666">:</span> {
+  checkCurrentLogin () {
+    <span style="color:#007020;font-weight:bold">if</span> (localStorage.token) {
+      <span style="color:#007020;font-weight:bold">this</span>.$router.replace(<span style="color:#007020;font-weight:bold">this</span>.$route.query.redirect <span style="color:#666">||</span> <span style="color:#4070a0">&#39;/authors&#39;</span>)
+    }
+  },
+  <span style="color:#60a0b0;font-style:italic">// ...
+</span><span style="color:#60a0b0;font-style:italic"></span>}</code></pre></div>
 <p><em>Note: if you&rsquo;ve a keen eye, you will have noticed something wrong with this code. We&rsquo;ll talk about it - please carry on reading for now.</em></p>
 
 <p>Anyway: if I have a token set and I happen to go to <code>/</code>, I get redirected to <code>/authors</code>.</p>
