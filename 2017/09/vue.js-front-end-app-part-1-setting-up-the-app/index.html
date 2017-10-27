@@ -21,7 +21,7 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.27.1">
+    <meta name="generator" content="Hugo 0.30.2">
     <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
     <title>Vue.js front end app, part 1: Setting up the app</title>
     <meta name="author" content="Paweł J. Wal">
@@ -298,14 +298,12 @@ ga('send', 'pageview');
 <p>There’s a caveat: NVM does not currently support Windows. If developing on Windows is your thing, alternatives such as <a href="https://github.com/coreybutler/nvm-windows">nvm-windows</a> and <a href="https://github.com/marcelklehr/nodist">nodist</a> exist. Since I don’t do any development on Windows, aside from developing my hand-eye coordination, I don’t know how well they work or indeed whether they work at all. Sorry 😔</p>
 
 <p>After installing NVM, installing Node.js and NPM is as easy as:</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>$ nvm install stable
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ nvm install stable
 $ nvm use stable
 $ node -v
 v8.4.0
 $ npm -v
-<span style="color: #40a070">5</span>.4.1
-</pre></div>
-
+<span style="color:#40a070">5</span>.4.1</code></pre></div>
 <h2 id="vue-js-cli">Vue.js CLI</h2>
 
 <p>We&rsquo;re going for the full Vue.js development experience. We&rsquo;re going to be using ES2015 (a.k.a. ES6) - there&rsquo;s no reason not to give ourselves all that <code>import</code> and <code>class</code> goodnes to play with.</p>
@@ -317,13 +315,9 @@ $ npm -v
 <p>Thankfully we don&rsquo;t need to bang out all that boilerplate code. There&rsquo;s a tool called <a href="https://github.com/vuejs/vue-cli">Vue.js CLI</a> that&rsquo;ll do most of that not-heavy-but-boring lifting for us.</p>
 
 <p>Since we already have Node.js and NPM installed, installing the CLI is as easy as:</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>$ npm install --global vue-cli
-</pre></div>
-
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ npm install --global vue-cli</code></pre></div>
 <p>The basic syntax for app initialization is <code>vue init [template-name] [app-name]</code>. There are several vue-provided templates, and you can check them all out at <a href="https://github.com/vuejs-templates">github.com/vuejs-templates</a>. The template that sets up all the goodies we&rsquo;ve talked about above is called <code>webpack</code>, so we can initialize our application like this:</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>$ vue init webpack bookstore-frontend
-</pre></div>
-
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ vue init webpack bookstore-frontend</code></pre></div>
 <p>The CLI asks us a couple of questions - what the app name should be (again), some description and who&rsquo;s the author. Then we get into some technical details.</p>
 
 <script type="text/javascript" src="https://asciinema.org/a/B1K9LL4MKw0Cfldf3UPi7J3Q7.js" id="asciicast-B1K9LL4MKw0Cfldf3UPi7J3Q7" async></script>
@@ -336,14 +330,10 @@ $ npm -v
 </ul>
 
 <p>The app is all generated now, so we can go ahead and install all the dependencies. Go get yourself something to drink - this&rsquo;ll take a <em>while</em> on a fresh Node.js install (depending largely on your network speed, hard drive throughput and, ocasionally, current moon phase).</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>$ <span style="color: #007020">cd</span> bookstore-frontend
-$ npm install
-</pre></div>
-
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ <span style="color:#007020">cd</span> bookstore-frontend
+$ npm install</code></pre></div>
 <p>When that&rsquo;s done, we can run</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>$ npm run dev
-</pre></div>
-
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ npm run dev</code></pre></div>
 <p>to start the development server. On my machine, this also opens the default browser to port 8080 on localhost, where the dev server listens. If everything went well, you should be able to feast your eyes on this:</p>
 
 
@@ -367,18 +357,14 @@ $ npm install
 <h2 id="wait-so-what-s-showing-this">Wait, so what&rsquo;s showing this?</h2>
 
 <p>I thought you&rsquo;d never ask! Let&rsquo;s look at the directory structure Vue.js CLI generated for us.</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>$ tree .
-</pre></div>
-
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ tree .</code></pre></div>
 <p>*Hits Ctrl+C after 30s of scrolling* okay, just <em>how many</em> lines are you trying to print here, <code>tree</code>?</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>$ tree . | wc -l
-   <span style="color: #40a070">21376</span>
-</pre></div>
-
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ tree . | wc -l
+   <span style="color:#40a070">21376</span></code></pre></div>
 <p><em>Ruh roh, Shaggy</em>. That&rsquo;s a <em>ton</em> of files. Did the CLI really generate all those?</p>
 
 <p>Not really. Much like Bundler works in vendor mode, <code>npm install</code> directed NPM to download and store local copies of all the necessary packages in the <code>node_modules</code> folder within our app&rsquo;s directory. Let&rsquo;s just direct <code>tree</code> to skip all that.</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>$ tree . -I <span style="color: #4070a0">&quot;node_modules&quot;</span>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ tree . -I <span style="color:#4070a0">&#34;node_modules&#34;</span>
 .
 ├── README.md
 ├── build
@@ -410,18 +396,16 @@ $ npm install
 │   └── router
 │       └── index.js
 ├── static
-└── <span style="color: #007020">test</span>
+└── <span style="color:#007020">test</span>
     └── unit
         ├── index.js
         ├── karma.conf.js
         └── specs
             └── Hello.spec.js
 
-<span style="color: #40a070">10</span> directories, <span style="color: #40a070">26</span> files
-</pre></div>
-
+<span style="color:#40a070">10</span> directories, <span style="color:#40a070">26</span> files</code></pre></div>
 <p>Phew! That&rsquo;s much more manageable. But we can trim this down even further - the <code>build</code> and <code>config</code> directories are not of interest to us for now, we&rsquo;ll get to those a bit later. Let&rsquo;s drop those too.</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>$ tree . -I <span style="color: #4070a0">&quot;node_modules|build|config&quot;</span>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ tree . -I <span style="color:#4070a0">&#34;node_modules|build|config&#34;</span>
 .
 ├── README.md
 ├── index.html
@@ -437,16 +421,14 @@ $ npm install
 │   └── router
 │       └── index.js
 ├── static
-└── <span style="color: #007020">test</span>
+└── <span style="color:#007020">test</span>
     └── unit
         ├── index.js
         ├── karma.conf.js
         └── specs
             └── Hello.spec.js
 
-<span style="color: #40a070">8</span> directories, <span style="color: #40a070">12</span> files
-</pre></div>
-
+<span style="color:#40a070">8</span> directories, <span style="color:#40a070">12</span> files</code></pre></div>
 <p>Okay, lovely! Let&rsquo;s see what we have here:</p>
 
 <ul>
@@ -457,7 +439,7 @@ $ npm install
 <li>A <code>test</code> directory, where we can already see a spec for <code>Hello</code>. What&rsquo;s that? We&rsquo;ll see in a minute.</li>
 <li>And the main event of the evening: the <code>src</code> directory. Let&rsquo;s take a closer look.</li>
 </ul>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>tree src
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">tree src
 src
 ├── App.vue
 ├── assets
@@ -468,9 +450,7 @@ src
 └── router
     └── index.js
 
-<span style="color: #40a070">3</span> directories, <span style="color: #40a070">5</span> files
-</pre></div>
-
+<span style="color:#40a070">3</span> directories, <span style="color:#40a070">5</span> files</code></pre></div>
 <p><code>main.js</code> is the actual entry point for our Vue application. It imports <code>Vue</code>, <code>App</code> and the <code>router</code>, and mounts the Vue app to the HTML template in <code>index.html</code>.</p>
 
 <p><code>App.vue</code> is what gets first loaded - it&rsquo;s our base <em>component</em>. We also have a child component in <code>Hello</code> (so that&rsquo;s what it was!).</p>
@@ -480,31 +460,29 @@ src
 <p><a href="https://vuejs.org/v2/guide/components.html">Components</a> are the building blocks of a Vue.js application. They are used similarly to HTML tags in Vue.js templates. Each component has its own template (made by mixing HTML and Vue.js markup), its code and it can have a style, which can be scoped so that it only affects the particular component.</p>
 
 <p>Since we&rsquo;re running the <code>webpack</code> scaffolding template, we&rsquo;re set up to use &ldquo;single-file templates&rdquo;. These take the three parts mentioned above - template, code and style - and jam them into a single file with a <code>.vue</code> extension. Let&rsquo;s take a peek at what our <code>App</code> component looks like.</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;<span style="color: #062873; font-weight: bold">template</span>&gt;
-  &lt;<span style="color: #062873; font-weight: bold">div</span> <span style="color: #4070a0">id</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;app&quot;</span>&gt;
-    &lt;<span style="color: #062873; font-weight: bold">img</span> <span style="color: #4070a0">src</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;./assets/logo.png&quot;</span>&gt;
-    &lt;<span style="color: #062873; font-weight: bold">router-view</span>&gt;&lt;/<span style="color: #062873; font-weight: bold">router-view</span>&gt;
-  &lt;/<span style="color: #062873; font-weight: bold">div</span>&gt;
-&lt;/<span style="color: #062873; font-weight: bold">template</span>&gt;
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#062873;font-weight:bold">template</span>&gt;
+  &lt;<span style="color:#062873;font-weight:bold">div</span> <span style="color:#4070a0">id</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;app&#34;</span>&gt;
+    &lt;<span style="color:#062873;font-weight:bold">img</span> <span style="color:#4070a0">src</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;./assets/logo.png&#34;</span>&gt;
+    &lt;<span style="color:#062873;font-weight:bold">router-view</span>&gt;&lt;/<span style="color:#062873;font-weight:bold">router-view</span>&gt;
+  &lt;/<span style="color:#062873;font-weight:bold">div</span>&gt;
+&lt;/<span style="color:#062873;font-weight:bold">template</span>&gt;
 
-&lt;<span style="color: #062873; font-weight: bold">script</span>&gt;
-<span style="color: #007020; font-weight: bold">export</span> <span style="color: #007020; font-weight: bold">default</span> {
-  name<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;app&#39;</span>
+&lt;<span style="color:#062873;font-weight:bold">script</span>&gt;
+<span style="color:#007020;font-weight:bold">export</span> <span style="color:#007020;font-weight:bold">default</span> {
+  name<span style="color:#666">:</span> <span style="color:#4070a0">&#39;app&#39;</span>
 }
-&lt;/<span style="color: #062873; font-weight: bold">script</span>&gt;
+&lt;/<span style="color:#062873;font-weight:bold">script</span>&gt;
 
-&lt;<span style="color: #062873; font-weight: bold">style</span>&gt;
-#<span style="color: #0e84b5; font-weight: bold">app</span> {
-  <span style="color: #007020; font-weight: bold">font-family</span>: <span style="color: #4070a0">&#39;Avenir&#39;</span>, Helvetica, Arial, <span style="color: #007020; font-weight: bold">sans-serif</span>;
-  <span style="color: #007020">-webkit-</span>font-smoothing: antialiased;
-  <span style="color: #007020">-moz-</span>osx-font-smoothing: grayscale;
-  <span style="color: #007020; font-weight: bold">text-align</span>: <span style="color: #007020; font-weight: bold">center</span>;
-  <span style="color: #007020; font-weight: bold">color</span>: <span style="color: #40a070">#2c3e50</span>;
-  <span style="color: #007020; font-weight: bold">margin-top</span>: <span style="color: #40a070">60</span><span style="color: #902000">px</span>;
+&lt;<span style="color:#062873;font-weight:bold">style</span>&gt;
+#<span style="color:#0e84b5;font-weight:bold">app</span> {
+  <span style="color:#007020;font-weight:bold">font-family</span>: <span style="color:#4070a0">&#39;Avenir&#39;</span>, Helvetica, Arial, <span style="color:#007020;font-weight:bold">sans-serif</span>;
+  <span style="color:#007020">-webkit-</span>font-smoothing: antialiased;
+  <span style="color:#007020">-moz-</span>osx-font-smoothing: grayscale;
+  <span style="color:#007020;font-weight:bold">text-align</span>: <span style="color:#007020;font-weight:bold">center</span>;
+  <span style="color:#007020;font-weight:bold">color</span>: <span style="color:#40a070">#2c3e50</span>;
+  <span style="color:#007020;font-weight:bold">margin-top</span>: <span style="color:#40a070">60</span><span style="color:#902000">px</span>;
 }
-&lt;/<span style="color: #062873; font-weight: bold">style</span>&gt;
-</pre></div>
-
+&lt;/<span style="color:#062873;font-weight:bold">style</span>&gt;</code></pre></div>
 <p>The three parts are clearly separated: the <code>&lt;template&gt;</code> at the top delimits our template&rsquo;s code, the <code>&lt;script&gt;</code> contains the logic and <code>&lt;style&gt;</code> is just CSS. We should keep in mind that this component&rsquo;s style is not <code>scoped</code>, so it will affect everything that is nested within <code>App</code>.</p>
 
 <p>In the script we can see that a component should export a default object. There&rsquo;s not much in there, just a name. This is the name that components can be referenced in templates; if we were to nest <code>App</code> somewhere, we could say <code>&lt;app&gt;&lt;/app&gt;</code> in our template and it&rsquo;d get embedded there. Since <code>App</code> is a top-level component, we don&rsquo;t want to do it, but the name is required nonetheless.</p>
@@ -518,87 +496,81 @@ src
 <h3 id="vue-router">vue-router</h3>
 
 <p>Where is our router config? Let&rsquo;s look at the imports in main.js again:</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60a0b0; font-style: italic">// ...</span>
-<span style="color: #007020; font-weight: bold">import</span> router from <span style="color: #4070a0">&#39;./router&#39;</span>
-<span style="color: #60a0b0; font-style: italic">// ...</span>
-</pre></div>
-
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#60a0b0;font-style:italic">// ...
+</span><span style="color:#60a0b0;font-style:italic"></span><span style="color:#007020;font-weight:bold">import</span> router from <span style="color:#4070a0">&#39;./router&#39;</span>
+<span style="">// ...</span></code></pre></div>
 <p>Since <code>./router.js</code> does not exist, it follows that <code>./router/index.js</code> is loaded here. Let&rsquo;s take a peek.</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">import</span> Vue from <span style="color: #4070a0">&#39;vue&#39;</span>
-<span style="color: #007020; font-weight: bold">import</span> Router from <span style="color: #4070a0">&#39;vue-router&#39;</span>
-<span style="color: #007020; font-weight: bold">import</span> Hello from <span style="color: #4070a0">&#39;@/components/Hello&#39;</span>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#007020;font-weight:bold">import</span> Vue from <span style="color:#4070a0">&#39;vue&#39;</span>
+<span style="color:#007020;font-weight:bold">import</span> Router from <span style="color:#4070a0">&#39;vue-router&#39;</span>
+<span style="color:#007020;font-weight:bold">import</span> Hello from <span style="color:#4070a0">&#39;@/components/Hello&#39;</span>
 
 Vue.use(Router)
 
-<span style="color: #007020; font-weight: bold">export</span> <span style="color: #007020; font-weight: bold">default</span> <span style="color: #007020; font-weight: bold">new</span> Router({
-  routes<span style="color: #666666">:</span> [
+<span style="color:#007020;font-weight:bold">export</span> <span style="color:#007020;font-weight:bold">default</span> <span style="color:#007020;font-weight:bold">new</span> Router({
+  routes<span style="color:#666">:</span> [
     {
-      path<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;/&#39;</span>,
-      name<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;Hello&#39;</span>,
-      component<span style="color: #666666">:</span> Hello
+      path<span style="color:#666">:</span> <span style="color:#4070a0">&#39;/&#39;</span>,
+      name<span style="color:#666">:</span> <span style="color:#4070a0">&#39;Hello&#39;</span>,
+      component<span style="color:#666">:</span> Hello
     }
   ]
-})
-</pre></div>
-
+})</code></pre></div>
 <p>Even if we don&rsquo;t know how everything here works, we can infer enough. So far, the routes only say &ldquo;when path is /, load component Hello&rdquo;. The name is for named routes, which are easy to link to - think of it like of path helpers in Rails. We&rsquo;ll go over this in much more detail when laying out the routing structure for our app in a future episode.</p>
 
 <p>Okay, &ldquo;load component Hello&rdquo;. What&rsquo;s in Hello?</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;<span style="color: #062873; font-weight: bold">template</span>&gt;
-  &lt;<span style="color: #062873; font-weight: bold">div</span> <span style="color: #4070a0">class</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;hello&quot;</span>&gt;
-    &lt;<span style="color: #062873; font-weight: bold">h1</span>&gt;{{ msg }}&lt;/<span style="color: #062873; font-weight: bold">h1</span>&gt;
-    &lt;<span style="color: #062873; font-weight: bold">h2</span>&gt;Essential Links&lt;/<span style="color: #062873; font-weight: bold">h2</span>&gt;
-    &lt;<span style="color: #062873; font-weight: bold">ul</span>&gt;
-      &lt;<span style="color: #062873; font-weight: bold">li</span>&gt;&lt;<span style="color: #062873; font-weight: bold">a</span> <span style="color: #4070a0">href</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;https://vuejs.org&quot;</span> <span style="color: #4070a0">target</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;_blank&quot;</span>&gt;Core Docs&lt;/<span style="color: #062873; font-weight: bold">a</span>&gt;&lt;/<span style="color: #062873; font-weight: bold">li</span>&gt;
-      &lt;<span style="color: #062873; font-weight: bold">li</span>&gt;&lt;<span style="color: #062873; font-weight: bold">a</span> <span style="color: #4070a0">href</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;https://forum.vuejs.org&quot;</span> <span style="color: #4070a0">target</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;_blank&quot;</span>&gt;Forum&lt;/<span style="color: #062873; font-weight: bold">a</span>&gt;&lt;/<span style="color: #062873; font-weight: bold">li</span>&gt;
-      &lt;<span style="color: #062873; font-weight: bold">li</span>&gt;&lt;<span style="color: #062873; font-weight: bold">a</span> <span style="color: #4070a0">href</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;https://chat.vuejs.org&quot;</span> <span style="color: #4070a0">target</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;_blank&quot;</span>&gt;Community Chat&lt;/<span style="color: #062873; font-weight: bold">a</span>&gt;&lt;/<span style="color: #062873; font-weight: bold">li</span>&gt;
-      &lt;<span style="color: #062873; font-weight: bold">li</span>&gt;&lt;<span style="color: #062873; font-weight: bold">a</span> <span style="color: #4070a0">href</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;https://twitter.com/vuejs&quot;</span> <span style="color: #4070a0">target</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;_blank&quot;</span>&gt;Twitter&lt;/<span style="color: #062873; font-weight: bold">a</span>&gt;&lt;/<span style="color: #062873; font-weight: bold">li</span>&gt;
-      &lt;<span style="color: #062873; font-weight: bold">br</span>&gt;
-      &lt;<span style="color: #062873; font-weight: bold">li</span>&gt;&lt;<span style="color: #062873; font-weight: bold">a</span> <span style="color: #4070a0">href</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;http://vuejs-templates.github.io/webpack/&quot;</span> <span style="color: #4070a0">target</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;_blank&quot;</span>&gt;Docs for This Template&lt;/<span style="color: #062873; font-weight: bold">a</span>&gt;&lt;/<span style="color: #062873; font-weight: bold">li</span>&gt;
-    &lt;/<span style="color: #062873; font-weight: bold">ul</span>&gt;
-    &lt;<span style="color: #062873; font-weight: bold">h2</span>&gt;Ecosystem&lt;/<span style="color: #062873; font-weight: bold">h2</span>&gt;
-    &lt;<span style="color: #062873; font-weight: bold">ul</span>&gt;
-      &lt;<span style="color: #062873; font-weight: bold">li</span>&gt;&lt;<span style="color: #062873; font-weight: bold">a</span> <span style="color: #4070a0">href</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;http://router.vuejs.org/&quot;</span> <span style="color: #4070a0">target</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;_blank&quot;</span>&gt;vue-router&lt;/<span style="color: #062873; font-weight: bold">a</span>&gt;&lt;/<span style="color: #062873; font-weight: bold">li</span>&gt;
-      &lt;<span style="color: #062873; font-weight: bold">li</span>&gt;&lt;<span style="color: #062873; font-weight: bold">a</span> <span style="color: #4070a0">href</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;http://vuex.vuejs.org/&quot;</span> <span style="color: #4070a0">target</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;_blank&quot;</span>&gt;vuex&lt;/<span style="color: #062873; font-weight: bold">a</span>&gt;&lt;/<span style="color: #062873; font-weight: bold">li</span>&gt;
-      &lt;<span style="color: #062873; font-weight: bold">li</span>&gt;&lt;<span style="color: #062873; font-weight: bold">a</span> <span style="color: #4070a0">href</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;http://vue-loader.vuejs.org/&quot;</span> <span style="color: #4070a0">target</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;_blank&quot;</span>&gt;vue-loader&lt;/<span style="color: #062873; font-weight: bold">a</span>&gt;&lt;/<span style="color: #062873; font-weight: bold">li</span>&gt;
-      &lt;<span style="color: #062873; font-weight: bold">li</span>&gt;&lt;<span style="color: #062873; font-weight: bold">a</span> <span style="color: #4070a0">href</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;https://github.com/vuejs/awesome-vue&quot;</span> <span style="color: #4070a0">target</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;_blank&quot;</span>&gt;awesome-vue&lt;/<span style="color: #062873; font-weight: bold">a</span>&gt;&lt;/<span style="color: #062873; font-weight: bold">li</span>&gt;
-    &lt;/<span style="color: #062873; font-weight: bold">ul</span>&gt;
-  &lt;/<span style="color: #062873; font-weight: bold">div</span>&gt;
-&lt;/<span style="color: #062873; font-weight: bold">template</span>&gt;
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#062873;font-weight:bold">template</span>&gt;
+  &lt;<span style="color:#062873;font-weight:bold">div</span> <span style="color:#4070a0">class</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;hello&#34;</span>&gt;
+    &lt;<span style="color:#062873;font-weight:bold">h1</span>&gt;{{ msg }}&lt;/<span style="color:#062873;font-weight:bold">h1</span>&gt;
+    &lt;<span style="color:#062873;font-weight:bold">h2</span>&gt;Essential Links&lt;/<span style="color:#062873;font-weight:bold">h2</span>&gt;
+    &lt;<span style="color:#062873;font-weight:bold">ul</span>&gt;
+      &lt;<span style="color:#062873;font-weight:bold">li</span>&gt;&lt;<span style="color:#062873;font-weight:bold">a</span> <span style="color:#4070a0">href</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;https://vuejs.org&#34;</span> <span style="color:#4070a0">target</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;_blank&#34;</span>&gt;Core Docs&lt;/<span style="color:#062873;font-weight:bold">a</span>&gt;&lt;/<span style="color:#062873;font-weight:bold">li</span>&gt;
+      &lt;<span style="color:#062873;font-weight:bold">li</span>&gt;&lt;<span style="color:#062873;font-weight:bold">a</span> <span style="color:#4070a0">href</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;https://forum.vuejs.org&#34;</span> <span style="color:#4070a0">target</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;_blank&#34;</span>&gt;Forum&lt;/<span style="color:#062873;font-weight:bold">a</span>&gt;&lt;/<span style="color:#062873;font-weight:bold">li</span>&gt;
+      &lt;<span style="color:#062873;font-weight:bold">li</span>&gt;&lt;<span style="color:#062873;font-weight:bold">a</span> <span style="color:#4070a0">href</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;https://chat.vuejs.org&#34;</span> <span style="color:#4070a0">target</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;_blank&#34;</span>&gt;Community Chat&lt;/<span style="color:#062873;font-weight:bold">a</span>&gt;&lt;/<span style="color:#062873;font-weight:bold">li</span>&gt;
+      &lt;<span style="color:#062873;font-weight:bold">li</span>&gt;&lt;<span style="color:#062873;font-weight:bold">a</span> <span style="color:#4070a0">href</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;https://twitter.com/vuejs&#34;</span> <span style="color:#4070a0">target</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;_blank&#34;</span>&gt;Twitter&lt;/<span style="color:#062873;font-weight:bold">a</span>&gt;&lt;/<span style="color:#062873;font-weight:bold">li</span>&gt;
+      &lt;<span style="color:#062873;font-weight:bold">br</span>&gt;
+      &lt;<span style="color:#062873;font-weight:bold">li</span>&gt;&lt;<span style="color:#062873;font-weight:bold">a</span> <span style="color:#4070a0">href</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;http://vuejs-templates.github.io/webpack/&#34;</span> <span style="color:#4070a0">target</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;_blank&#34;</span>&gt;Docs for This Template&lt;/<span style="color:#062873;font-weight:bold">a</span>&gt;&lt;/<span style="color:#062873;font-weight:bold">li</span>&gt;
+    &lt;/<span style="color:#062873;font-weight:bold">ul</span>&gt;
+    &lt;<span style="color:#062873;font-weight:bold">h2</span>&gt;Ecosystem&lt;/<span style="color:#062873;font-weight:bold">h2</span>&gt;
+    &lt;<span style="color:#062873;font-weight:bold">ul</span>&gt;
+      &lt;<span style="color:#062873;font-weight:bold">li</span>&gt;&lt;<span style="color:#062873;font-weight:bold">a</span> <span style="color:#4070a0">href</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;http://router.vuejs.org/&#34;</span> <span style="color:#4070a0">target</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;_blank&#34;</span>&gt;vue-router&lt;/<span style="color:#062873;font-weight:bold">a</span>&gt;&lt;/<span style="color:#062873;font-weight:bold">li</span>&gt;
+      &lt;<span style="color:#062873;font-weight:bold">li</span>&gt;&lt;<span style="color:#062873;font-weight:bold">a</span> <span style="color:#4070a0">href</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;http://vuex.vuejs.org/&#34;</span> <span style="color:#4070a0">target</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;_blank&#34;</span>&gt;vuex&lt;/<span style="color:#062873;font-weight:bold">a</span>&gt;&lt;/<span style="color:#062873;font-weight:bold">li</span>&gt;
+      &lt;<span style="color:#062873;font-weight:bold">li</span>&gt;&lt;<span style="color:#062873;font-weight:bold">a</span> <span style="color:#4070a0">href</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;http://vue-loader.vuejs.org/&#34;</span> <span style="color:#4070a0">target</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;_blank&#34;</span>&gt;vue-loader&lt;/<span style="color:#062873;font-weight:bold">a</span>&gt;&lt;/<span style="color:#062873;font-weight:bold">li</span>&gt;
+      &lt;<span style="color:#062873;font-weight:bold">li</span>&gt;&lt;<span style="color:#062873;font-weight:bold">a</span> <span style="color:#4070a0">href</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;https://github.com/vuejs/awesome-vue&#34;</span> <span style="color:#4070a0">target</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;_blank&#34;</span>&gt;awesome-vue&lt;/<span style="color:#062873;font-weight:bold">a</span>&gt;&lt;/<span style="color:#062873;font-weight:bold">li</span>&gt;
+    &lt;/<span style="color:#062873;font-weight:bold">ul</span>&gt;
+  &lt;/<span style="color:#062873;font-weight:bold">div</span>&gt;
+&lt;/<span style="color:#062873;font-weight:bold">template</span>&gt;
 
-&lt;<span style="color: #062873; font-weight: bold">script</span>&gt;
-<span style="color: #007020; font-weight: bold">export</span> <span style="color: #007020; font-weight: bold">default</span> {
-  name<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;hello&#39;</span>,
+&lt;<span style="color:#062873;font-weight:bold">script</span>&gt;
+<span style="color:#007020;font-weight:bold">export</span> <span style="color:#007020;font-weight:bold">default</span> {
+  name<span style="color:#666">:</span> <span style="color:#4070a0">&#39;hello&#39;</span>,
   data () {
-    <span style="color: #007020; font-weight: bold">return</span> {
-      msg<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;Welcome to Your Vue.js App&#39;</span>
+    <span style="color:#007020;font-weight:bold">return</span> {
+      msg<span style="color:#666">:</span> <span style="color:#4070a0">&#39;Welcome to Your Vue.js App&#39;</span>
     }
   }
 }
-&lt;/<span style="color: #062873; font-weight: bold">script</span>&gt;
+&lt;/<span style="color:#062873;font-weight:bold">script</span>&gt;
 
-<span style="color: #60a0b0; font-style: italic">&lt;!-- Add &quot;scoped&quot; attribute to limit CSS to this component only --&gt;</span>
-&lt;<span style="color: #062873; font-weight: bold">style</span> <span style="color: #4070a0">scoped</span>&gt;
-<span style="color: #062873; font-weight: bold">h1</span><span style="color: #666666">,</span> <span style="color: #062873; font-weight: bold">h2</span> {
-  <span style="color: #007020; font-weight: bold">font-weight</span>: <span style="color: #007020; font-weight: bold">normal</span>;
+<span style="color:#60a0b0;font-style:italic">&lt;!-- Add &#34;scoped&#34; attribute to limit CSS to this component only --&gt;</span>
+&lt;<span style="color:#062873;font-weight:bold">style</span> <span style="color:#4070a0">scoped</span>&gt;
+<span style="color:#062873;font-weight:bold">h1</span><span style="color:#666">,</span> <span style="color:#062873;font-weight:bold">h2</span> {
+  <span style="color:#007020;font-weight:bold">font-weight</span>: <span style="color:#007020;font-weight:bold">normal</span>;
 }
 
-<span style="color: #062873; font-weight: bold">ul</span> {
-  <span style="color: #007020; font-weight: bold">list-style-type</span>: <span style="color: #007020; font-weight: bold">none</span>;
-  <span style="color: #007020; font-weight: bold">padding</span>: <span style="color: #40a070">0</span>;
+<span style="color:#062873;font-weight:bold">ul</span> {
+  <span style="color:#007020;font-weight:bold">list-style-type</span>: <span style="color:#007020;font-weight:bold">none</span>;
+  <span style="color:#007020;font-weight:bold">padding</span>: <span style="color:#40a070">0</span>;
 }
 
-<span style="color: #062873; font-weight: bold">li</span> {
-  <span style="color: #007020; font-weight: bold">display</span>: <span style="color: #007020; font-weight: bold">inline-block</span>;
-  <span style="color: #007020; font-weight: bold">margin</span>: <span style="color: #40a070">0</span> <span style="color: #40a070">10</span><span style="color: #902000">px</span>;
+<span style="color:#062873;font-weight:bold">li</span> {
+  <span style="color:#007020;font-weight:bold">display</span>: <span style="color:#007020;font-weight:bold">inline</span><span style="color:#666">-</span><span style="color:#007020;font-weight:bold">block</span>;
+  <span style="color:#007020;font-weight:bold">margin</span>: <span style="color:#40a070">0</span> <span style="color:#40a070">10</span><span style="color:#902000">px</span>;
 }
 
-<span style="color: #062873; font-weight: bold">a</span> {
-  <span style="color: #007020; font-weight: bold">color</span>: <span style="color: #40a070">#42b983</span>;
+<span style="color:#062873;font-weight:bold">a</span> {
+  <span style="color:#007020;font-weight:bold">color</span>: <span style="color:#40a070">#42b983</span>;
 }
-&lt;/<span style="color: #062873; font-weight: bold">style</span>&gt;
-</pre></div>
-
+&lt;/<span style="color:#062873;font-weight:bold">style</span>&gt;</code></pre></div>
 <p>Jackpot. These are all the links we saw in the browser. But wait a minute - there&rsquo;s no logo here!</p>
 
 <p>vue-router doesn&rsquo;t just load a component - it loads the component into the <code>&lt;router-view&gt;</code> placeholder in a top level component. Whatever we define in <code>App</code> will always wrap what is in the component that router loaded - think of it like the <code>application</code> layout in Rails, and <code>&lt;router-view&gt;</code> as akin to <code>yield</code> in that layout.</p>
@@ -606,16 +578,14 @@ Vue.use(Router)
 <p>What does this component do? Nothing much, apparently - it does have its own <code>scoped</code> style and a single piece of data - <code>msg</code> - being displayed in the header.</p>
 
 <p>If there&rsquo;s one nice feature about the development server that we&rsquo;re running, it&rsquo;s the live regeneration of the app views. If we change the <code>&lt;script&gt;</code> section of <code>Hello.vue</code> to say, e.g.</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">export</span> <span style="color: #007020; font-weight: bold">default</span> {
-  name<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;hello&#39;</span>,
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#007020;font-weight:bold">export</span> <span style="color:#007020;font-weight:bold">default</span> {
+  name<span style="color:#666">:</span> <span style="color:#4070a0">&#39;hello&#39;</span>,
   data () {
-    <span style="color: #007020; font-weight: bold">return</span> {
-      msg<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;Hello from paweljw.github.io!&#39;</span>
+    <span style="color:#007020;font-weight:bold">return</span> {
+      msg<span style="color:#666">:</span> <span style="color:#4070a0">&#39;Hello from paweljw.github.io!&#39;</span>
     }
   }
-}
-</pre></div>
-
+}</code></pre></div>
 <p>the browser will show this <em>immediately after saving</em> the file - no reloads there:</p>
 
 

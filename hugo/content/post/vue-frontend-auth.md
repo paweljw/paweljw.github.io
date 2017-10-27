@@ -441,7 +441,7 @@ We can run the API in the background, try to log in and it should show the (slig
 
 ## Locking it down
 
-We know that our login works and we got redirected to `/books` after logging in. Now that I'm logged in, let me just go to `/` real quick...
+We know that our login works and we got redirected to `/authors` after logging in. Now that I'm logged in, let me just go to `/` real quick...
 
 {{< figure src="/media/vue-auth/login.png" link="/media/vue-auth/login.png" caption="Huh. That again.">}}
 

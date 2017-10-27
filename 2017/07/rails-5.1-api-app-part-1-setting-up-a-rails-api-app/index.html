@@ -21,7 +21,7 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.27.1">
+    <meta name="generator" content="Hugo 0.30.2">
     <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
     <title>Rails 5.1 API app, part 1: Setting up a Rails API app</title>
     <meta name="author" content="Paweł J. Wal">
@@ -315,17 +315,15 @@ ga('send', 'pageview');
 </ul>
 
 <p>One of the initializers will come in handy, though: <code>cors.rb</code>. We can uncomment what is already there and modify it to accept all origins:</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60add5">Rails</span><span style="color: #666666">.</span>application<span style="color: #666666">.</span>config<span style="color: #666666">.</span>middleware<span style="color: #666666">.</span>insert_before <span style="color: #40a070">0</span>, <span style="color: #60add5">Rack</span><span style="color: #666666">::</span><span style="color: #60add5">Cors</span> <span style="color: #007020; font-weight: bold">do</span>
-  allow <span style="color: #007020; font-weight: bold">do</span>
-    origins <span style="color: #60add5">ENV</span><span style="color: #666666">.</span>fetch(<span style="color: #4070a0">&#39;ALLOWED_ORIGINS&#39;</span>) { <span style="color: #4070a0">&#39;*&#39;</span> }
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#60add5">Rails</span><span style="color:#666">.</span>application<span style="color:#666">.</span>config<span style="color:#666">.</span>middleware<span style="color:#666">.</span>insert_before <span style="color:#40a070">0</span><span style="color:#666"></span>, <span style="color:#60add5">Rack</span><span style="color:#666">::</span><span style="color:#60add5">Cors</span> <span style="color:#007020;font-weight:bold">do</span>
+  allow <span style="color:#007020;font-weight:bold">do</span>
+    origins <span style="color:#60add5">ENV</span><span style="color:#666">.</span>fetch(<span style="color:#4070a0">&#39;ALLOWED_ORIGINS&#39;</span>) { <span style="color:#4070a0">&#39;*&#39;</span> }
 
-    resource <span style="color: #4070a0">&#39;*&#39;</span>,
-      <span style="color: #517918">headers</span>: <span style="color: #517918">:any</span>,
-      <span style="color: #007020">methods</span>: <span style="color: #666666">[</span><span style="color: #517918">:get</span>, <span style="color: #517918">:post</span>, <span style="color: #517918">:put</span>, <span style="color: #517918">:patch</span>, <span style="color: #517918">:delete</span>, <span style="color: #517918">:options</span>, <span style="color: #517918">:head</span><span style="color: #666666">]</span>
-  <span style="color: #007020; font-weight: bold">end</span>
-<span style="color: #007020; font-weight: bold">end</span>
-</pre></div>
-
+    resource <span style="color:#4070a0">&#39;*&#39;</span>,
+      <span style="color:#517918">headers</span>: <span style="color:#517918">:any</span>,
+      <span style="color:#007020">methods</span>: <span style="color:#666">[</span><span style="color:#517918">:get</span>, <span style="color:#517918">:post</span>, <span style="color:#517918">:put</span>, <span style="color:#517918">:patch</span>, <span style="color:#517918">:delete</span>, <span style="color:#517918">:options</span>, <span style="color:#517918">:head</span><span style="color:#666">]</span>
+  <span style="color:#007020;font-weight:bold">end</span>
+<span style="color:#007020;font-weight:bold">end</span></code></pre></div>
 <p>This will make us happy campers in development, and allows us to set it properly for production - when we will know where our front-end lives. As a side note, simply allowing <code>*</code> would also be fine if we were going to call our API from e.g. a mobile application.</p>
 
 <p>To use this, we need to uncomment <code>rack-cors</code> in the Gemfile.</p>
@@ -335,40 +333,36 @@ ga('send', 'pageview');
 <p>As we&rsquo;ve said in Part 0, we&rsquo;ll use <a href="https://docs.docker.com/compose/install/">Docker</a> to isolate our services in development. The easiest way to do this is by far with Docker. Messing around with images by themselves can be a bit cumbersome though, so we&rsquo;ll use <code>docker-compose</code> for that. If you don&rsquo;t have Docker installed yet, now is a great time to click that link and get it.</p>
 
 <p>When we have <code>docker-compose</code> ready, we can just drop a file called <code>docker-compose.yml</code> in the root of our application, set up like this:</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>postgresql:
-  image: postgres:9.6
-  ports:
-    - 5432:5432
-  environment:
-    - PGDATA=/postgresql
-    - PG_PASSWORD=our-awesome-bookstore-app
-  volumes:
-    - ./tmp/data/postgresql:/postgresql
-</pre></div>
-
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">postgresql:<span style="color:#bbb">
+</span><span style="color:#bbb">  </span>image:<span style="color:#bbb"> </span>postgres:<span style="color:#40a070">9.6</span><span style="color:#bbb">
+</span><span style="color:#bbb">  </span>ports:<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>-<span style="color:#bbb"> </span><span style="color:#40a070">5432</span>:<span style="color:#40a070">5432</span><span style="color:#bbb">
+</span><span style="color:#bbb">  </span>environment:<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>-<span style="color:#bbb"> </span>PGDATA=/postgresql<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>-<span style="color:#bbb"> </span>PG_PASSWORD=our-awesome-bookstore-app<span style="color:#bbb">
+</span><span style="color:#bbb">  </span>volumes:<span style="color:#bbb">
+</span><span style="color:#bbb">    </span>-<span style="color:#bbb"> </span>./tmp/data/postgresql:/postgresql</code></pre></div>
 <p>This will set up a container with PostgreSQL 9.6, connect it&rsquo;s port 5432 to our localhost and set up a password on the database. We can run it using <code>docker-compose up</code> in the front, or <code>docker-compose start</code> as a daemon. Don&rsquo;t forget to stop it when you&rsquo;re done! I keep forgetting, so I prefer to run mine in the foreground.</p>
 
 <p>Now we just need to point our Rails app to this instance of PostgreSQL in development and test environments. Our <code>database.yml</code> may look something like this:</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>default: <span style="color: #002070; font-weight: bold">&amp;default</span>
-  adapter: postgresql
-  encoding: unicode
-  pool: &lt;%= ENV.fetch(&quot;RAILS_MAX_THREADS&quot;) { 5 } %&gt;
-
-development: <span style="color: #002070; font-weight: bold">&amp;development</span>
-  &lt;&lt;: <span style="color: #bb60d5">*default</span>
-  database: bookstore-backend_development
-  username: postgres
-  password: our-awesome-bookstore-app
-  host: localhost
-
-test:
-  &lt;&lt;: <span style="color: #bb60d5">*development</span>
-  database: bookstore-backend_test
-
-production:
-  url: &lt;%= ENV[&#39;DATABASE_URL&#39;] %&gt;
-</pre></div>
-
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">default:<span style="color:#bbb"> </span>&amp;default<span style="color:#bbb">
+</span><span style="color:#bbb">  </span>adapter:<span style="color:#bbb"> </span>postgresql<span style="color:#bbb">
+</span><span style="color:#bbb">  </span>encoding:<span style="color:#bbb"> </span>unicode<span style="color:#bbb">
+</span><span style="color:#bbb">  </span>pool:<span style="color:#bbb"> </span>&lt;%=<span style="color:#bbb"> </span>ENV.fetch(<span style="color:#4070a0">&#34;RAILS_MAX_THREADS&#34;</span>)<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span><span style="color:#40a070">5</span><span style="color:#bbb"> </span>}<span style="color:#bbb"> </span>%<span style="color:#4070a0;font-style:italic">&gt;
+</span><span style="color:#4070a0;font-style:italic">
+</span><span style="color:#4070a0;font-style:italic">development: &amp;development</span><span style="color:#bbb">
+</span><span style="color:#bbb">  </span>&lt;&lt;:<span style="color:#bbb"> </span>*default<span style="color:#bbb">
+</span><span style="color:#bbb">  </span>database:<span style="color:#bbb"> </span>bookstore-backend_development<span style="color:#bbb">
+</span><span style="color:#bbb">  </span>username:<span style="color:#bbb"> </span>postgres<span style="color:#bbb">
+</span><span style="color:#bbb">  </span>password:<span style="color:#bbb"> </span>our-awesome-bookstore-app<span style="color:#bbb">
+</span><span style="color:#bbb">  </span>host:<span style="color:#bbb"> </span>localhost<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb"></span>test:<span style="color:#bbb">
+</span><span style="color:#bbb">  </span>&lt;&lt;:<span style="color:#bbb"> </span>*development<span style="color:#bbb">
+</span><span style="color:#bbb">  </span>database:<span style="color:#bbb"> </span>bookstore-backend_test<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb"></span>production:<span style="color:#bbb">
+</span><span style="color:#bbb">  </span>url:<span style="color:#bbb"> </span>&lt;%=<span style="color:#bbb"> </span>ENV[<span style="color:#4070a0">&#39;DATABASE_URL&#39;</span>]<span style="color:#bbb"> </span>%&gt;</code></pre></div>
 <p>You might notice some peculiarities. For example, we&rsquo;ve created an alias <code>&amp;development</code> and are running our <code>test</code> environment off of it. That makes sense, since the only thing we want to differ for the tests is the database they use - they should still hit Docker. Also, we&rsquo;ve already set up a production environment and made it use <code>DATABASE_URL</code>. This is how we&rsquo;ll set it up on Heroku.</p>
 
 <p>As a side note - almost everyone has probably at some (early) point in their career committed credentials to a repository. Most of us probably got chewed out for it. So why are we comfortable doing this for our development and test environments? Simple - the database only exists on our machine and doesn&rsquo;t talk to the outside world. Of course we would never put production creds in a repo.</p>

@@ -21,7 +21,7 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.27.1">
+    <meta name="generator" content="Hugo 0.30.2">
     <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
     <title>Vue.js front end app, part 3: Authentication</title>
     <meta name="author" content="Paweł J. Wal">
@@ -308,217 +308,199 @@ ga('send', 'pageview');
 <h2 id="login-form">Login form</h2>
 
 <p>Right now our <code>src/router/index.js</code> file looks something like this:</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">import</span> Vue from <span style="color: #4070a0">&#39;vue&#39;</span>
-<span style="color: #007020; font-weight: bold">import</span> Router from <span style="color: #4070a0">&#39;vue-router&#39;</span>
-<span style="color: #007020; font-weight: bold">import</span> Hello from <span style="color: #4070a0">&#39;@/components/Hello&#39;</span>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#007020;font-weight:bold">import</span> Vue from <span style="color:#4070a0">&#39;vue&#39;</span>
+<span style="color:#007020;font-weight:bold">import</span> Router from <span style="color:#4070a0">&#39;vue-router&#39;</span>
+<span style="color:#007020;font-weight:bold">import</span> Hello from <span style="color:#4070a0">&#39;@/components/Hello&#39;</span>
 
 Vue.use(Router)
 
-<span style="color: #007020; font-weight: bold">export</span> <span style="color: #007020; font-weight: bold">default</span> <span style="color: #007020; font-weight: bold">new</span> Router({
-  routes<span style="color: #666666">:</span> [
+<span style="color:#007020;font-weight:bold">export</span> <span style="color:#007020;font-weight:bold">default</span> <span style="color:#007020;font-weight:bold">new</span> Router({
+  routes<span style="color:#666">:</span> [
     {
-      path<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;/&#39;</span>,
-      name<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;Hello&#39;</span>,
-      component<span style="color: #666666">:</span> Hello
+      path<span style="color:#666">:</span> <span style="color:#4070a0">&#39;/&#39;</span>,
+      name<span style="color:#666">:</span> <span style="color:#4070a0">&#39;Hello&#39;</span>,
+      component<span style="color:#666">:</span> Hello
     }
   ]
-})
-</pre></div>
-
+})</code></pre></div>
 <p>The default route renders the <code>Hello</code> component within the <code>&lt;router-view&gt;</code> container within <code>App</code>. Let&rsquo;s see what <code>App</code> looks like:</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;<span style="color: #062873; font-weight: bold">template</span>&gt;
-  &lt;<span style="color: #062873; font-weight: bold">div</span> <span style="color: #4070a0">id</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;app&quot;</span>&gt;
-    &lt;<span style="color: #062873; font-weight: bold">img</span> <span style="color: #4070a0">src</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;./assets/logo.png&quot;</span>&gt;
-    &lt;<span style="color: #062873; font-weight: bold">router-view</span>&gt;&lt;/<span style="color: #062873; font-weight: bold">router-view</span>&gt;
-  &lt;/<span style="color: #062873; font-weight: bold">div</span>&gt;
-&lt;/<span style="color: #062873; font-weight: bold">template</span>&gt;
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#062873;font-weight:bold">template</span>&gt;
+  &lt;<span style="color:#062873;font-weight:bold">div</span> <span style="color:#4070a0">id</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;app&#34;</span>&gt;
+    &lt;<span style="color:#062873;font-weight:bold">img</span> <span style="color:#4070a0">src</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;./assets/logo.png&#34;</span>&gt;
+    &lt;<span style="color:#062873;font-weight:bold">router-view</span>&gt;&lt;/<span style="color:#062873;font-weight:bold">router-view</span>&gt;
+  &lt;/<span style="color:#062873;font-weight:bold">div</span>&gt;
+&lt;/<span style="color:#062873;font-weight:bold">template</span>&gt;
 
-&lt;<span style="color: #062873; font-weight: bold">script</span>&gt;
-<span style="color: #007020; font-weight: bold">export</span> <span style="color: #007020; font-weight: bold">default</span> {
-  name<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;app&#39;</span>
+&lt;<span style="color:#062873;font-weight:bold">script</span>&gt;
+<span style="color:#007020;font-weight:bold">export</span> <span style="color:#007020;font-weight:bold">default</span> {
+  name<span style="color:#666">:</span> <span style="color:#4070a0">&#39;app&#39;</span>
 }
-&lt;/<span style="color: #062873; font-weight: bold">script</span>&gt;
+&lt;/<span style="color:#062873;font-weight:bold">script</span>&gt;
 
-&lt;<span style="color: #062873; font-weight: bold">style</span>&gt;
-#<span style="color: #0e84b5; font-weight: bold">app</span> {
-  <span style="color: #007020; font-weight: bold">font-family</span>: <span style="color: #4070a0">&#39;Avenir&#39;</span>, Helvetica, Arial, <span style="color: #007020; font-weight: bold">sans-serif</span>;
-  <span style="color: #007020">-webkit-</span>font-smoothing: antialiased;
-  <span style="color: #007020">-moz-</span>osx-font-smoothing: grayscale;
-  <span style="color: #007020; font-weight: bold">text-align</span>: <span style="color: #007020; font-weight: bold">center</span>;
-  <span style="color: #007020; font-weight: bold">color</span>: <span style="color: #40a070">#2c3e50</span>;
-  <span style="color: #007020; font-weight: bold">margin-top</span>: <span style="color: #40a070">60</span><span style="color: #902000">px</span>;
+&lt;<span style="color:#062873;font-weight:bold">style</span>&gt;
+#<span style="color:#0e84b5;font-weight:bold">app</span> {
+  <span style="color:#007020;font-weight:bold">font-family</span>: <span style="color:#4070a0">&#39;Avenir&#39;</span>, Helvetica, Arial, <span style="color:#007020;font-weight:bold">sans-serif</span>;
+  <span style="color:#007020">-webkit-</span>font-smoothing: antialiased;
+  <span style="color:#007020">-moz-</span>osx-font-smoothing: grayscale;
+  <span style="color:#007020;font-weight:bold">text-align</span>: <span style="color:#007020;font-weight:bold">center</span>;
+  <span style="color:#007020;font-weight:bold">color</span>: <span style="color:#40a070">#2c3e50</span>;
+  <span style="color:#007020;font-weight:bold">margin-top</span>: <span style="color:#40a070">60</span><span style="color:#902000">px</span>;
 }
-&lt;/<span style="color: #062873; font-weight: bold">style</span>&gt;
-</pre></div>
-
+&lt;/<span style="color:#062873;font-weight:bold">style</span>&gt;</code></pre></div>
 <p>We&rsquo;ll rip all that out, drop in Bootstrap and make a <code>Login</code> component.</p>
 
 <h3 id="bootstrap">Bootstrap</h3>
 
 <p>We&rsquo;ll just go the fastest and easiest route and import Bootstrap from a CDN. You can get a link at Bootstrap&rsquo;s <a href="https://getbootstrap.com/docs/4.0/getting-started/introduction/">Quick Start</a> guide. After that, just place it in <code>/index.html</code> file within the <code>&lt;head&gt;</code> section.</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020">&lt;!DOCTYPE html&gt;</span>
-&lt;<span style="color: #062873; font-weight: bold">html</span>&gt;
-  &lt;<span style="color: #062873; font-weight: bold">head</span>&gt;
-    <span style="color: #60a0b0; font-style: italic">&lt;!-- ... //--&gt;</span>
-    &lt;<span style="color: #062873; font-weight: bold">link</span> <span style="color: #4070a0">rel</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;stylesheet&quot;</span> <span style="color: #4070a0">href</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css&quot;</span> <span style="color: #4070a0">integrity</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M&quot;</span> <span style="color: #4070a0">crossorigin</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;anonymous&quot;</span>&gt;
-  &lt;/<span style="color: #062873; font-weight: bold">head</span>&gt;
-  <span style="color: #60a0b0; font-style: italic">&lt;!-- ... //--&gt;</span>
-&lt;/<span style="color: #062873; font-weight: bold">html</span>&gt;
-</pre></div>
-
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#007020">&lt;!DOCTYPE html&gt;</span>
+&lt;<span style="color:#062873;font-weight:bold">html</span>&gt;
+  &lt;<span style="color:#062873;font-weight:bold">head</span>&gt;
+    <span style="color:#60a0b0;font-style:italic">&lt;!-- ... //--&gt;</span>
+    &lt;<span style="color:#062873;font-weight:bold">link</span> <span style="color:#4070a0">rel</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;stylesheet&#34;</span> <span style="color:#4070a0">href</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css&#34;</span> <span style="color:#4070a0">integrity</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M&#34;</span> <span style="color:#4070a0">crossorigin</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;anonymous&#34;</span>&gt;
+  &lt;/<span style="color:#062873;font-weight:bold">head</span>&gt;
+  <span style="color:#60a0b0;font-style:italic">&lt;!-- ... //--&gt;</span>
+&lt;/<span style="color:#062873;font-weight:bold">html</span>&gt;</code></pre></div>
 <p>Let&rsquo;s also put a <code>#container</code> div in the <code>App</code> component. While we&rsquo;re doing it, we can get rid of the unnecessary default styling, so it looks like this:</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;<span style="color: #062873; font-weight: bold">template</span>&gt;
-  &lt;<span style="color: #062873; font-weight: bold">div</span> <span style="color: #4070a0">id</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;app&quot;</span>&gt;
-    &lt;<span style="color: #062873; font-weight: bold">div</span> <span style="color: #4070a0">class</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;container&quot;</span>&gt;
-      &lt;<span style="color: #062873; font-weight: bold">router-view</span>&gt;&lt;/<span style="color: #062873; font-weight: bold">router-view</span>&gt;
-    &lt;/<span style="color: #062873; font-weight: bold">div</span>&gt;
-  &lt;/<span style="color: #062873; font-weight: bold">div</span>&gt;
-&lt;/<span style="color: #062873; font-weight: bold">template</span>&gt;
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#062873;font-weight:bold">template</span>&gt;
+  &lt;<span style="color:#062873;font-weight:bold">div</span> <span style="color:#4070a0">id</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;app&#34;</span>&gt;
+    &lt;<span style="color:#062873;font-weight:bold">div</span> <span style="color:#4070a0">class</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;container&#34;</span>&gt;
+      &lt;<span style="color:#062873;font-weight:bold">router-view</span>&gt;&lt;/<span style="color:#062873;font-weight:bold">router-view</span>&gt;
+    &lt;/<span style="color:#062873;font-weight:bold">div</span>&gt;
+  &lt;/<span style="color:#062873;font-weight:bold">div</span>&gt;
+&lt;/<span style="color:#062873;font-weight:bold">template</span>&gt;
 
-&lt;<span style="color: #062873; font-weight: bold">script</span>&gt;
-<span style="color: #007020; font-weight: bold">export</span> <span style="color: #007020; font-weight: bold">default</span> {
-  name<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;app&#39;</span>
+&lt;<span style="color:#062873;font-weight:bold">script</span>&gt;
+<span style="color:#007020;font-weight:bold">export</span> <span style="color:#007020;font-weight:bold">default</span> {
+  name<span style="color:#666">:</span> <span style="color:#4070a0">&#39;app&#39;</span>
 }
-&lt;/<span style="color: #062873; font-weight: bold">script</span>&gt;
+&lt;/<span style="color:#062873;font-weight:bold">script</span>&gt;
 
-&lt;<span style="color: #062873; font-weight: bold">style</span>&gt;
-&lt;/<span style="color: #062873; font-weight: bold">style</span>&gt;
-</pre></div>
-
+&lt;<span style="color:#062873;font-weight:bold">style</span>&gt;
+&lt;/<span style="color:#062873;font-weight:bold">style</span>&gt;</code></pre></div>
 <h3 id="login-component">Login component</h3>
 
 <p>Let&rsquo;s take a look at a first version of the <code>Login</code> component in it&rsquo;s entirety, and then drill down to the important bits.</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;<span style="color: #062873; font-weight: bold">template</span>&gt;
-  &lt;<span style="color: #062873; font-weight: bold">div</span> <span style="color: #4070a0">class</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;login-wrapper border border-light&quot;</span>&gt;
-    &lt;<span style="color: #062873; font-weight: bold">form</span> <span style="color: #4070a0">class</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;form-signin&quot;</span> <span style="border: 1px solid #FF0000">@</span><span style="color: #4070a0">submit</span><span style="border: 1px solid #FF0000">.</span><span style="color: #4070a0">prevent</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;login&quot;</span>&gt;
-      &lt;<span style="color: #062873; font-weight: bold">h2</span> <span style="color: #4070a0">class</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;form-signin-heading&quot;</span>&gt;Please sign in&lt;/<span style="color: #062873; font-weight: bold">h2</span>&gt;
-      &lt;<span style="color: #062873; font-weight: bold">label</span> <span style="color: #4070a0">for</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;inputEmail&quot;</span> <span style="color: #4070a0">class</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;sr-only&quot;</span>&gt;Email address&lt;/<span style="color: #062873; font-weight: bold">label</span>&gt;
-      &lt;<span style="color: #062873; font-weight: bold">input</span> <span style="color: #4070a0">v-model</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;email&quot;</span> <span style="color: #4070a0">type</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;email&quot;</span> <span style="color: #4070a0">id</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;inputEmail&quot;</span> <span style="color: #4070a0">class</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;form-control&quot;</span> <span style="color: #4070a0">placeholder</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;Email address&quot;</span> <span style="color: #4070a0">required</span> <span style="color: #4070a0">autofocus</span>&gt;
-      &lt;<span style="color: #062873; font-weight: bold">label</span> <span style="color: #4070a0">for</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;inputPassword&quot;</span> <span style="color: #4070a0">class</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;sr-only&quot;</span>&gt;Password&lt;/<span style="color: #062873; font-weight: bold">label</span>&gt;
-      &lt;<span style="color: #062873; font-weight: bold">input</span> <span style="color: #4070a0">v-model</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;password&quot;</span> <span style="color: #4070a0">type</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;password&quot;</span> <span style="color: #4070a0">id</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;inputPassword&quot;</span> <span style="color: #4070a0">class</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;form-control&quot;</span> <span style="color: #4070a0">placeholder</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;Password&quot;</span> <span style="color: #4070a0">required</span>&gt;
-      &lt;<span style="color: #062873; font-weight: bold">button</span> <span style="color: #4070a0">class</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;btn btn-lg btn-primary btn-block&quot;</span> <span style="color: #4070a0">type</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;submit&quot;</span>&gt;Sign in&lt;/<span style="color: #062873; font-weight: bold">button</span>&gt;
-    &lt;/<span style="color: #062873; font-weight: bold">form</span>&gt;
-  &lt;/<span style="color: #062873; font-weight: bold">div</span>&gt;
-&lt;/<span style="color: #062873; font-weight: bold">template</span>&gt;
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#062873;font-weight:bold">template</span>&gt;
+  &lt;<span style="color:#062873;font-weight:bold">div</span> <span style="color:#4070a0">class</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;login-wrapper border border-light&#34;</span>&gt;
+    &lt;<span style="color:#062873;font-weight:bold">form</span> <span style="color:#4070a0">class</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;form-signin&#34;</span> <span style="">@</span><span style="color:#4070a0">submit</span><span style="">.</span><span style="color:#4070a0">prevent</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;login&#34;</span>&gt;
+      &lt;<span style="color:#062873;font-weight:bold">h2</span> <span style="color:#4070a0">class</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;form-signin-heading&#34;</span>&gt;Please sign in&lt;/<span style="color:#062873;font-weight:bold">h2</span>&gt;
+      &lt;<span style="color:#062873;font-weight:bold">label</span> <span style="color:#4070a0">for</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;inputEmail&#34;</span> <span style="color:#4070a0">class</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;sr-only&#34;</span>&gt;Email address&lt;/<span style="color:#062873;font-weight:bold">label</span>&gt;
+      &lt;<span style="color:#062873;font-weight:bold">input</span> <span style="color:#4070a0">v-model</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;email&#34;</span> <span style="color:#4070a0">type</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;email&#34;</span> <span style="color:#4070a0">id</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;inputEmail&#34;</span> <span style="color:#4070a0">class</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;form-control&#34;</span> <span style="color:#4070a0">placeholder</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;Email address&#34;</span> <span style="color:#4070a0">required</span> <span style="color:#4070a0">autofocus</span>&gt;
+      &lt;<span style="color:#062873;font-weight:bold">label</span> <span style="color:#4070a0">for</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;inputPassword&#34;</span> <span style="color:#4070a0">class</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;sr-only&#34;</span>&gt;Password&lt;/<span style="color:#062873;font-weight:bold">label</span>&gt;
+      &lt;<span style="color:#062873;font-weight:bold">input</span> <span style="color:#4070a0">v-model</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;password&#34;</span> <span style="color:#4070a0">type</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;password&#34;</span> <span style="color:#4070a0">id</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;inputPassword&#34;</span> <span style="color:#4070a0">class</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;form-control&#34;</span> <span style="color:#4070a0">placeholder</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;Password&#34;</span> <span style="color:#4070a0">required</span>&gt;
+      &lt;<span style="color:#062873;font-weight:bold">button</span> <span style="color:#4070a0">class</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;btn btn-lg btn-primary btn-block&#34;</span> <span style="color:#4070a0">type</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;submit&#34;</span>&gt;Sign in&lt;/<span style="color:#062873;font-weight:bold">button</span>&gt;
+    &lt;/<span style="color:#062873;font-weight:bold">form</span>&gt;
+  &lt;/<span style="color:#062873;font-weight:bold">div</span>&gt;
+&lt;/<span style="color:#062873;font-weight:bold">template</span>&gt;
 
-&lt;<span style="color: #062873; font-weight: bold">script</span>&gt;
-<span style="color: #007020; font-weight: bold">export</span> <span style="color: #007020; font-weight: bold">default</span> {
-  name<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;Login&#39;</span>,
+&lt;<span style="color:#062873;font-weight:bold">script</span>&gt;
+<span style="color:#007020;font-weight:bold">export</span> <span style="color:#007020;font-weight:bold">default</span> {
+  name<span style="color:#666">:</span> <span style="color:#4070a0">&#39;Login&#39;</span>,
   data () {
-    <span style="color: #007020; font-weight: bold">return</span> {
-      email<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;&#39;</span>,
-      password<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;&#39;</span>
+    <span style="color:#007020;font-weight:bold">return</span> {
+      email<span style="color:#666">:</span> <span style="color:#4070a0">&#39;&#39;</span>,
+      password<span style="color:#666">:</span> <span style="color:#4070a0">&#39;&#39;</span>
     }
   },
-  methods<span style="color: #666666">:</span> {
+  methods<span style="color:#666">:</span> {
     login () {
-      console.log(<span style="color: #007020; font-weight: bold">this</span>.email)
-      console.log(<span style="color: #007020; font-weight: bold">this</span>.password)
+      console.log(<span style="color:#007020;font-weight:bold">this</span>.email)
+      console.log(<span style="color:#007020;font-weight:bold">this</span>.password)
     }
   }
 }
-&lt;/<span style="color: #062873; font-weight: bold">script</span>&gt;
+&lt;/<span style="color:#062873;font-weight:bold">script</span>&gt;
 
-&lt;<span style="color: #062873; font-weight: bold">style</span> <span style="color: #4070a0">lang</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;css&quot;</span>&gt;
-<span style="color: #062873; font-weight: bold">body</span> {
-  <span style="color: #007020; font-weight: bold">background</span>: <span style="color: #40a070">#605B56</span>;
-}
-
-.<span style="color: #0e84b5; font-weight: bold">login-wrapper</span> {
-  <span style="color: #007020; font-weight: bold">background</span>: <span style="color: #40a070">#fff</span>;
-  <span style="color: #007020; font-weight: bold">width</span>: <span style="color: #40a070">70</span><span style="color: #902000">%</span>;
-  <span style="color: #007020; font-weight: bold">margin</span>: <span style="color: #40a070">12</span><span style="color: #902000">%</span> <span style="color: #007020; font-weight: bold">auto</span>;
+&lt;<span style="color:#062873;font-weight:bold">style</span> <span style="color:#4070a0">lang</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;css&#34;</span>&gt;
+<span style="color:#062873;font-weight:bold">body</span> {
+  <span style="color:#007020;font-weight:bold">background</span>: <span style="color:#40a070">#605B56</span>;
 }
 
-.<span style="color: #0e84b5; font-weight: bold">form-signin</span> {
-  <span style="color: #007020; font-weight: bold">max-width</span>: <span style="color: #40a070">330</span><span style="color: #902000">px</span>;
-  <span style="color: #007020; font-weight: bold">padding</span>: <span style="color: #40a070">10</span><span style="color: #902000">%</span> <span style="color: #40a070">15</span><span style="color: #902000">px</span>;
-  <span style="color: #007020; font-weight: bold">margin</span>: <span style="color: #40a070">0</span> <span style="color: #007020; font-weight: bold">auto</span>;
+.<span style="color:#0e84b5;font-weight:bold">login-wrapper</span> {
+  <span style="color:#007020;font-weight:bold">background</span>: <span style="color:#40a070">#fff</span>;
+  <span style="color:#007020;font-weight:bold">width</span>: <span style="color:#40a070">70</span><span style="color:#902000">%</span>;
+  <span style="color:#007020;font-weight:bold">margin</span>: <span style="color:#40a070">12</span><span style="color:#902000">%</span> <span style="color:#007020;font-weight:bold">auto</span>;
 }
-.<span style="color: #0e84b5; font-weight: bold">form-signin</span> .<span style="color: #0e84b5; font-weight: bold">form-signin-heading</span><span style="color: #666666">,</span>
-.<span style="color: #0e84b5; font-weight: bold">form-signin</span> .<span style="color: #0e84b5; font-weight: bold">checkbox</span> {
-  <span style="color: #007020; font-weight: bold">margin-bottom</span>: <span style="color: #40a070">10</span><span style="color: #902000">px</span>;
-}
-.<span style="color: #0e84b5; font-weight: bold">form-signin</span> .<span style="color: #0e84b5; font-weight: bold">checkbox</span> {
-  <span style="color: #007020; font-weight: bold">font-weight</span>: <span style="color: #007020; font-weight: bold">normal</span>;
-}
-.<span style="color: #0e84b5; font-weight: bold">form-signin</span> .<span style="color: #0e84b5; font-weight: bold">form-control</span> {
-  <span style="color: #007020; font-weight: bold">position</span>: <span style="color: #007020; font-weight: bold">relative</span>;
-  <span style="color: #007020; font-weight: bold">height</span>: <span style="color: #007020; font-weight: bold">auto</span>;
-  <span style="color: #007020">-webkit-</span><span style="color: #007020; font-weight: bold">box-sizing</span>: <span style="color: #007020; font-weight: bold">border-box</span>;
-          <span style="color: #007020; font-weight: bold">box-sizing</span>: <span style="color: #007020; font-weight: bold">border-box</span>;
-  <span style="color: #007020; font-weight: bold">padding</span>: <span style="color: #40a070">10</span><span style="color: #902000">px</span>;
-  <span style="color: #007020; font-weight: bold">font-size</span>: <span style="color: #40a070">16</span><span style="color: #902000">px</span>;
-}
-.<span style="color: #0e84b5; font-weight: bold">form-signin</span> .<span style="color: #0e84b5; font-weight: bold">form-control</span>:<span style="color: #555555; font-weight: bold">focus</span> {
-  <span style="color: #007020; font-weight: bold">z-index</span>: <span style="color: #40a070">2</span>;
-}
-.<span style="color: #0e84b5; font-weight: bold">form-signin</span> <span style="color: #062873; font-weight: bold">input</span><span style="color: #666666">[</span><span style="color: #062873; font-weight: bold">type</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;email&quot;</span><span style="color: #666666">]</span> {
-  <span style="color: #007020; font-weight: bold">margin-bottom</span>: <span style="color: #40a070">-1</span><span style="color: #902000">px</span>;
-  <span style="color: #007020; font-weight: bold">border-bottom-right-radius</span>: <span style="color: #40a070">0</span>;
-  <span style="color: #007020; font-weight: bold">border-bottom-left-radius</span>: <span style="color: #40a070">0</span>;
-}
-.<span style="color: #0e84b5; font-weight: bold">form-signin</span> <span style="color: #062873; font-weight: bold">input</span><span style="color: #666666">[</span><span style="color: #062873; font-weight: bold">type</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;password&quot;</span><span style="color: #666666">]</span> {
-  <span style="color: #007020; font-weight: bold">margin-bottom</span>: <span style="color: #40a070">10</span><span style="color: #902000">px</span>;
-  <span style="color: #007020; font-weight: bold">border-top-left-radius</span>: <span style="color: #40a070">0</span>;
-  <span style="color: #007020; font-weight: bold">border-top-right-radius</span>: <span style="color: #40a070">0</span>;
-}
-&lt;/<span style="color: #062873; font-weight: bold">style</span>&gt;
-</pre></div>
 
+.<span style="color:#0e84b5;font-weight:bold">form-signin</span> {
+  <span style="color:#007020;font-weight:bold">max-width</span>: <span style="color:#40a070">330</span><span style="color:#902000">px</span>;
+  <span style="color:#007020;font-weight:bold">padding</span>: <span style="color:#40a070">10</span><span style="color:#902000">%</span> <span style="color:#40a070">15</span><span style="color:#902000">px</span>;
+  <span style="color:#007020;font-weight:bold">margin</span>: <span style="color:#40a070">0</span> <span style="color:#007020;font-weight:bold">auto</span>;
+}
+.<span style="color:#0e84b5;font-weight:bold">form-signin</span> .<span style="color:#0e84b5;font-weight:bold">form-signin-heading</span><span style="color:#666">,</span>
+.<span style="color:#0e84b5;font-weight:bold">form-signin</span> .<span style="color:#0e84b5;font-weight:bold">checkbox</span> {
+  <span style="color:#007020;font-weight:bold">margin-bottom</span>: <span style="color:#40a070">10</span><span style="color:#902000">px</span>;
+}
+.<span style="color:#0e84b5;font-weight:bold">form-signin</span> .<span style="color:#0e84b5;font-weight:bold">checkbox</span> {
+  <span style="color:#007020;font-weight:bold">font-weight</span>: <span style="color:#007020;font-weight:bold">normal</span>;
+}
+.<span style="color:#0e84b5;font-weight:bold">form-signin</span> .<span style="color:#0e84b5;font-weight:bold">form-control</span> {
+  <span style="color:#007020;font-weight:bold">position</span>: <span style="color:#007020;font-weight:bold">relative</span>;
+  <span style="color:#007020;font-weight:bold">height</span>: <span style="color:#007020;font-weight:bold">auto</span>;
+  <span style="color:#007020">-webkit-</span><span style="color:#007020;font-weight:bold">box-sizing</span>: <span style="color:#007020;font-weight:bold">border-box</span>;
+          <span style="color:#007020;font-weight:bold">box-sizing</span>: <span style="color:#007020;font-weight:bold">border-box</span>;
+  <span style="color:#007020;font-weight:bold">padding</span>: <span style="color:#40a070">10</span><span style="color:#902000">px</span>;
+  <span style="color:#007020;font-weight:bold">font-size</span>: <span style="color:#40a070">16</span><span style="color:#902000">px</span>;
+}
+.<span style="color:#0e84b5;font-weight:bold">form-signin</span> .<span style="color:#0e84b5;font-weight:bold">form-control</span>:<span style="color:#555;font-weight:bold">focus</span> {
+  <span style="color:#007020;font-weight:bold">z-index</span>: <span style="color:#40a070">2</span>;
+}
+.<span style="color:#0e84b5;font-weight:bold">form-signin</span> <span style="color:#062873;font-weight:bold">input</span><span style="color:#666">[</span><span style="color:#062873;font-weight:bold">type</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;email&#34;</span><span style="color:#666">]</span> {
+  <span style="color:#007020;font-weight:bold">margin-bottom</span>: <span style="color:#40a070">-1</span><span style="color:#902000">px</span>;
+  <span style="color:#007020;font-weight:bold">border-bottom-right-radius</span>: <span style="color:#40a070">0</span>;
+  <span style="color:#007020;font-weight:bold">border-bottom-left-radius</span>: <span style="color:#40a070">0</span>;
+}
+.<span style="color:#0e84b5;font-weight:bold">form-signin</span> <span style="color:#062873;font-weight:bold">input</span><span style="color:#666">[</span><span style="color:#062873;font-weight:bold">type</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;password&#34;</span><span style="color:#666">]</span> {
+  <span style="color:#007020;font-weight:bold">margin-bottom</span>: <span style="color:#40a070">10</span><span style="color:#902000">px</span>;
+  <span style="color:#007020;font-weight:bold">border-top-left-radius</span>: <span style="color:#40a070">0</span>;
+  <span style="color:#007020;font-weight:bold">border-top-right-radius</span>: <span style="color:#40a070">0</span>;
+}
+&lt;/<span style="color:#062873;font-weight:bold">style</span>&gt;</code></pre></div>
 <p>Let&rsquo;s look closer at the script itself:</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">export</span> <span style="color: #007020; font-weight: bold">default</span> {
-  name<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;Login&#39;</span>,
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#007020;font-weight:bold">export</span> <span style="color:#007020;font-weight:bold">default</span> {
+  name<span style="color:#666">:</span> <span style="color:#4070a0">&#39;Login&#39;</span>,
   data () {
-    <span style="color: #007020; font-weight: bold">return</span> {
-      email<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;&#39;</span>,
-      password<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;&#39;</span>
+    <span style="color:#007020;font-weight:bold">return</span> {
+      email<span style="color:#666">:</span> <span style="color:#4070a0">&#39;&#39;</span>,
+      password<span style="color:#666">:</span> <span style="color:#4070a0">&#39;&#39;</span>
     }
   },
-  methods<span style="color: #666666">:</span> {
+  methods<span style="color:#666">:</span> {
     login () {
-      console.log(<span style="color: #007020; font-weight: bold">this</span>.email)
-      console.log(<span style="color: #007020; font-weight: bold">this</span>.password)
+      console.log(<span style="color:#007020;font-weight:bold">this</span>.email)
+      console.log(<span style="color:#007020;font-weight:bold">this</span>.password)
     }
   }
-}
-</pre></div>
-
+}</code></pre></div>
 <p>We&rsquo;re adding placeholders in the <code>data()</code> section (remember that this needs to be a function - it&rsquo;s something that tended to trip me up!) for the email and password. We also have a super-simple <code>login()</code> method - it&rsquo;s just something to verify that the form works.</p>
 
 <p>We need to tell Vue to bind the inputs to the placeholder values. We can do that with the <code>v-model</code> directive:</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;<span style="color: #062873; font-weight: bold">input</span> <span style="color: #4070a0">v-model</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;email&quot;</span> <span style="color: #4070a0">type</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;email&quot;</span> <span style="border: 1px solid #FF0000">...</span>&gt;
-&lt;<span style="color: #062873; font-weight: bold">input</span> <span style="color: #4070a0">v-model</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;password&quot;</span> <span style="color: #4070a0">type</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;password&quot;</span> <span style="border: 1px solid #FF0000">...</span>&gt;
-</pre></div>
-
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#062873;font-weight:bold">input</span> <span style="color:#4070a0">v-model</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;email&#34;</span> <span style="color:#4070a0">type</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;email&#34;</span> <span style="">...</span>&gt;
+&lt;<span style="color:#062873;font-weight:bold">input</span> <span style="color:#4070a0">v-model</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;password&#34;</span> <span style="color:#4070a0">type</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;password&#34;</span> <span style="">...</span>&gt;</code></pre></div>
 <p>That&rsquo;s it - Vue will update the fields of the component automatically now.</p>
 
 <p>When the form submits, we don&rsquo;t really want the browser to perform the regular submit action - rather, we&rsquo;d like to run the <code>login()</code> method we&rsquo;ve defined. One more directive and we&rsquo;re golden:</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;<span style="color: #062873; font-weight: bold">form</span> <span style="color: #4070a0">class</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;form-signin&quot;</span> <span style="border: 1px solid #FF0000">@</span><span style="color: #4070a0">submit</span><span style="border: 1px solid #FF0000">.</span><span style="color: #4070a0">prevent</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;login&quot;</span>&gt;
-</pre></div>
-
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#062873;font-weight:bold">form</span> <span style="color:#4070a0">class</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;form-signin&#34;</span> <span style="">@</span><span style="color:#4070a0">submit</span><span style="">.</span><span style="color:#4070a0">prevent</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;login&#34;</span>&gt;</code></pre></div>
 <p>Pay attention to the <code>prevent</code> qualifier: if we omitted it, Vue would run our method, but after that allow the event to bubble up to the browser, messing up our flow.</p>
 
 <h3 id="mounting-it">Mounting it</h3>
 
 <p>Now that we have the <code>Login</code> component in place and <code>App</code> changed for Bootstrap, let&rsquo;s change the routing so that we route to <code>Login</code> on the path <code>/</code>:</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">import</span> Vue from <span style="color: #4070a0">&#39;vue&#39;</span>
-<span style="color: #007020; font-weight: bold">import</span> Router from <span style="color: #4070a0">&#39;vue-router&#39;</span>
-<span style="color: #007020; font-weight: bold">import</span> Login from <span style="color: #4070a0">&#39;@/components/Login&#39;</span>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#007020;font-weight:bold">import</span> Vue from <span style="color:#4070a0">&#39;vue&#39;</span>
+<span style="color:#007020;font-weight:bold">import</span> Router from <span style="color:#4070a0">&#39;vue-router&#39;</span>
+<span style="color:#007020;font-weight:bold">import</span> Login from <span style="color:#4070a0">&#39;@/components/Login&#39;</span>
 
 Vue.use(Router)
 
-<span style="color: #007020; font-weight: bold">export</span> <span style="color: #007020; font-weight: bold">default</span> <span style="color: #007020; font-weight: bold">new</span> Router({
-  routes<span style="color: #666666">:</span> [
+<span style="color:#007020;font-weight:bold">export</span> <span style="color:#007020;font-weight:bold">default</span> <span style="color:#007020;font-weight:bold">new</span> Router({
+  routes<span style="color:#666">:</span> [
     {
-      path<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;/&#39;</span>,
-      name<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;Login&#39;</span>,
-      component<span style="color: #666666">:</span> Login
+      path<span style="color:#666">:</span> <span style="color:#4070a0">&#39;/&#39;</span>,
+      name<span style="color:#666">:</span> <span style="color:#4070a0">&#39;Login&#39;</span>,
+      component<span style="color:#666">:</span> Login
     }
   ]
-})
-</pre></div>
-
+})</code></pre></div>
 <p>If we check the browser now, this is the reward for our efforts:</p>
 
 
@@ -537,21 +519,17 @@ Vue.use(Router)
 <p>A couple months back when I wrote the original post on <a href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/">stack choices</a> I said that we will use vue-resource. Since then it has come to my attention that the creator of Vue decided to <a href="https://medium.com/the-vue-point/retiring-vue-resource-871a82880af4">retire vue-resource</a> as far back as November 2016.</p>
 
 <p>Because of that I&rsquo;ve decided to replace it with <a href="https://github.com/imcvampire/vue-axios">vue-axios</a> which provides Vue-style binding to the <a href="https://github.com/axios/axios">axios</a> library. Let&rsquo;s drop that into our project:</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>$ npm install --save axios vue-axios
-</pre></div>
-
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ npm install --save axios vue-axios</code></pre></div>
 <p>We will need to tell Vue to use axios, and we will need to tell axios where our API is and how to authorize itself properly.</p>
 
 <p>I like all my things neatly tucked away in obvious locations (well, obvious to me at least) - I guess it&rsquo;s a Rails-person thing. Anyway, I tucked the files we&rsquo;ll discuss momentarily in <code>src/backend/vue-axios</code>. That way I know this talks to the backend and has to do with this library by glancing at the directory structure itself.</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>$ tree src/backend
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ tree src/backend
 src/backend
 └── vue-axios
     ├── axios.js
     └── index.js
 
-<span style="color: #40a070">1</span> directory, <span style="color: #40a070">2</span> files
-</pre></div>
-
+<span style="color:#40a070">1</span> directory, <span style="color:#40a070">2</span> files</code></pre></div>
 <h3 id="configuring-axios">Configuring axios</h3>
 
 <p>axios has a couple of configuration options we can leverage here.</p>
@@ -559,118 +537,102 @@ src/backend
 <p>First off, there&rsquo;s <code>baseURL</code>. When we tell axios to contact e.g. <code>/authors</code>, it will prepend the <code>baseURL</code> automatically. Thanks to this we can easily switch between local development (seen here as default value), staging and production. And if we ever need to change it, it&rsquo;s in one place.</p>
 
 <p>Secondly we have the headers. Right now we only want JSON responses, and we will attach a JWT token to each of our calls. Note that while the user is not authorized (and we didn&rsquo;t set up the <code>token</code> variable in localStorage) this will still be sent with just a space and nothing more after <code>Bearer</code>. That&rsquo;s fine: our backend can deal with this situation and properly bail on such a request if need be.</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60a0b0; font-style: italic">/* global localStorage */</span>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#60a0b0;font-style:italic">/* global localStorage */</span>
 
-<span style="color: #007020; font-weight: bold">import</span> axios from <span style="color: #4070a0">&#39;axios&#39;</span>
+<span style="color:#007020;font-weight:bold">import</span> axios from <span style="color:#4070a0">&#39;axios&#39;</span>
 
-<span style="color: #007020; font-weight: bold">const</span> API_URL <span style="color: #666666">=</span> process.env.API_URL <span style="color: #666666">||</span> <span style="color: #4070a0">&#39;http://localhost:3000/api/v1&#39;</span>
+<span style="color:#007020;font-weight:bold">const</span> API_URL <span style="color:#666">=</span> process.env.API_URL <span style="color:#666">||</span> <span style="color:#4070a0">&#39;http://localhost:3000/api/v1&#39;</span>
 
-<span style="color: #007020; font-weight: bold">export</span> <span style="color: #007020; font-weight: bold">default</span> axios.create({
-  baseURL<span style="color: #666666">:</span> API_URL,
-  headers<span style="color: #666666">:</span> {
-    <span style="color: #4070a0">&#39;Content-Type&#39;</span><span style="color: #666666">:</span> <span style="color: #4070a0">&#39;application/json&#39;</span>,
-    <span style="color: #4070a0">&#39;Authorization&#39;</span><span style="color: #666666">:</span> <span style="color: #4070a0">&#39;Bearer &#39;</span> <span style="color: #666666">+</span> localStorage.token
+<span style="color:#007020;font-weight:bold">export</span> <span style="color:#007020;font-weight:bold">default</span> axios.create({
+  baseURL<span style="color:#666">:</span> API_URL,
+  headers<span style="color:#666">:</span> {
+    <span style="color:#4070a0">&#39;Content-Type&#39;</span><span style="color:#666">:</span> <span style="color:#4070a0">&#39;application/json&#39;</span>,
+    <span style="color:#4070a0">&#39;Authorization&#39;</span><span style="color:#666">:</span> <span style="color:#4070a0">&#39;Bearer &#39;</span> <span style="color:#666">+</span> localStorage.token
   }
-})
-</pre></div>
-
+})</code></pre></div>
 <h3 id="configuring-vue-axios-with-our-axios">Configuring vue-axios with &ldquo;our&rdquo; axios</h3>
 
 <p>The contents of <code>index.js</code> are basically boilerplate Vue-extension-to-Vue-connection code:</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">import</span> Vue from <span style="color: #4070a0">&#39;vue&#39;</span>
-<span style="color: #007020; font-weight: bold">import</span> VueAxios from <span style="color: #4070a0">&#39;vue-axios&#39;</span>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#007020;font-weight:bold">import</span> Vue from <span style="color:#4070a0">&#39;vue&#39;</span>
+<span style="color:#007020;font-weight:bold">import</span> VueAxios from <span style="color:#4070a0">&#39;vue-axios&#39;</span>
 
-<span style="color: #007020; font-weight: bold">import</span> axios from <span style="color: #4070a0">&#39;./axios&#39;</span>
+<span style="color:#007020;font-weight:bold">import</span> axios from <span style="color:#4070a0">&#39;./axios&#39;</span>
 
-Vue.use(VueAxios, axios)
-</pre></div>
-
+Vue.use(VueAxios, axios)</code></pre></div>
 <p>There is one important twist. We instruct vue-axios to use <em>our configured axios instance</em> and attach to Vue. If we just used boilerplate code from GitHub, the <code>axios</code> instance that attaches to vue-axios would just have default settings.</p>
 
 <h3 id="acquainting-vue-with-axios">Acquainting Vue with axios</h3>
 
 <p>One last thing to do: we need to make sure it actually attaches to our instance. We can to this in <code>src/main.js</code> by adding two new lines:</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60a0b0; font-style: italic">// ... other imports ...</span>
-<span style="color: #007020; font-weight: bold">import</span> axios from <span style="color: #4070a0">&#39;./backend/vue-axios&#39;</span>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#60a0b0;font-style:italic">// ... other imports ...
+</span><span style="color:#60a0b0;font-style:italic"></span><span style="color:#007020;font-weight:bold">import</span> axios from <span style="color:#4070a0">&#39;./backend/vue-axios&#39;</span>
 
-<span style="color: #60a0b0; font-style: italic">// ...</span>
-
-<span style="color: #007020; font-weight: bold">new</span> Vue({
-  el<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;#app&#39;</span>,
+<span style="color:#60a0b0;font-style:italic">// ...
+</span><span style="color:#60a0b0;font-style:italic"></span>
+<span style="color:#007020;font-weight:bold">new</span> Vue({
+  el<span style="color:#666">:</span> <span style="color:#4070a0">&#39;#app&#39;</span>,
   router,
   axios,
-  <span style="color: #60a0b0; font-style: italic">// ...</span>
-})
-</pre></div>
-
+  <span style="color:#60a0b0;font-style:italic">// ...
+</span><span style="color:#60a0b0;font-style:italic"></span>})</code></pre></div>
 <p>Now our Vue instance knows it has two extensions: <code>router</code> and <code>axios</code>. Let&rsquo;s do something with it, shall we?</p>
 
 <h2 id="getting-a-token">Getting a token</h2>
 
 <p>Let&rsquo;s go back to our <code>Login</code> component and its <code>login</code> method. We will expand it a bit to call axios:</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>login () {
-  <span style="color: #007020; font-weight: bold">this</span>.$http.post(<span style="color: #4070a0">&#39;/auth&#39;</span>, { user<span style="color: #666666">:</span> <span style="color: #007020; font-weight: bold">this</span>.email, password<span style="color: #666666">:</span> <span style="color: #007020; font-weight: bold">this</span>.password })
-    .then(request =&gt; <span style="color: #007020; font-weight: bold">this</span>.loginSuccessful(request))
-    .<span style="color: #007020; font-weight: bold">catch</span>(() =&gt; <span style="color: #007020; font-weight: bold">this</span>.loginFailed())
-}
-</pre></div>
-
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">login () {
+  <span style="color:#007020;font-weight:bold">this</span>.$http.post(<span style="color:#4070a0">&#39;/auth&#39;</span>, { user<span style="color:#666">:</span> <span style="color:#007020;font-weight:bold">this</span>.email, password<span style="color:#666">:</span> <span style="color:#007020;font-weight:bold">this</span>.password })
+    .then(request =&gt; <span style="color:#007020;font-weight:bold">this</span>.loginSuccessful(request))
+    .<span style="color:#007020;font-weight:bold">catch</span>(() =&gt; <span style="color:#007020;font-weight:bold">this</span>.loginFailed())
+}</code></pre></div>
 <p>vue-axios mounted our axios instance under <code>$http</code> - it&rsquo;s available in all components. With it we make a POST request to our <code>/auth</code> endpoint, passing <code>user</code> and <code>password</code> along.</p>
 
 <p>axios returns <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promises</a>. It&rsquo;s a catch worth knowing about: if you expect to run in an environment where they are not supported, you may need to e.g. polyfill them.</p>
 
 <p>Anyway, we&rsquo;re telling axios that the promise it returns should call <code>loginSuccessful</code> with the request object if everything goes well, and if it does not - <code>loginFailed</code> should be called. Let&rsquo;s implement those methods now.</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>loginSuccessful (req) {
-  <span style="color: #007020; font-weight: bold">if</span> (<span style="color: #666666">!</span>req.data.token) {
-    <span style="color: #007020; font-weight: bold">this</span>.loginFailed()
-    <span style="color: #007020; font-weight: bold">return</span>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">loginSuccessful (req) {
+  <span style="color:#007020;font-weight:bold">if</span> (<span style="color:#666">!</span>req.data.token) {
+    <span style="color:#007020;font-weight:bold">this</span>.loginFailed()
+    <span style="color:#007020;font-weight:bold">return</span>
   }
 
-  localStorage.token <span style="color: #666666">=</span> req.data.token
-  <span style="color: #007020; font-weight: bold">this</span>.error <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">false</span>
+  localStorage.token <span style="color:#666">=</span> req.data.token
+  <span style="color:#007020;font-weight:bold">this</span>.error <span style="color:#666">=</span> <span style="color:#007020;font-weight:bold">false</span>
 
-  <span style="color: #007020; font-weight: bold">this</span>.$router.replace(<span style="color: #007020; font-weight: bold">this</span>.$route.query.redirect <span style="color: #666666">||</span> <span style="color: #4070a0">&#39;/authors&#39;</span>)
+  <span style="color:#007020;font-weight:bold">this</span>.$router.replace(<span style="color:#007020;font-weight:bold">this</span>.$route.query.redirect <span style="color:#666">||</span> <span style="color:#4070a0">&#39;/authors&#39;</span>)
 }
 
 loginFailed () {
-  <span style="color: #007020; font-weight: bold">this</span>.error <span style="color: #666666">=</span> <span style="color: #4070a0">&#39;Login failed!&#39;</span>
-  <span style="color: #007020; font-weight: bold">delete</span> localStorage.token
-}
-</pre></div>
-
+  <span style="color:#007020;font-weight:bold">this</span>.error <span style="color:#666">=</span> <span style="color:#4070a0">&#39;Login failed!&#39;</span>
+  <span style="color:#007020;font-weight:bold">delete</span> localStorage.token
+}</code></pre></div>
 <p>You will notice that if the server decides to respond with 200, but does not generate a token, we fail either way. If we <em>do</em> get a proper token, we put it into local storage and redirect to <code>/authors</code>. You will notice that we&rsquo;ve also prepared ourselves for a <code>redirect</code> parameter that might happen to be present on the query. We&rsquo;ll use it for clean redirection after an auth failure later. For all our routing needs we use <code>$router</code> - it was mounted by the <code>vue-router</code> extension we generated our app with.</p>
 
 <p>When the login fails we delete whatever there might be in the <code>localStorage</code>. We also set an error message. But wait, we didn&rsquo;t define it yet! We should let the component know that we require it to have such a variable. We can do this in the <code>data</code> section, expanding it to look like so:</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>data () {
-  <span style="color: #007020; font-weight: bold">return</span> {
-    email<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;&#39;</span>,
-    password<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;&#39;</span>,
-    error<span style="color: #666666">:</span> <span style="color: #007020; font-weight: bold">false</span>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">data () {
+  <span style="color:#007020;font-weight:bold">return</span> {
+    email<span style="color:#666">:</span> <span style="color:#4070a0">&#39;&#39;</span>,
+    password<span style="color:#666">:</span> <span style="color:#4070a0">&#39;&#39;</span>,
+    error<span style="color:#666">:</span> <span style="color:#007020;font-weight:bold">false</span>
   }
-}
-</pre></div>
-
+}</code></pre></div>
 <p>One finishing touch: displaying the error to the user. We can use a Bootstrap alert with a div that will only display if there is an error to be shown:</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>&lt;<span style="color: #062873; font-weight: bold">h2</span> <span style="color: #4070a0">class</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;form-signin-heading&quot;</span>&gt;Please sign in&lt;/<span style="color: #062873; font-weight: bold">h2</span>&gt;
-&lt;<span style="color: #062873; font-weight: bold">div</span> <span style="color: #4070a0">class</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;alert alert-danger&quot;</span> <span style="color: #4070a0">v-if</span><span style="color: #666666">=</span><span style="color: #4070a0">&quot;error&quot;</span>&gt;{{ error }}&lt;/<span style="color: #062873; font-weight: bold">div</span>&gt;
-</pre></div>
-
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#062873;font-weight:bold">h2</span> <span style="color:#4070a0">class</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;form-signin-heading&#34;</span>&gt;Please sign in&lt;/<span style="color:#062873;font-weight:bold">h2</span>&gt;
+&lt;<span style="color:#062873;font-weight:bold">div</span> <span style="color:#4070a0">class</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;alert alert-danger&#34;</span> <span style="color:#4070a0">v-if</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;error&#34;</span>&gt;{{ error }}&lt;/<span style="color:#062873;font-weight:bold">div</span>&gt;</code></pre></div>
 <p>How shall we test it? Let&rsquo;s just attach something under <code>/authors</code>. We do have a perfectly good <code>Hello</code> component laying around after all:</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60a0b0; font-style: italic">// src/router/index.js</span>
-
-<span style="color: #60a0b0; font-style: italic">// ...</span>
-    {
-      path<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;/authors&#39;</span>,
-      name<span style="color: #666666">:</span> <span style="color: #4070a0">&#39;Authors&#39;</span>,
-      component<span style="color: #666666">:</span> Hello
-    }
-</pre></div>
-
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#60a0b0;font-style:italic">// src/router/index.js
+</span><span style="color:#60a0b0;font-style:italic"></span>
+<span style="color:#60a0b0;font-style:italic">// ...
+</span><span style="color:#60a0b0;font-style:italic"></span>    {
+      path<span style="color:#666">:</span> <span style="color:#4070a0">&#39;/authors&#39;</span>,
+      name<span style="color:#666">:</span> <span style="color:#4070a0">&#39;Authors&#39;</span>,
+      component<span style="color:#666">:</span> Hello
+    }</code></pre></div>
 <p>We can run the API in the background, try to log in and it should show the (slightly mangled, but that&rsquo;s just for testing) contents of <code>Hello</code>!</p>
 
 <h2 id="locking-it-down">Locking it down</h2>
 
-<p>We know that our login works and we got redirected to <code>/books</code> after logging in. Now that I&rsquo;m logged in, let me just go to <code>/</code> real quick&hellip;</p>
+<p>We know that our login works and we got redirected to <code>/authors</code> after logging in. Now that I&rsquo;m logged in, let me just go to <code>/</code> real quick&hellip;</p>
 
 
 <figure >
@@ -737,13 +699,11 @@ loginFailed () {
 <h3 id="redirecting-to-app-when-logged-in">Redirecting to app when logged in</h3>
 
 <p>When a Vue component is updated, it fires it&rsquo;s <code>updated()</code> method. Note that this does not go into the <code>methods</code> section, instead being a top level method. We can make ourselves a very simple one:</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>updated () {
-  <span style="color: #007020; font-weight: bold">if</span> (localStorage.token) {
-    <span style="color: #007020; font-weight: bold">this</span>.$router.replace(<span style="color: #007020; font-weight: bold">this</span>.$route.query.redirect <span style="color: #666666">||</span> <span style="color: #4070a0">&#39;/authors&#39;</span>)
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">updated () {
+  <span style="color:#007020;font-weight:bold">if</span> (localStorage.token) {
+    <span style="color:#007020;font-weight:bold">this</span>.$router.replace(<span style="color:#007020;font-weight:bold">this</span>.$route.query.redirect <span style="color:#666">||</span> <span style="color:#4070a0">&#39;/authors&#39;</span>)
   }
-}
-</pre></div>
-
+}</code></pre></div>
 <p><em>Note: if you&rsquo;ve a keen eye, you will have noticed something wrong with this code. We&rsquo;ll talk about it - please carry on reading for now.</em></p>
 
 <p>Anyway: if I have a token set and I happen to go to <code>/</code>, I get redirected to <code>/authors</code>.</p>
@@ -753,25 +713,21 @@ loginFailed () {
 <p>We definitely do not want to have to check whether we&rsquo;re logged in in every component. We&rsquo;ll have a bunch of them down the line and we might slip up. Besides, that&rsquo;s not very <a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY</a>.</p>
 
 <p>There is however one component through which <em>every</em> request must come through: <code>App</code>. We can put the kick-you-out logic there.</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>updated () {
-  <span style="color: #007020; font-weight: bold">if</span> (<span style="color: #666666">!</span>localStorage.token <span style="color: #666666">&amp;&amp;</span> <span style="color: #007020; font-weight: bold">this</span>.$route.path <span style="color: #666666">!==</span> <span style="color: #4070a0">&#39;/&#39;</span>) {
-    <span style="color: #007020; font-weight: bold">this</span>.$router.push(<span style="color: #4070a0">&#39;/?redirect=&#39;</span> <span style="color: #666666">+</span> <span style="color: #007020; font-weight: bold">this</span>.$route.path)
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">updated () {
+  <span style="color:#007020;font-weight:bold">if</span> (<span style="color:#666">!</span>localStorage.token <span style="color:#666">&amp;&amp;</span> <span style="color:#007020;font-weight:bold">this</span>.$route.path <span style="color:#666">!==</span> <span style="color:#4070a0">&#39;/&#39;</span>) {
+    <span style="color:#007020;font-weight:bold">this</span>.$router.push(<span style="color:#4070a0">&#39;/?redirect=&#39;</span> <span style="color:#666">+</span> <span style="color:#007020;font-weight:bold">this</span>.$route.path)
   }
-}
-</pre></div>
-
+}</code></pre></div>
 <p>That&rsquo;s where the <code>redirect</code> parameter comes into play: if I go to <code>/authors</code> and get redirected to login, after logging in I will continue to <code>/authors</code> again - similarly with <code>/books</code> etc.</p>
 
 <h2 id="closing-thoughts">Closing thoughts</h2>
 
 <p>Remember that mistake I talked about earlier, that you might have spotted? It was in this function:</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>updated () {
-  <span style="color: #007020; font-weight: bold">if</span> (localStorage.token) {
-    <span style="color: #007020; font-weight: bold">this</span>.$router.replace(<span style="color: #007020; font-weight: bold">this</span>.$route.query.redirect <span style="color: #666666">||</span> <span style="color: #4070a0">&#39;/authors&#39;</span>)
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">updated () {
+  <span style="color:#007020;font-weight:bold">if</span> (localStorage.token) {
+    <span style="color:#007020;font-weight:bold">this</span>.$router.replace(<span style="color:#007020;font-weight:bold">this</span>.$route.query.redirect <span style="color:#666">||</span> <span style="color:#4070a0">&#39;/authors&#39;</span>)
   }
-}
-</pre></div>
-
+}</code></pre></div>
 <p>Let&rsquo;s do an experiment: I&rsquo;ll open a new incognito window where I have no <code>localStorage.token</code> and I have not logged in. I&rsquo;ll go into the developer tools and set it to <code>nonsense</code>.</p>
 
 

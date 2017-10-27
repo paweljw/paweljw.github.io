@@ -21,7 +21,7 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.27.1">
+    <meta name="generator" content="Hugo 0.30.2">
     <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
     <title>Saturday project: temperature and humidity meter with Onion Omega2&#43;</title>
     <meta name="author" content="Paweł J. Wal">
@@ -320,16 +320,12 @@ ga('send', 'pageview');
 
 
 <p>I&rsquo;m using the <code>dht-sensor</code> program (I&rsquo;ll probably create my own version for study purposes, but I was pressed for time). Once everything is attached how it should be, it&rsquo;s just a matter of <code>dht-sensor PIN-NUMBER PROTOCOL-VERSION</code>:</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>root@Omega-ABCD:~# dht-sensor <span style="color: #40a070">3</span> DHT11
-humidity: <span style="color: #40a070">58</span>.000000
-temperature: <span style="color: #40a070">20</span>.000000
-</pre></div>
-
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">root@Omega-ABCD:~# dht-sensor <span style="color:#40a070">3</span> DHT11
+humidity: <span style="color:#40a070">58</span>.000000
+temperature: <span style="color:#40a070">20</span>.000000</code></pre></div>
 <p>What&rsquo;s interesting is it can output JSON, though I&rsquo;m not using this currently. Maybe at a later stage.</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>root@Omega-ABCD:~# dht-sensor <span style="color: #40a070">3</span> DHT11 json
-<span style="color: #666666">{</span><span style="color: #4070a0">&quot;humidity&quot;</span>: <span style="color: #40a070">58</span>.000000, <span style="color: #4070a0">&quot;temperature&quot;</span>: <span style="color: #40a070">20</span>.000000<span style="color: #666666">}</span>
-</pre></div>
-
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">root@Omega-ABCD:~# dht-sensor <span style="color:#40a070">3</span> DHT11 json
+<span style="color:#666">{</span><span style="color:#4070a0">&#34;humidity&#34;</span>: <span style="color:#40a070">58</span>.000000, <span style="color:#4070a0">&#34;temperature&#34;</span>: <span style="color:#40a070">20</span>.000000<span style="color:#666">}</span></code></pre></div>
 <p>Since this is an IoT device, it would not be complete without spilling sensitive information onto the internet. I&rsquo;ve decided to use <a href="https://thingspeak.com">ThingSpeak</a> for the purpose of collecting and graphing that information until I have something useful to do with it.</p>
 
 
@@ -342,21 +338,19 @@ temperature: <span style="color: #40a070">20</span>.000000
 
 
 <p>Another place you can tell from that this is a hurried weekend plaything is this script I&rsquo;m using for reporting:</p>
-<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60a0b0; font-style: italic">#!/bin/sh -e</span>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#007020">#!/bin/sh -e
+</span><span style="color:#007020"></span>
+<span style="color:#bb60d5">res</span><span style="color:#666">=</span><span style="color:#4070a0">`</span>dht-sensor <span style="color:#40a070">3</span> DHT11<span style="color:#4070a0">`</span>
+<span style="color:#bb60d5">hum</span><span style="color:#666">=</span><span style="color:#4070a0">`</span><span style="color:#007020">echo</span> <span style="color:#bb60d5">$res</span> | awk <span style="color:#4070a0">&#39;{print $2}&#39;</span><span style="color:#4070a0">`</span>
+<span style="color:#bb60d5">temp</span><span style="color:#666">=</span><span style="color:#4070a0">`</span><span style="color:#007020">echo</span> <span style="color:#bb60d5">$res</span> | awk <span style="color:#4070a0">&#39;{print $4}&#39;</span><span style="color:#4070a0">`</span>
 
-<span style="color: #bb60d5">res</span><span style="color: #666666">=</span><span style="color: #4070a0">`</span>dht-sensor <span style="color: #40a070">3</span> DHT11<span style="color: #4070a0">`</span>
-<span style="color: #bb60d5">hum</span><span style="color: #666666">=</span><span style="color: #4070a0">`</span><span style="color: #007020">echo</span> <span style="color: #bb60d5">$res</span> | awk <span style="color: #4070a0">&#39;{print $2}&#39;`</span>
-<span style="color: #bb60d5">temp</span><span style="color: #666666">=</span><span style="color: #4070a0">`</span><span style="color: #007020">echo</span> <span style="color: #bb60d5">$res</span> | awk <span style="color: #4070a0">&#39;{print $4}&#39;`</span>
+curl --insecure https://api.thingspeak.com/update <span style="color:#4070a0;font-weight:bold">\
+</span><span style="color:#4070a0;font-weight:bold"></span>    --data <span style="color:#4070a0">&#34;api_key=GETYOUROWN&#34;</span> <span style="color:#4070a0;font-weight:bold">\
+</span><span style="color:#4070a0;font-weight:bold"></span>    --data <span style="color:#4070a0">&#34;field1=</span><span style="color:#bb60d5">$temp</span><span style="color:#4070a0">&#34;</span> <span style="color:#4070a0;font-weight:bold">\
+</span><span style="color:#4070a0;font-weight:bold"></span>    --data <span style="color:#4070a0">&#34;field2=</span><span style="color:#bb60d5">$hum</span><span style="color:#4070a0">&#34;</span>
 
-curl --insecure https://api.thingspeak.com/update <span style="color: #4070a0; font-weight: bold">\</span>
-    --data <span style="color: #4070a0">&quot;api_key=GETYOUROWN&quot;</span> <span style="color: #4070a0; font-weight: bold">\</span>
-    --data <span style="color: #4070a0">&quot;field1=</span><span style="color: #bb60d5">$temp</span><span style="color: #4070a0">&quot;</span> <span style="color: #4070a0; font-weight: bold">\</span>
-    --data <span style="color: #4070a0">&quot;field2=</span><span style="color: #bb60d5">$hum</span><span style="color: #4070a0">&quot;</span>
-
-<span style="color: #007020">echo</span> oneshot &gt; /sys/class/leds/omega2p<span style="color: #4070a0; font-weight: bold">\:</span>amber<span style="color: #4070a0; font-weight: bold">\:</span>system/trigger
-<span style="color: #007020">echo</span> <span style="color: #40a070">1</span> &gt; /sys/class/leds/omega2p<span style="color: #4070a0; font-weight: bold">\:</span>amber<span style="color: #4070a0; font-weight: bold">\:</span>system/shot
-</pre></div>
-
+<span style="color:#007020">echo</span> oneshot &gt; /sys/class/leds/omega2p<span style="color:#4070a0;font-weight:bold">\:</span>amber<span style="color:#4070a0;font-weight:bold">\:</span>system/trigger
+<span style="color:#007020">echo</span> <span style="color:#40a070">1</span> &gt; /sys/class/leds/omega2p<span style="color:#4070a0;font-weight:bold">\:</span>amber<span style="color:#4070a0;font-weight:bold">\:</span>system/shot</code></pre></div>
 <p>Interesting sidenote - the last two lines allow me to blink the on-board led when the data has been collected and sent.</p>
 
 <p>And that&rsquo;s it for now! We&rsquo;re returning to our regularly-scheduled Vue.js programming soon, probably towards the end of next week. 😉</p>
