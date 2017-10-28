@@ -26,6 +26,7 @@ _In this series, the following articles have been posted:_
   * [Part 1: Setting up the app](/2017/09/vue.js-front-end-app-part-1-setting-up-the-app/)
   * [Part 2: Design is (not) hard](/2017/09/vue.js-front-end-app-part-2-design-is-not-hard/)
   * [Part 3: Authentication](/2017/09/vue.js-front-end-app-part-3-authentication/)
+  * [Part 4: Keeping state with Vuex](/2017/10/vue.js-front-end-app-part-4-keeping-state-with-vuex/)
 
 ## But first: thanks!
 
@@ -396,7 +397,7 @@ In order to avoid wasting time later we'll throw together a quick mock-up of the
 
 As always, the code for this part is available on GitHub at [paweljw/bookstore-frontend](https://github.com/paweljw/bookstore-frontend/releases/tag/part-1).
 
-See you in part 2!
+See you in [part 2](/2017/09/vue.js-front-end-app-part-2-design-is-not-hard/)!
 
 ---
 

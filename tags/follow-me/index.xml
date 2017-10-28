@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Sat, 30 Sep 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 28 Oct 2017 14:00:00 +0200</lastBuildDate>
     
 	<atom:link href="https://paweljw.github.io/tags/follow-me/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Vue.js front end app, part 4: Keeping state with Vuex</title>
+      <link>https://paweljw.github.io/2017/10/vue.js-front-end-app-part-4-keeping-state-with-vuex/</link>
+      <pubDate>Sat, 28 Oct 2017 14:00:00 +0200</pubDate>
+      
+      <guid>https://paweljw.github.io/2017/10/vue.js-front-end-app-part-4-keeping-state-with-vuex/</guid>
+      <description>&lt;p&gt;Last time we built an &lt;a href=&#34;https://paweljw.github.io/2017/09/vue.js-front-end-app-part-3-authentication/&#34;&gt;authentication mechanism&lt;/a&gt; with a pretty glaring bug - you can just set the &lt;code&gt;token&lt;/code&gt; in &lt;code&gt;localStorage&lt;/code&gt; to whatever and it&amp;rsquo;ll let you in. We need to actually read the token, and persist what we&amp;rsquo;ve read so we don&amp;rsquo;t have to do it over and over.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Vue.js front end app, part 3: Authentication</title>

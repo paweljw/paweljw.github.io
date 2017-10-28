@@ -273,7 +273,8 @@ ga('send', 'pageview');
 <ul>
 <li><a href="https://paweljw.github.io/2017/09/vue.js-front-end-app-part-1-setting-up-the-app/">Part 1: Setting up the app</a></li>
 <li><a href="https://paweljw.github.io/2017/09/vue.js-front-end-app-part-2-design-is-not-hard/">Part 2: Design is (not) hard</a></li>
-<li>Part 3: Authentication
+<li>Part 3: Authentication</li>
+<li><a href="https://paweljw.github.io/2017/10/vue.js-front-end-app-part-4-keeping-state-with-vuex/">Part 4: Keeping state with Vuex</a>
 </details></li>
 </ul>
 
@@ -776,7 +777,7 @@ methods<span style="color:#666">:</span> {
 
 <p>It would make a lot of sense if we could store our state somewhere and just look at it every now and again - and change it very rarely. Guess what - that&rsquo;s what we&rsquo;re going to do in the next part, which will focus on storing state with <a href="https://github.com/vuejs/vuex/">vuex</a>.</p>
 
-<p>As always, the code for this part is available on GitHub at <a href="https://github.com/paweljw/bookstore-frontend/releases/tag/part-2">paweljw/bookstore-frontend</a>. See you next time!</p>
+<p>As always, the code for this part is available on GitHub at <a href="https://github.com/paweljw/bookstore-frontend/releases/tag/part-2">paweljw/bookstore-frontend</a>. See you in <a href="https://paweljw.github.io/2017/10/vue.js-front-end-app-part-4-keeping-state-with-vuex/">part 4</a>!</p>
 
 <hr />
 
@@ -821,7 +822,7 @@ methods<span style="color:#666">:</span> {
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--disabled">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/10/vue.js-front-end-app-part-4-keeping-state-with-vuex/" data-tooltip="Vue.js front end app, part 4: Keeping state with Vuex">
           
             <i class="fa fa-angle-left"></i>
             <span class="hide-xs hide-sm text-small icon-ml"></span>
@@ -902,7 +903,7 @@ methods<span style="color:#666">:</span> {
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--disabled">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/10/vue.js-front-end-app-part-4-keeping-state-with-vuex/" data-tooltip="Vue.js front end app, part 4: Keeping state with Vuex">
           
             <i class="fa fa-angle-left"></i>
             <span class="hide-xs hide-sm text-small icon-ml"></span>
@@ -1030,6 +1031,25 @@ methods<span style="color:#666">:</span> {
       <div class="no-result text-color-light text-center"></div>
       <div class="results">
         
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/10/vue.js-front-end-app-part-4-keeping-state-with-vuex/">
+                <h3 class="media-heading">Vue.js front end app, part 4: Keeping state with Vuex</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Oct 10, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>Last time we built an <a href="https://paweljw.github.io/2017/09/vue.js-front-end-app-part-3-authentication/">authentication mechanism</a> with a pretty glaring bug - you can just set the <code>token</code> in <code>localStorage</code> to whatever and it&rsquo;ll let you in. We need to actually read the token, and persist what we&rsquo;ve read so we don&rsquo;t have to do it over and over.</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
         
           <div class="media">
             
@@ -1204,24 +1224,6 @@ methods<span style="color:#666">:</span> {
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/">
-                <h3 class="media-heading">Rails 5.1 API with Vue.js frontend, part 0: stack choices</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jul 7, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">I&rsquo;ve been rather busy lately, and my progress in learning Vue.js has slowed down. However, I think that I&rsquo;m ready to dive into making something more resembling a real application than Monster Hunter and GalaxyQuest.
-I believe that you learn best when your objective is teaching it to somebody else. Therefore, over the next couple of weeks I&rsquo;ll be making and refining a simple bookstore app1, using Rails 5.1 for the API backend, and vue.</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -1229,7 +1231,7 @@ I believe that you learn best when your objective is teaching it to somebody els
          data-message-zero=""
          data-message-one=""
          data-message-other="">
-         17 posts found
+         18 posts found
       </p>
     </div>
   </div>

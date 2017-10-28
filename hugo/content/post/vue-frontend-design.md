@@ -23,6 +23,7 @@ Now that we have our environment running, the app is initialized, and we know a 
   * [Part 1: Setting up the app](/2017/09/vue.js-front-end-app-part-1-setting-up-the-app/)
   * Part 2: Design is (not) hard
   * [Part 3: Authentication](/2017/09/vue.js-front-end-app-part-3-authentication/)
+  * [Part 4: Keeping state with Vuex](/2017/10/vue.js-front-end-app-part-4-keeping-state-with-vuex/)
 </details>
 
 My relationship with web design (as opposed to web development) is of a somewhat... _rotary_ nature. I started by banging out simple web apps (though we called them pages back then) in PHP way-back-when. It was a hobby, so obviously any front end design was also done by yours truly.
@@ -306,4 +307,8 @@ This post is significantly longer (and took significantly longer to write, too) 
 
 All this might seem like wasting time - I know that in the past it would certainly seem like that to me. However we have in fact saved time: the time that we would otherwise spend on writing, rewriting and re-rewriting our code if we started slinging from the hip.
 
-Hopefully you find this selection of tools and techniques useful, and I promise - we'll get back to coding our app in the next post, now that we actually have an idea what we're going to do. See you in part 3!
+Hopefully you find this selection of tools and techniques useful, and I promise - we'll get back to coding our app in the next post, now that we actually have an idea what we're going to do. See you in [part 3](/2017/09/vue.js-front-end-app-part-3-authentication/)!
+
+---
+
+Top image credit: https://www.pexels.com/photo/art-business-color-colorful-276267/ (CC0)

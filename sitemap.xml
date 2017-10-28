@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://paweljw.github.io/2017/10/vue.js-front-end-app-part-4-keeping-state-with-vuex/</loc>
+    <lastmod>2017-10-28T14:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://paweljw.github.io/2017/09/vue.js-front-end-app-part-3-authentication/</loc>
     <lastmod>2017-09-30T00:00:00+00:00</lastmod>
   </url>
@@ -130,13 +135,13 @@
   
   <url>
     <loc>https://paweljw.github.io/tags/es6/</loc>
-    <lastmod>2017-09-07T17:00:00+02:00</lastmod>
+    <lastmod>2017-10-28T14:00:00+02:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://paweljw.github.io/tags/follow-me/</loc>
-    <lastmod>2017-09-30T00:00:00+00:00</lastmod>
+    <lastmod>2017-10-28T14:00:00+02:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -154,7 +159,7 @@
   
   <url>
     <loc>https://paweljw.github.io/tags/javascript/</loc>
-    <lastmod>2017-09-07T17:00:00+02:00</lastmod>
+    <lastmod>2017-10-28T14:00:00+02:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -172,7 +177,7 @@
   
   <url>
     <loc>https://paweljw.github.io/post/</loc>
-    <lastmod>2017-09-30T00:00:00+00:00</lastmod>
+    <lastmod>2017-10-28T14:00:00+02:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -202,7 +207,7 @@
   
   <url>
     <loc>https://paweljw.github.io/</loc>
-    <lastmod>2017-09-30T00:00:00+00:00</lastmod>
+    <lastmod>2017-10-28T14:00:00+02:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -220,7 +225,7 @@
   
   <url>
     <loc>https://paweljw.github.io/tags/vue-frontend-series/</loc>
-    <lastmod>2017-09-30T00:00:00+00:00</lastmod>
+    <lastmod>2017-10-28T14:00:00+02:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -232,7 +237,13 @@
   
   <url>
     <loc>https://paweljw.github.io/tags/vue.js/</loc>
-    <lastmod>2017-09-30T00:00:00+00:00</lastmod>
+    <lastmod>2017-10-28T14:00:00+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://paweljw.github.io/tags/vuex/</loc>
+    <lastmod>2017-10-28T14:00:00+02:00</lastmod>
     <priority>0</priority>
   </url>
   
