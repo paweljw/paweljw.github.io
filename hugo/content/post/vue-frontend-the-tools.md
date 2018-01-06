@@ -27,6 +27,7 @@ _In this series, the following articles have been posted:_
   * [Part 2: Design is (not) hard](/2017/09/vue.js-front-end-app-part-2-design-is-not-hard/)
   * [Part 3: Authentication](/2017/09/vue.js-front-end-app-part-3-authentication/)
   * [Part 4: Keeping state with Vuex](/2017/10/vue.js-front-end-app-part-4-keeping-state-with-vuex/)
+  * [Part 5: Data presentation](/2018/01/vue.js-front-end-app-part-5-data-presentation/)
 
 ## But first: thanks!
 

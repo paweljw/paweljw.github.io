@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Sat, 28 Oct 2017 14:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Sat, 06 Jan 2018 00:00:00 +0200</lastBuildDate>
     
 	<atom:link href="https://paweljw.github.io/tags/vuex/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Vue.js front end app, part 5: Data presentation</title>
+      <link>https://paweljw.github.io/2018/01/vue.js-front-end-app-part-5-data-presentation/</link>
+      <pubDate>Sat, 06 Jan 2018 00:00:00 +0200</pubDate>
+      
+      <guid>https://paweljw.github.io/2018/01/vue.js-front-end-app-part-5-data-presentation/</guid>
+      <description>&lt;p&gt;New year, new &lt;del&gt;you&lt;/del&gt; blog post! In this long overdue part we&amp;rsquo;ll strengthen our command of loading data from the server and take a look at presenting it.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Vue.js front end app, part 4: Keeping state with Vuex</title>

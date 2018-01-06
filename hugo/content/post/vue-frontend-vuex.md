@@ -25,6 +25,7 @@ Last time we built an [authentication mechanism](/2017/09/vue.js-front-end-app-p
   * [Part 2: Design is (not) hard](/2017/09/vue.js-front-end-app-part-2-design-is-not-hard/)
   * [Part 3: Authentication](/2017/09/vue.js-front-end-app-part-3-authentication/)
   * Part 4: Keeping state with Vuex
+  * [Part 5: Data presentation](/2018/01/vue.js-front-end-app-part-5-data-presentation/)
 </details>
 
 ## What is Vuex?
@@ -565,7 +566,7 @@ I've mentioned ripgrep in this episode. It's a great tool and I'm getting a ton 
 
 While these "big" articles take a lot of time to make (this one is currently clocking in at almost 10 hours of coding and writing alone), I'll be posting a couple of shorter posts between them about the tools that I just can't live without, so be on the lookout for those as well.
 
-As always, thanks for reading - let me know your thoughts and questions in the comments below! I respond to every single one, even if it takes a little while sometimes. Check out the code for this part on GitHub at [paweljw/bookstore-frontend](https://github.com/paweljw/bookstore-frontend/tree/part-4) and I'll see you in the next one!
+As always, thanks for reading - let me know your thoughts and questions in the comments below! I respond to every single one, even if it takes a little while sometimes. Check out the code for this part on GitHub at [paweljw/bookstore-frontend](https://github.com/paweljw/bookstore-frontend/tree/part-4) and I'll see you in the [next one](/2018/01/vue.js-front-end-app-part-5-data-presentation/)!
 
 ---
 

@@ -1,0 +1,1199 @@
+
+
+  
+    
+  
+
+
+  
+
+
+
+
+  
+
+
+  
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hugo 0.31.1">
+    <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
+    <title>Vue.js front end app, part 5: Data presentation</title>
+    <meta name="author" content="Paweł J. Wal">
+    <meta name="keywords" content=", development, ruby, ruby on rails, es6, javascript, electronics, arduino, science">
+
+    <link rel="icon" href="https://paweljw.github.io/favicon.png">
+    
+
+    
+    <meta name="description" content="New year, new you blog post! In this long overdue part we&rsquo;ll strengthen our command of loading data from the server and take a look at presenting it.
+
+">
+    <meta property="og:description" content="New year, new you blog post! In this long overdue part we&rsquo;ll strengthen our command of loading data from the server and take a look at presenting it.
+
+">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Vue.js front end app, part 5: Data presentation">
+    <meta property="og:url" content="/2018/01/vue.js-front-end-app-part-5-data-presentation/">
+    <meta property="og:site_name" content="Shenanigans! - a blog on programming, technology and science">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Vue.js front end app: Data presentation">
+    <meta name="twitter:description" content="New year, new you blog post! In this long overdue part we&rsquo;ll strengthen our command of loading data from the server and take a look at presenting it.
+
+">
+    
+      <meta name="twitter:creator" content="@paweljwal">
+    
+    
+
+    
+    
+
+    
+      <meta property="og:image" content="//www.gravatar.com/avatar/5a78de40753ba5abf8fcf3a46c748d53?s=640">
+    
+
+    
+    
+      <meta property="og:image" content="https://paweljw.github.io/media/magnifying-glass.jpg">
+    
+    
+
+    
+
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" />
+    
+    
+    <link rel="stylesheet" href="https://paweljw.github.io/css/style-u6mk0ojoywresbx8iepslrmmhl4stuhrsxuwhkpwrkrx7mryjcaimasnk4pi.min.css" />
+    
+    
+
+    
+      
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-51524008-2', 'auto');
+ga('send', 'pageview');
+</script>
+
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap; width: 70%; max-height: 55px; margin: 0 auto; display: block">
+    <a class="header-title-link" href="https://paweljw.github.io/"  style="text-overflow: ellipsis">Shenanigans! - a blog on programming, technology and science</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://paweljw.github.io/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="//www.gravatar.com/avatar/5a78de40753ba5abf8fcf3a46c748d53?s=90" alt="" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://paweljw.github.io/#about">
+          <img class="sidebar-profile-picture" src="//www.gravatar.com/avatar/5a78de40753ba5abf8fcf3a46c748d53?s=110" alt="" />
+        </a>
+        <h4 class="sidebar-profile-name">Paweł J. Wal</h4>
+        
+          <h5 class="sidebar-profile-bio">Hi, I&rsquo;m Paweł. I <a href="https://github.com/paweljw">hack on stuff</a> and write about things.</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://paweljw.github.io/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://paweljw.github.io/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://paweljw.github.io/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://paweljw.github.io/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://linkedin.com/in/pawe%c5%82-wal-a478a785" target="_blank">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+      
+      <span class="sidebar-button-desc">LinkedIn</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/paweljw" target="_blank">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">@paweljw</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://twitter.com/paweljwal" target="_blank">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-twitter"></i>
+      
+      <span class="sidebar-button-desc">@paweljwal</span>
+    </a>
+  </li>
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://paweljw.github.io/index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+    </ul>
+  </div>
+</nav>
+
+      
+  <div class="post-header-cover
+              text-left
+              "
+       style="background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('/media/magnifying-glass.jpg'); background-size: cover"
+       data-behavior="5">
+    
+      <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      Vue.js front end app, part 5: Data presentation
+    </h1>
+  
+  <div class="postShorten-meta post-meta">
+  
+    <time itemprop="datePublished" datetime="2018-01-06T00:00:00&#43;02:00">
+      
+  
+  
+  
+  
+    2018-01-06
+  
+
+    </time>
+  
+  
+
+</div>
+
+</div>
+    
+  </div>
+
+
+      <div id="main" data-behavior="5"
+        class="hasCover
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>New year, new <del>you</del> blog post! In this long overdue part we&rsquo;ll strengthen our command of loading data from the server and take a look at presenting it.</p>
+
+<p></p>
+
+<p><details>
+  <summary><em>This series is composed of multiple articles! Click here for a table of contents.</em></summary></p>
+
+<ul>
+<li><a href="https://paweljw.github.io/2017/09/vue.js-front-end-app-part-1-setting-up-the-app/">Part 1: Setting up the app</a></li>
+<li><a href="https://paweljw.github.io/2017/09/vue.js-front-end-app-part-2-design-is-not-hard/">Part 2: Design is (not) hard</a></li>
+<li><a href="https://paweljw.github.io/2017/09/vue.js-front-end-app-part-3-authentication/">Part 3: Authentication</a></li>
+<li><a href="https://paweljw.github.io/2017/10/vue.js-front-end-app-part-4-keeping-state-with-vuex/">Part 4: Keeping state with Vuex</a></li>
+<li>Part 5: Data presentation
+</details></li>
+</ul>
+
+<h2 id="plan-of-attack">Plan of attack</h2>
+
+<p>When we finished our login process last time, we&rsquo;ve ended up with something looking roughly like this:</p>
+
+
+<figure >
+    <a href="https://paweljw.github.io/media/vue-views/last-time.png">
+        <img src="https://paweljw.github.io/media/vue-views/last-time.png" alt="Last time, on Shenanigans..." />
+    </a>
+    
+    <figcaption>
+        <p>
+        Last time, on Shenanigans...
+        
+            
+        
+        </p> 
+    </figcaption>
+    
+</figure>
+
+
+<p>The obvious problem with this image is: it&rsquo;s still not a bookstore! Unbelievable, right? After four whole articles. Well, time to do something. This time:</p>
+
+<ul>
+<li>We&rsquo;ll add the display of authors and books,</li>
+<li>We&rsquo;ll add a search,</li>
+<li>And we&rsquo;ll up our design game with Bootstrap.</li>
+</ul>
+
+<p>One more note before we begin: contrary to what I usually try to achieve, this is not a definitive guide with &ldquo;the right approach&rdquo; to doing something. Instead consider this post a collection of doing things in different manners - they just happen to be in the same project. Normally this would constitute a symptom of lax coding standards or code reviews, and both the code and approach can and will feel somewhat disjointed here and there in this post.</p>
+
+<p>So, if you spot the seams - good job! And regardless, consider this an experiment. As always I think we can all learn something here 😄</p>
+
+<h2 id="laying-out-the-authors">Laying out the authors</h2>
+
+<p>First we need to get requests routed to some component that will act as an author &ldquo;index&rdquo;. We&rsquo;ve done this before - a simple change in <a href="https://github.com/paweljw/bookstore-frontend/blob/part-5/src/router/index.js#L19">src/router/index.js</a> will suffice:</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#007020;font-weight:bold">import</span> AuthorsList from <span style="color:#4070a0">&#39;@/components/Authors/List&#39;</span>
+
+<span style="color:#60a0b0;font-style:italic">// ...
+</span><span style="color:#60a0b0;font-style:italic"></span>
+{
+  path<span style="color:#666">:</span> <span style="color:#4070a0">&#39;/authors&#39;</span>,
+  name<span style="color:#666">:</span> <span style="color:#4070a0">&#39;Authors&#39;</span>,
+  component<span style="color:#666">:</span> AuthorsList
+},</code></pre></div>
+<p>I&rsquo;ve decided that I want the components dealing with authors in <code>src/components/Authors</code>. Further down the line, if I get a whole lot of components (and need to do a whole lot of importing) I can just <code>import * from '@/components/Authors'</code> and refer to those like <code>Authors.List</code>.</p>
+
+<p>Let&rsquo;s take a look how the Authors/List component is put together.</p>
+
+<h3 id="designing-the-list-of-authors">Designing the list of authors</h3>
+
+<p>You can take a look at the complete file in <a href="https://github.com/paweljw/bookstore-frontend/blob/part-5/src/components/Authors/List.vue">src/components/Authors/List.vue</a>. We&rsquo;ll be dissecting it part by part here.</p>
+
+<p>Let&rsquo;s see what&rsquo;s in our template this time.</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#062873;font-weight:bold">template</span>&gt;
+  &lt;<span style="color:#062873;font-weight:bold">div</span>&gt;
+    &lt;<span style="color:#062873;font-weight:bold">div</span> <span style="color:#4070a0">class</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;page-header&#34;</span>&gt;
+      &lt;<span style="color:#062873;font-weight:bold">div</span> <span style="color:#4070a0">class</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;float-right&#34;</span>&gt;
+        &lt;<span style="color:#062873;font-weight:bold">input</span> <span style="color:#4070a0">type</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;text&#34;</span> <span style="color:#4070a0">name</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;search&#34;</span> <span style="color:#4070a0">v-model</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;search&#34;</span> <span style="color:#4070a0">placeholder</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;Search...&#34;</span> <span style="color:#4070a0">class</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;form-control&#34;</span>&gt;&lt;/<span style="color:#062873;font-weight:bold">input</span>&gt;
+      &lt;/<span style="color:#062873;font-weight:bold">div</span>&gt;
+      &lt;<span style="color:#062873;font-weight:bold">h1</span>&gt;All authors&lt;/<span style="color:#062873;font-weight:bold">h1</span>&gt;
+    &lt;/<span style="color:#062873;font-weight:bold">div</span>&gt;
+    &lt;<span style="color:#062873;font-weight:bold">div</span> <span style="color:#4070a0">class</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;row&#34;</span>&gt;
+      &lt;<span style="color:#062873;font-weight:bold">Box</span> <span style="color:#4070a0">v-for</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;author in authors&#34;</span> <span style="color:#4070a0">:key</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;author.id&#34;</span> <span style="color:#4070a0">:author</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;author&#34;</span> <span style="color:#4070a0">v-show</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;searchMatch(author.name)&#34;</span>&gt;&lt;/<span style="color:#062873;font-weight:bold">Box</span>&gt;
+    &lt;/<span style="color:#062873;font-weight:bold">div</span>&gt;
+  &lt;/<span style="color:#062873;font-weight:bold">div</span>&gt;
+&lt;/<span style="color:#062873;font-weight:bold">template</span>&gt;</code></pre></div>
+<p>Going top-to-bottom, there&rsquo;s a pretty standard Bootstrap page header bar, with a search box tucked into it. The usual use case for search functions is &ldquo;search, then scroll through search results&rdquo;, so ensuring that the search bar stays prominently on top at all resolutions is important. We can also note that the input field is wired to a <code>v-model</code> variable. We now know that we&rsquo;ll have a <code>data</code> section entry called <code>search</code> in our component script and that Vue will take care of updating this for us.</p>
+
+<p>Next large part is a list of authors. There&rsquo;ll be an <code>authors</code> property in the script. The list is keyed (with the <code>:key</code> directive) on <code>author.id</code>. We can expect that this ID is the server-side one coming from our database. It&rsquo;s very important for performance reasons that a <code>v-for</code> directive comes with a <code>:key</code> at all times - try to remember that!</p>
+
+<p>Speaking of performance, we&rsquo;ve got our first glimpse into what our search does - it only displays these authors that match the current search (checked via the <code>searchMath</code> method). But why is this <code>v-show</code>? Wouldn&rsquo;t <code>v-if</code> work just as well?</p>
+
+<p><code>v-if</code> removes the element from the DOM completely while <code>v-show</code> just hides it. This is very important if you&rsquo;re trying to &ldquo;hide&rdquo; something and not have it visible with e.g. Developer Tools in a browser. Another interesting difference is that while <code>v-show</code> - by virtue of keeping the DOM element in the DOM - retains the component instance, while <code>v-if</code> will destroy the instance as soon as it goes <code>false</code>, and create it yet again when it flips <code>true</code>. The decision to use <code>v-show</code> here is important for this exact reason - we&rsquo;ll see why in just a simple while.</p>
+
+<p>What else is in this template? Not much, actually - the list is composed of components called <code>Box</code>, with a parameter of <code>author</code> being passed to it. We&rsquo;ll figure out where <code>Box</code> is and what&rsquo;s going on under the hood from the script.</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#007020;font-weight:bold">import</span> Box from <span style="color:#4070a0">&#39;./Box&#39;</span>
+
+<span style="color:#007020;font-weight:bold">export</span> <span style="color:#007020;font-weight:bold">default</span> {
+  name<span style="color:#666">:</span> <span style="color:#4070a0">&#39;List&#39;</span>,
+  data () {
+    <span style="color:#007020;font-weight:bold">return</span> {
+      search<span style="color:#666">:</span> <span style="color:#4070a0">&#39;&#39;</span>,
+      authors<span style="color:#666">:</span> []
+    }
+  },
+  created () {
+    <span style="color:#007020;font-weight:bold">this</span>.$http.get(<span style="color:#4070a0">&#39;/authors&#39;</span>)
+        .then(request =&gt; <span style="color:#007020;font-weight:bold">this</span>.buildAuthorList(request.data))
+        .<span style="color:#007020;font-weight:bold">catch</span>(() =&gt; { alert(<span style="color:#4070a0">&#39;Something went wrong!&#39;</span>) })
+  },
+  methods<span style="color:#666">:</span> {
+    buildAuthorList (data) {
+      <span style="color:#007020;font-weight:bold">this</span>.authors <span style="color:#666">=</span> data
+    },
+    searchMatch (authorName) {
+      <span style="color:#007020;font-weight:bold">return</span> authorName.toLowerCase().match(<span style="color:#007020;font-weight:bold">this</span>.searchRegExp)
+    }
+  },
+  computed<span style="color:#666">:</span> {
+    searchRegExp () {
+      <span style="color:#007020;font-weight:bold">return</span> <span style="color:#007020;font-weight:bold">new</span> <span style="color:#007020">RegExp</span>(<span style="color:#4070a0">`(.*)</span><span style="color:#70a0d0;font-style:italic">${</span><span style="color:#007020;font-weight:bold">this</span>.search<span style="color:#70a0d0;font-style:italic">}</span><span style="color:#4070a0">(.*)`</span>)
+    }
+  },
+  components<span style="color:#666">:</span> {
+    Box
+  }
+}</code></pre></div>
+<p>We can note that the <code>Box</code> component also lives under <code>Authors</code> - now we know where to go look for it. The <code>data</code> section indeed has slots for the <code>authors</code> and <code>search</code> variables, as we expected from analyzing the template.</p>
+
+<p>In the <code>created</code> callback we see a single AJAX request for all the authors, which calls out to <code>buildAuthorsList</code> - a very simple and probably slightly unnecessary method - on success. On error it shows an <code>alert</code>, which is probably not something you want to do in production, but in development it&rsquo;s just fine.</p>
+
+<p>We can also see that the <code>searchMath</code> just checks the given <code>authorName</code> against a regexp which is regenerated every time <code>search</code> changes. Therefore we can see that the search is purely front-end based.</p>
+
+<p>For a production grade application:</p>
+
+<ul>
+<li>We&rsquo;d probably paginate the authors collection on the server side and employ some kind of &ldquo;next page&rdquo; button or infinite scroll,</li>
+<li>We&rsquo;d also probably farm the search off to the server side,</li>
+<li>And finally, we&rsquo;d probably want to add some sort of indication to the user that the page is &ldquo;doing&rdquo; something - some kind of throbber, progressbar or the like.</li>
+</ul>
+
+<h3 id="what-s-in-the-box">What&rsquo;s in the <code>Box</code>?</h3>
+
+<p>Now that we have <code>List</code> thoroughly figured out, we can take a look at <a href="https://github.com/paweljw/bookstore-frontend/blob/part-5/src/components/Authors/Box.vue">src/components/Authors/Box.vue</a>.</p>
+
+<p>As previously, let&rsquo;s dig into the template first:</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#062873;font-weight:bold">template</span>&gt;
+  &lt;<span style="color:#062873;font-weight:bold">div</span> <span style="color:#4070a0">class</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;col author text-center&#34;</span>&gt;
+    &lt;<span style="color:#062873;font-weight:bold">router-link</span> <span style="color:#4070a0">:to</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;{ name: &#39;Author&#39;, params: { id: author.id } }&#34;</span>&gt;
+      &lt;<span style="color:#062873;font-weight:bold">img</span> <span style="color:#4070a0">:src</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;image&#34;</span>&gt;&lt;/<span style="color:#062873;font-weight:bold">img</span>&gt;
+      &lt;<span style="color:#062873;font-weight:bold">p</span>&gt;{{ author.name }}&lt;/<span style="color:#062873;font-weight:bold">p</span>&gt;
+    &lt;/<span style="color:#062873;font-weight:bold">router-link</span>&gt;
+  &lt;/<span style="color:#062873;font-weight:bold">div</span>&gt;
+&lt;/<span style="color:#062873;font-weight:bold">template</span>&gt;</code></pre></div>
+<p>Huh. That&rsquo;s pretty sparse, isn&rsquo;t it. There&rsquo;s one <code>router-link</code> that tells us we&rsquo;ll need to dig a little deeper still to get a complete look at authors. There&rsquo;s one image with it&rsquo;s <code>src</code> attribute bound to some variable or computed property, and there&rsquo;s a call to display <code>author.name</code>. We can also note that the CSS class <code>author</code> looks custom, so there&rsquo;s probably a <code>&lt;style&gt;</code> part to this component, but there&rsquo;s nothing there otherwise.</p>
+
+<p>Hold on just a second, though. I don&rsquo;t remember adding an image property to the backend representation of author. It&rsquo;s also not clearly coming off of just <code>author.image</code>. What&rsquo;s going on? Let&rsquo;s look at the script.</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#007020;font-weight:bold">export</span> <span style="color:#007020;font-weight:bold">default</span> {
+  name<span style="color:#666">:</span> <span style="color:#4070a0">&#39;Box&#39;</span>,
+  props<span style="color:#666">:</span> [<span style="color:#4070a0">&#39;author&#39;</span>],
+  data () {
+    <span style="color:#007020;font-weight:bold">return</span> {
+      image<span style="color:#666">:</span> <span style="color:#4070a0">`http://via.placeholder.com/200x200?text=</span><span style="color:#70a0d0;font-style:italic">${</span><span style="color:#007020">encodeURIComponent</span>(<span style="color:#007020;font-weight:bold">this</span>.author.name)<span style="color:#70a0d0;font-style:italic">}</span><span style="color:#4070a0">`</span>
+    }
+  },
+  created () {
+    <span style="color:#007020;font-weight:bold">this</span>.pullImage()
+  },
+  methods<span style="color:#666">:</span> {
+    <span style="color:#007020;font-weight:bold">async</span> pullImage () {
+      <span style="color:#007020;font-weight:bold">const</span> response <span style="color:#666">=</span> <span style="color:#007020;font-weight:bold">await</span> fetch(<span style="color:#4070a0">`http://api.duckduckgo.com/?q=</span><span style="color:#70a0d0;font-style:italic">${</span><span style="color:#007020">encodeURIComponent</span>(<span style="color:#007020;font-weight:bold">this</span>.author.name)<span style="color:#70a0d0;font-style:italic">}</span><span style="color:#4070a0">&amp;format=json&amp;pretty=1`</span>)
+      <span style="color:#007020;font-weight:bold">const</span> json <span style="color:#666">=</span> <span style="color:#007020;font-weight:bold">await</span> response.json()
+      <span style="color:#007020;font-weight:bold">if</span> (json.Image) {
+        <span style="color:#007020;font-weight:bold">this</span>.image <span style="color:#666">=</span> json.Image
+      }
+    }
+  }
+}</code></pre></div>
+<p>Hel-<em>lo</em> there. It seems that most of what this component does is pull an image! But how does it do it?</p>
+
+<p>We can see that the default value for image is a placeholder image from <a href="https://placeholder.com">placeholder.com</a>. It&rsquo;s one of my favourite tools when I&rsquo;d like a placeholder in a particular size, color, and with specified text, but don&rsquo;t feel like whipping up a gazillion of images in Photoshop or other graphics program. I recommend you look at it.</p>
+
+<p>Some more fun stuff gets done in <code>pullImage</code>. Right off the bat we can see it&rsquo;s declared <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function"><code>async</code></a>. That&rsquo;s a neat way to clean up a method relying on AJAX calls or any other asynchronous behavior. As you can see, we <code>await</code> a fetch, and then wait for it&rsquo;s results, without building a &ldquo;callback christmas tree&rdquo;.</p>
+
+<p>But what are we actually pulling? I&rsquo;m an avid user of the <a href="https://duckduckgo.com">DuckDuckGo</a> search engine. Aside from providing non-tracking search, they expose an <a href="https://duckduckgo.com/api">Instant Answers API</a>. On a theoretical level, it works similarly to the little box Google displays when you search for someone or something it &ldquo;knows&rdquo; about - this API powers a similar function in DuckDuckGo.</p>
+
+<p>The important thing for us is - when you ask the API about someone of some celebrity, it will usually return an <code>Image</code> entry in it&rsquo;s JSON output. We don&rsquo;t have the capability to store images on the backend, so we put in a sort of a &ldquo;smart placeholder&rdquo;: we either use an actual placeholder, or an image that DuckDuckGo provides.</p>
+
+<p>And that&rsquo;s why author search is using <code>v-show</code>. Since this request happens when <code>created</code> happens, every time you type something into the search bar <code>v-if</code> would recreate components, spawning a series of requests to DuckDuckGo. While I haven&rsquo;t encountered any instance where I would be rate-limited into oblivion for hammering the API, doing that is simply not nice to both DDG and our user; after all we&rsquo;re using <em>their</em> bandwidth for said hammering.</p>
+
+<p>Let&rsquo;s shoot a quick look at the style section, too:</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#062873;font-weight:bold">style</span> <span style="color:#4070a0">lang</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;scss&#34;</span> <span style="color:#4070a0">scoped</span>&gt;
+.<span style="color:#0e84b5;font-weight:bold">author</span> {
+  <span style="color:#007020;font-weight:bold">min-width</span>: <span style="color:#40a070">260</span><span style="color:#902000">px</span>;
+
+  <span style="">img</span> <span style="">{</span>
+    <span style="color:#007020;font-weight:bold">object-fit</span>: <span style="color:#007020;font-weight:bold">cover</span>;
+    <span style="color:#007020;font-weight:bold">width</span>: <span style="color:#40a070">100</span><span style="color:#902000">%</span>;
+    <span style="color:#007020;font-weight:bold">height</span>: <span style="color:#40a070">260</span><span style="color:#902000">px</span>;
+  }
+<span style="">}</span>
+&lt;/<span style="color:#062873;font-weight:bold">style</span>&gt;</code></pre></div>
+<p>Since we don&rsquo;t know what image size the API will return - and it returns sizes best described as &ldquo;assorted&rdquo; - we use <code>object-fit</code> directive to fill the available space and the expense of trimming the image. We also say that our image boxes are &ldquo;at least square&rdquo; and 260x260px in size, with the possibility of growing sideways as needed. And that might be required due to how Bootstrap uses flex directives.</p>
+
+<h3 id="single-author">Single author</h3>
+
+<p>We&rsquo;ve noticed that a <code>router-link</code> is present in an author box. It&rsquo;s a named route called <code>Author</code>, so we can take a peek into our router:</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#007020;font-weight:bold">import</span> SingleAuthor from <span style="color:#4070a0">&#39;@/components/Authors/Single&#39;</span>
+
+<span style="color:#60a0b0;font-style:italic">// ...
+</span><span style="color:#60a0b0;font-style:italic"></span>
+{
+  path<span style="color:#666">:</span> <span style="color:#4070a0">&#39;/authors/:id&#39;</span>,
+  name<span style="color:#666">:</span> <span style="color:#4070a0">&#39;Author&#39;</span>,
+  component<span style="color:#666">:</span> SingleAuthor
+},</code></pre></div>
+<p>So evidently what we&rsquo;re looking for is in <a href="https://github.com/paweljw/bookstore-frontend/blob/part-5/src/components/Authors/Single.vue">src/components/Authors/Single.vue</a>. Let&rsquo;s take a look at the template.</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#062873;font-weight:bold">template</span>&gt;
+  &lt;<span style="color:#062873;font-weight:bold">div</span> <span style="color:#4070a0">class</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;row&#34;</span>&gt;
+    &lt;<span style="color:#062873;font-weight:bold">div</span> <span style="color:#4070a0">class</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;col-12 col-md-3 border-right&#34;</span>&gt;
+      &lt;<span style="color:#062873;font-weight:bold">Box</span> <span style="color:#4070a0">:author</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;author&#34;</span> <span style="color:#4070a0">v-if</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;author&#34;</span>&gt;&lt;/<span style="color:#062873;font-weight:bold">Box</span>&gt;
+    &lt;/<span style="color:#062873;font-weight:bold">div</span>&gt;
+    &lt;<span style="color:#062873;font-weight:bold">div</span> <span style="color:#4070a0">class</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;col-12 col-md-9&#34;</span>&gt;
+      &lt;<span style="color:#062873;font-weight:bold">List</span> <span style="color:#4070a0">:author</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;author&#34;</span> <span style="color:#4070a0">v-if</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;author&#34;</span>&gt;&lt;/<span style="color:#062873;font-weight:bold">List</span>&gt;
+    &lt;/<span style="color:#062873;font-weight:bold">div</span>&gt;
+  &lt;/<span style="color:#062873;font-weight:bold">div</span>&gt;
+&lt;/<span style="color:#062873;font-weight:bold">template</span>&gt;</code></pre></div>
+<p>Just a couple of interesting bits. The <code>v-if</code> rendering guard will make sense in a bit. We can however see that we&rsquo;re referencing <code>List</code> again. Now, remember that we&rsquo;re not in the author list anymore, so I have a strong suspicion that we&rsquo;re not, in fact, using <code>Authors/List</code> here. Let&rsquo;s see if we can confirm this by looking at the script.</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#007020;font-weight:bold">import</span> Box from <span style="color:#4070a0">&#39;./Box&#39;</span>
+<span style="color:#007020;font-weight:bold">import</span> List from <span style="color:#4070a0">&#39;@/components/Books/List&#39;</span>
+
+<span style="color:#007020;font-weight:bold">export</span> <span style="color:#007020;font-weight:bold">default</span> {
+  name<span style="color:#666">:</span> <span style="color:#4070a0">&#39;Single&#39;</span>,
+  data () {
+    <span style="color:#007020;font-weight:bold">return</span> {
+      author<span style="color:#666">:</span> <span style="color:#007020;font-weight:bold">null</span>
+    }
+  },
+  created () {
+    <span style="color:#007020;font-weight:bold">this</span>.$http.get(<span style="color:#4070a0">`/authors/</span><span style="color:#70a0d0;font-style:italic">${</span><span style="color:#007020;font-weight:bold">this</span>.$route.params.id<span style="color:#70a0d0;font-style:italic">}</span><span style="color:#4070a0">`</span>)
+        .then(request =&gt; { <span style="color:#007020;font-weight:bold">this</span>.author <span style="color:#666">=</span> request.data })
+        .<span style="color:#007020;font-weight:bold">catch</span>(() =&gt; { alert(<span style="color:#4070a0">&#39;Something went wrong!&#39;</span>) })
+  },
+  components<span style="color:#666">:</span> {
+    Box,
+    List
+  }
+}</code></pre></div>
+<p>And there it is: this <code>List</code> references <code>src/components/Books/List.vue</code>. In a project where we expect somebody else working on it, this would probably be a no-no. We can alias this <code>List</code> as e.g. <code>BooksList</code> and be more explicit about what we&rsquo;re doing here that way.</p>
+
+<p>The script also explains the <code>author</code> render guard made with <code>v-if</code>. When the component first loads, we don&rsquo;t have any data about a particular author, instead of rendering it. Since this is a component that is not directly tied to the <code>authors</code> list we pulled for the index, we can&rsquo;t depend on it.</p>
+
+<p>That way we&rsquo;re also prepared for a situation where the backend returns different data about authors in the CRUD index and show actions, e.g. attempting to decrease the size of the initial index request by returning just the author&rsquo;s name and ID. This is something that would make perfect sense in a production, high-traffic environment, and we should always to decouple our frontend in such a way that code using different API endpoints doesn&rsquo;t share too many assumptions.</p>
+
+<p>Going back to the code, we already know what <code>Box</code> does - it&rsquo;s just an author box. Let&rsquo;s dig into the book list.</p>
+
+<h3 id="displaying-books-for-an-author">Displaying books for an author</h3>
+
+<p>Let&rsquo;s peek into <a href="https://github.com/paweljw/bookstore-frontend/blob/288939193acc7116b963e0e56ea9754a2ed05c32/src/components/Books/List.vue">src/components/Books/List.vue</a>. We&rsquo;ll take a slightly different approach here and just look at the whole code file at once:</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#062873;font-weight:bold">template</span>&gt;
+  &lt;<span style="color:#062873;font-weight:bold">div</span>&gt;
+    &lt;<span style="color:#062873;font-weight:bold">div</span> <span style="color:#4070a0">class</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;page-header&#34;</span>&gt;
+      &lt;<span style="color:#062873;font-weight:bold">div</span> <span style="color:#4070a0">class</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;float-right&#34;</span>&gt;
+        &lt;<span style="color:#062873;font-weight:bold">input</span> <span style="color:#4070a0">type</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;text&#34;</span> <span style="color:#4070a0">name</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;search&#34;</span> <span style="color:#4070a0">v-model</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;search&#34;</span> <span style="color:#4070a0">placeholder</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;Search...&#34;</span> <span style="color:#4070a0">class</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;form-control&#34;</span>&gt;&lt;/<span style="color:#062873;font-weight:bold">input</span>&gt;
+      &lt;/<span style="color:#062873;font-weight:bold">div</span>&gt;
+      &lt;<span style="color:#062873;font-weight:bold">h1</span>&gt;Books by {{ author.name }}&lt;/<span style="color:#062873;font-weight:bold">h1</span>&gt;
+    &lt;/<span style="color:#062873;font-weight:bold">div</span>&gt;
+    &lt;<span style="color:#062873;font-weight:bold">div</span> <span style="color:#4070a0">class</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;row&#34;</span>&gt;
+      &lt;<span style="color:#062873;font-weight:bold">Box</span> <span style="color:#4070a0">v-for</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;book in books&#34;</span> <span style="color:#4070a0">:author</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;author&#34;</span> <span style="color:#4070a0">:book</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;book&#34;</span> <span style="color:#4070a0">:key</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;book.id&#34;</span> <span style="color:#4070a0">v-show</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;searchMatch(book.title)&#34;</span>&gt;&lt;/<span style="color:#062873;font-weight:bold">Box</span>&gt;
+    &lt;/<span style="color:#062873;font-weight:bold">div</span>&gt;
+  &lt;/<span style="color:#062873;font-weight:bold">div</span>&gt;
+&lt;/<span style="color:#062873;font-weight:bold">template</span>&gt;
+
+&lt;<span style="color:#062873;font-weight:bold">script</span>&gt;
+<span style="color:#007020;font-weight:bold">import</span> Box from <span style="color:#4070a0">&#39;./Box&#39;</span>
+
+<span style="color:#007020;font-weight:bold">export</span> <span style="color:#007020;font-weight:bold">default</span> {
+  name<span style="color:#666">:</span> <span style="color:#4070a0">&#39;List&#39;</span>,
+  props<span style="color:#666">:</span> [<span style="color:#4070a0">&#39;author&#39;</span>],
+  data () {
+    <span style="color:#007020;font-weight:bold">return</span> {
+      search<span style="color:#666">:</span> <span style="color:#4070a0">&#39;&#39;</span>,
+      books<span style="color:#666">:</span> []
+    }
+  },
+  created () {
+    <span style="color:#007020;font-weight:bold">this</span>.$http.get(<span style="color:#4070a0">`/authors/</span><span style="color:#70a0d0;font-style:italic">${</span><span style="color:#007020;font-weight:bold">this</span>.author.id<span style="color:#70a0d0;font-style:italic">}</span><span style="color:#4070a0">/books`</span>)
+        .then(request =&gt; { <span style="color:#007020;font-weight:bold">this</span>.books <span style="color:#666">=</span> request.data })
+        .<span style="color:#007020;font-weight:bold">catch</span>(() =&gt; { alert(<span style="color:#4070a0">&#39;Something went wrong!&#39;</span>) })
+  },
+  methods<span style="color:#666">:</span> {
+    searchMatch (bookTitle) {
+      <span style="color:#007020;font-weight:bold">return</span> bookTitle.toLowerCase().match(<span style="color:#007020;font-weight:bold">this</span>.searchRegExp)
+    }
+  },
+  computed<span style="color:#666">:</span> {
+    searchRegExp () {
+      <span style="color:#007020;font-weight:bold">return</span> <span style="color:#007020;font-weight:bold">new</span> <span style="color:#007020">RegExp</span>(<span style="color:#4070a0">`(.*)</span><span style="color:#70a0d0;font-style:italic">${</span><span style="color:#007020;font-weight:bold">this</span>.search<span style="color:#70a0d0;font-style:italic">}</span><span style="color:#4070a0">(.*)`</span>)
+    }
+  },
+  components<span style="color:#666">:</span> {
+    Box
+  }
+}
+&lt;/<span style="color:#062873;font-weight:bold">script</span>&gt;</code></pre></div>
+<p>And I guess you can see why already: because it&rsquo;s extremely similar to the authors list. In fact, on a conceptual level it&rsquo;s entirely identical: replace author box with book box and searching in author names with searching in book titles. It&rsquo;s almost like its a lazily copy-pasted and lightly reworked author index component. Which of course</p>
+
+<p>But I have an idea how we can make it better. Smarter. We can rebuild him. We have the technology!</p>
+
+<p><em>Ahem.</em> Anyway: let&rsquo;s enhance this books listing!</p>
+
+<h2 id="books-list-v2-revenge-of-the-sidebar">Books list v2: Revenge of the Sidebar</h2>
+
+<p>If you&rsquo;ll recall, in our design episode we came up with something like this for our book page:</p>
+
+
+<figure >
+    <a href="https://paweljw.github.io/media/vue-views/book-wireframe.png">
+        <img src="https://paweljw.github.io/media/vue-views/book-wireframe.png" />
+    </a>
+    
+</figure>
+
+
+<p>I have to admit, I no longer like this design. However, there&rsquo;s a saying in Polish which translates roughly to &ldquo;only a cow does not change it&rsquo;s mind&rdquo;. The ridiculousness of the phrase being coined by a nation so stubborn it probably measures on the Richter scale aside, it&rsquo;s a good one.</p>
+
+<p>If you don&rsquo;t like it and you designed it, change it. If someone else designed it or is implementing your design, talk to them first, then change it together. (Sometimes the best part about working alone is the complete lack of meetings. And sometimes it&rsquo;s the worst.)</p>
+
+<p>I think we can get away with something like this:</p>
+
+
+<figure >
+    <a href="https://paweljw.github.io/media/vue-views/new-book-wireframe.png">
+        <img src="https://paweljw.github.io/media/vue-views/new-book-wireframe.png" />
+    </a>
+    
+</figure>
+
+
+<p>The reason for this is we now know we have much less information about a book than we used to think we would. No blurbs - certainly not enough to fill the space in the original design. (No author blurbs either, but it doesn&rsquo;t look to bad without them).</p>
+
+<p>There&rsquo;s one more nice thing about this. Since our information about a book is so sparse, and we already have all of it loaded on the index view, we can get away with not making yet another AJAX request to our backend. Instead we&rsquo;ll do it all with frontend magic, elbow grease and duct tape!</p>
+
+<h3 id="splitting-it-three-ways">Splitting it three ways</h3>
+
+<p>We&rsquo;re already using <code>row</code> from Bootstrap, so we can delegate the work of making a nice split view to it. Barring any special directives, <code>row</code> splits it&rsquo;s <code>col</code>s equally, and they can be nested.</p>
+
+<p>We&rsquo;ll need to update the template for <a href="https://github.com/paweljw/bookstore-frontend/blob/part-5/src/components/Books/List.vue">src/components/Books/List.vue</a> slightly:</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#062873;font-weight:bold">template</span>&gt;
+  &lt;<span style="color:#062873;font-weight:bold">div</span>&gt;
+    <span style="color:#60a0b0;font-style:italic">&lt;!-- ... //--&gt;</span>
+    &lt;<span style="color:#062873;font-weight:bold">div</span> <span style="color:#4070a0">class</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;row&#34;</span>&gt;
+      &lt;<span style="color:#062873;font-weight:bold">div</span> <span style="color:#4070a0">class</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;row col&#34;</span>&gt;
+        &lt;<span style="color:#062873;font-weight:bold">Box</span> <span style="color:#4070a0">v-for</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;book in books&#34;</span> <span style="color:#4070a0">:author</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;author&#34;</span> <span style="color:#4070a0">:book</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;book&#34;</span> <span style="color:#4070a0">:key</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;book.id&#34;</span>
+          <span style="color:#4070a0">v-show</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;searchMatch(book.title)&#34;</span> <span style="color:#4070a0">v-on:click</span><span style="">.</span><span style="color:#4070a0">native</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;setBook(book)&#34;</span>&gt;&lt;/<span style="color:#062873;font-weight:bold">Box</span>&gt;
+      &lt;/<span style="color:#062873;font-weight:bold">div</span>&gt;
+      &lt;<span style="color:#062873;font-weight:bold">Full</span> <span style="color:#4070a0">:book</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;currentBook&#34;</span> <span style="color:#4070a0">v-if</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;currentBook&#34;</span> <span style="color:#4070a0">v-on:close</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;closeBook&#34;</span>&gt;&lt;/<span style="color:#062873;font-weight:bold">Full</span>&gt;
+    &lt;/<span style="color:#062873;font-weight:bold">div</span>&gt;
+  &lt;/<span style="color:#062873;font-weight:bold">div</span>&gt;
+&lt;/<span style="color:#062873;font-weight:bold">template</span>&gt;</code></pre></div>
+<p>That way we have two nested <code>row</code>s. Our book list and the new <code>Full</code> component will split one between themselves. By default <code>currentBook</code> is <code>null</code>, so the <code>Full</code> component will not be shown.</p>
+
+<p>We&rsquo;ll also attach a <em>native</em> click event to every book in the list. It&rsquo;s slightly complicated, but the short of it is - if you really need to register a click the &ldquo;regular DOM way&rdquo;, it&rsquo;s better to attach it to the top element of a component via the <code>native</code> directive for <code>v-on</code>.</p>
+
+<p>Once the book is set, <code>Full</code> springs to life. It&rsquo;s mostly based on Box, and you can just look up <a href="https://github.com/paweljw/bookstore-frontend/blob/part-5/src/components/Books/Full.vue">src/components/Books/Full.vue</a> on GitHub, but we&rsquo;ll take a look at one interesting excerpt.</p>
+
+<p>We have means to open a new book via the <code>click</code> event, but we&rsquo;d like to also close it. You might remember, however, that the flow of data in Vue is one-directional. This means that we can&rsquo;t reach from <code>Full</code> into <code>List</code> and just unset <code>currentBook</code>. The right way for this is to emit an <em>event</em> that the parent can listen for.</p>
+
+<p>In the <code>Full</code> component we achieve it like so:</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#062873;font-weight:bold">template</span>&gt;
+  &lt;<span style="color:#062873;font-weight:bold">div</span> <span style="color:#4070a0">class</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;col book text-center&#34;</span>&gt;
+    &lt;<span style="color:#062873;font-weight:bold">button</span> <span style="color:#4070a0">class</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;btn btn-light btn-close&#34;</span> <span style="color:#4070a0">v-on:click</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;close&#34;</span>&gt;× close&lt;/<span style="color:#062873;font-weight:bold">button</span>&gt;
+    <span style="color:#60a0b0;font-style:italic">&lt;!-- ... //--&gt;</span>
+&lt;/<span style="color:#062873;font-weight:bold">template</span>&gt;
+
+&lt;<span style="color:#062873;font-weight:bold">script</span>&gt;
+<span style="color:#007020;font-weight:bold">export</span> <span style="color:#007020;font-weight:bold">default</span> {
+  <span style="color:#60a0b0;font-style:italic">// ...
+</span><span style="color:#60a0b0;font-style:italic"></span>  methods<span style="color:#666">:</span> {
+    <span style="color:#60a0b0;font-style:italic">// ...
+</span><span style="color:#60a0b0;font-style:italic"></span>    close () {
+      <span style="color:#007020;font-weight:bold">this</span>.$emit(<span style="color:#4070a0">&#39;close&#39;</span>)
+    }
+  }
+}
+&lt;/<span style="color:#062873;font-weight:bold">script</span>&gt;</code></pre></div>
+<p>Every instance of a Vue object comes with a <code>$emit</code> method. In the parent we can just listen for this custom event with <code>v-on</code> on the component element as can be seen above.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>We&rsquo;ve written a lot of code and covered a lot of ground in this post. We&rsquo;ve looked at components, we&rsquo;ve used props and events to pass data around and we&rsquo;ve played a bit with Bootstrap. In all, we&rsquo;ve got ourselves something decently presentable for a learning project:</p>
+
+
+<figure >
+    <a href="https://paweljw.github.io/media/vue-views/finish.png">
+        <img src="https://paweljw.github.io/media/vue-views/finish.png" />
+    </a>
+    
+</figure>
+
+
+<p>As always, the recommended reading is the documentation, particularly the <a href="https://vuejs.org/v2/guide/components.html">Components</a> section. Any things that I might have ommited here for brevity (if we can even speak of brevity at this length) are sure to be found there.</p>
+
+<p>As per usual, the full code for this part can be found over <a href="https://github.com/paweljw/bookstore-frontend/tree/part-5">on GitHub</a>.</p>
+
+<p>In closing, I&rsquo;d like to thank Y. K. whose kind contribution to this blog helped put things in perspective and start the new year off on the right footing. And thank you, dear readers and commenters, for helping make me a better coder and writer!</p>
+
+<p>Happy 2018, and see you in the next one, where we&rsquo;ll finally do some data editing!</p>
+
+<hr />
+
+<p>Top image credit:
+Maurício Mascaro via <a href="https://www.pexels.com/photo/person-holding-magnifying-glass-712786/">https://www.pexels.com/photo/person-holding-magnifying-glass-712786/</a> (CC0)</p>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            <div id="i-like-beer" style="text-align: center; margin: 0 auto; display: block; color: #999; font-size: 90%">
+  <hr/>
+  <br/>
+  <p>Hey there! I hope you found the post above useful. If you feel it's worth it, and are capable of doing so, please consider <a href="https://paypal.me/paweljw">buying me a beer</a> through PayPal, or tweet <a href="https://twitter.com/paweljwal">@paweljwal</a> if you want to grab one offline when you're in Kraków, MA, Poland.</p>
+  <small>If you want to remove this text with your adblocker, the selector is <code>#i-like-beer</code>.</small>
+  <hr/>
+</div>
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small"></span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/follow-me/">follow me</a>
+
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/javascript/">javascript</a>
+
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/es6/">es6</a>
+
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/vue.js/">vue.js</a>
+
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/vue-frontend-series/">vue-frontend-series</a>
+
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/vuex/">vuex</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  <nav>
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--disabled">
+          
+            <i class="fa fa-angle-left"></i>
+            <span class="hide-xs hide-sm text-small icon-ml"></span>
+          </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/10/vue.js-front-end-app-part-4-keeping-state-with-vuex/" data-tooltip="Vue.js front end app, part 4: Keeping state with Vuex">
+          
+            <span class="hide-xs hide-sm text-small icon-mr"></span>
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </nav>
+  <ul class="post-actions post-action-share">
+    
+      <li class="post-action hide-lg hide-md hide-sm">
+        <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+          <i class="fa fa-share-alt"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2018%2f01%2fvue.js-front-end-app-part-5-data-presentation%2f">
+          <i class="fa fa-google-plus"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2018%2f01%2fvue.js-front-end-app-part-5-data-presentation%2f">
+          <i class="fa fa-facebook-official"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2018%2f01%2fvue.js-front-end-app-part-5-data-presentation%2f">
+          <i class="fa fa-twitter"></i>
+        </a>
+      </li>
+    
+    
+      <li class="post-action">
+        <a class="post-action-btn btn btn--default" href="#disqus_thread">
+          <i class="fa fa-comment-o"></i>
+        </a>
+      </li>
+    
+    <li class="post-action">
+      
+        <a class="post-action-btn btn btn--default" href="#">
+      
+        <i class="fa fa-list"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    Created by <a href="https://github.com/paweljw">Paweł J. Wal</a> | <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        <div class="post-actions-wrap">
+  <nav>
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--disabled">
+          
+            <i class="fa fa-angle-left"></i>
+            <span class="hide-xs hide-sm text-small icon-ml"></span>
+          </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/10/vue.js-front-end-app-part-4-keeping-state-with-vuex/" data-tooltip="Vue.js front end app, part 4: Keeping state with Vuex">
+          
+            <span class="hide-xs hide-sm text-small icon-mr"></span>
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </nav>
+  <ul class="post-actions post-action-share">
+    
+      <li class="post-action hide-lg hide-md hide-sm">
+        <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+          <i class="fa fa-share-alt"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2018%2f01%2fvue.js-front-end-app-part-5-data-presentation%2f">
+          <i class="fa fa-google-plus"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2018%2f01%2fvue.js-front-end-app-part-5-data-presentation%2f">
+          <i class="fa fa-facebook-official"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2018%2f01%2fvue.js-front-end-app-part-5-data-presentation%2f">
+          <i class="fa fa-twitter"></i>
+        </a>
+      </li>
+    
+    
+      <li class="post-action">
+        <a class="post-action-btn btn btn--default" href="#disqus_thread">
+          <i class="fa fa-comment-o"></i>
+        </a>
+      </li>
+    
+    <li class="post-action">
+      
+        <a class="post-action-btn btn btn--default" href="#">
+      
+        <i class="fa fa-list"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <ul class="share-options">
+    <li class="share-option">
+      <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2018%2f01%2fvue.js-front-end-app-part-5-data-presentation%2f">
+        <i class="fa fa-google-plus"></i><span></span>
+      </a>
+    </li>
+    <li class="share-option">
+      <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2018%2f01%2fvue.js-front-end-app-part-5-data-presentation%2f">
+        <i class="fa fa-facebook-official"></i><span></span>
+      </a>
+    </li>
+    <li class="share-option">
+      <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2018%2f01%2fvue.js-front-end-app-part-5-data-presentation%2f">
+        <i class="fa fa-twitter"></i><span></span>
+      </a>
+    </li>
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="//www.gravatar.com/avatar/5a78de40753ba5abf8fcf3a46c748d53?s=110" alt="" />
+    
+    <h4 id="about-card-name">Paweł J. Wal</h4>
+    
+      <div id="about-card-bio">Hi, I&rsquo;m Paweł. I <a href="https://github.com/paweljw">hack on stuff</a> and write about things.</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Sofware Magician
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        Poland
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center"></div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2018/01/vue.js-front-end-app-part-5-data-presentation/">
+                <h3 class="media-heading">Vue.js front end app, part 5: Data presentation</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jan 1, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>New year, new <del>you</del> blog post! In this long overdue part we&rsquo;ll strengthen our command of loading data from the server and take a look at presenting it.</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/10/vue.js-front-end-app-part-4-keeping-state-with-vuex/">
+                <h3 class="media-heading">Vue.js front end app, part 4: Keeping state with Vuex</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Oct 10, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>Last time we built an <a href="https://paweljw.github.io/2017/09/vue.js-front-end-app-part-3-authentication/">authentication mechanism</a> with a pretty glaring bug - you can just set the <code>token</code> in <code>localStorage</code> to whatever and it&rsquo;ll let you in. We need to actually read the token, and persist what we&rsquo;ve read so we don&rsquo;t have to do it over and over.</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/09/vue.js-front-end-app-part-3-authentication/">
+                <h3 class="media-heading">Vue.js front end app, part 3: Authentication</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Sep 9, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>In this part we&rsquo;ll allow the user to log in to our frontend app, using the <a href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-4-authentication-and-authorization/">auth mechanism</a> we&rsquo;ve built on the back end earlier. A lot of topics in this one, so jump right in!</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/09/vue.js-front-end-app-part-2-design-is-not-hard/">
+                <h3 class="media-heading">Vue.js front end app, part 2: Design is (not) hard</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Sep 9, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>Now that we have our environment running, the app is initialized, and we know a little bit about what&rsquo;s going on in there, it&rsquo;s time to take a little bit of time to design our front end.</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/09/saturday-project-temperature-and-humidity-meter-with-onion-omega2-/">
+                <h3 class="media-heading">Saturday project: temperature and humidity meter with Onion Omega2&#43;</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Sep 9, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>Quick thing I threw together in about an hour: an IoT temperature and humidity meter!</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/09/vue.js-front-end-app-part-1-setting-up-the-app/">
+                <h3 class="media-heading">Vue.js front end app, part 1: Setting up the app</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Sep 9, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>Last time we’ve seen each other, we’ve just deployed our Rails 5.1 API app. Time to put an end to this! A <em>front</em> end, of course.</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-5-deploying-with-confidence/">
+                <h3 class="media-heading">Rails 5.1 API app, part 5: Deploying with confidence</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>In this final part of our Rails API app series we&rsquo;ll talk about specs, code coverage, continuous integration and deployment - and how to be certain your application is working.</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-4-authentication-and-authorization/">
+                <h3 class="media-heading">Rails 5.1 API app, part 4: Authentication and authorization</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>Time to deal with authenticating users in our bookstore application.</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-3-api-versioning/">
+                <h3 class="media-heading">Rails 5.1 API app, part 3: API versioning</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>We have two more things to tackle before our Rails API app is an MVP: namespacing the controllers and creating an authentication mechanism. We&rsquo;ll tackle namespacing the controllers in this article - it might seem wordy, but it&rsquo;s for a good reason.</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-2-modeling-reality/">
+                <h3 class="media-heading">Rails 5.1 API app, part 2: Modeling reality</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>Oh yeah. Now we&rsquo;re going <em>hardcore</em>. Well, not really.</p>
+
+<p>While Rails embraces a continuously changing data model, it&rsquo;s always good to stop and think for a minute about the domain we&rsquo;re trying to magically lockwithin an app. We&rsquo;re building a bookstore. So what&rsquo;s in one?</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero=""
+         data-message-one=""
+         data-message-other="">
+         19 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('https://paweljw.github.io/images/cover2.jpeg');"></div>
+  
+
+
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.js"></script>
+
+
+<script src="https://paweljw.github.io/js/script-wl33z0n6ocaypepiqrazthtivfrliqijej4rq8ek8gvrv1awftmgjuv8k4zc.min.js"></script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight').each(function(i, block) {
+    var code = "";
+    hljs.highlightAuto(block.innerText).value.split(/\r\n|\r|\n/).forEach(function(line) {
+      code += "<span class=\"line\">" + line + "</span><br>";
+    });
+    if (code.length > 0) {
+      block.innerHTML = code;  
+    }
+  });
+  $('pre > code').each(function(i, block) {
+    $(this).addClass('codeblock');
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/paweljw.github.io\/2018\/01\/vue.js-front-end-app-part-5-data-presentation\/';
+          
+            this.page.identifier = '\/2018\/01\/vue.js-front-end-app-part-5-data-presentation\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'paweljw-github-io';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+
+    
+  </body>
+</html>
+
