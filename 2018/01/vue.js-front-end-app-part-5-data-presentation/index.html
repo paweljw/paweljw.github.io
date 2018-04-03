@@ -21,7 +21,7 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.31.1">
+    <meta name="generator" content="Hugo 0.38">
     <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
     <title>Vue.js front end app, part 5: Data presentation</title>
     <meta name="author" content="Paweł J. Wal">
@@ -275,7 +275,8 @@ ga('send', 'pageview');
 <li><a href="https://paweljw.github.io/2017/09/vue.js-front-end-app-part-2-design-is-not-hard/">Part 2: Design is (not) hard</a></li>
 <li><a href="https://paweljw.github.io/2017/09/vue.js-front-end-app-part-3-authentication/">Part 3: Authentication</a></li>
 <li><a href="https://paweljw.github.io/2017/10/vue.js-front-end-app-part-4-keeping-state-with-vuex/">Part 4: Keeping state with Vuex</a></li>
-<li>Part 5: Data presentation
+<li>Part 5: Data presentation</li>
+<li><a href="https://paweljw.github.io/2018/04/vue.js-front-end-app-part-6-deploying-to-s3/">Part 6: Deploying to S3</a>
 </details></li>
 </ul>
 
@@ -284,7 +285,7 @@ ga('send', 'pageview');
 <p>When we finished our login process last time, we&rsquo;ve ended up with something looking roughly like this:</p>
 
 
-<figure >
+<figure>
     <a href="https://paweljw.github.io/media/vue-views/last-time.png">
         <img src="https://paweljw.github.io/media/vue-views/last-time.png" alt="Last time, on Shenanigans..." />
     </a>
@@ -324,7 +325,8 @@ ga('send', 'pageview');
   path<span style="color:#666">:</span> <span style="color:#4070a0">&#39;/authors&#39;</span>,
   name<span style="color:#666">:</span> <span style="color:#4070a0">&#39;Authors&#39;</span>,
   component<span style="color:#666">:</span> AuthorsList
-},</code></pre></div>
+},
+</code></pre></div>
 <p>I&rsquo;ve decided that I want the components dealing with authors in <code>src/components/Authors</code>. Further down the line, if I get a whole lot of components (and need to do a whole lot of importing) I can just <code>import * from '@/components/Authors'</code> and refer to those like <code>Authors.List</code>.</p>
 
 <p>Let&rsquo;s take a look how the Authors/List component is put together.</p>
@@ -387,7 +389,8 @@ ga('send', 'pageview');
   components<span style="color:#666">:</span> {
     Box
   }
-}</code></pre></div>
+}
+</code></pre></div>
 <p>We can note that the <code>Box</code> component also lives under <code>Authors</code> - now we know where to go look for it. The <code>data</code> section indeed has slots for the <code>authors</code> and <code>search</code> variables, as we expected from analyzing the template.</p>
 
 <p>In the <code>created</code> callback we see a single AJAX request for all the authors, which calls out to <code>buildAuthorsList</code> - a very simple and probably slightly unnecessary method - on success. On error it shows an <code>alert</code>, which is probably not something you want to do in production, but in development it&rsquo;s just fine.</p>
@@ -438,7 +441,8 @@ ga('send', 'pageview');
       }
     }
   }
-}</code></pre></div>
+}
+</code></pre></div>
 <p>Hel-<em>lo</em> there. It seems that most of what this component does is pull an image! But how does it do it?</p>
 
 <p>We can see that the default value for image is a placeholder image from <a href="https://placeholder.com">placeholder.com</a>. It&rsquo;s one of my favourite tools when I&rsquo;d like a placeholder in a particular size, color, and with specified text, but don&rsquo;t feel like whipping up a gazillion of images in Photoshop or other graphics program. I recommend you look at it.</p>
@@ -476,7 +480,8 @@ ga('send', 'pageview');
   path<span style="color:#666">:</span> <span style="color:#4070a0">&#39;/authors/:id&#39;</span>,
   name<span style="color:#666">:</span> <span style="color:#4070a0">&#39;Author&#39;</span>,
   component<span style="color:#666">:</span> SingleAuthor
-},</code></pre></div>
+},
+</code></pre></div>
 <p>So evidently what we&rsquo;re looking for is in <a href="https://github.com/paweljw/bookstore-frontend/blob/part-5/src/components/Authors/Single.vue">src/components/Authors/Single.vue</a>. Let&rsquo;s take a look at the template.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#062873;font-weight:bold">template</span>&gt;
   &lt;<span style="color:#062873;font-weight:bold">div</span> <span style="color:#4070a0">class</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;row&#34;</span>&gt;
@@ -508,7 +513,8 @@ ga('send', 'pageview');
     Box,
     List
   }
-}</code></pre></div>
+}
+</code></pre></div>
 <p>And there it is: this <code>List</code> references <code>src/components/Books/List.vue</code>. In a project where we expect somebody else working on it, this would probably be a no-no. We can alias this <code>List</code> as e.g. <code>BooksList</code> and be more explicit about what we&rsquo;re doing here that way.</p>
 
 <p>The script also explains the <code>author</code> render guard made with <code>v-if</code>. When the component first loads, we don&rsquo;t have any data about a particular author, instead of rendering it. Since this is a component that is not directly tied to the <code>authors</code> list we pulled for the index, we can&rsquo;t depend on it.</p>
@@ -577,7 +583,7 @@ ga('send', 'pageview');
 <p>If you&rsquo;ll recall, in our design episode we came up with something like this for our book page:</p>
 
 
-<figure >
+<figure>
     <a href="https://paweljw.github.io/media/vue-views/book-wireframe.png">
         <img src="https://paweljw.github.io/media/vue-views/book-wireframe.png" />
     </a>
@@ -592,7 +598,7 @@ ga('send', 'pageview');
 <p>I think we can get away with something like this:</p>
 
 
-<figure >
+<figure>
     <a href="https://paweljw.github.io/media/vue-views/new-book-wireframe.png">
         <img src="https://paweljw.github.io/media/vue-views/new-book-wireframe.png" />
     </a>
@@ -632,7 +638,7 @@ ga('send', 'pageview');
 <p>In the <code>Full</code> component we achieve it like so:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#062873;font-weight:bold">template</span>&gt;
   &lt;<span style="color:#062873;font-weight:bold">div</span> <span style="color:#4070a0">class</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;col book text-center&#34;</span>&gt;
-    &lt;<span style="color:#062873;font-weight:bold">button</span> <span style="color:#4070a0">class</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;btn btn-light btn-close&#34;</span> <span style="color:#4070a0">v-on:click</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;close&#34;</span>&gt;× close&lt;/<span style="color:#062873;font-weight:bold">button</span>&gt;
+    &lt;<span style="color:#062873;font-weight:bold">button</span> <span style="color:#4070a0">class</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;btn btn-light btn-close&#34;</span> <span style="color:#4070a0">v-on:click</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;close&#34;</span>&gt;<span style="color:#d55537;font-weight:bold">&amp;times;</span> close&lt;/<span style="color:#062873;font-weight:bold">button</span>&gt;
     <span style="color:#60a0b0;font-style:italic">&lt;!-- ... //--&gt;</span>
 &lt;/<span style="color:#062873;font-weight:bold">template</span>&gt;
 
@@ -654,7 +660,7 @@ ga('send', 'pageview');
 <p>We&rsquo;ve written a lot of code and covered a lot of ground in this post. We&rsquo;ve looked at components, we&rsquo;ve used props and events to pass data around and we&rsquo;ve played a bit with Bootstrap. In all, we&rsquo;ve got ourselves something decently presentable for a learning project:</p>
 
 
-<figure >
+<figure>
     <a href="https://paweljw.github.io/media/vue-views/finish.png">
         <img src="https://paweljw.github.io/media/vue-views/finish.png" />
     </a>
@@ -714,7 +720,7 @@ Maurício Mascaro via <a href="https://www.pexels.com/photo/person-holding-magni
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--disabled">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2018/04/vue.js-front-end-app-part-6-deploying-to-s3/" data-tooltip="Vue.js front end app, part 6: Deploying to S3">
           
             <i class="fa fa-angle-left"></i>
             <span class="hide-xs hide-sm text-small icon-ml"></span>
@@ -795,7 +801,7 @@ Maurício Mascaro via <a href="https://www.pexels.com/photo/person-holding-magni
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--disabled">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2018/04/vue.js-front-end-app-part-6-deploying-to-s3/" data-tooltip="Vue.js front end app, part 6: Deploying to S3">
           
             <i class="fa fa-angle-left"></i>
             <span class="hide-xs hide-sm text-small icon-ml"></span>
@@ -923,6 +929,25 @@ Maurício Mascaro via <a href="https://www.pexels.com/photo/person-holding-magni
       <div class="no-result text-color-light text-center"></div>
       <div class="results">
         
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2018/04/vue.js-front-end-app-part-6-deploying-to-s3/">
+                <h3 class="media-heading">Vue.js front end app, part 6: Deploying to S3</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>In this final episode of the series, we&rsquo;ll take a look at deploying our Single Page Application to Amazon Web Services Simple Storage Service (or S3).</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
         
           <div class="media">
             
@@ -1095,27 +1120,6 @@ Maurício Mascaro via <a href="https://www.pexels.com/photo/person-holding-magni
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-2-modeling-reality/">
-                <h3 class="media-heading">Rails 5.1 API app, part 2: Modeling reality</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jul 7, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>Oh yeah. Now we&rsquo;re going <em>hardcore</em>. Well, not really.</p>
-
-<p>While Rails embraces a continuously changing data model, it&rsquo;s always good to stop and think for a minute about the domain we&rsquo;re trying to magically lockwithin an app. We&rsquo;re building a bookstore. So what&rsquo;s in one?</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -1123,7 +1127,7 @@ Maurício Mascaro via <a href="https://www.pexels.com/photo/person-holding-magni
          data-message-zero=""
          data-message-one=""
          data-message-other="">
-         19 posts found
+         20 posts found
       </p>
     </div>
   </div>

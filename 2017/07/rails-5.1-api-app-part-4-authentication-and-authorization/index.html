@@ -21,7 +21,7 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.31.1">
+    <meta name="generator" content="Hugo 0.38">
     <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
     <title>Rails 5.1 API app, part 4: Authentication and authorization</title>
     <meta name="author" content="Paweł J. Wal">
@@ -332,7 +332,7 @@ ga('send', 'pageview');
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ rails g model User email password_digest admin:boolean</code></pre></div>
 <p>Very barebones, but that&rsquo;s all we need. The migration needs a couple tweaks to look something like this:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#007020;font-weight:bold">class</span> <span style="color:#0e84b5;font-weight:bold">CreateUsers</span> <span style="color:#666">&lt;</span> <span style="color:#60add5">ActiveRecord</span><span style="color:#666">::</span><span style="color:#60add5">Migration</span><span style="color:#666">[</span><span style="color:#40a070">5</span><span style="color:#666">.</span><span style="color:#40a070">1</span><span style="color:#666">]</span>
-  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#0e84b5;font-weight:bold"></span><span style="color:#666"></span><span style="color:#06287e">change</span>
+  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">change</span>
     create_table <span style="color:#517918">:users</span> <span style="color:#007020;font-weight:bold">do</span> <span style="color:#666">|</span>t<span style="color:#666">|</span>
       t<span style="color:#666">.</span>string <span style="color:#517918">:email</span>, <span style="color:#517918">null</span>: <span style="color:#007020">false</span>
       t<span style="color:#666">.</span>string <span style="color:#517918">:password_digest</span>, <span style="color:#517918">null</span>: <span style="color:#007020">false</span>
@@ -412,27 +412,27 @@ claim. When that is set to a timestamp, and it is past that timestamp, JWT will 
     <span style="color:#007020">new</span>(<span style="color:#666">*</span>args)<span style="color:#666">.</span>call
   <span style="color:#007020;font-weight:bold">end</span>
 
-  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#0e84b5;font-weight:bold"></span><span style="color:#666"></span><span style="color:#06287e">call</span>
+  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">call</span>
     @result <span style="color:#666">=</span> <span style="color:#007020">nil</span>
     payload
     <span style="color:#007020">self</span>
   <span style="color:#007020;font-weight:bold">end</span>
 
-  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#0e84b5;font-weight:bold"></span><span style="color:#666"></span><span style="color:#06287e">success?</span>
+  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">success?</span>
     errors<span style="color:#666">.</span>empty?
   <span style="color:#007020;font-weight:bold">end</span>
 
-  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#0e84b5;font-weight:bold"></span><span style="color:#666"></span><span style="color:#06287e">errors</span>
+  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">errors</span>
     @errors <span style="color:#666">||=</span> <span style="color:#60add5">ActiveModel</span><span style="color:#666">::</span><span style="color:#60add5">Errors</span><span style="color:#666">.</span>new(<span style="color:#007020">self</span>)
   <span style="color:#007020;font-weight:bold">end</span>
 
   <span style="color:#007020">private</span>
 
-  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#0e84b5;font-weight:bold"></span><span style="color:#666"></span><span style="color:#06287e">initialize</span>(<span style="color:#666">*</span>_)
+  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">initialize</span>(<span style="color:#666">*</span>_)
     not_implemented
   <span style="color:#007020;font-weight:bold">end</span>
 
-  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#0e84b5;font-weight:bold"></span><span style="color:#666"></span><span style="color:#06287e">payload</span>
+  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">payload</span>
     not_implemented
   <span style="color:#007020;font-weight:bold">end</span>
 <span style="color:#007020;font-weight:bold">end</span></code></pre></div>
@@ -444,20 +444,20 @@ claim. When that is set to a timestamp, and it is past that timestamp, JWT will 
 
   <span style="color:#007020">attr_reader</span> <span style="color:#517918">:email</span>, <span style="color:#517918">:password</span>
 
-  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#0e84b5;font-weight:bold"></span><span style="color:#666"></span><span style="color:#06287e">initialize</span>(email, password)
+  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">initialize</span>(email, password)
     @email <span style="color:#666">=</span> email
     @password <span style="color:#666">=</span> password
   <span style="color:#007020;font-weight:bold">end</span>
 
-  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#0e84b5;font-weight:bold"></span><span style="color:#666"></span><span style="color:#06287e">user</span>
+  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">user</span>
     @user <span style="color:#666">||=</span> <span style="color:#60add5">User</span><span style="color:#666">.</span>find_by(<span style="color:#517918">email</span>: email)
   <span style="color:#007020;font-weight:bold">end</span>
 
-  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#0e84b5;font-weight:bold"></span><span style="color:#666"></span><span style="color:#06287e">password_valid?</span>
+  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">password_valid?</span>
     user <span style="color:#666">&amp;&amp;</span> user<span style="color:#666">.</span>authenticate(password)
   <span style="color:#007020;font-weight:bold">end</span>
 
-  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#0e84b5;font-weight:bold"></span><span style="color:#666"></span><span style="color:#06287e">payload</span>
+  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">payload</span>
     <span style="color:#007020;font-weight:bold">if</span> password_valid?
       @result <span style="color:#666">=</span> <span style="color:#60add5">JwtService</span><span style="color:#666">.</span>encode(contents)
     <span style="color:#007020;font-weight:bold">else</span>
@@ -465,7 +465,7 @@ claim. When that is set to a timestamp, and it is past that timestamp, JWT will 
     <span style="color:#007020;font-weight:bold">end</span>
   <span style="color:#007020;font-weight:bold">end</span>
 
-  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#0e84b5;font-weight:bold"></span><span style="color:#666"></span><span style="color:#06287e">contents</span>
+  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">contents</span>
     {
       <span style="color:#517918">user_id</span>: user<span style="color:#666">.</span>id,
       <span style="color:#517918">exp</span>: <span style="color:#40a070">24</span><span style="color:#666">.</span>hours<span style="color:#666">.</span>from_now<span style="color:#666">.</span>to_i
@@ -480,7 +480,7 @@ claim. When that is set to a timestamp, and it is past that timestamp, JWT will 
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#007020;font-weight:bold">module</span> <span style="color:#0e84b5;font-weight:bold">Api</span>
   <span style="color:#007020;font-weight:bold">module</span> <span style="color:#0e84b5;font-weight:bold">V1</span>
     <span style="color:#007020;font-weight:bold">class</span> <span style="color:#0e84b5;font-weight:bold">AuthsController</span> <span style="color:#666">&lt;</span> <span style="color:#60add5">ApplicationController</span>
-      <span style="color:#007020;font-weight:bold">def</span> <span style="color:#0e84b5;font-weight:bold"></span><span style="color:#666"></span><span style="color:#06287e">create</span>
+      <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">create</span>
         token_command <span style="color:#666">=</span> <span style="color:#60add5">AuthenticateUserCommand</span><span style="color:#666">.</span>call(<span style="color:#666">*</span>params<span style="color:#666">.</span>slice(<span style="color:#517918">:user</span>, <span style="color:#517918">:password</span>)<span style="color:#666">.</span>values)
 
         <span style="color:#007020;font-weight:bold">if</span> token_command<span style="color:#666">.</span>success?
@@ -497,7 +497,7 @@ claim. When that is set to a timestamp, and it is past that timestamp, JWT will 
 <p>Now when I try to log in with a nonexistent user, I get an <code>Unauthorized status</code>:</p>
 
 
-<figure >
+<figure>
     <a href="https://paweljw.github.io/media/auth_1.png">
         <img src="https://paweljw.github.io/media/auth_1.png" />
     </a>
@@ -513,7 +513,7 @@ claim. When that is set to a timestamp, and it is past that timestamp, JWT will 
 <p>and try again,</p>
 
 
-<figure >
+<figure>
     <a href="https://paweljw.github.io/media/auth_2.png">
         <img src="https://paweljw.github.io/media/auth_2.png" />
     </a>
@@ -539,36 +539,36 @@ claim. When that is set to a timestamp, and it is past that timestamp, JWT will 
 
   <span style="color:#007020">attr_reader</span> <span style="color:#517918">:headers</span>
 
-  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#0e84b5;font-weight:bold"></span><span style="color:#666"></span><span style="color:#06287e">initialize</span>(headers)
+  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">initialize</span>(headers)
     @headers <span style="color:#666">=</span> headers
     @user <span style="color:#666">=</span> <span style="color:#007020">nil</span>
   <span style="color:#007020;font-weight:bold">end</span>
 
-  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#0e84b5;font-weight:bold"></span><span style="color:#666"></span><span style="color:#06287e">payload</span>
+  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">payload</span>
     <span style="color:#007020;font-weight:bold">return</span> <span style="color:#007020;font-weight:bold">unless</span> token_present?
     @result <span style="color:#666">=</span> user <span style="color:#007020;font-weight:bold">if</span> user
   <span style="color:#007020;font-weight:bold">end</span>
 
-  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#0e84b5;font-weight:bold"></span><span style="color:#666"></span><span style="color:#06287e">user</span>
+  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">user</span>
     @user <span style="color:#666">||=</span> <span style="color:#60add5">User</span><span style="color:#666">.</span>find_by(<span style="color:#007020">id</span>: decoded_id)
     @user <span style="color:#666">||</span> errors<span style="color:#666">.</span>add(<span style="color:#517918">:token</span>, <span style="color:#60add5">I18n</span><span style="color:#666">.</span>t(<span style="color:#4070a0">&#39;decode_authentication_command.token_invalid&#39;</span>)) <span style="color:#666">&amp;&amp;</span> <span style="color:#007020">nil</span>
   <span style="color:#007020;font-weight:bold">end</span>
 
-  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#0e84b5;font-weight:bold"></span><span style="color:#666"></span><span style="color:#06287e">token_present?</span>
+  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">token_present?</span>
     token<span style="color:#666">.</span>present? <span style="color:#666">&amp;&amp;</span> token_contents<span style="color:#666">.</span>present?
   <span style="color:#007020;font-weight:bold">end</span>
 
-  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#0e84b5;font-weight:bold"></span><span style="color:#666"></span><span style="color:#06287e">token</span>
+  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">token</span>
     <span style="color:#007020;font-weight:bold">return</span> authorization_header<span style="color:#666">.</span>split(<span style="color:#4070a0">&#39; &#39;</span>)<span style="color:#666">.</span>last <span style="color:#007020;font-weight:bold">if</span> authorization_header<span style="color:#666">.</span>present?
     errors<span style="color:#666">.</span>add(<span style="color:#517918">:token</span>, <span style="color:#60add5">I18n</span><span style="color:#666">.</span>t(<span style="color:#4070a0">&#39;decode_authentication_command.token_missing&#39;</span>))
     <span style="color:#007020">nil</span>
   <span style="color:#007020;font-weight:bold">end</span>
 
-  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#0e84b5;font-weight:bold"></span><span style="color:#666"></span><span style="color:#06287e">authorization_header</span>
+  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">authorization_header</span>
     headers<span style="color:#666">[</span><span style="color:#4070a0">&#39;Authorization&#39;</span><span style="color:#666">]</span>
   <span style="color:#007020;font-weight:bold">end</span>
 
-  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#0e84b5;font-weight:bold"></span><span style="color:#666"></span><span style="color:#06287e">token_contents</span>
+  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">token_contents</span>
     @token_contents <span style="color:#666">||=</span> <span style="color:#007020;font-weight:bold">begin</span>
       decoded <span style="color:#666">=</span> <span style="color:#60add5">JwtService</span><span style="color:#666">.</span>decode(token)
       errors<span style="color:#666">.</span>add(<span style="color:#517918">:token</span>, <span style="color:#60add5">I18n</span><span style="color:#666">.</span>t(<span style="color:#4070a0">&#39;decode_authentication_command.token_expired&#39;</span>)) <span style="color:#007020;font-weight:bold">unless</span> decoded
@@ -576,7 +576,7 @@ claim. When that is set to a timestamp, and it is past that timestamp, JWT will 
     <span style="color:#007020;font-weight:bold">end</span>
   <span style="color:#007020;font-weight:bold">end</span>
 
-  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#0e84b5;font-weight:bold"></span><span style="color:#666"></span><span style="color:#06287e">decoded_id</span>
+  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">decoded_id</span>
     token_contents<span style="color:#666">[</span><span style="color:#4070a0">&#39;user_id&#39;</span><span style="color:#666">]</span>
   <span style="color:#007020;font-weight:bold">end</span>
 <span style="color:#007020;font-weight:bold">end</span></code></pre></div>
@@ -594,12 +594,12 @@ because the token has already expired (according to the <code>exp</code> reserve
 
     before_action <span style="color:#517918">:authenticate_user</span>
 
-    rescue_from <span style="color:#60add5">NotAuthorizedException</span>, <span style="color:#517918">with</span>: <span style="color:#666">-&gt;</span> { render <span style="color:#517918">json</span>: { <span style="color:#517918">error</span>: <span style="color:#4070a0">&#39;Not Authorized&#39;</span> }, <span style="color:#517918">status</span>: <span style="color:#40a070">401</span> <span style="color:#666"></span>}
+    rescue_from <span style="color:#60add5">NotAuthorizedException</span>, <span style="color:#517918">with</span>: <span style="color:#666">-&gt;</span> { render <span style="color:#517918">json</span>: { <span style="color:#517918">error</span>: <span style="color:#4070a0">&#39;Not Authorized&#39;</span> }, <span style="color:#517918">status</span>: <span style="color:#40a070">401</span> }
   <span style="color:#007020;font-weight:bold">end</span>
 
   <span style="color:#007020">private</span>
 
-  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#0e84b5;font-weight:bold"></span><span style="color:#666"></span><span style="color:#06287e">authenticate_user</span>
+  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">authenticate_user</span>
     @current_user <span style="color:#666">=</span> <span style="color:#60add5">DecodeAuthenticationCommand</span><span style="color:#666">.</span>call(request<span style="color:#666">.</span>headers)<span style="color:#666">.</span>result
     <span style="color:#007020;font-weight:bold">raise</span> <span style="color:#60add5">NotAuthorizedException</span> <span style="color:#007020;font-weight:bold">unless</span> @current_user
   <span style="color:#007020;font-weight:bold">end</span>
@@ -611,7 +611,7 @@ because the token has already expired (according to the <code>exp</code> reserve
 <p>Now if I try to get a list of authors in Postman not passing in an authentication header, I get rejected:</p>
 
 
-<figure >
+<figure>
     <a href="https://paweljw.github.io/media/auth_3.png">
         <img src="https://paweljw.github.io/media/auth_3.png" />
     </a>
@@ -622,7 +622,7 @@ because the token has already expired (according to the <code>exp</code> reserve
 <p>But if I do pass this header, I&rsquo;m approved!</p>
 
 
-<figure >
+<figure>
     <a href="https://paweljw.github.io/media/auth_4.png">
         <img src="https://paweljw.github.io/media/auth_4.png" />
     </a>
@@ -642,7 +642,7 @@ because the token has already expired (according to the <code>exp</code> reserve
     rescue_from <span style="color:#60add5">NotPermittedException</span>, <span style="color:#517918">with</span>: <span style="color:#666">-&gt;</span> { render <span style="color:#517918">json</span>: { <span style="color:#517918">error</span>: <span style="color:#4070a0">&#39;Not Permitted&#39;</span> }, <span style="color:#517918">status</span>: <span style="color:#517918">:forbidden</span> }
   <span style="color:#007020;font-weight:bold">end</span>
 
-  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#0e84b5;font-weight:bold"></span><span style="color:#666"></span><span style="color:#06287e">authorize!</span>(action)
+  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">authorize!</span>(action)
     <span style="color:#007020;font-weight:bold">raise</span> <span style="color:#60add5">NotPermittedException</span> <span style="color:#007020;font-weight:bold">if</span> action <span style="color:#666">!=</span> <span style="color:#517918">:read</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>current_user<span style="color:#666">.</span>admin?
     <span style="color:#007020">true</span>
   <span style="color:#007020;font-weight:bold">end</span>
@@ -913,6 +913,25 @@ because the token has already expired (according to the <code>exp</code> reserve
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2018/04/vue.js-front-end-app-part-6-deploying-to-s3/">
+                <h3 class="media-heading">Vue.js front end app, part 6: Deploying to S3</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>In this final episode of the series, we&rsquo;ll take a look at deploying our Single Page Application to Amazon Web Services Simple Storage Service (or S3).</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="https://paweljw.github.io/2018/01/vue.js-front-end-app-part-5-data-presentation/">
                 <h3 class="media-heading">Vue.js front end app, part 5: Data presentation</h3>
               </a>
@@ -1081,27 +1100,6 @@ because the token has already expired (according to the <code>exp</code> reserve
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-2-modeling-reality/">
-                <h3 class="media-heading">Rails 5.1 API app, part 2: Modeling reality</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jul 7, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>Oh yeah. Now we&rsquo;re going <em>hardcore</em>. Well, not really.</p>
-
-<p>While Rails embraces a continuously changing data model, it&rsquo;s always good to stop and think for a minute about the domain we&rsquo;re trying to magically lockwithin an app. We&rsquo;re building a bookstore. So what&rsquo;s in one?</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -1109,7 +1107,7 @@ because the token has already expired (according to the <code>exp</code> reserve
          data-message-zero=""
          data-message-one=""
          data-message-other="">
-         19 posts found
+         20 posts found
       </p>
     </div>
   </div>

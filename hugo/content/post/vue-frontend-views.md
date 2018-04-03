@@ -26,6 +26,7 @@ New year, new ~~you~~ blog post! In this long overdue part we'll strengthen our 
   * [Part 3: Authentication](/2017/09/vue.js-front-end-app-part-3-authentication/)
   * [Part 4: Keeping state with Vuex](/2017/10/vue.js-front-end-app-part-4-keeping-state-with-vuex/)
   * Part 5: Data presentation
+  * [Part 6: Deploying to S3](/2018/04/vue.js-front-end-app-part-6-deploying-to-s3/)
 </details>
 
 ## Plan of attack

@@ -21,7 +21,7 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.31.1">
+    <meta name="generator" content="Hugo 0.38">
     <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
     <title>Saturday Project: Alien Generator in JavaScript</title>
     <meta name="author" content="Paweł J. Wal">
@@ -314,7 +314,8 @@ ga('send', 'pageview');
 
     <span style="color:#007020;font-weight:bold">return</span> <span style="color:#007020;font-weight:bold">new</span> Color(red, green, blue)
   }
-}</code></pre></div>
+}
+</code></pre></div>
 <p>Now I also want to mix my color with any other color in &ldquo;equal parts&rdquo;. The method to do it is add every pair of base color values together and halve the sum. To make sure we still get integer values for base colors, we&rsquo;ll use <code>Math.floor</code>.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#007020;font-weight:bold">class</span> Color {
   <span style="color:#60a0b0;font-style:italic">// ...
@@ -325,7 +326,8 @@ ga('send', 'pageview');
     <span style="color:#007020;font-weight:bold">return</span> <span style="color:#007020;font-weight:bold">new</span> Color(red, green, blue)
   }
   <span style="color:#60a0b0;font-style:italic">// ...
-</span><span style="color:#60a0b0;font-style:italic"></span>}</code></pre></div>
+</span><span style="color:#60a0b0;font-style:italic"></span>}
+</code></pre></div>
 <p>You may notice that this method is in <code>operator-style</code>, that is - it takes a right-hand-side operator, treating self as left hand side, and returns a new instance of it&rsquo;s class with the result. The benefit here is that we can add (&ldquo;mix&rdquo;) two colors together and not mess up the instances we&rsquo;ve been adding.</p>
 
 <p>Now, all I&rsquo;ll be using this <code>Color</code> class for will be pastel colors, and I don&rsquo;t want to type <code>Color.random().mix(new Color(255, 255, 255))</code> all the time. I&rsquo;m just lazy like that. So let&rsquo;s add a <code>toPastel()</code> method which will shorthand that for me:</p>
@@ -335,7 +337,8 @@ ga('send', 'pageview');
     <span style="color:#007020;font-weight:bold">return</span> <span style="color:#007020;font-weight:bold">this</span>.mix(<span style="color:#007020;font-weight:bold">new</span> Color(<span style="color:#40a070">255</span>, <span style="color:#40a070">255</span>, <span style="color:#40a070">255</span>))
   }
   <span style="color:#60a0b0;font-style:italic">// ...
-</span><span style="color:#60a0b0;font-style:italic"></span>}</code></pre></div>
+</span><span style="color:#60a0b0;font-style:italic"></span>}
+</code></pre></div>
 <p>One last thing: we&rsquo;ll want to get the values of the color in a string formatted like <code>rgb(10, 20, 30)</code> for use with Two.js. So let&rsquo;s add in a method to cast our color to string.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#007020;font-weight:bold">class</span> Color {
   <span style="color:#60a0b0;font-style:italic">// ...
@@ -343,7 +346,8 @@ ga('send', 'pageview');
     <span style="color:#007020;font-weight:bold">return</span> <span style="color:#4070a0">`rgb(</span><span style="color:#70a0d0;font-style:italic">${</span><span style="color:#007020;font-weight:bold">this</span>.r<span style="color:#70a0d0;font-style:italic">}</span><span style="color:#4070a0">, </span><span style="color:#70a0d0;font-style:italic">${</span><span style="color:#007020;font-weight:bold">this</span>.g<span style="color:#70a0d0;font-style:italic">}</span><span style="color:#4070a0">, </span><span style="color:#70a0d0;font-style:italic">${</span><span style="color:#007020;font-weight:bold">this</span>.b<span style="color:#70a0d0;font-style:italic">}</span><span style="color:#4070a0">)`</span>
   }
   <span style="color:#60a0b0;font-style:italic">// ...
-</span><span style="color:#60a0b0;font-style:italic"></span>}</code></pre></div>
+</span><span style="color:#60a0b0;font-style:italic"></span>}
+</code></pre></div>
 <p>Great, that&rsquo;s our <code>Color</code> class done! If you haven&rsquo;t been following along, here&rsquo;s the complete product <a href="https://gist.github.com/paweljw/c2c850dc5e9b74f071610fdfbc13fa83">as a Gist</a>.</p>
 
 <h2 id="the-alien">The <code>Alien</code></h2>
@@ -374,7 +378,8 @@ ga('send', 'pageview');
     <span style="color:#007020;font-weight:bold">this</span>.partSize <span style="color:#666">=</span> <span style="color:#007020;font-weight:bold">this</span>.size <span style="">/ this.parts</span>
     <span style="color:#007020;font-weight:bold">this</span>.frequency <span style="color:#666">=</span> frequency
   }
-}</code></pre></div>
+}
+</code></pre></div>
 <p>I decided to give my constructor some default values (I&rsquo;m lazy, remember?). So I&rsquo;ll have an alien at 600 pixels in size, 16x16 cells, and I want a (statistical) half of them to be filled with a color. I&rsquo;ll pass in an element later.</p>
 
 <p>We won&rsquo;t be saving the element at all, instead making an instance of Two.js right away and store that. Two takes a simple params hash into it&rsquo;s constructor, and then we run <code>appendTo</code> and hey presto - it&rsquo;s on there forever.</p>
@@ -415,7 +420,8 @@ $$</p>
 <p>Drawing a rectangle is a three step process, which can be summarised as follows:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#007020;font-weight:bold">var</span> rectangle <span style="color:#666">=</span> two.makeRectangle(center_x, center_y, width, height) <span style="color:#60a0b0;font-style:italic">// make rectangle width by height in size, with it&#39;s center at center_x and center_y
 </span><span style="color:#60a0b0;font-style:italic"></span>rectangle.fill <span style="color:#666">=</span> <span style="color:#4070a0">&#39;rgb(r, g, b)&#39;</span> <span style="color:#60a0b0;font-style:italic">// fill it with some color
-</span><span style="color:#60a0b0;font-style:italic"></span>rectangle.noStroke() <span style="">// make it have no border</span></code></pre></div>
+</span><span style="color:#60a0b0;font-style:italic"></span>rectangle.noStroke() <span style="color:#60a0b0;font-style:italic">// make it have no border
+</span><span style="color:#60a0b0;font-style:italic"></span></code></pre></div>
 <p>Spot the catch yet? Some graphics libraries define their rectangles by their top left corner; Two defines them with the center. So when we want to calculate the x and y position for an alien&rsquo;s cell, we need to solve this equation:</p>
 
 <p>$$
@@ -432,7 +438,8 @@ $$</p>
   _y (j) {
     <span style="color:#007020;font-weight:bold">return</span> <span style="color:#007020;font-weight:bold">this</span>._x(j)
   }
-}</code></pre></div>
+}
+</code></pre></div>
 <p>So putting all of this together, we&rsquo;ll get something like this:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#007020;font-weight:bold">class</span> Alien {
   <span style="color:#60a0b0;font-style:italic">// ...
@@ -453,11 +460,13 @@ $$</p>
     <span style="color:#007020;font-weight:bold">this</span>.two.update()
   }
   <span style="color:#60a0b0;font-style:italic">// ...
-</span><span style="color:#60a0b0;font-style:italic"></span>}</code></pre></div>
+</span><span style="color:#60a0b0;font-style:italic"></span>}
+</code></pre></div>
 <p>Let&rsquo;s test it right now! We can attach our Alien to a DOM node and call <code>draw()</code> on it.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#007020;font-weight:bold">const</span> elem <span style="color:#666">=</span> <span style="color:#007020">document</span>.getElementById(<span style="color:#4070a0">&#39;two-container&#39;</span>)
 <span style="color:#007020;font-weight:bold">var</span> alien <span style="color:#666">=</span> (<span style="color:#007020;font-weight:bold">new</span> Alien(elem))
-alien.draw()</code></pre></div>
+alien.draw()
+</code></pre></div>
 <p>Drum roll, please&hellip;</p>
 
 <p><img src="https://paweljw.github.io/media/alien_half.png" width="100" /></p>
@@ -492,7 +501,8 @@ $$</p>
 </span><span style="color:#60a0b0;font-style:italic"></span>  _mirroredX (i) {
     <span style="color:#007020;font-weight:bold">return</span> <span style="color:#007020;font-weight:bold">this</span>.size <span style="color:#666">-</span> <span style="color:#007020;font-weight:bold">this</span>._x(i) <span style="color:#666">-</span> <span style="color:#007020;font-weight:bold">this</span>.partSize
   }
-}</code></pre></div>
+}
+</code></pre></div>
 <p>Now we can make our <em>ULTIMATE DRAW FUNCTION</em>:</p>
 
 <pre><code>draw () {
@@ -529,7 +539,8 @@ $$</p>
 <span style="color:#007020;font-weight:bold">var</span> alien <span style="color:#666">=</span> (<span style="color:#007020;font-weight:bold">new</span> Alien(elem))
 alien.draw()
 
-<span style="color:#007020">document</span>.getElementById(<span style="color:#4070a0">&#39;redraw&#39;</span>).addEventListener(<span style="color:#4070a0">&#39;click&#39;</span>, <span style="color:#007020;font-weight:bold">function</span>() { alien.draw() })</code></pre></div>
+<span style="color:#007020">document</span>.getElementById(<span style="color:#4070a0">&#39;redraw&#39;</span>).addEventListener(<span style="color:#4070a0">&#39;click&#39;</span>, <span style="color:#007020;font-weight:bold">function</span>() { alien.draw() })
+</code></pre></div>
 <h1 id="all-done">All done!</h1>
 
 <p>And here&rsquo;s a live view straight from CodePen:</p>
@@ -785,6 +796,25 @@ alien.draw()
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2018/04/vue.js-front-end-app-part-6-deploying-to-s3/">
+                <h3 class="media-heading">Vue.js front end app, part 6: Deploying to S3</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>In this final episode of the series, we&rsquo;ll take a look at deploying our Single Page Application to Amazon Web Services Simple Storage Service (or S3).</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="https://paweljw.github.io/2018/01/vue.js-front-end-app-part-5-data-presentation/">
                 <h3 class="media-heading">Vue.js front end app, part 5: Data presentation</h3>
               </a>
@@ -953,27 +983,6 @@ alien.draw()
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-2-modeling-reality/">
-                <h3 class="media-heading">Rails 5.1 API app, part 2: Modeling reality</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jul 7, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>Oh yeah. Now we&rsquo;re going <em>hardcore</em>. Well, not really.</p>
-
-<p>While Rails embraces a continuously changing data model, it&rsquo;s always good to stop and think for a minute about the domain we&rsquo;re trying to magically lockwithin an app. We&rsquo;re building a bookstore. So what&rsquo;s in one?</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -981,7 +990,7 @@ alien.draw()
          data-message-zero=""
          data-message-one=""
          data-message-other="">
-         19 posts found
+         20 posts found
       </p>
     </div>
   </div>

@@ -21,7 +21,7 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.31.1">
+    <meta name="generator" content="Hugo 0.38">
     <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
     <title>Rails 5.1 API app, part 1: Setting up a Rails API app</title>
     <meta name="author" content="Paweł J. Wal">
@@ -315,7 +315,7 @@ ga('send', 'pageview');
 </ul>
 
 <p>One of the initializers will come in handy, though: <code>cors.rb</code>. We can uncomment what is already there and modify it to accept all origins:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#60add5">Rails</span><span style="color:#666">.</span>application<span style="color:#666">.</span>config<span style="color:#666">.</span>middleware<span style="color:#666">.</span>insert_before <span style="color:#40a070">0</span><span style="color:#666"></span>, <span style="color:#60add5">Rack</span><span style="color:#666">::</span><span style="color:#60add5">Cors</span> <span style="color:#007020;font-weight:bold">do</span>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#60add5">Rails</span><span style="color:#666">.</span>application<span style="color:#666">.</span>config<span style="color:#666">.</span>middleware<span style="color:#666">.</span>insert_before <span style="color:#40a070">0</span>, <span style="color:#60add5">Rack</span><span style="color:#666">::</span><span style="color:#60add5">Cors</span> <span style="color:#007020;font-weight:bold">do</span>
   allow <span style="color:#007020;font-weight:bold">do</span>
     origins <span style="color:#60add5">ENV</span><span style="color:#666">.</span>fetch(<span style="color:#4070a0">&#39;ALLOWED_ORIGINS&#39;</span>) { <span style="color:#4070a0">&#39;*&#39;</span> }
 
@@ -345,20 +345,20 @@ ga('send', 'pageview');
 <p>This will set up a container with PostgreSQL 9.6, connect it&rsquo;s port 5432 to our localhost and set up a password on the database. We can run it using <code>docker-compose up</code> in the front, or <code>docker-compose start</code> as a daemon. Don&rsquo;t forget to stop it when you&rsquo;re done! I keep forgetting, so I prefer to run mine in the foreground.</p>
 
 <p>Now we just need to point our Rails app to this instance of PostgreSQL in development and test environments. Our <code>database.yml</code> may look something like this:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">default:<span style="color:#bbb"> </span>&amp;default<span style="color:#bbb">
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">default:<span style="color:#bbb"> </span><span style="color:#007020">&amp;default</span><span style="color:#bbb">
 </span><span style="color:#bbb">  </span>adapter:<span style="color:#bbb"> </span>postgresql<span style="color:#bbb">
 </span><span style="color:#bbb">  </span>encoding:<span style="color:#bbb"> </span>unicode<span style="color:#bbb">
 </span><span style="color:#bbb">  </span>pool:<span style="color:#bbb"> </span>&lt;%=<span style="color:#bbb"> </span>ENV.fetch(<span style="color:#4070a0">&#34;RAILS_MAX_THREADS&#34;</span>)<span style="color:#bbb"> </span>{<span style="color:#bbb"> </span><span style="color:#40a070">5</span><span style="color:#bbb"> </span>}<span style="color:#bbb"> </span>%<span style="color:#4070a0;font-style:italic">&gt;
 </span><span style="color:#4070a0;font-style:italic">
 </span><span style="color:#4070a0;font-style:italic">development: &amp;development</span><span style="color:#bbb">
-</span><span style="color:#bbb">  </span>&lt;&lt;:<span style="color:#bbb"> </span>*default<span style="color:#bbb">
+</span><span style="color:#bbb">  </span>&lt;&lt;:<span style="color:#bbb"> </span><span style="color:#007020">*default</span><span style="color:#bbb">
 </span><span style="color:#bbb">  </span>database:<span style="color:#bbb"> </span>bookstore-backend_development<span style="color:#bbb">
 </span><span style="color:#bbb">  </span>username:<span style="color:#bbb"> </span>postgres<span style="color:#bbb">
 </span><span style="color:#bbb">  </span>password:<span style="color:#bbb"> </span>our-awesome-bookstore-app<span style="color:#bbb">
 </span><span style="color:#bbb">  </span>host:<span style="color:#bbb"> </span>localhost<span style="color:#bbb">
 </span><span style="color:#bbb">
 </span><span style="color:#bbb"></span>test:<span style="color:#bbb">
-</span><span style="color:#bbb">  </span>&lt;&lt;:<span style="color:#bbb"> </span>*development<span style="color:#bbb">
+</span><span style="color:#bbb">  </span>&lt;&lt;:<span style="color:#bbb"> </span><span style="color:#007020">*development</span><span style="color:#bbb">
 </span><span style="color:#bbb">  </span>database:<span style="color:#bbb"> </span>bookstore-backend_test<span style="color:#bbb">
 </span><span style="color:#bbb">
 </span><span style="color:#bbb"></span>production:<span style="color:#bbb">
@@ -633,6 +633,25 @@ bundle exec bin/setup
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2018/04/vue.js-front-end-app-part-6-deploying-to-s3/">
+                <h3 class="media-heading">Vue.js front end app, part 6: Deploying to S3</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>In this final episode of the series, we&rsquo;ll take a look at deploying our Single Page Application to Amazon Web Services Simple Storage Service (or S3).</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="https://paweljw.github.io/2018/01/vue.js-front-end-app-part-5-data-presentation/">
                 <h3 class="media-heading">Vue.js front end app, part 5: Data presentation</h3>
               </a>
@@ -801,27 +820,6 @@ bundle exec bin/setup
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-2-modeling-reality/">
-                <h3 class="media-heading">Rails 5.1 API app, part 2: Modeling reality</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jul 7, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>Oh yeah. Now we&rsquo;re going <em>hardcore</em>. Well, not really.</p>
-
-<p>While Rails embraces a continuously changing data model, it&rsquo;s always good to stop and think for a minute about the domain we&rsquo;re trying to magically lockwithin an app. We&rsquo;re building a bookstore. So what&rsquo;s in one?</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -829,7 +827,7 @@ bundle exec bin/setup
          data-message-zero=""
          data-message-one=""
          data-message-other="">
-         19 posts found
+         20 posts found
       </p>
     </div>
   </div>

@@ -26,6 +26,7 @@ In this part we'll allow the user to log in to our frontend app, using the [auth
   * Part 3: Authentication
   * [Part 4: Keeping state with Vuex](/2017/10/vue.js-front-end-app-part-4-keeping-state-with-vuex/)
   * [Part 5: Data presentation](/2018/01/vue.js-front-end-app-part-5-data-presentation/)
+  * [Part 6: Deploying to S3](/2018/04/vue.js-front-end-app-part-6-deploying-to-s3/)
 </details>
 
 We did a lot of talking in the previous post, a bunch of drawing squares, and almost zero coding. And with good reason, too. But I'm raring to code already, and I guess so are you! No worries: today's post is all code, all the time.

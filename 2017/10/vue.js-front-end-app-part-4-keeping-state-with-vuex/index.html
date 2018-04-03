@@ -21,7 +21,7 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.31.1">
+    <meta name="generator" content="Hugo 0.38">
     <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
     <title>Vue.js front end app, part 4: Keeping state with Vuex</title>
     <meta name="author" content="Paweł J. Wal">
@@ -275,7 +275,8 @@ ga('send', 'pageview');
 <li><a href="https://paweljw.github.io/2017/09/vue.js-front-end-app-part-2-design-is-not-hard/">Part 2: Design is (not) hard</a></li>
 <li><a href="https://paweljw.github.io/2017/09/vue.js-front-end-app-part-3-authentication/">Part 3: Authentication</a></li>
 <li>Part 4: Keeping state with Vuex</li>
-<li><a href="https://paweljw.github.io/2018/01/vue.js-front-end-app-part-5-data-presentation/">Part 5: Data presentation</a>
+<li><a href="https://paweljw.github.io/2018/01/vue.js-front-end-app-part-5-data-presentation/">Part 5: Data presentation</a></li>
+<li><a href="https://paweljw.github.io/2018/04/vue.js-front-end-app-part-6-deploying-to-s3/">Part 6: Deploying to S3</a>
 </details></li>
 </ul>
 
@@ -314,7 +315,8 @@ Vue.use(Vuex)
   modules<span style="color:#666">:</span> {
     auth
   }
-})</code></pre></div>
+})
+</code></pre></div>
 <p>Not much meat on the bones here, but hold on - what&rsquo;s that <code>auth</code> import doing there?</p>
 
 <p>We only have the one lonely store module in this application (so far at least), but when building a real-world application, we may have a bunch of different ones. Say we wanted to track how many pages the user has navigated to. That&rsquo;d be a different module - a <code>counter</code> perhaps - and an entirely silly thing to do.</p>
@@ -362,7 +364,8 @@ Vue.use(Vuex)
   get isAdmin () {
     <span style="color:#007020;font-weight:bold">return</span> <span style="color:#007020;font-weight:bold">this</span>.admin
   }
-}</code></pre></div>
+}
+</code></pre></div>
 <p><em>Note: I&rsquo;ve extended the token that is sent from the backend app to include info about admin status and email; if you are following the series using that app as your backend, take a look at <a href="https://github.com/paweljw/bookstore-backend/commit/94eda960e8e0d1815e90207582ea0277a0c8acd8">this commit</a> and pull it into your local repository or fork.</em></p>
 
 <p>We&rsquo;ll need jwt-decode, too:</p>
@@ -381,7 +384,8 @@ Vue.use(Vuex)
 
 <span style="color:#007020;font-weight:bold">const</span> state <span style="color:#666">=</span> {
   user<span style="color:#666">:</span> User.from(localStorage.token)
-}</code></pre></div>
+}
+</code></pre></div>
 <p>As soon as the app starts, the state will be initialized to either contain a proper user if the token is still hanging around in the local storage, or we&rsquo;ll have a null in there - which means we need to drop the user into login again. Neat.</p>
 
 <h3 id="getters">Getters</h3>
@@ -391,7 +395,8 @@ Vue.use(Vuex)
   currentUser (state) {
     <span style="color:#007020;font-weight:bold">return</span> state.user
   }
-}</code></pre></div>
+}
+</code></pre></div>
 <p>Thanks to this we&rsquo;ll be able to add a computed getter in our components and just ask the store about <code>currentUser</code>. It&rsquo;s simple. I like simple.</p>
 
 <h3 id="mutations">Mutations</h3>
@@ -402,7 +407,8 @@ Vue.use(Vuex)
 
 <p>Mutation types are simply constants that we&rsquo;ll use throughout our application to refer to particular kinds of mutations. For now, we just need two kinds: login and logout. Let&rsquo;s create yet another file, <code>src/store/mutation_types.js</code> and add those two constants:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#007020;font-weight:bold">export</span> <span style="color:#007020;font-weight:bold">const</span> LOGIN <span style="color:#666">=</span> <span style="color:#4070a0">&#39;LOGIN&#39;</span>
-<span style="color:#007020;font-weight:bold">export</span> <span style="color:#007020;font-weight:bold">const</span> LOGOUT <span style="color:#666">=</span> <span style="color:#4070a0">&#39;LOGOUT&#39;</span></code></pre></div>
+<span style="color:#007020;font-weight:bold">export</span> <span style="color:#007020;font-weight:bold">const</span> LOGOUT <span style="color:#666">=</span> <span style="color:#4070a0">&#39;LOGOUT&#39;</span>
+</code></pre></div>
 <p>Now whenever we need to refer to those, we can just <code>import * as MutationTypes from '@/store/mutation-types'</code> and refer to them like <code>MutationTypes.LOGIN</code>.</p>
 
 <h4 id="defining-the-mutations">Defining the mutations</h4>
@@ -415,7 +421,8 @@ Vue.use(Vuex)
   [MutationTypes.LOGOUT] (state) {
     state.user <span style="color:#666">=</span> <span style="color:#007020;font-weight:bold">null</span>
   }
-}</code></pre></div>
+}
+</code></pre></div>
 <p>When the user logs in, we&rsquo;ll assume the token is already updated and set the store state to our model, and when the user logs out we remove the reference to that object.</p>
 
 <h3 id="actions">Actions</h3>
@@ -429,11 +436,13 @@ Vue.use(Vuex)
   logout ({ commit }) {
     commit(MutationTypes.LOGOUT)
   }
-}</code></pre></div>
+}
+</code></pre></div>
 <p>The object that gets passed into these functions is a Vuex context, so we could do this:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">login(context) {
   context.commit(...)
-}</code></pre></div>
+}
+</code></pre></div>
 <p>But we&rsquo;re making our lives a little bit easier and destructuring out just the function we need. After all, ES2015 is all about typing less (looking at you, fat arrow operator)!</p>
 
 <h3 id="putting-it-all-together">Putting it all together</h3>
@@ -444,7 +453,8 @@ Vue.use(Vuex)
   mutations,
   getters,
   actions
-}</code></pre></div>
+}
+</code></pre></div>
 <p>Final change comes in <code>main.js</code>. We just need to wire our store into Vue and it&rsquo;ll automagically know what to do with it thanks to that <code>Vue.use(Vuex)</code> line:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#60a0b0;font-style:italic">// ...
 </span><span style="color:#60a0b0;font-style:italic"></span><span style="color:#007020;font-weight:bold">import</span> store from <span style="color:#4070a0">&#39;./store&#39;</span>
@@ -457,7 +467,8 @@ Vue.use(Vuex)
   store,
   template<span style="color:#666">:</span> <span style="color:#4070a0">&#39;&lt;App/&gt;&#39;</span>,
   components<span style="color:#666">:</span> { App }
-})</code></pre></div>
+})
+</code></pre></div>
 <p>Done, we now have a complete working store! Time to put it to use.</p>
 
 <h2 id="who-uses-the-user">Who uses the User?</h2>
@@ -478,7 +489,8 @@ Vue.use(Vuex)
     ...mapGetters({ currentUser<span style="color:#666">:</span> <span style="color:#4070a0">&#39;currentUser&#39;</span> })
   },
   <span style="color:#60a0b0;font-style:italic">// ...
-</span><span style="color:#60a0b0;font-style:italic"></span>}</code></pre></div>
+</span><span style="color:#60a0b0;font-style:italic"></span>}
+</code></pre></div>
 <p>Next stop: when we login in the user successfully, we need to dispatch the <code>login</code> action. Our <code>logout</code> action destroys the user in the store, so we&rsquo;ll dispatch it when the login fails, just to be on the safe side. We&rsquo;ve prepared well while augmenting our store with actions, so this requires adding just two lines to our <code>loginSuccessful</code> and <code>loginFailed</code> methods. I&rsquo;ve marked them below:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">loginSuccessful (req) {
   <span style="color:#007020;font-weight:bold">if</span> (<span style="color:#666">!</span>req.data.token) {
@@ -494,13 +506,15 @@ loginFailed () {
   <span style="color:#007020;font-weight:bold">this</span>.error <span style="color:#666">=</span> <span style="color:#4070a0">&#39;Login failed!&#39;</span>
   <span style="color:#007020;font-weight:bold">this</span>.$store.dispatch(<span style="color:#4070a0">&#39;logout&#39;</span>) <span style="color:#60a0b0;font-style:italic">// &lt;=
 </span><span style="color:#60a0b0;font-style:italic"></span>  <span style="color:#007020;font-weight:bold">delete</span> localStorage.token
-}</code></pre></div>
+}
+</code></pre></div>
 <p>One final thing: we need to check for <code>this.currentUser</code> instead of the token in <code>checkCurrentLogin</code>.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">checkCurrentLogin () {
   <span style="color:#007020;font-weight:bold">if</span> (<span style="color:#007020;font-weight:bold">this</span>.currentUser) {
     <span style="color:#007020;font-weight:bold">this</span>.$router.replace(<span style="color:#007020;font-weight:bold">this</span>.$route.query.redirect <span style="color:#666">||</span> <span style="color:#4070a0">&#39;/authors&#39;</span>)
   }
-},</code></pre></div>
+},
+</code></pre></div>
 <h3 id="updating-the-app-component">Updating the <code>App</code> component</h3>
 
 <p>We&rsquo;re now storing User properly on login, but we&rsquo;re still vulnerable to the ol&rsquo; &ldquo;set <code>localStorage.token</code> to &lsquo;nonsense&rsquo;&rdquo; bug because we&rsquo;re referring straight to <code>localStorage</code> in <code>App</code>. At least I think that&rsquo;s the only place that&rsquo;s left; let me just do a quick search.</p>
@@ -544,7 +558,8 @@ src/components/Login.vue
       }
     }
   }
-}</code></pre></div>
+}
+</code></pre></div>
 <p>Let&rsquo;s see how that token replacement bug fares now:<br/><br/></p>
 
 <video id="it-works" src="https://paweljw.github.io/media/vue-vuex/itworks.webm" controls style="width: 100%"></video>
@@ -573,16 +588,19 @@ src/components/Login.vue
 
 <p>A couple more things before this clicks together. First of all, we need to import these new components in <code>App</code>:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#007020;font-weight:bold">import</span> Navbar from <span style="color:#4070a0">&#39;@/components/Navbar&#39;</span>
-<span style="color:#007020;font-weight:bold">import</span> Foot from <span style="color:#4070a0">&#39;@/components/Foot&#39;</span></code></pre></div>
+<span style="color:#007020;font-weight:bold">import</span> Foot from <span style="color:#4070a0">&#39;@/components/Foot&#39;</span>
+</code></pre></div>
 <p>Before Vue renders them, we also need to register them, so let&rsquo;s add a <code>components</code> section in <code>App</code>:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">components<span style="color:#666">:</span> {
   Navbar,
   Foot
-}</code></pre></div>
+}
+</code></pre></div>
 <p>If we wanted to reference them by different names in the template, we could do it like so:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">components<span style="color:#666">:</span> {
   MySuperSnazzyNavbar<span style="color:#666">:</span> Navbar
-}</code></pre></div><div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#062873;font-weight:bold">div</span>&gt;
+}
+</code></pre></div><div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#062873;font-weight:bold">div</span>&gt;
   &lt;<span style="color:#062873;font-weight:bold">MySuperSnazzyNavbar</span>&gt;&lt;/<span style="color:#062873;font-weight:bold">MySuperSnazzyNavbar</span>&gt;
 &lt;/<span style="color:#062873;font-weight:bold">div</span>&gt;</code></pre></div>
 <p>If we just want the default names though, we can rely on object destructuring to build the <code>{ Navbar: Navbar }</code> setup for us.</p>
@@ -662,7 +680,8 @@ src/components/Login.vue
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">{
   test<span style="color:#666">:</span> <span style="color:#235388">/\.s[a|c]ss$/</span>,
   loader<span style="color:#666">:</span> <span style="color:#4070a0">&#39;style!css!sass&#39;</span>
-}</code></pre></div>
+}
+</code></pre></div>
 <p>It&rsquo;s a big file, but it already contains a ton of loaders - you should have no problem figuring out where to add this one.</p>
 
 <h3 id="wiring-together-the-logout">Wiring together the logout</h3>
@@ -681,7 +700,8 @@ src/components/Login.vue
       component<span style="color:#666">:</span> Logout
     }
   ]
-})</code></pre></div>
+})
+</code></pre></div>
 <p>And as you might have already guessed, we&rsquo;ll add a Logout component. It&rsquo;s a different kind than the ones we&rsquo;ve built so far, though - no template, no styles and a minimal script:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#062873;font-weight:bold">script</span>&gt;
 <span style="color:#007020;font-weight:bold">export</span> <span style="color:#007020;font-weight:bold">default</span> {
@@ -975,6 +995,25 @@ src/components/Login.vue
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2018/04/vue.js-front-end-app-part-6-deploying-to-s3/">
+                <h3 class="media-heading">Vue.js front end app, part 6: Deploying to S3</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>In this final episode of the series, we&rsquo;ll take a look at deploying our Single Page Application to Amazon Web Services Simple Storage Service (or S3).</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="https://paweljw.github.io/2018/01/vue.js-front-end-app-part-5-data-presentation/">
                 <h3 class="media-heading">Vue.js front end app, part 5: Data presentation</h3>
               </a>
@@ -1143,27 +1182,6 @@ src/components/Login.vue
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-2-modeling-reality/">
-                <h3 class="media-heading">Rails 5.1 API app, part 2: Modeling reality</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jul 7, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>Oh yeah. Now we&rsquo;re going <em>hardcore</em>. Well, not really.</p>
-
-<p>While Rails embraces a continuously changing data model, it&rsquo;s always good to stop and think for a minute about the domain we&rsquo;re trying to magically lockwithin an app. We&rsquo;re building a bookstore. So what&rsquo;s in one?</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -1171,7 +1189,7 @@ src/components/Login.vue
          data-message-zero=""
          data-message-one=""
          data-message-other="">
-         19 posts found
+         20 posts found
       </p>
     </div>
   </div>

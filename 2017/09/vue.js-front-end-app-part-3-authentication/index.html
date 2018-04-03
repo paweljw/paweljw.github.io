@@ -21,7 +21,7 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.31.1">
+    <meta name="generator" content="Hugo 0.38">
     <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
     <title>Vue.js front end app, part 3: Authentication</title>
     <meta name="author" content="Paweł J. Wal">
@@ -275,7 +275,8 @@ ga('send', 'pageview');
 <li><a href="https://paweljw.github.io/2017/09/vue.js-front-end-app-part-2-design-is-not-hard/">Part 2: Design is (not) hard</a></li>
 <li>Part 3: Authentication</li>
 <li><a href="https://paweljw.github.io/2017/10/vue.js-front-end-app-part-4-keeping-state-with-vuex/">Part 4: Keeping state with Vuex</a></li>
-<li><a href="https://paweljw.github.io/2018/01/vue.js-front-end-app-part-5-data-presentation/">Part 5: Data presentation</a>
+<li><a href="https://paweljw.github.io/2018/01/vue.js-front-end-app-part-5-data-presentation/">Part 5: Data presentation</a></li>
+<li><a href="https://paweljw.github.io/2018/04/vue.js-front-end-app-part-6-deploying-to-s3/">Part 6: Deploying to S3</a>
 </details></li>
 </ul>
 
@@ -284,7 +285,7 @@ ga('send', 'pageview');
 <p>When we&rsquo;ve last parted ways with our app, it looked like this:</p>
 
 
-<figure >
+<figure>
     <a href="https://paweljw.github.io/media/hello.png">
         <img src="https://paweljw.github.io/media/hello.png" />
     </a>
@@ -324,7 +325,8 @@ Vue.use(Router)
       component<span style="color:#666">:</span> Hello
     }
   ]
-})</code></pre></div>
+})
+</code></pre></div>
 <p>The default route renders the <code>Hello</code> component within the <code>&lt;router-view&gt;</code> container within <code>App</code>. Let&rsquo;s see what <code>App</code> looks like:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#062873;font-weight:bold">template</span>&gt;
   &lt;<span style="color:#062873;font-weight:bold">div</span> <span style="color:#4070a0">id</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;app&#34;</span>&gt;
@@ -473,7 +475,8 @@ Vue.use(Router)
       console.log(<span style="color:#007020;font-weight:bold">this</span>.password)
     }
   }
-}</code></pre></div>
+}
+</code></pre></div>
 <p>We&rsquo;re adding placeholders in the <code>data()</code> section (remember that this needs to be a function - it&rsquo;s something that tended to trip me up!) for the email and password. We also have a super-simple <code>login()</code> method - it&rsquo;s just something to verify that the form works.</p>
 
 <p>We need to tell Vue to bind the inputs to the placeholder values. We can do that with the <code>v-model</code> directive:</p>
@@ -502,11 +505,12 @@ Vue.use(Router)
       component<span style="color:#666">:</span> Login
     }
   ]
-})</code></pre></div>
+})
+</code></pre></div>
 <p>If we check the browser now, this is the reward for our efforts:</p>
 
 
-<figure >
+<figure>
     <a href="https://paweljw.github.io/media/vue-auth/login.png">
         <img src="https://paweljw.github.io/media/vue-auth/login.png" />
     </a>
@@ -551,7 +555,8 @@ src/backend
     <span style="color:#4070a0">&#39;Content-Type&#39;</span><span style="color:#666">:</span> <span style="color:#4070a0">&#39;application/json&#39;</span>,
     <span style="color:#4070a0">&#39;Authorization&#39;</span><span style="color:#666">:</span> <span style="color:#4070a0">&#39;Bearer &#39;</span> <span style="color:#666">+</span> localStorage.token
   }
-})</code></pre></div>
+})
+</code></pre></div>
 <h3 id="configuring-vue-axios-with-our-axios">Configuring vue-axios with &ldquo;our&rdquo; axios</h3>
 
 <p>The contents of <code>index.js</code> are basically boilerplate Vue-extension-to-Vue-connection code:</p>
@@ -560,7 +565,8 @@ src/backend
 
 <span style="color:#007020;font-weight:bold">import</span> axios from <span style="color:#4070a0">&#39;./axios&#39;</span>
 
-Vue.use(VueAxios, axios)</code></pre></div>
+Vue.use(VueAxios, axios)
+</code></pre></div>
 <p>There is one important twist. We instruct vue-axios to use <em>our configured axios instance</em> and attach to Vue. If we just used boilerplate code from GitHub, the <code>axios</code> instance that attaches to vue-axios would just have default settings.</p>
 
 <h3 id="acquainting-vue-with-axios">Acquainting Vue with axios</h3>
@@ -576,7 +582,8 @@ Vue.use(VueAxios, axios)</code></pre></div>
   router,
   axios,
   <span style="color:#60a0b0;font-style:italic">// ...
-</span><span style="color:#60a0b0;font-style:italic"></span>})</code></pre></div>
+</span><span style="color:#60a0b0;font-style:italic"></span>})
+</code></pre></div>
 <p>Now our Vue instance knows it has two extensions: <code>router</code> and <code>axios</code>. Let&rsquo;s do something with it, shall we?</p>
 
 <h2 id="getting-a-token">Getting a token</h2>
@@ -586,7 +593,8 @@ Vue.use(VueAxios, axios)</code></pre></div>
   <span style="color:#007020;font-weight:bold">this</span>.$http.post(<span style="color:#4070a0">&#39;/auth&#39;</span>, { user<span style="color:#666">:</span> <span style="color:#007020;font-weight:bold">this</span>.email, password<span style="color:#666">:</span> <span style="color:#007020;font-weight:bold">this</span>.password })
     .then(request =&gt; <span style="color:#007020;font-weight:bold">this</span>.loginSuccessful(request))
     .<span style="color:#007020;font-weight:bold">catch</span>(() =&gt; <span style="color:#007020;font-weight:bold">this</span>.loginFailed())
-}</code></pre></div>
+}
+</code></pre></div>
 <p>vue-axios mounted our axios instance under <code>$http</code> - it&rsquo;s available in all components. With it we make a POST request to our <code>/auth</code> endpoint, passing <code>user</code> and <code>password</code> along.</p>
 
 <p>axios returns <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promises</a>. It&rsquo;s a catch worth knowing about: if you expect to run in an environment where they are not supported, you may need to e.g. polyfill them.</p>
@@ -607,7 +615,8 @@ Vue.use(VueAxios, axios)</code></pre></div>
 loginFailed () {
   <span style="color:#007020;font-weight:bold">this</span>.error <span style="color:#666">=</span> <span style="color:#4070a0">&#39;Login failed!&#39;</span>
   <span style="color:#007020;font-weight:bold">delete</span> localStorage.token
-}</code></pre></div>
+}
+</code></pre></div>
 <p>You will notice that if the server decides to respond with 200, but does not generate a token, we fail either way. If we <em>do</em> get a proper token, we put it into local storage and redirect to <code>/authors</code>. You will notice that we&rsquo;ve also prepared ourselves for a <code>redirect</code> parameter that might happen to be present on the query. We&rsquo;ll use it for clean redirection after an auth failure later. For all our routing needs we use <code>$router</code> - it was mounted by the <code>vue-router</code> extension we generated our app with.</p>
 
 <p>When the login fails we delete whatever there might be in the <code>localStorage</code>. We also set an error message. But wait, we didn&rsquo;t define it yet! We should let the component know that we require it to have such a variable. We can do this in the <code>data</code> section, expanding it to look like so:</p>
@@ -617,7 +626,8 @@ loginFailed () {
     password<span style="color:#666">:</span> <span style="color:#4070a0">&#39;&#39;</span>,
     error<span style="color:#666">:</span> <span style="color:#007020;font-weight:bold">false</span>
   }
-}</code></pre></div>
+}
+</code></pre></div>
 <p>One finishing touch: displaying the error to the user. We can use a Bootstrap alert with a div that will only display if there is an error to be shown:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#062873;font-weight:bold">h2</span> <span style="color:#4070a0">class</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;form-signin-heading&#34;</span>&gt;Please sign in&lt;/<span style="color:#062873;font-weight:bold">h2</span>&gt;
 &lt;<span style="color:#062873;font-weight:bold">div</span> <span style="color:#4070a0">class</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;alert alert-danger&#34;</span> <span style="color:#4070a0">v-if</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;error&#34;</span>&gt;{{ error }}&lt;/<span style="color:#062873;font-weight:bold">div</span>&gt;</code></pre></div>
@@ -629,7 +639,8 @@ loginFailed () {
       path<span style="color:#666">:</span> <span style="color:#4070a0">&#39;/authors&#39;</span>,
       name<span style="color:#666">:</span> <span style="color:#4070a0">&#39;Authors&#39;</span>,
       component<span style="color:#666">:</span> Hello
-    }</code></pre></div>
+    }
+</code></pre></div>
 <p>We can run the API in the background, try to log in and it should show the (slightly mangled, but that&rsquo;s just for testing) contents of <code>Hello</code>!</p>
 
 <h2 id="locking-it-down">Locking it down</h2>
@@ -637,7 +648,7 @@ loginFailed () {
 <p>We know that our login works and we got redirected to <code>/authors</code> after logging in. Now that I&rsquo;m logged in, let me just go to <code>/</code> real quick&hellip;</p>
 
 
-<figure >
+<figure>
     <a href="https://paweljw.github.io/media/vue-auth/login.png">
         <img src="https://paweljw.github.io/media/vue-auth/login.png" alt="Huh. That again." />
     </a>
@@ -657,7 +668,7 @@ loginFailed () {
 <p>From a modern web application I&rsquo;d expect a redirect if I&rsquo;m already logged in. I am, right? Let&rsquo;s go to <code>/authors</code>&hellip;</p>
 
 
-<figure >
+<figure>
     <a href="https://paweljw.github.io/media/vue-auth/authors.png">
         <img src="https://paweljw.github.io/media/vue-auth/authors.png" alt="Okay, I think I&#39;m logged in." />
     </a>
@@ -677,7 +688,7 @@ loginFailed () {
 <p>Good, so that works. Let&rsquo;s check it once more, somewhere where my <code>localStorage</code> cannot follow me: in incognito mode. We&rsquo;ll copy the direct link to authors and&hellip;</p>
 
 
-<figure >
+<figure>
     <a href="https://paweljw.github.io/media/vue-auth/authors_private.png">
         <img src="https://paweljw.github.io/media/vue-auth/authors_private.png" />
     </a>
@@ -712,7 +723,8 @@ created () {
   <span style="color:#007020;font-weight:bold">if</span> (localStorage.token) {
     <span style="color:#007020;font-weight:bold">this</span>.$router.replace(<span style="color:#007020;font-weight:bold">this</span>.$route.query.redirect <span style="color:#666">||</span> <span style="color:#4070a0">&#39;/authors&#39;</span>)
   }
-}</code></pre></div>
+}
+</code></pre></div>
 <p>We shouldn&rsquo;t be repeating ourselves though, so let&rsquo;s kick the body of those out to a method and call that instead:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">created () {
   <span style="color:#007020;font-weight:bold">this</span>.checkCurrentLogin()
@@ -727,7 +739,8 @@ methods<span style="color:#666">:</span> {
     }
   },
   <span style="color:#60a0b0;font-style:italic">// ...
-</span><span style="color:#60a0b0;font-style:italic"></span>}</code></pre></div>
+</span><span style="color:#60a0b0;font-style:italic"></span>}
+</code></pre></div>
 <p><em>Note: if you&rsquo;ve a keen eye, you will have noticed something wrong with this code. We&rsquo;ll talk about it - please carry on reading for now.</em></p>
 
 <p>Anyway: if I have a token set and I happen to go to <code>/</code>, I get redirected to <code>/authors</code>.</p>
@@ -741,7 +754,8 @@ methods<span style="color:#666">:</span> {
   <span style="color:#007020;font-weight:bold">if</span> (<span style="color:#666">!</span>localStorage.token <span style="color:#666">&amp;&amp;</span> <span style="color:#007020;font-weight:bold">this</span>.$route.path <span style="color:#666">!==</span> <span style="color:#4070a0">&#39;/&#39;</span>) {
     <span style="color:#007020;font-weight:bold">this</span>.$router.push(<span style="color:#4070a0">&#39;/?redirect=&#39;</span> <span style="color:#666">+</span> <span style="color:#007020;font-weight:bold">this</span>.$route.path)
   }
-}</code></pre></div>
+}
+</code></pre></div>
 <p>That&rsquo;s where the <code>redirect</code> parameter comes into play: if I go to <code>/authors</code> and get redirected to login, after logging in I will continue to <code>/authors</code> again - similarly with <code>/books</code> etc.</p>
 
 <h2 id="closing-thoughts">Closing thoughts</h2>
@@ -751,11 +765,12 @@ methods<span style="color:#666">:</span> {
   <span style="color:#007020;font-weight:bold">if</span> (localStorage.token) {
     <span style="color:#007020;font-weight:bold">this</span>.$router.replace(<span style="color:#007020;font-weight:bold">this</span>.$route.query.redirect <span style="color:#666">||</span> <span style="color:#4070a0">&#39;/authors&#39;</span>)
   }
-}</code></pre></div>
+}
+</code></pre></div>
 <p>Let&rsquo;s do an experiment: I&rsquo;ll open a new incognito window where I have no <code>localStorage.token</code> and I have not logged in. I&rsquo;ll go into the developer tools and set it to <code>nonsense</code>.</p>
 
 
-<figure >
+<figure>
     <a href="https://paweljw.github.io/media/vue-auth/nonsense.png">
         <img src="https://paweljw.github.io/media/vue-auth/nonsense.png" />
     </a>
@@ -766,7 +781,7 @@ methods<span style="color:#666">:</span> {
 <p>Now let me just refresh, and&hellip;</p>
 
 
-<figure >
+<figure>
     <a href="https://paweljw.github.io/media/vue-auth/nonsense_authors.png">
         <img src="https://paweljw.github.io/media/vue-auth/nonsense_authors.png" />
     </a>
@@ -1036,6 +1051,25 @@ methods<span style="color:#666">:</span> {
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2018/04/vue.js-front-end-app-part-6-deploying-to-s3/">
+                <h3 class="media-heading">Vue.js front end app, part 6: Deploying to S3</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>In this final episode of the series, we&rsquo;ll take a look at deploying our Single Page Application to Amazon Web Services Simple Storage Service (or S3).</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="https://paweljw.github.io/2018/01/vue.js-front-end-app-part-5-data-presentation/">
                 <h3 class="media-heading">Vue.js front end app, part 5: Data presentation</h3>
               </a>
@@ -1204,27 +1238,6 @@ methods<span style="color:#666">:</span> {
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-2-modeling-reality/">
-                <h3 class="media-heading">Rails 5.1 API app, part 2: Modeling reality</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jul 7, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>Oh yeah. Now we&rsquo;re going <em>hardcore</em>. Well, not really.</p>
-
-<p>While Rails embraces a continuously changing data model, it&rsquo;s always good to stop and think for a minute about the domain we&rsquo;re trying to magically lockwithin an app. We&rsquo;re building a bookstore. So what&rsquo;s in one?</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -1232,7 +1245,7 @@ methods<span style="color:#666">:</span> {
          data-message-zero=""
          data-message-one=""
          data-message-other="">
-         19 posts found
+         20 posts found
       </p>
     </div>
   </div>

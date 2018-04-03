@@ -21,7 +21,7 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.31.1">
+    <meta name="generator" content="Hugo 0.38">
     <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
     <title>Saturday project: temperature and humidity meter with Onion Omega2&#43;</title>
     <meta name="author" content="Paweł J. Wal">
@@ -270,7 +270,7 @@ ga('send', 'pageview');
 <p>I&rsquo;ve very recently sourced an Omega2+ WiFi board from <a href="https://onion.io">Onion</a>. I&rsquo;ve previously only played with Arduino (skipped Raspberry Pi completely), so grabbing something that runs actual Linux on a hefty .5GHz was a whole new world for me.</p>
 
 
-<figure >
+<figure>
     
         <img src="https://paweljw.github.io/media/weather_station/omega.jpg" />
     
@@ -283,7 +283,7 @@ ga('send', 'pageview');
 <p>After a couple of soldering misadventures, I managed to get this going (thumbs up for botched soldering jobs!)</p>
 
 
-<figure >
+<figure>
     
         <img src="https://paweljw.github.io/media/weather_station/dht.jpg" />
     
@@ -300,7 +300,7 @@ ga('send', 'pageview');
 <p>Some last-minute jury rigging (thumbs up for not having the right size thermal shrink!) and here we go:</p>
 
 
-<figure >
+<figure>
     
         <img src="https://paweljw.github.io/media/weather_station/battery.jpg" />
     
@@ -311,7 +311,7 @@ ga('send', 'pageview');
 <p>And here&rsquo;s everything connected together:</p>
 
 
-<figure >
+<figure>
     
         <img src="https://paweljw.github.io/media/weather_station/setup.jpg" />
     
@@ -329,7 +329,7 @@ temperature: <span style="color:#40a070">20</span>.000000</code></pre></div>
 <p>Since this is an IoT device, it would not be complete without spilling sensitive information onto the internet. I&rsquo;ve decided to use <a href="https://thingspeak.com">ThingSpeak</a> for the purpose of collecting and graphing that information until I have something useful to do with it.</p>
 
 
-<figure >
+<figure>
     
         <img src="https://paweljw.github.io/media/weather_station/thingspeak.png" />
     
@@ -599,6 +599,25 @@ curl --insecure https://api.thingspeak.com/update <span style="color:#4070a0;fon
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2018/04/vue.js-front-end-app-part-6-deploying-to-s3/">
+                <h3 class="media-heading">Vue.js front end app, part 6: Deploying to S3</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>In this final episode of the series, we&rsquo;ll take a look at deploying our Single Page Application to Amazon Web Services Simple Storage Service (or S3).</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="https://paweljw.github.io/2018/01/vue.js-front-end-app-part-5-data-presentation/">
                 <h3 class="media-heading">Vue.js front end app, part 5: Data presentation</h3>
               </a>
@@ -767,27 +786,6 @@ curl --insecure https://api.thingspeak.com/update <span style="color:#4070a0;fon
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-2-modeling-reality/">
-                <h3 class="media-heading">Rails 5.1 API app, part 2: Modeling reality</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jul 7, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>Oh yeah. Now we&rsquo;re going <em>hardcore</em>. Well, not really.</p>
-
-<p>While Rails embraces a continuously changing data model, it&rsquo;s always good to stop and think for a minute about the domain we&rsquo;re trying to magically lockwithin an app. We&rsquo;re building a bookstore. So what&rsquo;s in one?</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -795,7 +793,7 @@ curl --insecure https://api.thingspeak.com/update <span style="color:#4070a0;fon
          data-message-zero=""
          data-message-one=""
          data-message-other="">
-         19 posts found
+         20 posts found
       </p>
     </div>
   </div>

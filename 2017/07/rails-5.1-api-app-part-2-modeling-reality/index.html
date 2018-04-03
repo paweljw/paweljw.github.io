@@ -21,7 +21,7 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.31.1">
+    <meta name="generator" content="Hugo 0.38">
     <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
     <title>Rails 5.1 API app, part 2: Modeling reality</title>
     <meta name="author" content="Paweł J. Wal">
@@ -342,14 +342,14 @@ rails g scaffold Book author:belongs_to title:string price:monetize
   before_action <span style="color:#517918">:set_author</span>
   before_action <span style="color:#517918">:set_book</span>, <span style="color:#517918">only</span>: <span style="color:#666">[</span><span style="color:#517918">:show</span>, <span style="color:#517918">:update</span>, <span style="color:#517918">:destroy</span><span style="color:#666">]</span>
 
-  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#0e84b5;font-weight:bold"></span><span style="color:#666"></span><span style="color:#06287e">index</span>
+  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">index</span>
     @books <span style="color:#666">=</span> @author<span style="color:#666">.</span>books<span style="color:#666">.</span>all
     render <span style="color:#517918">json</span>: @books
   <span style="color:#007020;font-weight:bold">end</span>
 
   <span style="color:#60a0b0;font-style:italic"># ...</span>
 
-  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#0e84b5;font-weight:bold"></span><span style="color:#666"></span><span style="color:#06287e">create</span>
+  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">create</span>
     @book <span style="color:#666">=</span> @author<span style="color:#666">.</span>books<span style="color:#666">.</span>new(book_params)
 
     <span style="color:#60a0b0;font-style:italic"># ...</span>
@@ -359,11 +359,11 @@ rails g scaffold Book author:belongs_to title:string price:monetize
 
   <span style="color:#007020">private</span>
 
-  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#0e84b5;font-weight:bold"></span><span style="color:#666"></span><span style="color:#06287e">set_book</span>
+  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">set_book</span>
     @book <span style="color:#666">=</span> @author<span style="color:#666">.</span>books<span style="color:#666">.</span>find(params<span style="color:#666">[</span><span style="color:#517918">:id</span><span style="color:#666">]</span>)
   <span style="color:#007020;font-weight:bold">end</span>
 
-  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#0e84b5;font-weight:bold"></span><span style="color:#666"></span><span style="color:#06287e">set_author</span>
+  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">set_author</span>
     @author <span style="color:#666">=</span> <span style="color:#60add5">Author</span><span style="color:#666">.</span>find(params<span style="color:#666">[</span><span style="color:#517918">:author_id</span><span style="color:#666">]</span>)
   <span style="color:#007020;font-weight:bold">end</span>
 
@@ -382,7 +382,7 @@ the author whom we&rsquo;re browsing.</p>
 
   validates <span style="color:#517918">:name</span>, <span style="color:#517918">presence</span>: <span style="color:#007020">true</span>
 
-  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#0e84b5;font-weight:bold"></span><span style="color:#666"></span><span style="color:#06287e">to_s</span>
+  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">to_s</span>
     <span style="color:#007020">name</span>
   <span style="color:#007020;font-weight:bold">end</span>
 <span style="color:#007020;font-weight:bold">end</span></code></pre></div>
@@ -393,7 +393,7 @@ the author whom we&rsquo;re browsing.</p>
 
   validates <span style="color:#517918">:title</span>, <span style="color:#517918">presence</span>: <span style="color:#007020">true</span>
 
-  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#0e84b5;font-weight:bold"></span><span style="color:#666"></span><span style="color:#06287e">to_s</span>
+  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">to_s</span>
     title
   <span style="color:#007020;font-weight:bold">end</span>
 <span style="color:#007020;font-weight:bold">end</span></code></pre></div>
@@ -416,7 +416,7 @@ namespace <span style="color:#517918">:import</span> <span style="color:#007020;
     books<span style="color:#666">.</span>each { <span style="color:#666">|</span>book<span style="color:#666">|</span> book_from_xml(book) }
   <span style="color:#007020;font-weight:bold">end</span>
 
-  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#0e84b5;font-weight:bold"></span><span style="color:#666"></span><span style="color:#06287e">book_from_xml</span>(book)
+  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">book_from_xml</span>(book)
     title, author_name <span style="color:#666">=</span> book<span style="color:#666">.</span>xpath(<span style="color:#4070a0">&#39;.//*[@itemprop=&#34;name&#34;]&#39;</span>)<span style="color:#666">.</span>map(<span style="color:#666">&amp;</span><span style="color:#517918">:content</span>)
     author <span style="color:#666">=</span> <span style="color:#60add5">Author</span><span style="color:#666">.</span>find_or_create_by(<span style="color:#007020">name</span>: author_name)
 
@@ -425,10 +425,10 @@ namespace <span style="color:#517918">:import</span> <span style="color:#007020;
     <span style="color:#007020">puts</span> <span style="color:#4070a0">&#34;</span><span style="color:#70a0d0;font-style:italic">#{</span>book<span style="color:#666">.</span>author<span style="color:#70a0d0;font-style:italic">}</span><span style="color:#4070a0"> - </span><span style="color:#70a0d0;font-style:italic">#{</span>book<span style="color:#70a0d0;font-style:italic">}</span><span style="color:#4070a0"> for </span><span style="color:#70a0d0;font-style:italic">#{</span>book<span style="color:#666">.</span>price<span style="color:#70a0d0;font-style:italic">}</span><span style="color:#4070a0">&#34;</span>
   <span style="color:#007020;font-weight:bold">end</span>
 
-  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#0e84b5;font-weight:bold"></span><span style="color:#666"></span><span style="color:#06287e">create_book</span>(author, title)
+  <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">create_book</span>(author, title)
     book <span style="color:#666">=</span> author<span style="color:#666">.</span>books<span style="color:#666">.</span>find_or_create_by(<span style="color:#517918">title</span>: title)
     book<span style="color:#666">.</span>price <span style="color:#666">||=</span> <span style="color:#007020">rand</span> <span style="color:#666">*</span> <span style="color:#40a070">15</span>
-    <span style="color:#666"></span>book<span style="color:#666">.</span>save
+    book<span style="color:#666">.</span>save
     book
   <span style="color:#007020;font-weight:bold">end</span>
 <span style="color:#007020;font-weight:bold">end</span></code></pre></div>
@@ -440,7 +440,7 @@ tool and I highly recommend it.</p>
 <p>Anyway, let&rsquo;s boot up our app with <code>rails s</code>, point Postman at <code>http://localhost:3000</code>, and&hellip;</p>
 
 
-<figure >
+<figure>
     <a href="https://paweljw.github.io/media/modeling_reality_postman.png">
         <img src="https://paweljw.github.io/media/modeling_reality_postman.png" alt="Testing our app with Postman" />
     </a>
@@ -733,6 +733,25 @@ tool and I highly recommend it.</p>
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2018/04/vue.js-front-end-app-part-6-deploying-to-s3/">
+                <h3 class="media-heading">Vue.js front end app, part 6: Deploying to S3</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>In this final episode of the series, we&rsquo;ll take a look at deploying our Single Page Application to Amazon Web Services Simple Storage Service (or S3).</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="https://paweljw.github.io/2018/01/vue.js-front-end-app-part-5-data-presentation/">
                 <h3 class="media-heading">Vue.js front end app, part 5: Data presentation</h3>
               </a>
@@ -901,27 +920,6 @@ tool and I highly recommend it.</p>
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-2-modeling-reality/">
-                <h3 class="media-heading">Rails 5.1 API app, part 2: Modeling reality</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jul 7, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>Oh yeah. Now we&rsquo;re going <em>hardcore</em>. Well, not really.</p>
-
-<p>While Rails embraces a continuously changing data model, it&rsquo;s always good to stop and think for a minute about the domain we&rsquo;re trying to magically lockwithin an app. We&rsquo;re building a bookstore. So what&rsquo;s in one?</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -929,7 +927,7 @@ tool and I highly recommend it.</p>
          data-message-zero=""
          data-message-one=""
          data-message-other="">
-         19 posts found
+         20 posts found
       </p>
     </div>
   </div>

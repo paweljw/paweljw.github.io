@@ -25,6 +25,7 @@ Now that we have our environment running, the app is initialized, and we know a 
   * [Part 3: Authentication](/2017/09/vue.js-front-end-app-part-3-authentication/)
   * [Part 4: Keeping state with Vuex](/2017/10/vue.js-front-end-app-part-4-keeping-state-with-vuex/)
   * [Part 5: Data presentation](/2018/01/vue.js-front-end-app-part-5-data-presentation/)
+  * [Part 6: Deploying to S3](/2018/04/vue.js-front-end-app-part-6-deploying-to-s3/)
 </details>
 
 My relationship with web design (as opposed to web development) is of a somewhat... _rotary_ nature. I started by banging out simple web apps (though we called them pages back then) in PHP way-back-when. It was a hobby, so obviously any front end design was also done by yours truly.

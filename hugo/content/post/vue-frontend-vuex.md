@@ -26,6 +26,7 @@ Last time we built an [authentication mechanism](/2017/09/vue.js-front-end-app-p
   * [Part 3: Authentication](/2017/09/vue.js-front-end-app-part-3-authentication/)
   * Part 4: Keeping state with Vuex
   * [Part 5: Data presentation](/2018/01/vue.js-front-end-app-part-5-data-presentation/)
+  * [Part 6: Deploying to S3](/2018/04/vue.js-front-end-app-part-6-deploying-to-s3/)
 </details>
 
 ## What is Vuex?

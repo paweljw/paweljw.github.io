@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://paweljw.github.io/2018/04/vue.js-front-end-app-part-6-deploying-to-s3/</loc>
+    <lastmod>2018-04-03T13:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://paweljw.github.io/2018/01/vue.js-front-end-app-part-5-data-presentation/</loc>
     <lastmod>2018-01-06T00:00:00+02:00</lastmod>
   </url>
@@ -116,6 +121,12 @@
   </url>
   
   <url>
+    <loc>https://paweljw.github.io/tags/aws/</loc>
+    <lastmod>2018-04-03T13:00:00+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://paweljw.github.io/categories/</loc>
     <priority>0</priority>
   </url>
@@ -140,13 +151,13 @@
   
   <url>
     <loc>https://paweljw.github.io/tags/es6/</loc>
-    <lastmod>2018-01-06T00:00:00+02:00</lastmod>
+    <lastmod>2018-04-03T13:00:00+02:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://paweljw.github.io/tags/follow-me/</loc>
-    <lastmod>2018-01-06T00:00:00+02:00</lastmod>
+    <lastmod>2018-04-03T13:00:00+02:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -164,7 +175,7 @@
   
   <url>
     <loc>https://paweljw.github.io/tags/javascript/</loc>
-    <lastmod>2018-01-06T00:00:00+02:00</lastmod>
+    <lastmod>2018-04-03T13:00:00+02:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -182,7 +193,7 @@
   
   <url>
     <loc>https://paweljw.github.io/post/</loc>
-    <lastmod>2018-01-06T00:00:00+02:00</lastmod>
+    <lastmod>2018-04-03T13:00:00+02:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -195,6 +206,12 @@
   <url>
     <loc>https://paweljw.github.io/tags/rails-api-series/</loc>
     <lastmod>2017-07-29T15:00:00+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://paweljw.github.io/tags/s3/</loc>
+    <lastmod>2018-04-03T13:00:00+02:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -212,7 +229,7 @@
   
   <url>
     <loc>https://paweljw.github.io/</loc>
-    <lastmod>2018-01-06T00:00:00+02:00</lastmod>
+    <lastmod>2018-04-03T13:00:00+02:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -230,7 +247,7 @@
   
   <url>
     <loc>https://paweljw.github.io/tags/vue-frontend-series/</loc>
-    <lastmod>2018-01-06T00:00:00+02:00</lastmod>
+    <lastmod>2018-04-03T13:00:00+02:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -242,7 +259,7 @@
   
   <url>
     <loc>https://paweljw.github.io/tags/vue.js/</loc>
-    <lastmod>2018-01-06T00:00:00+02:00</lastmod>
+    <lastmod>2018-04-03T13:00:00+02:00</lastmod>
     <priority>0</priority>
   </url>
   

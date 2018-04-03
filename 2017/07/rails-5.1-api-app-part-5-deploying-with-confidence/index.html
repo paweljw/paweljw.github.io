@@ -21,7 +21,7 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.31.1">
+    <meta name="generator" content="Hugo 0.38">
     <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
     <title>Rails 5.1 API app, part 5: Deploying with confidence</title>
     <meta name="author" content="Paweł J. Wal">
@@ -352,7 +352,7 @@ shared_context <span style="color:#4070a0">&#39;logged in admin&#39;</span> <spa
   factory <span style="color:#517918">:book</span> <span style="color:#007020;font-weight:bold">do</span>
     title { <span style="color:#60add5">Faker</span><span style="color:#666">::</span><span style="color:#60add5">Book</span><span style="color:#666">.</span>title }
     author
-    price { <span style="color:#007020">rand</span> <span style="color:#666">*</span> <span style="color:#40a070">15</span> <span style="color:#666"></span>}
+    price { <span style="color:#007020">rand</span> <span style="color:#666">*</span> <span style="color:#40a070">15</span> }
   <span style="color:#007020;font-weight:bold">end</span>
 <span style="color:#007020;font-weight:bold">end</span></code></pre></div>
 <p>Book factory was given <code>author</code> without a block, so it checks whether it&rsquo;s an association, and since we&rsquo;ve defined an author factory - each fabricated book will trigger fabricating an author. Of course if I had a particular author I wanted, I could force that with <code>create(:book, author: author)</code>.</p>
@@ -393,7 +393,7 @@ shared_context <span style="color:#4070a0">&#39;logged in admin&#39;</span> <spa
 <h3 id="timecop">Timecop</h3>
 
 <p>Timecop allows for testing of time-sensitive things - here it&rsquo;s about expirations for tokens. Since the expiration is a part of token content, I wouldn&rsquo;t be able to test the output of <code>AuthenticateUserCommand</code>. With Timecop:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">before { <span style="color:#60add5">Timecop</span><span style="color:#666">.</span>freeze(<span style="color:#40a070">2017</span><span style="color:#666"></span>, <span style="color:#40a070">1</span><span style="color:#666"></span>, <span style="color:#40a070">1</span><span style="color:#666"></span>, <span style="color:#40a070">0</span><span style="color:#666"></span>, <span style="color:#40a070">0</span><span style="color:#666"></span>, <span style="color:#40a070">1</span><span style="color:#666"></span>, <span style="color:#40a070">1</span><span style="color:#666"></span>) }
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">before { <span style="color:#60add5">Timecop</span><span style="color:#666">.</span>freeze(<span style="color:#40a070">2017</span>, <span style="color:#40a070">1</span>, <span style="color:#40a070">1</span>, <span style="color:#40a070">0</span>, <span style="color:#40a070">0</span>, <span style="color:#40a070">1</span>, <span style="color:#40a070">1</span>) }
 after { <span style="color:#60add5">Timecop</span><span style="color:#666">.</span>return }
 
 let(<span style="color:#517918">:expected_token</span>) <span style="color:#007020;font-weight:bold">do</span>
@@ -429,7 +429,7 @@ it { expect(subject<span style="color:#666">.</span>result)<span style="color:#6
 <p>We&rsquo;ll talk about Code Climate more in a while. For now the important parts here are the environment under <code>env</code>, attaching postgresql with <code>services</code> and <code>addons</code>, and setting up the environment in the <code>before_script</code>. For <code>language: ruby</code> Travis just runs <code>bundle exec rake</code> to test. Rspec hooks straight into that.</p>
 
 
-<figure >
+<figure>
     <a href="https://paweljw.github.io/media/travis.png">
         <img src="https://paweljw.github.io/media/travis.png" alt="bookstore-backend on Travis CI" />
     </a>
@@ -457,7 +457,7 @@ it { expect(subject<span style="color:#666">.</span>result)<span style="color:#6
 </ul>
 
 
-<figure >
+<figure>
     <a href="https://paweljw.github.io/media/pull_request.png">
         <img src="https://paweljw.github.io/media/pull_request.png" alt="Pull request view, note that Code Climate has finished and Travis CI is still running its check" />
     </a>
@@ -541,7 +541,7 @@ it { expect(subject<span style="color:#666">.</span>result)<span style="color:#6
 <p>Our code is now tested regularly and automatically, and we have several spiffy badges on our GitHub page to prove this.</p>
 
 
-<figure >
+<figure>
     <a href="https://paweljw.github.io/media/bookstore_badges.png">
         <img src="https://paweljw.github.io/media/bookstore_badges.png" alt="Badges on the bookstore-backend GitHub page" />
     </a>
@@ -563,7 +563,7 @@ it { expect(subject<span style="color:#666">.</span>result)<span style="color:#6
 <p>After registering, you&rsquo;ll be greeted with a dashboard:</p>
 
 
-<figure >
+<figure>
     <a href="https://paweljw.github.io/media/1_heroku_dashboard.png">
         <img src="https://paweljw.github.io/media/1_heroku_dashboard.png" />
     </a>
@@ -574,7 +574,7 @@ it { expect(subject<span style="color:#666">.</span>result)<span style="color:#6
 <p>Click on new in top right to create an app. It&rsquo;ll need to be named. That name will be in your URL later.</p>
 
 
-<figure >
+<figure>
     <a href="https://paweljw.github.io/media/2_heroku_app_creation.png">
         <img src="https://paweljw.github.io/media/2_heroku_app_creation.png" />
     </a>
@@ -585,7 +585,7 @@ it { expect(subject<span style="color:#666">.</span>result)<span style="color:#6
 <p>On the next screen, you will have an option to authenticate with GitHub and attach a repository.</p>
 
 
-<figure >
+<figure>
     <a href="https://paweljw.github.io/media/3_heroku_attach_github.png">
         <img src="https://paweljw.github.io/media/3_heroku_attach_github.png" />
     </a>
@@ -596,7 +596,7 @@ it { expect(subject<span style="color:#666">.</span>result)<span style="color:#6
 <p>We also want to enable automatic deploys from master branch:</p>
 
 
-<figure >
+<figure>
     <a href="https://paweljw.github.io/media/4_automatic_deploys.png">
         <img src="https://paweljw.github.io/media/4_automatic_deploys.png" />
     </a>
@@ -607,7 +607,7 @@ it { expect(subject<span style="color:#666">.</span>result)<span style="color:#6
 <p>Completing this process drops us down into the app&rsquo;s dashboard.</p>
 
 
-<figure >
+<figure>
     <a href="https://paweljw.github.io/media/5_dashboard.png">
         <img src="https://paweljw.github.io/media/5_dashboard.png" />
     </a>
@@ -618,7 +618,7 @@ it { expect(subject<span style="color:#666">.</span>result)<span style="color:#6
 <p>From top left we can attach a PostgreSQL database. The free version is limited to 10,000 rows, but for us this is more than enough.</p>
 
 
-<figure >
+<figure>
     <a href="https://paweljw.github.io/media/6_postgres_addon.png">
         <img src="https://paweljw.github.io/media/6_postgres_addon.png" />
     </a>
@@ -629,7 +629,7 @@ it { expect(subject<span style="color:#666">.</span>result)<span style="color:#6
 <p>Provisioning PostgreSQL sets a DATABASE_URL environment variable for our app:</p>
 
 
-<figure >
+<figure>
     <a href="https://paweljw.github.io/media/7_database_url.png">
         <img src="https://paweljw.github.io/media/7_database_url.png" />
     </a>
@@ -647,7 +647,7 @@ it { expect(subject<span style="color:#666">.</span>result)<span style="color:#6
 <p>Since we didn&rsquo;t push to master since setting up the app, no deploys have been done yet. We&rsquo;ll need to go into the &ldquo;Deploy&rdquo; menu and run one by hand. It&rsquo;s at the far bottom of the page.</p>
 
 
-<figure >
+<figure>
     <a href="https://paweljw.github.io/media/8_manual_deploy.png">
         <img src="https://paweljw.github.io/media/8_manual_deploy.png" />
     </a>
@@ -658,7 +658,7 @@ it { expect(subject<span style="color:#666">.</span>result)<span style="color:#6
 <p>We go back to the dashboard and see that the deploy completed.</p>
 
 
-<figure >
+<figure>
     <a href="https://paweljw.github.io/media/9_heroku_complete.png">
         <img src="https://paweljw.github.io/media/9_heroku_complete.png" />
     </a>
@@ -669,7 +669,7 @@ it { expect(subject<span style="color:#666">.</span>result)<span style="color:#6
 <p>Time to whip out Postman again and see if it responds.</p>
 
 
-<figure >
+<figure>
     <a href="https://paweljw.github.io/media/10_postman.png">
         <img src="https://paweljw.github.io/media/10_postman.png" />
     </a>
@@ -949,6 +949,25 @@ it { expect(subject<span style="color:#666">.</span>result)<span style="color:#6
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2018/04/vue.js-front-end-app-part-6-deploying-to-s3/">
+                <h3 class="media-heading">Vue.js front end app, part 6: Deploying to S3</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>In this final episode of the series, we&rsquo;ll take a look at deploying our Single Page Application to Amazon Web Services Simple Storage Service (or S3).</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="https://paweljw.github.io/2018/01/vue.js-front-end-app-part-5-data-presentation/">
                 <h3 class="media-heading">Vue.js front end app, part 5: Data presentation</h3>
               </a>
@@ -1117,27 +1136,6 @@ it { expect(subject<span style="color:#666">.</span>result)<span style="color:#6
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-2-modeling-reality/">
-                <h3 class="media-heading">Rails 5.1 API app, part 2: Modeling reality</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jul 7, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>Oh yeah. Now we&rsquo;re going <em>hardcore</em>. Well, not really.</p>
-
-<p>While Rails embraces a continuously changing data model, it&rsquo;s always good to stop and think for a minute about the domain we&rsquo;re trying to magically lockwithin an app. We&rsquo;re building a bookstore. So what&rsquo;s in one?</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -1145,7 +1143,7 @@ it { expect(subject<span style="color:#666">.</span>result)<span style="color:#6
          data-message-zero=""
          data-message-one=""
          data-message-other="">
-         19 posts found
+         20 posts found
       </p>
     </div>
   </div>
