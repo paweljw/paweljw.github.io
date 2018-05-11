@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Tue, 03 Apr 2018 13:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Fri, 11 May 2018 22:00:00 +0200</lastBuildDate>
     
 	<atom:link href="https://paweljw.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Ruby vs Elixir: an API battle royale</title>
+      <link>https://paweljw.github.io/2018/05/ruby-vs-elixir-an-api-battle-royale/</link>
+      <pubDate>Fri, 11 May 2018 22:00:00 +0200</pubDate>
+      
+      <guid>https://paweljw.github.io/2018/05/ruby-vs-elixir-an-api-battle-royale/</guid>
+      <description>&lt;p&gt;&lt;em&gt;&amp;ldquo;Ruby&amp;rsquo;s dying, man&amp;rdquo;&lt;/em&gt;, they keep telling me. &lt;em&gt;&amp;ldquo;Besides, it&amp;rsquo;s OOP, and that&amp;rsquo;s so 2013, functional programming is all the rage now. Oh, and there&amp;rsquo;s this new kid on the blog, it&amp;rsquo;s called Elixir. It&amp;rsquo;s functional programming for the avid Rubyist!&amp;rdquo;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Vue.js front end app, part 6: Deploying to S3</title>

@@ -1,0 +1,883 @@
+
+
+  
+    
+  
+
+
+  
+
+
+
+
+  
+
+
+  
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hugo 0.40.3">
+    <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
+    <title>Ruby vs Elixir: an API battle royale</title>
+    <meta name="author" content="Paweł J. Wal">
+    <meta name="keywords" content=", development, ruby, ruby on rails, es6, javascript, electronics, arduino, science">
+
+    <link rel="icon" href="https://paweljw.github.io/favicon.png">
+    
+
+    
+    <meta name="description" content="&ldquo;Ruby&rsquo;s dying, man&rdquo;, they keep telling me. &ldquo;Besides, it&rsquo;s OOP, and that&rsquo;s so 2013, functional programming is all the rage now. Oh, and there&rsquo;s this new kid on the blog, it&rsquo;s called Elixir. It&rsquo;s functional programming for the avid Rubyist!&rdquo;
+
+">
+    <meta property="og:description" content="&ldquo;Ruby&rsquo;s dying, man&rdquo;, they keep telling me. &ldquo;Besides, it&rsquo;s OOP, and that&rsquo;s so 2013, functional programming is all the rage now. Oh, and there&rsquo;s this new kid on the blog, it&rsquo;s called Elixir. It&rsquo;s functional programming for the avid Rubyist!&rdquo;
+
+">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Ruby vs Elixir: an API battle royale">
+    <meta property="og:url" content="/2018/05/ruby-vs-elixir-an-api-battle-royale/">
+    <meta property="og:site_name" content="Shenanigans! - a blog on programming, technology and science">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Ruby vs Elixir: an API battle royale">
+    <meta name="twitter:description" content="&ldquo;Ruby&rsquo;s dying, man&rdquo;, they keep telling me. &ldquo;Besides, it&rsquo;s OOP, and that&rsquo;s so 2013, functional programming is all the rage now. Oh, and there&rsquo;s this new kid on the blog, it&rsquo;s called Elixir. It&rsquo;s functional programming for the avid Rubyist!&rdquo;
+
+">
+    
+      <meta name="twitter:creator" content="@paweljwal">
+    
+    
+
+    
+    
+
+    
+      <meta property="og:image" content="//www.gravatar.com/avatar/5a78de40753ba5abf8fcf3a46c748d53?s=640">
+    
+
+    
+    
+      <meta property="og:image" content="https://paweljw.github.io/media/race.jpg">
+    
+    
+
+    
+
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" />
+    
+    
+    <link rel="stylesheet" href="https://paweljw.github.io/css/style-u6mk0ojoywresbx8iepslrmmhl4stuhrsxuwhkpwrkrx7mryjcaimasnk4pi.min.css" />
+    
+    
+
+    
+      
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-51524008-2', 'auto');
+ga('send', 'pageview');
+</script>
+
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap; width: 70%; max-height: 55px; margin: 0 auto; display: block">
+    <a class="header-title-link" href="https://paweljw.github.io/"  style="text-overflow: ellipsis">Shenanigans! - a blog on programming, technology and science</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://paweljw.github.io/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="//www.gravatar.com/avatar/5a78de40753ba5abf8fcf3a46c748d53?s=90" alt="" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://paweljw.github.io/#about">
+          <img class="sidebar-profile-picture" src="//www.gravatar.com/avatar/5a78de40753ba5abf8fcf3a46c748d53?s=110" alt="" />
+        </a>
+        <h4 class="sidebar-profile-name">Paweł J. Wal</h4>
+        
+          <h5 class="sidebar-profile-bio">Hi, I&rsquo;m Paweł. I <a href="https://github.com/paweljw">hack on stuff</a> and write about things.</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://paweljw.github.io/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://paweljw.github.io/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://paweljw.github.io/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://paweljw.github.io/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://linkedin.com/in/pawe%c5%82-wal-a478a785" target="_blank">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+      
+      <span class="sidebar-button-desc">LinkedIn</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/paweljw" target="_blank">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">@paweljw</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://twitter.com/paweljwal" target="_blank">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-twitter"></i>
+      
+      <span class="sidebar-button-desc">@paweljwal</span>
+    </a>
+  </li>
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://paweljw.github.io/index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+    </ul>
+  </div>
+</nav>
+
+      
+  <div class="post-header-cover
+              text-left
+              "
+       style="background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('/media/race.jpg'); background-size: cover"
+       data-behavior="5">
+    
+      <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      Ruby vs Elixir: an API battle royale
+    </h1>
+  
+  <div class="postShorten-meta post-meta">
+  
+    <time itemprop="datePublished" datetime="2018-05-11T22:00:00&#43;02:00">
+      
+  
+  
+  
+  
+    2018-05-11
+  
+
+    </time>
+  
+  
+
+</div>
+
+</div>
+    
+  </div>
+
+
+      <div id="main" data-behavior="5"
+        class="hasCover
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p><em>&ldquo;Ruby&rsquo;s dying, man&rdquo;</em>, they keep telling me. <em>&ldquo;Besides, it&rsquo;s OOP, and that&rsquo;s so 2013, functional programming is all the rage now. Oh, and there&rsquo;s this new kid on the blog, it&rsquo;s called Elixir. It&rsquo;s functional programming for the avid Rubyist!&rdquo;</em></p>
+
+<p></p>
+
+<p>All right, all right, ladies and gentlemen, please stay your commenting blades. As you might have discerned from the <em>very first sentence</em> in this intro, I&rsquo;m joking about Ruby dying. But I&rsquo;m not joking about Elixir and functional programming.</p>
+
+<p>Since you hang around here, I&rsquo;m tempted to assume you have more than a passing familiarity with <a href="https://paweljw.github.io/tags/rails">Ruby</a>. Or with front-end JavaScript frameworks such as <a href="https://paweljw.github.io/tags/vue.js">Vue.js</a>. Or <a href="https://paweljw.github.io/tags/electronics">electronics</a>. Or maybe you get your kicks tackling weird <a href="https://paweljw.github.io/tags/science">science</a> questions. Err&hellip; okay, will someone throw me a shovel so I can dig myself out of this hole I have so expertly dug for myself?</p>
+
+<p>However whatever brings you to this site, my dear reader, I&rsquo;m sure we share at least one thing in common: the desire to experiment and explore new and unfamiliar concepts. We like the unknowns, you and I. And until just a couple of months ago, functional programming was one such unknown I wanted to explore.</p>
+
+<h1 id="and-what-the-heck-is-functional-programming">And what the heck is functional programming?</h1>
+
+<p>I guess to start here, we&rsquo;ll need a little bit of a story time. You see, I originally come from an imperative programming background. I moved on to object-oriented programming after that, and in my mind that was the next logical step. I can have my imperative &ldquo;things&rdquo;, but now they are neatly stashed away in classes with single responsibilities. Over the years I&rsquo;ve been around a few Rails shops and I&rsquo;ve learned to step out a bit from the general MVC pattern. There&rsquo;d be Command Objects and Service Objects so our controllers and <a href="https://codeclimate.com/blog/7-ways-to-decompose-fat-activerecord-models/">models don&rsquo;t grow too fat</a>.</p>
+
+<p>In particular, on the excellent team I have the immense pleasure of working with at <a href="https://codesthq.com">Codest</a> we&rsquo;ve gone full hog on the Service Object. So there&rsquo;d be <code>ThisService.call(some, arguments)</code>. They do, of course, have single responsibilities, and sometimes our objects would need arguments that result from other objects. So sometimes we&rsquo;d need something like <code>ThisService.call(ThatService.call(TheOtherService.call(foo)))</code>.</p>
+
+<p>Now you see - functional programming is a little bit different. The first thing they tell you about functional programming is, of course, <em>&ldquo;there are no classes&rdquo;</em>. That&rsquo;s usually quite enough to make your average Rubyist balk at the though - heck, it was enough for me to balk at the thought for the longest time. <em>&ldquo;What do you mean, there are no classes? But how do I even organize my code? Or my data? Or&hellip; anything? YOU PROPOSE UTTER CHAOS SIR&rdquo;</em>. This used to be my reaction, almost to the letter! All the while I didn&rsquo;t realise that we were <em>using a functional programming pattern all along</em>.</p>
+
+<h2 id="it-s-coming-from-inside-the-software-house">It&rsquo;s coming from inside the (software) house</h2>
+
+<p>The other thing they&rsquo;ll gladly tell you about functional programming is usually <em>&ldquo;remember high school algebra, where there&rsquo;d be <code>f(x)</code>? Now, consider <code>f(g(h(x)))</code> and there you go.&rdquo;</em> And that&rsquo;s the key here: see any similarities to <code>ThisService.call(ThatService.call(TheOtherService.call(foo)))</code>?</p>
+
+<h2 id="what-s-this-got-to-do-with-elixir">What&rsquo;s this got to do with Elixir?</h2>
+
+<p>Well, a couple of people seem to agree that the pattern we&rsquo;ve been using with Service Objects fits neatly into a functional programming language. But Ruby&rsquo;s not exactly the best language to practice the pattern, with its &ldquo;everything is an object&rdquo; philosophy.</p>
+
+<p>So a bunch of extremely smart people - Jose Valim, whom you might recognize from <a href="https://github.com/plataformatec">Plataformatec</a>, amongst them - decided to build a language reasonably easy to be picked up by a Rubyist, built around the functional paradigm, and <em>fast</em>. Ludicrously fast.</p>
+
+<p>They took a technology that was already tried and battle-tested - Erlang - and put a whole bunch of syntactic sugar on top of it that makes it a bit more palatable. Erlang is a compiled language, executed in a VM, and it&rsquo;s designed to make excellent use of multiple processing nodes (CPUs) and available memory. It doesn&rsquo;t come without downsides, however. Just for your reference, Erlang tends to look like this:</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-erlang" data-lang="erlang">-<span style="color:#d55537;font-weight:bold">spec</span> <span style="color:#06287e">loop</span>(<span style="color:#bb60d5">Req</span>, <span style="color:#bb60d5">Env</span>, <span style="color:#06287e">module</span>(), <span style="color:#06287e">any</span>())
+  -<span style="">&gt; {</span><span style="color:#d55537;font-weight:bold">ok</span>, <span style="color:#bb60d5">Req</span>, <span style="color:#bb60d5">Env</span>} | {suspend, <span style="color:#666">?</span><span style="color:#bb60d5">MODULE</span>, loop, [<span style="color:#06287e">any</span>()]}
+  <span style="color:#007020;font-weight:bold">when</span> <span style="color:#bb60d5">Req</span>::<span style="color:#0e84b5;font-weight:bold">cowboy_req</span>:<span style="color:#06287e">req</span>(), <span style="color:#bb60d5">Env</span>::<span style="color:#0e84b5;font-weight:bold">cowboy_middleware</span>:<span style="color:#06287e">env</span>().</code></pre></div>
+<p>That&rsquo;s taken from the leading HTTP server in Erlang, <a href="https://github.com/ninenines/cowboy/blob/master/src/cowboy_loop.erl#L52">Cowboy</a>, by the way. If this doesn&rsquo;t look confusing to you, you&rsquo;re probably way smarter than I am - congrats on that.</p>
+
+<p>On the other hand, Elixir looks like this:</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir">defp frames(stacktrace, opts) do
+  app <span style="color:#666">=</span> opts[<span style="color:#517918">:otp_app</span>]
+  editor <span style="color:#666">=</span> <span style="color:#0e84b5;font-weight:bold">System</span><span style="color:#666">.</span>get_env(<span style="color:#4070a0">&#34;PLUG_EDITOR&#34;</span>)
+
+  stacktrace
+  <span style="color:#666">|&gt;</span> <span style="color:#0e84b5;font-weight:bold">Enum</span><span style="color:#666">.</span>map_reduce(<span style="color:#40a070">0</span>, <span style="color:#666">&amp;</span>each_frame(<span style="color:#d55537;font-weight:bold">&amp;1</span>, <span style="color:#d55537;font-weight:bold">&amp;2</span>, app, editor))
+  <span style="color:#666">|&gt;</span> elem(<span style="color:#40a070">0</span>)
+end</code></pre></div>
+<p>Aside from this weird <code>|&gt;</code>, if you&rsquo;re a bit of a Rubyist yourself, I&rsquo;m pretty sure you&rsquo;ve already figured this code out, despite there being some quirks in there.</p>
+
+<p>But I&rsquo;m sure you&rsquo;re dying to know what that <code>|&gt;</code> is. It&rsquo;s&hellip; <em>drum roll</em>&hellip; a <strong>pipe</strong> operator. It works a little bit like the <code>|</code> operator in Unix shells. It means &ldquo;take the output of this expression and put it in the first argument place of the expression we&rsquo;re piping to&rdquo;. To illustrate with our previous example, this would be Ruby:</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#60add5">ThisService</span><span style="color:#666">.</span>call(<span style="color:#60add5">ThatService</span><span style="color:#666">.</span>call(<span style="color:#60add5">TheOtherService</span><span style="color:#666">.</span>call(foo)))</code></pre></div>
+<p>And this would be Elixir:</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir">foo
+<span style="color:#666">|&gt;</span> <span style="color:#0e84b5;font-weight:bold">TheOtherService</span><span style="color:#666">.</span>call
+<span style="color:#666">|&gt;</span> <span style="color:#0e84b5;font-weight:bold">ThatService</span><span style="color:#666">.</span>call
+<span style="color:#666">|&gt;</span> <span style="color:#0e84b5;font-weight:bold">ThisService</span><span style="color:#666">.</span>call</code></pre></div>
+<p>The second is a bit more readable, for me at least. But that alone is not a reason to hop languages, is it?</p>
+
+<h2 id="the-joy-of-concurrency-or-lack-thereof">The joy of concurrency (or lack thereof)</h2>
+
+<p>As I&rsquo;ve said before, Erlang is designed to run concurrently - <em>very</em> concurrently if it at all can. Using Elixir, you get all the benefits of Erlang with little overhead. Now, in Ruby concurrency is Hard™️. In web development, we work around this with multi-threaded application servers, offloading some of the issues onto gems like Unicorn or Puma, or putting nginx in front of our apps.</p>
+
+<h1 id="the-battle-royale-is-here-at-last">The battle royale is here at last!</h1>
+
+<p>A couple of my associates at <a href="https://codesthq.com">Codest</a> have decided to teach ourselves Elixir with a couple of side projects, and I&rsquo;ve taken a keen interest in the language. I wanted to put Ruby in Elixir in a fair race, performing the same task. And the task itself had to be a varied workload itself: at the very least some disk I/O and some network I/O, and we&rsquo;ll want to read some data from the request. I also wanted to check how the library ecosystem of Elixir holds up, since I&rsquo;m spoiled by RubyGems. And ideally, the task will be something I might need!</p>
+
+<p>Thus, for this battle royale, the task at hand will be serving a JSON API that will take the incoming request&rsquo;s remote IP, hit the <a href="https://dev.maxmind.com/geoip/geoip2/downloadable/">MaxMind GeoIP2</a> database (read from local disk) to read the country&rsquo;s ISO code and return that.</p>
+
+<h2 id="ruby-tech-choices">Ruby tech choices</h2>
+
+<p>On the Ruby side we&rsquo;ll be running our service over <a href="https://rubygems.org/gems/unicorn">Unicorn</a> - an application server I&rsquo;ve learned to love and respect over the years, and of course there&rsquo;ll be <a href="https://rubygems.org/gems/rack">Rack</a> underneath it. As for MaxMind database reading, there are a couple of options; I&rsquo;ve chosen the <a href="https://rubygems.org/gems/hive_geoip2">hive_geoip2</a> gem. I&rsquo;ve worked with it in the past, its API is fine and its Ruby bindings to <code>libmaxmind</code> are top-notch.</p>
+
+<h2 id="elixir-tech-choices">Elixir tech choices</h2>
+
+<p>I&rsquo;ll freely admit that I&rsquo;m much less knowledgeable about the Elixir package ecosystem than I am about Ruby&rsquo;s. However during my somewhat cursory research it appears that the basic stack for an HTTP API server would be <a href="https://hex.pm/packages/cowboy">cowboy</a> as the app server, <a href="https://hex.pm/packages/plug">plug</a> as the router / glue and <a href="https://hex.pm/packages/poison">poison</a> as the JSON encoder. On top of that, we&rsquo;ll be running the only adapter that is officially recognized by MaxMind, <a href="https://hex.pm/packages/geolix">geolix</a>.</p>
+
+<h2 id="the-code">The code</h2>
+
+<p>The code for the Ruby side of things is available at <a href="https://github.com/paweljw/geoip-unicorn">paweljw/geoip-unicorn</a>, and the code for the Elixir side is available at <a href="https://github.com/paweljw/geoip-elixir">paweljw/unicorn-elixir</a>.</p>
+
+<h1 id="testing-methodology">Testing methodology</h1>
+
+<p>For now, we&rsquo;ll stick to the basics. Both sides will be ran through the <a href="https://github.com/httperf/httperf">httperf</a> webapp benchmarking tool. Both the scanner and the service will be running on the same machine - a 2013 MacBook Pro with a 4-core i7 and 8GB of RAM. For the purposes of this post, we&rsquo;ll re-run this test 10 times and there&rsquo;ll be no special preparation steps done to the Mac - it hasn&rsquo;t been restarted for days, it&rsquo;s not the only workload running and there may or may not be a Safari instance running Neflix on there.</p>
+
+<p>This is by no means a scientific test - that&rsquo;d ideally run in a cloud environment which better simulates what we might encounter in production. What we&rsquo;re interested in right now is: is there even a difference between those two implementations, one which I would hope is pretty decent and one which is probably as close to naive as they come?</p>
+
+<p>Should you want to try and reproduce my results (and I encourage you to!), here are the httperf commands I ran:</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">httperf --server localhost --port <span style="color:#40a070">9090</span> --num-conns <span style="color:#40a070">15000</span> --hog --timeout <span style="color:#40a070">1</span> <span style="color:#60a0b0;font-style:italic"># Ruby
+</span><span style="color:#60a0b0;font-style:italic"></span>httperf --server localhost --port <span style="color:#40a070">4000</span> --num-conns <span style="color:#40a070">15000</span> --hog --timeout <span style="color:#40a070">1</span> # Elixir</code></pre></div>
+<h1 id="the-results">The results</h1>
+
+<p>For the 10 tests I ran, the results are:</p>
+
+<ul>
+<li>Elixir: 1932.7 successfull requests per second, 0 failed requests</li>
+<li>Ruby: 1090.8 successfull requests per second, 0 failed requests</li>
+</ul>
+
+<h1 id="the-verdict">The verdict</h1>
+
+<p>I have to admit, those results did flare up my imagination. If achieving twice the requests per second of finely-crafted Ruby was possible with a naive, tutorial-based implementation of the same thing in Elixir, I want to know more!</p>
+
+<p>However, I freely admit that my testing was not scientific in the slightest, and that a MacBook running who-knows-what is hardly representative of anything, much less of a cloud server - which is what I&rsquo;d be interested in running.</p>
+
+<p>Thus it seems that we have our work cut out for us for another test: we should deploy both those implementations to the cloud and <em>then</em> compare them. Nevertheless, I&rsquo;ll admit my interest was piqued by Elixir. We&rsquo;ll be performing those cloud tests (and looking at what exactly went into those two implementations) very soon. Until then - if you can get me any more experimental data, please do! I&rsquo;ll catch you in the comments section.</p>
+
+<hr />
+
+<p>Top image credit: <a href="https://pxhere.com/en/photo/1223175">https://pxhere.com/en/photo/1223175</a> (CC0)</p>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            <div id="i-like-beer" style="text-align: center; margin: 0 auto; display: block; color: #999; font-size: 90%">
+  <hr/>
+  <br/>
+  <p>Hey there! I hope you found the post above useful. If you feel it's worth it, and are capable of doing so, please consider <a href="https://paypal.me/paweljw">buying me a beer</a> through PayPal, or tweet <a href="https://twitter.com/paweljwal">@paweljwal</a> if you want to grab one offline when you're in Kraków, MA, Poland.</p>
+  <small>If you want to remove this text with your adblocker, the selector is <code>#i-like-beer</code>.</small>
+  <hr/>
+</div>
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small"></span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/ruby/">ruby</a>
+
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/elixir/">elixir</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  <nav>
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--disabled">
+          
+            <i class="fa fa-angle-left"></i>
+            <span class="hide-xs hide-sm text-small icon-ml"></span>
+          </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2018/04/vue.js-front-end-app-part-6-deploying-to-s3/" data-tooltip="Vue.js front end app, part 6: Deploying to S3">
+          
+            <span class="hide-xs hide-sm text-small icon-mr"></span>
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </nav>
+  <ul class="post-actions post-action-share">
+    
+      <li class="post-action hide-lg hide-md hide-sm">
+        <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+          <i class="fa fa-share-alt"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2018%2f05%2fruby-vs-elixir-an-api-battle-royale%2f">
+          <i class="fa fa-google-plus"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2018%2f05%2fruby-vs-elixir-an-api-battle-royale%2f">
+          <i class="fa fa-facebook-official"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2018%2f05%2fruby-vs-elixir-an-api-battle-royale%2f">
+          <i class="fa fa-twitter"></i>
+        </a>
+      </li>
+    
+    
+      <li class="post-action">
+        <a class="post-action-btn btn btn--default" href="#disqus_thread">
+          <i class="fa fa-comment-o"></i>
+        </a>
+      </li>
+    
+    <li class="post-action">
+      
+        <a class="post-action-btn btn btn--default" href="#">
+      
+        <i class="fa fa-list"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    Created by <a href="https://github.com/paweljw">Paweł J. Wal</a> | <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        <div class="post-actions-wrap">
+  <nav>
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--disabled">
+          
+            <i class="fa fa-angle-left"></i>
+            <span class="hide-xs hide-sm text-small icon-ml"></span>
+          </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2018/04/vue.js-front-end-app-part-6-deploying-to-s3/" data-tooltip="Vue.js front end app, part 6: Deploying to S3">
+          
+            <span class="hide-xs hide-sm text-small icon-mr"></span>
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </nav>
+  <ul class="post-actions post-action-share">
+    
+      <li class="post-action hide-lg hide-md hide-sm">
+        <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+          <i class="fa fa-share-alt"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2018%2f05%2fruby-vs-elixir-an-api-battle-royale%2f">
+          <i class="fa fa-google-plus"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2018%2f05%2fruby-vs-elixir-an-api-battle-royale%2f">
+          <i class="fa fa-facebook-official"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2018%2f05%2fruby-vs-elixir-an-api-battle-royale%2f">
+          <i class="fa fa-twitter"></i>
+        </a>
+      </li>
+    
+    
+      <li class="post-action">
+        <a class="post-action-btn btn btn--default" href="#disqus_thread">
+          <i class="fa fa-comment-o"></i>
+        </a>
+      </li>
+    
+    <li class="post-action">
+      
+        <a class="post-action-btn btn btn--default" href="#">
+      
+        <i class="fa fa-list"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <ul class="share-options">
+    <li class="share-option">
+      <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2018%2f05%2fruby-vs-elixir-an-api-battle-royale%2f">
+        <i class="fa fa-google-plus"></i><span></span>
+      </a>
+    </li>
+    <li class="share-option">
+      <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2018%2f05%2fruby-vs-elixir-an-api-battle-royale%2f">
+        <i class="fa fa-facebook-official"></i><span></span>
+      </a>
+    </li>
+    <li class="share-option">
+      <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2018%2f05%2fruby-vs-elixir-an-api-battle-royale%2f">
+        <i class="fa fa-twitter"></i><span></span>
+      </a>
+    </li>
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="//www.gravatar.com/avatar/5a78de40753ba5abf8fcf3a46c748d53?s=110" alt="" />
+    
+    <h4 id="about-card-name">Paweł J. Wal</h4>
+    
+      <div id="about-card-bio">Hi, I&rsquo;m Paweł. I <a href="https://github.com/paweljw">hack on stuff</a> and write about things.</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Sofware Magician
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        Poland
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center"></div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2018/05/ruby-vs-elixir-an-api-battle-royale/">
+                <h3 class="media-heading">Ruby vs Elixir: an API battle royale</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p><em>&ldquo;Ruby&rsquo;s dying, man&rdquo;</em>, they keep telling me. <em>&ldquo;Besides, it&rsquo;s OOP, and that&rsquo;s so 2013, functional programming is all the rage now. Oh, and there&rsquo;s this new kid on the blog, it&rsquo;s called Elixir. It&rsquo;s functional programming for the avid Rubyist!&rdquo;</em></p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2018/04/vue.js-front-end-app-part-6-deploying-to-s3/">
+                <h3 class="media-heading">Vue.js front end app, part 6: Deploying to S3</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>In this final episode of the series, we&rsquo;ll take a look at deploying our Single Page Application to Amazon Web Services Simple Storage Service (or S3).</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2018/01/vue.js-front-end-app-part-5-data-presentation/">
+                <h3 class="media-heading">Vue.js front end app, part 5: Data presentation</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jan 1, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>New year, new <del>you</del> blog post! In this long overdue part we&rsquo;ll strengthen our command of loading data from the server and take a look at presenting it.</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/10/vue.js-front-end-app-part-4-keeping-state-with-vuex/">
+                <h3 class="media-heading">Vue.js front end app, part 4: Keeping state with Vuex</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Oct 10, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>Last time we built an <a href="https://paweljw.github.io/2017/09/vue.js-front-end-app-part-3-authentication/">authentication mechanism</a> with a pretty glaring bug - you can just set the <code>token</code> in <code>localStorage</code> to whatever and it&rsquo;ll let you in. We need to actually read the token, and persist what we&rsquo;ve read so we don&rsquo;t have to do it over and over.</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/09/vue.js-front-end-app-part-3-authentication/">
+                <h3 class="media-heading">Vue.js front end app, part 3: Authentication</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Sep 9, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>In this part we&rsquo;ll allow the user to log in to our frontend app, using the <a href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-4-authentication-and-authorization/">auth mechanism</a> we&rsquo;ve built on the back end earlier. A lot of topics in this one, so jump right in!</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/09/vue.js-front-end-app-part-2-design-is-not-hard/">
+                <h3 class="media-heading">Vue.js front end app, part 2: Design is (not) hard</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Sep 9, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>Now that we have our environment running, the app is initialized, and we know a little bit about what&rsquo;s going on in there, it&rsquo;s time to take a little bit of time to design our front end.</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/09/saturday-project-temperature-and-humidity-meter-with-onion-omega2-/">
+                <h3 class="media-heading">Saturday project: temperature and humidity meter with Onion Omega2&#43;</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Sep 9, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>Quick thing I threw together in about an hour: an IoT temperature and humidity meter!</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/09/vue.js-front-end-app-part-1-setting-up-the-app/">
+                <h3 class="media-heading">Vue.js front end app, part 1: Setting up the app</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Sep 9, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>Last time we’ve seen each other, we’ve just deployed our Rails 5.1 API app. Time to put an end to this! A <em>front</em> end, of course.</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-5-deploying-with-confidence/">
+                <h3 class="media-heading">Rails 5.1 API app, part 5: Deploying with confidence</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>In this final part of our Rails API app series we&rsquo;ll talk about specs, code coverage, continuous integration and deployment - and how to be certain your application is working.</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-4-authentication-and-authorization/">
+                <h3 class="media-heading">Rails 5.1 API app, part 4: Authentication and authorization</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>Time to deal with authenticating users in our bookstore application.</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero=""
+         data-message-one=""
+         data-message-other="">
+         21 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('https://paweljw.github.io/images/cover2.jpeg');"></div>
+  
+
+
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.js"></script>
+
+
+<script src="https://paweljw.github.io/js/script-wl33z0n6ocaypepiqrazthtivfrliqijej4rq8ek8gvrv1awftmgjuv8k4zc.min.js"></script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight').each(function(i, block) {
+    var code = "";
+    hljs.highlightAuto(block.innerText).value.split(/\r\n|\r|\n/).forEach(function(line) {
+      code += "<span class=\"line\">" + line + "</span><br>";
+    });
+    if (code.length > 0) {
+      block.innerHTML = code;  
+    }
+  });
+  $('pre > code').each(function(i, block) {
+    $(this).addClass('codeblock');
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/paweljw.github.io\/2018\/05\/ruby-vs-elixir-an-api-battle-royale\/';
+          
+            this.page.identifier = '\/2018\/05\/ruby-vs-elixir-an-api-battle-royale\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'paweljw-github-io';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+
+    
+  </body>
+</html>
+
