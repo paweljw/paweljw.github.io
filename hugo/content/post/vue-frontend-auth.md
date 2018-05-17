@@ -260,7 +260,7 @@ Pay attention to the `prevent` qualifier: if we omitted it, Vue would run our me
 
 ### Mounting it
 
-Now that we have the `Login` component in place and `App` changed for Bootstrap, let's change the routing so that we route to `Login` on the path `/`:
+Now that we have the `Login` component in place and `App` changed for Bootstrap, let's change the routing so that we route to `Login` on the path `/`. This is done in `router/index.js`:
 
 ``` javascript
 import Vue from 'vue'
