@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Music on Shenanigans! - a blog on programming, technology and science</title>
+    <title>music on Shenanigans! - a blog on programming, technology and science</title>
     <link>https://paweljw.github.io/tags/music/</link>
-    <description>Recent content in Music on Shenanigans! - a blog on programming, technology and science</description>
+    <description>Recent content in music on Shenanigans! - a blog on programming, technology and science</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
@@ -18,9 +18,7 @@
       <pubDate>Sat, 28 Feb 2015 21:17:45 +0200</pubDate>
       
       <guid>https://paweljw.github.io/2015/02/ultrasonic-theremin/</guid>
-      <description>&lt;p&gt;I’ve been wanting to construct an instrument in the spirit of a theremin for quite a while. Of course, I have neither the skills to construct a proper theremin, nor the time to master them. What I do have is an Arduino board, some sensors and a couple of spare parts.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;I’ve been wanting to construct an instrument in the spirit of a theremin for quite a while. Of course, I have neither the skills to construct a proper theremin, nor the time to master them. What I do have is an Arduino board, some sensors and a couple of spare parts.&lt;/p&gt;</description>
     </item>
     
   </channel>

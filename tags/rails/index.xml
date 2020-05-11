@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Rails on Shenanigans! - a blog on programming, technology and science</title>
+    <title>rails on Shenanigans! - a blog on programming, technology and science</title>
     <link>https://paweljw.github.io/tags/rails/</link>
-    <description>Recent content in Rails on Shenanigans! - a blog on programming, technology and science</description>
+    <description>Recent content in rails on Shenanigans! - a blog on programming, technology and science</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
@@ -18,9 +18,7 @@
       <pubDate>Sat, 29 Jul 2017 15:00:00 +0200</pubDate>
       
       <guid>https://paweljw.github.io/2017/07/rails-5.1-api-app-part-5-deploying-with-confidence/</guid>
-      <description>&lt;p&gt;In this final part of our Rails API app series we&amp;rsquo;ll talk about specs, code coverage, continuous integration and deployment - and how to be certain your application is working.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;In this final part of our Rails API app series we&amp;rsquo;ll talk about specs, code coverage, continuous integration and deployment - and how to be certain your application is working.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -29,9 +27,7 @@
       <pubDate>Sat, 22 Jul 2017 17:00:00 +0200</pubDate>
       
       <guid>https://paweljw.github.io/2017/07/rails-5.1-api-app-part-4-authentication-and-authorization/</guid>
-      <description>&lt;p&gt;Time to deal with authenticating users in our bookstore application.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Time to deal with authenticating users in our bookstore application.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -40,9 +36,7 @@
       <pubDate>Tue, 18 Jul 2017 15:00:00 +0200</pubDate>
       
       <guid>https://paweljw.github.io/2017/07/rails-5.1-api-app-part-3-api-versioning/</guid>
-      <description>&lt;p&gt;We have two more things to tackle before our Rails API app is an MVP: namespacing the controllers and creating an authentication mechanism. We&amp;rsquo;ll tackle namespacing the controllers in this article - it might seem wordy, but it&amp;rsquo;s for a good reason.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;We have two more things to tackle before our Rails API app is an MVP: namespacing the controllers and creating an authentication mechanism. We&amp;rsquo;ll tackle namespacing the controllers in this article - it might seem wordy, but it&amp;rsquo;s for a good reason.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -52,10 +46,7 @@
       
       <guid>https://paweljw.github.io/2017/07/rails-5.1-api-app-part-2-modeling-reality/</guid>
       <description>&lt;p&gt;Oh yeah. Now we&amp;rsquo;re going &lt;em&gt;hardcore&lt;/em&gt;. Well, not really.&lt;/p&gt;
-
-&lt;p&gt;While Rails embraces a continuously changing data model, it&amp;rsquo;s always good to stop and think for a minute about the domain we&amp;rsquo;re trying to magically lockwithin an app. We&amp;rsquo;re building a bookstore. So what&amp;rsquo;s in one?&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;While Rails embraces a continuously changing data model, it&amp;rsquo;s always good to stop and think for a minute about the domain we&amp;rsquo;re trying to magically lockwithin an app. We&amp;rsquo;re building a bookstore. So what&amp;rsquo;s in one?&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -64,9 +55,7 @@
       <pubDate>Tue, 11 Jul 2017 15:26:57 +0200</pubDate>
       
       <guid>https://paweljw.github.io/2017/07/rails-5.1-api-app-part-1-setting-up-a-rails-api-app/</guid>
-      <description>&lt;p&gt;It&amp;rsquo;s time to continue with our foray into Rails API app with Vue.js frontend! In &lt;a href=&#34;https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/&#34;&gt;Part 0&lt;/a&gt; we discussed what technology we&amp;rsquo;ll be using and why - I highly recommend you read through it if you haven&amp;rsquo;t already. Now it&amp;rsquo;s time to get our Rails on.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;It&amp;rsquo;s time to continue with our foray into Rails API app with Vue.js frontend! In &lt;a href=&#34;https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/&#34;&gt;Part 0&lt;/a&gt; we discussed what technology we&amp;rsquo;ll be using and why - I highly recommend you read through it if you haven&amp;rsquo;t already. Now it&amp;rsquo;s time to get our Rails on.&lt;/p&gt;</description>
     </item>
     
     <item>

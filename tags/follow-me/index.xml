@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Follow Me on Shenanigans! - a blog on programming, technology and science</title>
+    <title>follow me on Shenanigans! - a blog on programming, technology and science</title>
     <link>https://paweljw.github.io/tags/follow-me/</link>
-    <description>Recent content in Follow Me on Shenanigans! - a blog on programming, technology and science</description>
+    <description>Recent content in follow me on Shenanigans! - a blog on programming, technology and science</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
@@ -18,9 +18,7 @@
       <pubDate>Tue, 03 Apr 2018 13:00:00 +0200</pubDate>
       
       <guid>https://paweljw.github.io/2018/04/vue.js-front-end-app-part-6-deploying-to-s3/</guid>
-      <description>&lt;p&gt;In this final episode of the series, we&amp;rsquo;ll take a look at deploying our Single Page Application to Amazon Web Services Simple Storage Service (or S3).&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;In this final episode of the series, we&amp;rsquo;ll take a look at deploying our Single Page Application to Amazon Web Services Simple Storage Service (or S3).&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -29,9 +27,7 @@
       <pubDate>Sat, 06 Jan 2018 00:00:00 +0200</pubDate>
       
       <guid>https://paweljw.github.io/2018/01/vue.js-front-end-app-part-5-data-presentation/</guid>
-      <description>&lt;p&gt;New year, new &lt;del&gt;you&lt;/del&gt; blog post! In this long overdue part we&amp;rsquo;ll strengthen our command of loading data from the server and take a look at presenting it.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;New year, new &lt;del&gt;you&lt;/del&gt; blog post! In this long overdue part we&amp;rsquo;ll strengthen our command of loading data from the server and take a look at presenting it.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -40,9 +36,7 @@
       <pubDate>Sat, 28 Oct 2017 14:00:00 +0200</pubDate>
       
       <guid>https://paweljw.github.io/2017/10/vue.js-front-end-app-part-4-keeping-state-with-vuex/</guid>
-      <description>&lt;p&gt;Last time we built an &lt;a href=&#34;https://paweljw.github.io/2017/09/vue.js-front-end-app-part-3-authentication/&#34;&gt;authentication mechanism&lt;/a&gt; with a pretty glaring bug - you can just set the &lt;code&gt;token&lt;/code&gt; in &lt;code&gt;localStorage&lt;/code&gt; to whatever and it&amp;rsquo;ll let you in. We need to actually read the token, and persist what we&amp;rsquo;ve read so we don&amp;rsquo;t have to do it over and over.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Last time we built an &lt;a href=&#34;https://paweljw.github.io/2017/09/vue.js-front-end-app-part-3-authentication/&#34;&gt;authentication mechanism&lt;/a&gt; with a pretty glaring bug - you can just set the &lt;code&gt;token&lt;/code&gt; in &lt;code&gt;localStorage&lt;/code&gt; to whatever and it&amp;rsquo;ll let you in. We need to actually read the token, and persist what we&amp;rsquo;ve read so we don&amp;rsquo;t have to do it over and over.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -51,9 +45,7 @@
       <pubDate>Sat, 30 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>https://paweljw.github.io/2017/09/vue.js-front-end-app-part-3-authentication/</guid>
-      <description>&lt;p&gt;In this part we&amp;rsquo;ll allow the user to log in to our frontend app, using the &lt;a href=&#34;https://paweljw.github.io/2017/07/rails-5.1-api-app-part-4-authentication-and-authorization/&#34;&gt;auth mechanism&lt;/a&gt; we&amp;rsquo;ve built on the back end earlier. A lot of topics in this one, so jump right in!&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;In this part we&amp;rsquo;ll allow the user to log in to our frontend app, using the &lt;a href=&#34;https://paweljw.github.io/2017/07/rails-5.1-api-app-part-4-authentication-and-authorization/&#34;&gt;auth mechanism&lt;/a&gt; we&amp;rsquo;ve built on the back end earlier. A lot of topics in this one, so jump right in!&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -62,9 +54,7 @@
       <pubDate>Sat, 23 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>https://paweljw.github.io/2017/09/vue.js-front-end-app-part-2-design-is-not-hard/</guid>
-      <description>&lt;p&gt;Now that we have our environment running, the app is initialized, and we know a little bit about what&amp;rsquo;s going on in there, it&amp;rsquo;s time to take a little bit of time to design our front end.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Now that we have our environment running, the app is initialized, and we know a little bit about what&amp;rsquo;s going on in there, it&amp;rsquo;s time to take a little bit of time to design our front end.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -73,9 +63,7 @@
       <pubDate>Thu, 07 Sep 2017 17:00:00 +0200</pubDate>
       
       <guid>https://paweljw.github.io/2017/09/vue.js-front-end-app-part-1-setting-up-the-app/</guid>
-      <description>&lt;p&gt;Last time we’ve seen each other, we’ve just deployed our Rails 5.1 API app. Time to put an end to this! A &lt;em&gt;front&lt;/em&gt; end, of course.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Last time we’ve seen each other, we’ve just deployed our Rails 5.1 API app. Time to put an end to this! A &lt;em&gt;front&lt;/em&gt; end, of course.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -84,9 +72,7 @@
       <pubDate>Sat, 29 Jul 2017 15:00:00 +0200</pubDate>
       
       <guid>https://paweljw.github.io/2017/07/rails-5.1-api-app-part-5-deploying-with-confidence/</guid>
-      <description>&lt;p&gt;In this final part of our Rails API app series we&amp;rsquo;ll talk about specs, code coverage, continuous integration and deployment - and how to be certain your application is working.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;In this final part of our Rails API app series we&amp;rsquo;ll talk about specs, code coverage, continuous integration and deployment - and how to be certain your application is working.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -95,9 +81,7 @@
       <pubDate>Sat, 22 Jul 2017 17:00:00 +0200</pubDate>
       
       <guid>https://paweljw.github.io/2017/07/rails-5.1-api-app-part-4-authentication-and-authorization/</guid>
-      <description>&lt;p&gt;Time to deal with authenticating users in our bookstore application.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Time to deal with authenticating users in our bookstore application.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -106,9 +90,7 @@
       <pubDate>Tue, 18 Jul 2017 15:00:00 +0200</pubDate>
       
       <guid>https://paweljw.github.io/2017/07/rails-5.1-api-app-part-3-api-versioning/</guid>
-      <description>&lt;p&gt;We have two more things to tackle before our Rails API app is an MVP: namespacing the controllers and creating an authentication mechanism. We&amp;rsquo;ll tackle namespacing the controllers in this article - it might seem wordy, but it&amp;rsquo;s for a good reason.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;We have two more things to tackle before our Rails API app is an MVP: namespacing the controllers and creating an authentication mechanism. We&amp;rsquo;ll tackle namespacing the controllers in this article - it might seem wordy, but it&amp;rsquo;s for a good reason.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -118,10 +100,7 @@
       
       <guid>https://paweljw.github.io/2017/07/rails-5.1-api-app-part-2-modeling-reality/</guid>
       <description>&lt;p&gt;Oh yeah. Now we&amp;rsquo;re going &lt;em&gt;hardcore&lt;/em&gt;. Well, not really.&lt;/p&gt;
-
-&lt;p&gt;While Rails embraces a continuously changing data model, it&amp;rsquo;s always good to stop and think for a minute about the domain we&amp;rsquo;re trying to magically lockwithin an app. We&amp;rsquo;re building a bookstore. So what&amp;rsquo;s in one?&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;While Rails embraces a continuously changing data model, it&amp;rsquo;s always good to stop and think for a minute about the domain we&amp;rsquo;re trying to magically lockwithin an app. We&amp;rsquo;re building a bookstore. So what&amp;rsquo;s in one?&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -130,9 +109,7 @@
       <pubDate>Tue, 11 Jul 2017 15:26:57 +0200</pubDate>
       
       <guid>https://paweljw.github.io/2017/07/rails-5.1-api-app-part-1-setting-up-a-rails-api-app/</guid>
-      <description>&lt;p&gt;It&amp;rsquo;s time to continue with our foray into Rails API app with Vue.js frontend! In &lt;a href=&#34;https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/&#34;&gt;Part 0&lt;/a&gt; we discussed what technology we&amp;rsquo;ll be using and why - I highly recommend you read through it if you haven&amp;rsquo;t already. Now it&amp;rsquo;s time to get our Rails on.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;It&amp;rsquo;s time to continue with our foray into Rails API app with Vue.js frontend! In &lt;a href=&#34;https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/&#34;&gt;Part 0&lt;/a&gt; we discussed what technology we&amp;rsquo;ll be using and why - I highly recommend you read through it if you haven&amp;rsquo;t already. Now it&amp;rsquo;s time to get our Rails on.&lt;/p&gt;</description>
     </item>
     
     <item>

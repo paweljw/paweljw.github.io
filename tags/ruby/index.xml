@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Ruby on Shenanigans! - a blog on programming, technology and science</title>
+    <title>ruby on Shenanigans! - a blog on programming, technology and science</title>
     <link>https://paweljw.github.io/tags/ruby/</link>
-    <description>Recent content in Ruby on Shenanigans! - a blog on programming, technology and science</description>
+    <description>Recent content in ruby on Shenanigans! - a blog on programming, technology and science</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
@@ -18,9 +18,7 @@
       <pubDate>Fri, 11 May 2018 22:00:00 +0200</pubDate>
       
       <guid>https://paweljw.github.io/2018/05/ruby-vs-elixir-an-api-battle-royale/</guid>
-      <description>&lt;p&gt;&lt;em&gt;&amp;ldquo;Ruby&amp;rsquo;s dying, man&amp;rdquo;&lt;/em&gt;, they keep telling me. &lt;em&gt;&amp;ldquo;Besides, it&amp;rsquo;s OOP, and that&amp;rsquo;s so 2013, functional programming is all the rage now. Oh, and there&amp;rsquo;s this new kid on the blog, it&amp;rsquo;s called Elixir. It&amp;rsquo;s functional programming for the avid Rubyist!&amp;rdquo;&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;&lt;em&gt;&amp;ldquo;Ruby&amp;rsquo;s dying, man&amp;rdquo;&lt;/em&gt;, they keep telling me. &lt;em&gt;&amp;ldquo;Besides, it&amp;rsquo;s OOP, and that&amp;rsquo;s so 2013, functional programming is all the rage now. Oh, and there&amp;rsquo;s this new kid on the blog, it&amp;rsquo;s called Elixir. It&amp;rsquo;s functional programming for the avid Rubyist!&amp;quot;&lt;/em&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

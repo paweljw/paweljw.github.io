@@ -1,91 +1,103 @@
-
-
-  
-    
-  
-
-
-  
-
-
-
-
-  
-
-
-  
-
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
     
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.40.3">
-    <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.68.3 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="author" content="Paweł J. Wal">
+<meta name="keywords" content=", development, ruby, ruby on rails, es6, javascript, electronics, arduino, science">
+<meta name="description" content="Time to deal with authenticating users in our bookstore application.">
+
+
+<meta property="og:description" content="Time to deal with authenticating users in our bookstore application.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rails 5.1 API app, part 4: Authentication and authorization">
+<meta name="twitter:title" content="Rails 5.1 API app, part 4: Authentication and authorization">
+<meta property="og:url" content="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-4-authentication-and-authorization/">
+<meta property="twitter:url" content="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-4-authentication-and-authorization/">
+<meta property="og:site_name" content="Shenanigans! - a blog on programming, technology and science">
+<meta property="og:description" content="Time to deal with authenticating users in our bookstore application.">
+<meta name="twitter:description" content="Time to deal with authenticating users in our bookstore application.">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2017-07-22T17:00:00">
+  
+  
+    <meta property="article:modified_time" content="2017-07-22T17:00:00">
+  
+  
+  
+  
+    
+      <meta property="article:tag" content="follow me">
+    
+      <meta property="article:tag" content="rails">
+    
+      <meta property="article:tag" content="api">
+    
+      <meta property="article:tag" content="rails-api-series">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+  <meta name="twitter:site" content="@paweljwal">
+
+
+  <meta name="twitter:creator" content="@paweljwal">
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://paweljw.github.io/media/padlock.jpg">
+  <meta property="twitter:image" content="https://paweljw.github.io/media/padlock.jpg">
+
+
+
+
+  <meta property="og:image" content="https://www.gravatar.com/avatar/5a78de40753ba5abf8fcf3a46c748d53?s=640">
+  <meta property="twitter:image" content="https://www.gravatar.com/avatar/5a78de40753ba5abf8fcf3a46c748d53?s=640">
+
+
     <title>Rails 5.1 API app, part 4: Authentication and authorization</title>
-    <meta name="author" content="Paweł J. Wal">
-    <meta name="keywords" content=", development, ruby, ruby on rails, es6, javascript, electronics, arduino, science">
 
     <link rel="icon" href="https://paweljw.github.io/favicon.png">
     
 
     
-    <meta name="description" content="Time to deal with authenticating users in our bookstore application.
 
-">
-    <meta property="og:description" content="Time to deal with authenticating users in our bookstore application.
-
-">
-    <meta property="og:type" content="blog">
-    <meta property="og:title" content="Rails 5.1 API app, part 4: Authentication and authorization">
-    <meta property="og:url" content="/2017/07/rails-5.1-api-app-part-4-authentication-and-authorization/">
-    <meta property="og:site_name" content="Shenanigans! - a blog on programming, technology and science">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Authentication and authorization in Rails 5 API apps">
-    <meta name="twitter:description" content="Time to deal with authenticating users in our bookstore application.
-
-">
-    
-      <meta name="twitter:creator" content="@paweljwal">
-    
-    
+    <link rel="canonical" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-4-authentication-and-authorization/">
 
     
-    
-
-    
-      <meta property="og:image" content="//www.gravatar.com/avatar/5a78de40753ba5abf8fcf3a46c748d53?s=640">
-    
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
     
     
-      <meta property="og:image" content="https://paweljw.github.io/media/padlock.jpg">
-    
-    
-
-    
-
-    
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.css" />
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" />
-    
-    
-    <link rel="stylesheet" href="https://paweljw.github.io/css/style-u6mk0ojoywresbx8iepslrmmhl4stuhrsxuwhkpwrkrx7mryjcaimasnk4pi.min.css" />
+    <link rel="stylesheet" href="https://paweljw.github.io/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
     
     
 
     
       
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-51524008-2', 'auto');
-ga('send', 'pageview');
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-51524008-2', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
 
     
@@ -96,8 +108,8 @@ ga('send', 'pageview');
     <div id="blog">
       <header id="header" data-behavior="5">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
-  <div class="header-title" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap; width: 70%; max-height: 55px; margin: 0 auto; display: block">
-    <a class="header-title-link" href="https://paweljw.github.io/"  style="text-overflow: ellipsis">Shenanigans! - a blog on programming, technology and science</a>
+  <div class="header-title">
+    <a class="header-title-link" href="https://paweljw.github.io/">Shenanigans! - a blog on programming, technology and science</a>
   </div>
   
     
@@ -107,7 +119,7 @@ ga('send', 'pageview');
     
     
       
-        <img class="header-picture" src="//www.gravatar.com/avatar/5a78de40753ba5abf8fcf3a46c748d53?s=90" alt="" />
+        <img class="header-picture" src="https://www.gravatar.com/avatar/5a78de40753ba5abf8fcf3a46c748d53?s=90" alt="Author&#39;s picture" />
       
     
     </a>
@@ -119,7 +131,7 @@ ga('send', 'pageview');
     
       <div class="sidebar-profile">
         <a href="https://paweljw.github.io/#about">
-          <img class="sidebar-profile-picture" src="//www.gravatar.com/avatar/5a78de40753ba5abf8fcf3a46c748d53?s=110" alt="" />
+          <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/5a78de40753ba5abf8fcf3a46c748d53?s=110" alt="Author&#39;s picture" />
         </a>
         <h4 class="sidebar-profile-name">Paweł J. Wal</h4>
         
@@ -169,12 +181,13 @@ ga('send', 'pageview');
     </a>
   </li>
 
+
     </ul>
     <ul class="sidebar-buttons">
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://linkedin.com/in/pawe%c5%82-wal-a478a785" target="_blank">
+      <a class="sidebar-button-link " href="https://linkedin.com/in/pawe%c5%82-wal" target="_blank" rel="noopener">
     
       <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
       
@@ -184,7 +197,7 @@ ga('send', 'pageview');
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://github.com/paweljw" target="_blank">
+      <a class="sidebar-button-link " href="https://github.com/paweljw" target="_blank" rel="noopener">
     
       <i class="sidebar-button-icon fa fa-lg fa-github"></i>
       
@@ -194,13 +207,14 @@ ga('send', 'pageview');
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://twitter.com/paweljwal" target="_blank">
+      <a class="sidebar-button-link " href="https://twitter.com/paweljwal" target="_blank" rel="noopener">
     
       <i class="sidebar-button-icon fa fa-lg fa-twitter"></i>
       
       <span class="sidebar-button-desc">@paweljwal</span>
     </a>
   </li>
+
 
     </ul>
     <ul class="sidebar-buttons">
@@ -215,6 +229,7 @@ ga('send', 'pageview');
     </a>
   </li>
 
+
     </ul>
   </div>
 </nav>
@@ -223,7 +238,7 @@ ga('send', 'pageview');
   <div class="post-header-cover
               text-left
               "
-       style="background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('/media/padlock.jpg'); background-size: cover"
+       style="background-image:url('/media/padlock.jpg')"
        data-behavior="5">
     
       <div class="post-header main-content-wrap text-left">
@@ -232,10 +247,11 @@ ga('send', 'pageview');
       Rails 5.1 API app, part 4: Authentication and authorization
     </h1>
   
-  <div class="postShorten-meta post-meta">
   
-    <time itemprop="datePublished" datetime="2017-07-22T17:00:00&#43;02:00">
-      
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2017-07-22T17:00:00&#43;02:00">
+        
   
   
   
@@ -243,11 +259,10 @@ ga('send', 'pageview');
     2017-07-22
   
 
-    </time>
-  
-  
-
-</div>
+      </time>
+    
+    
+  </div>
 
 </div>
     
@@ -264,73 +279,54 @@ ga('send', 'pageview');
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
               <p>Time to deal with authenticating users in our bookstore application.</p>
-
-<p></p>
-
-<p><details>
-  <summary><em>This series is composed of six articles! Click here for a table of contents.</em></summary></p>
-
+<!-- raw HTML omitted -->
 <ul>
 <li><a href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/">Part 0: Stack choices</a></li>
 <li><a href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-1-setting-up-a-rails-api-app/">Part 1: Setting up a Rails API app</a></li>
 <li><a href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-2-modeling-reality/">Part 2: Modeling reality</a></li>
 <li><a href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-3-api-versioning/">Part 3: API versioning</a></li>
 <li><a href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-4-authentication-and-authorization/">Part 4: Authentication and authorization</a></li>
-<li><a href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-5-deploying-with-confidence/">Part 5: Deploying with confidence</a>
-</details></li>
+<li><a href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-5-deploying-with-confidence/">Part 5: Deploying with confidence</a></li>
 </ul>
-
+<!-- raw HTML omitted -->
 <h2 id="what-is-token-authentication">What is token authentication?</h2>
-
-<p><em>&ldquo;And why do we even need it?&rdquo;</em> are two questions you might be asking yourself right now. You&rsquo;re probably familiar how a simple authentication flow might work in a &ldquo;regular&rdquo; Rails app:</p>
-
+<p><em>&ldquo;And why do we even need it?&quot;</em> are two questions you might be asking yourself right now. You&rsquo;re probably familiar how a simple authentication flow might work in a &ldquo;regular&rdquo; Rails app:</p>
 <ul>
 <li>User provides login and password,</li>
 <li>The credentials are checked against a list (e.g. a database) of approved users,</li>
 <li>If the credentials match, a cookie is set on the user&rsquo;s browser.</li>
 </ul>
-
 <p>This list is of course simplified, but that&rsquo;s the general idea. But for an API app we can&rsquo;t use cookies for a couple of reasons:</p>
-
 <ul>
 <li>The frontend app is completely separate from our API backend - the cookies we set in the browser won&rsquo;t hit the backend at all.</li>
 <li><strong>There might not even be a browser.</strong> I keep stressing this across this whole series of articles, but I feel this bears repeating: anything that can parse JSON should be able to use our app.</li>
 </ul>
-
 <h2 id="enter-jwt">Enter JWT</h2>
-
 <p>For the above reasons we will use <a href="https://en.wikipedia.org/wiki/JSON_Web_Token">JSON Web Tokens</a> for passing around credentials in our app. A JWT consists of three parts:</p>
-
 <ul>
 <li>A header, which contains information about the type of the token and the algorithm used. It looks something like this:</li>
 </ul>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
   <span style="color:#062873;font-weight:bold">&#34;alg&#34;</span>: <span style="color:#4070a0">&#34;HS256&#34;</span>,
   <span style="color:#062873;font-weight:bold">&#34;typ&#34;</span>:<span style="color:#4070a0">&#34;JWT&#34;</span>
-}</code></pre></div>
-<ul>
+}
+</code></pre></div><ul>
 <li>A payload - that&rsquo;s whatever we want the token to carry around, for example a user&rsquo;s ID.</li>
 </ul>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
   <span style="color:#062873;font-weight:bold">&#34;userId&#34;</span>: <span style="color:#40a070">1</span>
-}</code></pre></div>
-<ul>
+}
+</code></pre></div><ul>
 <li>A signature, used to ensure that the communication has not been tampered with. A signature is calculated using the <a href="https://en.wikipedia.org/wiki/Hash-based_message_authentication_code">HMAC-SHA256</a> algorithm; without going too deep into the implementation of this, it&rsquo;s a hash that&rsquo;s signed with a server-side secret, so the server can verify that it was indeed the one to produce a token.</li>
 </ul>
-
 <p>Thankfully, there&rsquo;s a Ruby gem to deal with a lot of this for us. It&rsquo;s called, somewhat unimaginatively for a Ruby gem, <a href="https://rubygems.org/gems/jwt">jwt</a>. Let&rsquo;s look at how we can make use of it.</p>
-
 <h2 id="user-model">User model</h2>
-
 <p>We all knew this had to happen. It happens in almost every Rails project. We need to create a <code>User</code> model and all the stuff around it.</p>
-
 <p>Since this is a very simple app - and we&rsquo;re learning, so we want to do as much of this by hand as possible! - we&rsquo;re not going to use anything ready-made. That&rsquo;s right, remove that <code>gem 'devise'</code> from your Gemfile please.</p>
-
 <p>Rails 4 added the <code>has_secure_password</code> helper to ActiveRecord models, so we&rsquo;ll use that to extract some pain out of managing passwords. Make sure <code>gem 'bcrypt'</code> is in your Gemfile, because it is required. I&rsquo;ll lock mine to <code>3.1.11</code>, but in the future the newest applicable version may of course change.</p>
-
 <p>That&rsquo;s all we need to create a very simple User:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ rails g model User email password_digest admin:boolean</code></pre></div>
-<p>Very barebones, but that&rsquo;s all we need. The migration needs a couple tweaks to look something like this:</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ rails g model User email password_digest admin:boolean
+</code></pre></div><p>Very barebones, but that&rsquo;s all we need. The migration needs a couple tweaks to look something like this:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#007020;font-weight:bold">class</span> <span style="color:#0e84b5;font-weight:bold">CreateUsers</span> <span style="color:#666">&lt;</span> <span style="color:#60add5">ActiveRecord</span><span style="color:#666">::</span><span style="color:#60add5">Migration</span><span style="color:#666">[</span><span style="color:#40a070">5</span><span style="color:#666">.</span><span style="color:#40a070">1</span><span style="color:#666">]</span>
   <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">change</span>
     create_table <span style="color:#517918">:users</span> <span style="color:#007020;font-weight:bold">do</span> <span style="color:#666">|</span>t<span style="color:#666">|</span>
@@ -341,23 +337,20 @@ ga('send', 'pageview');
       t<span style="color:#666">.</span>timestamps
     <span style="color:#007020;font-weight:bold">end</span>
   <span style="color:#007020;font-weight:bold">end</span>
-<span style="color:#007020;font-weight:bold">end</span></code></pre></div>
-<p>Note the NOT NULLs and defaulting to false on the admin flag.</p>
-
+<span style="color:#007020;font-weight:bold">end</span>
+</code></pre></div><p>Note the NOT NULLs and defaulting to false on the admin flag.</p>
 <p>We also need a couple more things in the User model:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#007020;font-weight:bold">class</span> <span style="color:#0e84b5;font-weight:bold">User</span> <span style="color:#666">&lt;</span> <span style="color:#60add5">ApplicationRecord</span>
   has_secure_password
   validates <span style="color:#517918">:email</span>, <span style="color:#517918">presence</span>: <span style="color:#007020">true</span>
-<span style="color:#007020;font-weight:bold">end</span></code></pre></div>
-<p>And we&rsquo;re done here!</p>
-
+<span style="color:#007020;font-weight:bold">end</span>
+</code></pre></div><p>And we&rsquo;re done here!</p>
 <h2 id="jwt-encoding">JWT encoding</h2>
-
 <p>Reading through the docs, we can see that to encode a token using HMAC-SHA256 with a particular secret, we need to do something like this:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#60add5">JWT</span><span style="color:#666">.</span>encode payload, hmac_secret, <span style="color:#4070a0">&#39;HS256&#39;</span></code></pre></div>
-<p>And to decode,</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#60add5">JWT</span><span style="color:#666">.</span>decode token, hmac_secret, <span style="color:#007020">true</span>, { <span style="color:#517918">:algorithm</span> <span style="color:#666">=&gt;</span> <span style="color:#4070a0">&#39;HS256&#39;</span> }</code></pre></div>
-<p>Slightly unwieldy! We can wrap this into a service object.</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#60add5">JWT</span><span style="color:#666">.</span>encode payload, hmac_secret, <span style="color:#4070a0">&#39;HS256&#39;</span>
+</code></pre></div><p>And to decode,</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#60add5">JWT</span><span style="color:#666">.</span>decode token, hmac_secret, <span style="color:#007020">true</span>, { <span style="color:#517918">:algorithm</span> <span style="color:#666">=&gt;</span> <span style="color:#4070a0">&#39;HS256&#39;</span> }
+</code></pre></div><p>Slightly unwieldy! We can wrap this into a service object.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#007020;font-weight:bold">class</span> <span style="color:#0e84b5;font-weight:bold">JwtService</span>
   <span style="color:#007020;font-weight:bold">def</span> <span style="color:#0e84b5;font-weight:bold">self</span><span style="color:#666">.</span><span style="color:#06287e">encode</span>(payload)
     <span style="color:#60add5">JWT</span><span style="color:#666">.</span>encode(payload, <span style="color:#60add5">Rails</span><span style="color:#666">.</span>application<span style="color:#666">.</span>secrets<span style="color:#666">.</span>secret_key_base, <span style="color:#4070a0">&#39;HS256&#39;</span>)
@@ -370,15 +363,12 @@ ga('send', 'pageview');
   <span style="color:#007020;font-weight:bold">rescue</span> <span style="color:#60add5">JWT</span><span style="color:#666">::</span><span style="color:#60add5">ExpiredSignature</span>
     <span style="color:#007020">nil</span>
   <span style="color:#007020;font-weight:bold">end</span>
-<span style="color:#007020;font-weight:bold">end</span></code></pre></div>
-<p>We&rsquo;ll just use the <code>secret_key_base</code> as our secret - it&rsquo;s used for cookie signing in regular apps, so it makes sense here. Notice how in decode we&rsquo;re skipping the second part of what <code>JWT.decode</code> returns - the second part is the header, and we&rsquo;re not really interested in that. We&rsquo;re also wrapping it in a <code>HashWithIndifferentAccess</code> - JWT returns hashes that are string-keyed, but I guarantee you that one of us will forget about that later and spend a good long while getting mad.</p>
-
+<span style="color:#007020;font-weight:bold">end</span>
+</code></pre></div><p>We&rsquo;ll just use the <code>secret_key_base</code> as our secret - it&rsquo;s used for cookie signing in regular apps, so it makes sense here. Notice how in decode we&rsquo;re skipping the second part of what <code>JWT.decode</code> returns - the second part is the header, and we&rsquo;re not really interested in that. We&rsquo;re also wrapping it in a <code>HashWithIndifferentAccess</code> - JWT returns hashes that are string-keyed, but I guarantee you that one of us will forget about that later and spend a good long while getting mad.</p>
 <p>Note that we&rsquo;re rescuing from <code>JWT::ExpiredSignature</code>. JSON Web Tokens have some reserved &ldquo;claims&rdquo; (keys) - one of those is the <code>exp</code>
 claim. When that is set to a timestamp, and it is past that timestamp, JWT will raise this exception. We&rsquo;ll simply opt to return
 <code>nil</code> in such a case and utilize it later.</p>
-
 <p><em>Big thank you to <a href="https://twitter.com/ylansegal/status/890642103813816320">Ylan Segal</a> for pointing reserved claims out to me!</em></p>
-
 <p>Let&rsquo;s drop in a quick test to check everything works:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">describe <span style="color:#60add5">JwtService</span> <span style="color:#007020;font-weight:bold">do</span>
   subject { described_class }
@@ -393,17 +383,13 @@ claim. When that is set to a timestamp, and it is past that timestamp, JWT will 
   describe <span style="color:#4070a0">&#39;.decode&#39;</span> <span style="color:#007020;font-weight:bold">do</span>
     it { expect(subject<span style="color:#666">.</span>decode(token))<span style="color:#666">.</span>to eq(payload) }
   <span style="color:#007020;font-weight:bold">end</span>
-<span style="color:#007020;font-weight:bold">end</span></code></pre></div>
-<p>It should pass, of course. Okay, on to the next thing:</p>
-
+<span style="color:#007020;font-weight:bold">end</span>
+</code></pre></div><p>It should pass, of course. Okay, on to the next thing:</p>
 <h2 id="giving-out-an-authentication-token">Giving out an authentication token</h2>
-
 <p>We need to check an email and password against Users, and if everything is fine - give out an access token. We&rsquo;ll also add an expiration timestamp to our tokens so they aren&rsquo;t everliving.</p>
-
 <p>We can use a command object for the authentication and token-generation portion. The command object exposes a simple pattern:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#60add5">CommandObject</span><span style="color:#666">.</span>call(arguments)</code></pre></div>
-<p>We&rsquo;ll decide that our command objects should return an instance of themselves after calling a payload function. They will also publish a <code>result</code>, <code>errors</code> and a <code>success?</code> predicate.</p>
-
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#60add5">CommandObject</span><span style="color:#666">.</span>call(arguments)
+</code></pre></div><p>We&rsquo;ll decide that our command objects should return an instance of themselves after calling a payload function. They will also publish a <code>result</code>, <code>errors</code> and a <code>success?</code> predicate.</p>
 <p>We&rsquo;ll make ourselves a little <code>BaseCommand</code> class so we don&rsquo;t repeat ourselves:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#007020;font-weight:bold">class</span> <span style="color:#0e84b5;font-weight:bold">BaseCommand</span>
   <span style="color:#007020">attr_reader</span> <span style="color:#517918">:result</span>
@@ -435,9 +421,9 @@ claim. When that is set to a timestamp, and it is past that timestamp, JWT will 
   <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">payload</span>
     not_implemented
   <span style="color:#007020;font-weight:bold">end</span>
-<span style="color:#007020;font-weight:bold">end</span></code></pre></div>
-<p>We&rsquo;ll use <code>ActiveModel::Errors</code> to provide us with a nice clean way to collect errors that might arise in our commands.</p>
+<span style="color:#007020;font-weight:bold">end</span>
 
+</code></pre></div><p>We&rsquo;ll use <code>ActiveModel::Errors</code> to provide us with a nice clean way to collect errors that might arise in our commands.</p>
 <p>Let&rsquo;s look at the <code>AuthenticateUserCommand</code> now:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#007020;font-weight:bold">class</span> <span style="color:#0e84b5;font-weight:bold">AuthenticateUserCommand</span> <span style="color:#666">&lt;</span> <span style="color:#60add5">BaseCommand</span>
   <span style="color:#007020">private</span>
@@ -471,11 +457,10 @@ claim. When that is set to a timestamp, and it is past that timestamp, JWT will 
       <span style="color:#517918">exp</span>: <span style="color:#40a070">24</span><span style="color:#666">.</span>hours<span style="color:#666">.</span>from_now<span style="color:#666">.</span>to_i
     }
   <span style="color:#007020;font-weight:bold">end</span>
-<span style="color:#007020;font-weight:bold">end</span></code></pre></div>
-<p>It&rsquo;s a mouthful, but the internals are simple as pie: if an user for the e-mail provided exists and the password matches, return a JSON Web Token with a payload of user ID and an expiration timer. Otherwise, append to errors and return <code>nil</code>.</p>
+<span style="color:#007020;font-weight:bold">end</span>
 
+</code></pre></div><p>It&rsquo;s a mouthful, but the internals are simple as pie: if an user for the e-mail provided exists and the password matches, return a JSON Web Token with a payload of user ID and an expiration timer. Otherwise, append to errors and return <code>nil</code>.</p>
 <p>Note that since the payload is time sensitive with the addition of expiration timestamp, to test it properly we&rsquo;ll need something like <a href="https://rubygems.org/gems/timecop">Timecop</a>.</p>
-
 <p>With this command object, our auth controller is very simple:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#007020;font-weight:bold">module</span> <span style="color:#0e84b5;font-weight:bold">Api</span>
   <span style="color:#007020;font-weight:bold">module</span> <span style="color:#0e84b5;font-weight:bold">V1</span>
@@ -491,48 +476,29 @@ claim. When that is set to a timestamp, and it is past that timestamp, JWT will 
       <span style="color:#007020;font-weight:bold">end</span>
     <span style="color:#007020;font-weight:bold">end</span>
   <span style="color:#007020;font-weight:bold">end</span>
-<span style="color:#007020;font-weight:bold">end</span></code></pre></div>
-<p>Add a route and you&rsquo;re golden:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">resource <span style="color:#517918">:auth</span>, <span style="color:#517918">only</span>: <span style="color:#666">%</span>i<span style="color:#666">[</span>create<span style="color:#666">]</span></code></pre></div>
-<p>Now when I try to log in with a nonexistent user, I get an <code>Unauthorized status</code>:</p>
-
-
-<figure>
-    <a href="https://paweljw.github.io/media/auth_1.png">
-        <img src="https://paweljw.github.io/media/auth_1.png" />
-    </a>
-    
+<span style="color:#007020;font-weight:bold">end</span>
+</code></pre></div><p>Add a route and you&rsquo;re golden:</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">resource <span style="color:#517918">:auth</span>, <span style="color:#517918">only</span>: <span style="color:#666">%</span>i<span style="color:#666">[</span>create<span style="color:#666">]</span>
+</code></pre></div><p>Now when I try to log in with a nonexistent user, I get an <code>Unauthorized status</code>:</p>
+<figure><a href="https://paweljw.github.io/media/auth_1.png">
+    <img src="https://paweljw.github.io/media/auth_1.png"/> </a>
 </figure>
-
 
 <p>But when I create this user in the console,</p>
-
 <pre><code>User.create(email: 'p@p.local', password: 'password123')
-</code></pre>
-
-<p>and try again,</p>
-
-
-<figure>
-    <a href="https://paweljw.github.io/media/auth_2.png">
-        <img src="https://paweljw.github.io/media/auth_2.png" />
-    </a>
-    
+</code></pre><p>and try again,</p>
+<figure><a href="https://paweljw.github.io/media/auth_2.png">
+    <img src="https://paweljw.github.io/media/auth_2.png"/> </a>
 </figure>
 
-
 <p>Sweet! A token!</p>
-
 <h2 id="locking-it-down">Locking it down</h2>
-
 <p>We need to do a couple more things:</p>
-
 <ul>
 <li>decode the token from headers,</li>
 <li>check it against database for users,</li>
 <li>check if it&rsquo;s not expired.</li>
 </ul>
-
 <p>We can confine this to another command:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#007020;font-weight:bold">class</span> <span style="color:#0e84b5;font-weight:bold">DecodeAuthenticationCommand</span> <span style="color:#666">&lt;</span> <span style="color:#60add5">BaseCommand</span>
   <span style="color:#007020">private</span>
@@ -579,10 +545,9 @@ claim. When that is set to a timestamp, and it is past that timestamp, JWT will 
   <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">decoded_id</span>
     token_contents<span style="color:#666">[</span><span style="color:#4070a0">&#39;user_id&#39;</span><span style="color:#666">]</span>
   <span style="color:#007020;font-weight:bold">end</span>
-<span style="color:#007020;font-weight:bold">end</span></code></pre></div>
-<p>Whew, another mouthful! It extracts the contents of the <code>Authorization</code> header (expecting it to contain something like <code>Bearer token.goes.here</code>, checks whether a user with a given ID exists. We&rsquo;re also assuming that when <code>JwtService</code> returns <code>nil</code>, it&rsquo;s
+<span style="color:#007020;font-weight:bold">end</span>
+</code></pre></div><p>Whew, another mouthful! It extracts the contents of the <code>Authorization</code> header (expecting it to contain something like <code>Bearer token.goes.here</code>, checks whether a user with a given ID exists. We&rsquo;re also assuming that when <code>JwtService</code> returns <code>nil</code>, it&rsquo;s
 because the token has already expired (according to the <code>exp</code> reserved claim). If anything goes wrong at all, it just registers an error and bails.</p>
-
 <p>We can then get ourselves a nice concern to include in our application controller:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#007020;font-weight:bold">class</span> <span style="color:#0e84b5;font-weight:bold">NotAuthorizedException</span> <span style="color:#666">&lt;</span> <span style="color:#60add5">StandardError</span>; <span style="color:#007020;font-weight:bold">end</span>
 
@@ -603,37 +568,22 @@ because the token has already expired (according to the <code>exp</code> reserve
     @current_user <span style="color:#666">=</span> <span style="color:#60add5">DecodeAuthenticationCommand</span><span style="color:#666">.</span>call(request<span style="color:#666">.</span>headers)<span style="color:#666">.</span>result
     <span style="color:#007020;font-weight:bold">raise</span> <span style="color:#60add5">NotAuthorizedException</span> <span style="color:#007020;font-weight:bold">unless</span> @current_user
   <span style="color:#007020;font-weight:bold">end</span>
-<span style="color:#007020;font-weight:bold">end</span></code></pre></div>
-<p>It&rsquo;s also important to add</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">skip_before_action <span style="color:#517918">:authenticate_user</span></code></pre></div>
-<p>to our AuthsController, or we will reject users trying to authenticate because they aren&rsquo;t authenticated.</p>
-
+<span style="color:#007020;font-weight:bold">end</span>
+</code></pre></div><p>It&rsquo;s also important to add</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">skip_before_action <span style="color:#517918">:authenticate_user</span>
+</code></pre></div><p>to our AuthsController, or we will reject users trying to authenticate because they aren&rsquo;t authenticated.</p>
 <p>Now if I try to get a list of authors in Postman not passing in an authentication header, I get rejected:</p>
-
-
-<figure>
-    <a href="https://paweljw.github.io/media/auth_3.png">
-        <img src="https://paweljw.github.io/media/auth_3.png" />
-    </a>
-    
+<figure><a href="https://paweljw.github.io/media/auth_3.png">
+    <img src="https://paweljw.github.io/media/auth_3.png"/> </a>
 </figure>
-
 
 <p>But if I do pass this header, I&rsquo;m approved!</p>
-
-
-<figure>
-    <a href="https://paweljw.github.io/media/auth_4.png">
-        <img src="https://paweljw.github.io/media/auth_4.png" />
-    </a>
-    
+<figure><a href="https://paweljw.github.io/media/auth_4.png">
+    <img src="https://paweljw.github.io/media/auth_4.png"/> </a>
 </figure>
 
-
 <h2 id="administrative-access">Administrative access</h2>
-
 <p>One more thing: currently any logged in user can edit books. That&rsquo;s not great. We&rsquo;ll need to check for admin privileges before that.</p>
-
 <p>We&rsquo;ll add a simple authorization-checking function in another concern:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#007020;font-weight:bold">module</span> <span style="color:#0e84b5;font-weight:bold">AdminAuthorizable</span>
   <span style="color:#007020">extend</span> <span style="color:#60add5">ActiveSupport</span><span style="color:#666">::</span><span style="color:#60add5">Concern</span>
@@ -646,117 +596,89 @@ because the token has already expired (according to the <code>exp</code> reserve
     <span style="color:#007020;font-weight:bold">raise</span> <span style="color:#60add5">NotPermittedException</span> <span style="color:#007020;font-weight:bold">if</span> action <span style="color:#666">!=</span> <span style="color:#517918">:read</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>current_user<span style="color:#666">.</span>admin?
     <span style="color:#007020">true</span>
   <span style="color:#007020;font-weight:bold">end</span>
-<span style="color:#007020;font-weight:bold">end</span></code></pre></div>
-<p><em>Big thank you to <span style="font-family: sans-serif">Никита Василевский</span> for pointing out that I left a bug in this code!</em></p>
-
+<span style="color:#007020;font-weight:bold">end</span>
+</code></pre></div><p><em>Big thank you to <!-- raw HTML omitted -->Никита Василевский<!-- raw HTML omitted --> for pointing out that I left a bug in this code!</em></p>
 <p>Now we can use <code>authorize! :read</code> in our index and show actions, and <code>authorize! :create</code>, <code>authorize! :update</code> and <code>authorize! :destroy</code> elsewhere. Simple yet effective!</p>
-
 <h2 id="closing-thoughts">Closing thoughts</h2>
-
 <p>We did a lot of things by hand today. We could have plonked in Devise, <a href="https://rubygems.org/gems/simple_command">simple_command</a> for the command objects (I recommend you look it over if you haven&rsquo;t already - our commands are heavily modeled after what they&rsquo;re doing!), and e.g. <a href="https://rubygems.org/gems/cancancan">cancancan</a> for the role-based auth. The point, however, is to learn how to do things yourself, especially in fun-time projects - it removes a lot of magic from the gems you&rsquo;re using in large, production-level apps.</p>
-
 <p>As always, the state of the project after this part can be found on GitHub at <a href="https://github.com/paweljw/bookstore-backend/tree/part-4">paweljw/bookstore-backend</a>.</p>
-
-<p>We&rsquo;ve started adding tests in this part, too. We&rsquo;re not exactly doing <abbr title="Test-Driven Development">TDD</abbr> here - and that&rsquo;s totally fine when learning (unless you&rsquo;re learning TDD, of course!). It was important to get the basic API and auth working in the first place so that we know what we&rsquo;re testing. We&rsquo;ll talk about testing Rails API apps next time. See you then!</p>
-
-<p><em>And once again, special thanks go out to <span style="font-family: sans-serif">Никита Василевский</span> and <a href="https://twitter.com/ylansegal/status/890642103813816320">Ylan Segal</a> for corrections!</em></p>
-
-<hr />
-
+<p>We&rsquo;ve started adding tests in this part, too. We&rsquo;re not exactly doing <!-- raw HTML omitted -->TDD<!-- raw HTML omitted --> here - and that&rsquo;s totally fine when learning (unless you&rsquo;re learning TDD, of course!). It was important to get the basic API and auth working in the first place so that we know what we&rsquo;re testing. We&rsquo;ll talk about testing Rails API apps next time. See you then!</p>
+<p><em>And once again, special thanks go out to <!-- raw HTML omitted -->Никита Василевский<!-- raw HTML omitted --> and <a href="https://twitter.com/ylansegal/status/890642103813816320">Ylan Segal</a> for corrections!</em></p>
+<hr>
 <p>Top image credit: <a href="https://pixabay.com/p-406986/">https://pixabay.com/p-406986/</a> (CC0)</p>
               
             </div>
           </div>
           <div id="post-footer" class="post-footer main-content-wrap">
-            <div id="i-like-beer" style="text-align: center; margin: 0 auto; display: block; color: #999; font-size: 90%">
-  <hr/>
-  <br/>
-  <p>Hey there! I hope you found the post above useful. If you feel it's worth it, and are capable of doing so, please consider <a href="https://paypal.me/paweljw">buying me a beer</a> through PayPal, or tweet <a href="https://twitter.com/paweljwal">@paweljwal</a> if you want to grab one offline when you're in Kraków, MA, Poland.</p>
-  <small>If you want to remove this text with your adblocker, the selector is <code>#i-like-beer</code>.</small>
-  <hr/>
-</div>
             
               
                 
                 
                   <div class="post-footer-tags">
-                    <span class="text-color-light text-small"></span><br/>
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/follow-me/">follow me</a>
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io/tags/follow-me/">follow me</a>
 
-  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/rails/">rails</a>
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io/tags/rails/">rails</a>
 
-  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/api/">api</a>
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io/tags/api/">api</a>
 
-  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/rails-api-series/">rails-api-series</a>
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io/tags/rails-api-series/">rails-api-series</a>
 
                   </div>
                 
               
             
             <div class="post-actions-wrap">
-  <nav>
-    <ul class="post-actions post-action-nav">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-5-deploying-with-confidence/" data-tooltip="Rails 5.1 API app, part 5: Deploying with confidence">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-3-api-versioning/" data-tooltip="Rails 5.1 API app, part 3: API versioning">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
       
-        <li class="post-action">
-          
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-5-deploying-with-confidence/" data-tooltip="Rails 5.1 API app, part 5: Deploying with confidence">
-          
-            <i class="fa fa-angle-left"></i>
-            <span class="hide-xs hide-sm text-small icon-ml"></span>
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
           </a>
         </li>
+        
+      
+      
         <li class="post-action">
-          
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-3-api-versioning/" data-tooltip="Rails 5.1 API app, part 3: API versioning">
-          
-            <span class="hide-xs hide-sm text-small icon-mr"></span>
-            <i class="fa fa-angle-right"></i>
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
           </a>
         </li>
       
-    </ul>
-  </nav>
-  <ul class="post-actions post-action-share">
-    
-      <li class="post-action hide-lg hide-md hide-sm">
-        <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
-          <i class="fa fa-share-alt"></i>
-        </a>
-      </li>
-      <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-app-part-4-authentication-and-authorization%2f">
-          <i class="fa fa-google-plus"></i>
-        </a>
-      </li>
-      <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-app-part-4-authentication-and-authorization%2f">
-          <i class="fa fa-facebook-official"></i>
-        </a>
-      </li>
-      <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-app-part-4-authentication-and-authorization%2f">
-          <i class="fa fa-twitter"></i>
-        </a>
-      </li>
-    
-    
       <li class="post-action">
-        <a class="post-action-btn btn btn--default" href="#disqus_thread">
-          <i class="fa fa-comment-o"></i>
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
         </a>
       </li>
-    
-    <li class="post-action">
-      
-        <a class="post-action-btn btn btn--default" href="#">
-      
-        <i class="fa fa-list"></i>
-      </a>
-    </li>
-  </ul>
+    </ul>
+  
 </div>
-
 
             
               
@@ -769,94 +691,68 @@ because the token has already expired (according to the <code>exp</code> reserve
         </article>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
-    Created by <a href="https://github.com/paweljw">Paweł J. Wal</a> | <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
+    &copy; 2020 <a href="https://github.com/paweljw">Paweł J. Wal</a>. All Rights Reserved
   </span>
 </footer>
 
       </div>
       <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
         <div class="post-actions-wrap">
-  <nav>
-    <ul class="post-actions post-action-nav">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-5-deploying-with-confidence/" data-tooltip="Rails 5.1 API app, part 5: Deploying with confidence">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-3-api-versioning/" data-tooltip="Rails 5.1 API app, part 3: API versioning">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
       
-        <li class="post-action">
-          
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-5-deploying-with-confidence/" data-tooltip="Rails 5.1 API app, part 5: Deploying with confidence">
-          
-            <i class="fa fa-angle-left"></i>
-            <span class="hide-xs hide-sm text-small icon-ml"></span>
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
           </a>
         </li>
+        
+      
+      
         <li class="post-action">
-          
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-3-api-versioning/" data-tooltip="Rails 5.1 API app, part 3: API versioning">
-          
-            <span class="hide-xs hide-sm text-small icon-mr"></span>
-            <i class="fa fa-angle-right"></i>
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
           </a>
         </li>
       
-    </ul>
-  </nav>
-  <ul class="post-actions post-action-share">
-    
-      <li class="post-action hide-lg hide-md hide-sm">
-        <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
-          <i class="fa fa-share-alt"></i>
-        </a>
-      </li>
-      <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-app-part-4-authentication-and-authorization%2f">
-          <i class="fa fa-google-plus"></i>
-        </a>
-      </li>
-      <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-app-part-4-authentication-and-authorization%2f">
-          <i class="fa fa-facebook-official"></i>
-        </a>
-      </li>
-      <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-app-part-4-authentication-and-authorization%2f">
-          <i class="fa fa-twitter"></i>
-        </a>
-      </li>
-    
-    
       <li class="post-action">
-        <a class="post-action-btn btn btn--default" href="#disqus_thread">
-          <i class="fa fa-comment-o"></i>
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
         </a>
       </li>
-    
-    <li class="post-action">
-      
-        <a class="post-action-btn btn btn--default" href="#">
-      
-        <i class="fa fa-list"></i>
-      </a>
-    </li>
-  </ul>
+    </ul>
+  
 </div>
-
 
       </div>
       <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
   <ul class="share-options">
-    <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-app-part-4-authentication-and-authorization%2f">
-        <i class="fa fa-google-plus"></i><span></span>
-      </a>
-    </li>
-    <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-app-part-4-authentication-and-authorization%2f">
-        <i class="fa fa-facebook-official"></i><span></span>
-      </a>
-    </li>
-    <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2017%2f07%2frails-5.1-api-app-part-4-authentication-and-authorization%2f">
-        <i class="fa fa-twitter"></i><span></span>
-      </a>
-    </li>
+    
   </ul>
 </div>
 <div id="share-options-mask" class="share-options-mask"></div>
@@ -868,7 +764,7 @@ because the token has already expired (according to the <code>exp</code> reserve
       <i class="fa fa-remove"></i>
     </div>
     
-      <img id="about-card-picture" src="//www.gravatar.com/avatar/5a78de40753ba5abf8fcf3a46c748d53?s=110" alt="" />
+      <img id="about-card-picture" src="https://www.gravatar.com/avatar/5a78de40753ba5abf8fcf3a46c748d53?s=110" alt="Author&#39;s picture" />
     
     <h4 id="about-card-name">Paweł J. Wal</h4>
     
@@ -891,261 +787,40 @@ because the token has already expired (according to the <code>exp</code> reserve
   </div>
 </div>
 
-    <div id="algolia-search-modal" class="modal-container">
-  <div class="modal">
-    <div class="modal-header">
-      <span class="close-button"><i class="fa fa-close"></i></span>
-      <a href="https://algolia.com" target="_blank" class="searchby-algolia text-color-light link-unstyled">
-        <span class="searchby-algolia-text text-color-light text-small">by</span>
-        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
-      </a>
-      <i class="search-icon fa fa-search"></i>
-      <form id="algolia-search-form">
-        <input type="text" id="algolia-search-input" name="search"
-          class="form-control input--large search-input" placeholder="" />
-      </form>
-    </div>
-    <div class="modal-body">
-      <div class="no-result text-color-light text-center"></div>
-      <div class="results">
-        
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://paweljw.github.io/2018/05/ruby-vs-elixir-an-api-battle-royale/">
-                <h3 class="media-heading">Ruby vs Elixir: an API battle royale</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  May 5, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p><em>&ldquo;Ruby&rsquo;s dying, man&rdquo;</em>, they keep telling me. <em>&ldquo;Besides, it&rsquo;s OOP, and that&rsquo;s so 2013, functional programming is all the rage now. Oh, and there&rsquo;s this new kid on the blog, it&rsquo;s called Elixir. It&rsquo;s functional programming for the avid Rubyist!&rdquo;</em></p>
+    
 
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://paweljw.github.io/2018/04/vue.js-front-end-app-part-6-deploying-to-s3/">
-                <h3 class="media-heading">Vue.js front end app, part 6: Deploying to S3</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Apr 4, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>In this final episode of the series, we&rsquo;ll take a look at deploying our Single Page Application to Amazon Web Services Simple Storage Service (or S3).</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://paweljw.github.io/2018/01/vue.js-front-end-app-part-5-data-presentation/">
-                <h3 class="media-heading">Vue.js front end app, part 5: Data presentation</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jan 1, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>New year, new <del>you</del> blog post! In this long overdue part we&rsquo;ll strengthen our command of loading data from the server and take a look at presenting it.</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://paweljw.github.io/2017/10/vue.js-front-end-app-part-4-keeping-state-with-vuex/">
-                <h3 class="media-heading">Vue.js front end app, part 4: Keeping state with Vuex</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Oct 10, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>Last time we built an <a href="https://paweljw.github.io/2017/09/vue.js-front-end-app-part-3-authentication/">authentication mechanism</a> with a pretty glaring bug - you can just set the <code>token</code> in <code>localStorage</code> to whatever and it&rsquo;ll let you in. We need to actually read the token, and persist what we&rsquo;ve read so we don&rsquo;t have to do it over and over.</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://paweljw.github.io/2017/09/vue.js-front-end-app-part-3-authentication/">
-                <h3 class="media-heading">Vue.js front end app, part 3: Authentication</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Sep 9, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>In this part we&rsquo;ll allow the user to log in to our frontend app, using the <a href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-4-authentication-and-authorization/">auth mechanism</a> we&rsquo;ve built on the back end earlier. A lot of topics in this one, so jump right in!</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://paweljw.github.io/2017/09/vue.js-front-end-app-part-2-design-is-not-hard/">
-                <h3 class="media-heading">Vue.js front end app, part 2: Design is (not) hard</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Sep 9, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>Now that we have our environment running, the app is initialized, and we know a little bit about what&rsquo;s going on in there, it&rsquo;s time to take a little bit of time to design our front end.</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://paweljw.github.io/2017/09/saturday-project-temperature-and-humidity-meter-with-onion-omega2-/">
-                <h3 class="media-heading">Saturday project: temperature and humidity meter with Onion Omega2&#43;</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Sep 9, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>Quick thing I threw together in about an hour: an IoT temperature and humidity meter!</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://paweljw.github.io/2017/09/vue.js-front-end-app-part-1-setting-up-the-app/">
-                <h3 class="media-heading">Vue.js front end app, part 1: Setting up the app</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Sep 9, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>Last time we’ve seen each other, we’ve just deployed our Rails 5.1 API app. Time to put an end to this! A <em>front</em> end, of course.</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-5-deploying-with-confidence/">
-                <h3 class="media-heading">Rails 5.1 API app, part 5: Deploying with confidence</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jul 7, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>In this final part of our Rails API app series we&rsquo;ll talk about specs, code coverage, continuous integration and deployment - and how to be certain your application is working.</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-4-authentication-and-authorization/">
-                <h3 class="media-heading">Rails 5.1 API app, part 4: Authentication and authorization</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jul 7, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>Time to deal with authenticating users in our bookstore application.</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-      </div>
-    </div>
-    <div class="modal-footer">
-      <p class="results-count text-medium"
-         data-message-zero=""
-         data-message-one=""
-         data-message-other="">
-         21 posts found
-      </p>
-    </div>
-  </div>
-</div>
     
   
     
-    <div id="cover" style="background-image:url('https://paweljw.github.io/images/cover2.jpeg');"></div>
+      <div id="cover" style="background-image:url('https://paweljw.github.io/images/cover2.jpeg');"></div>
+    
   
 
 
     
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
 
 
-<script src="https://paweljw.github.io/js/script-wl33z0n6ocaypepiqrazthtivfrliqijej4rq8ek8gvrv1awftmgjuv8k4zc.min.js"></script>
+<script src="https://paweljw.github.io/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
 
-<script>
-$(document).ready(function() {
-  hljs.configure({ classPrefix: '', useBR: false });
-  $('pre.code-highlight').each(function(i, block) {
-    var code = "";
-    hljs.highlightAuto(block.innerText).value.split(/\r\n|\r|\n/).forEach(function(line) {
-      code += "<span class=\"line\">" + line + "</span><br>";
-    });
-    if (code.length > 0) {
-      block.innerHTML = code;  
-    }
-  });
-  $('pre > code').each(function(i, block) {
-    $(this).addClass('codeblock');
-    hljs.highlightBlock(block);
-  });
-});
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
 </script>
+
 
   
     
@@ -1172,7 +847,6 @@ $(document).ready(function() {
       </script>
     
   
-
 
 
 

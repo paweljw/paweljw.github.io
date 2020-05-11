@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Aliens on Shenanigans! - a blog on programming, technology and science</title>
+    <title>aliens on Shenanigans! - a blog on programming, technology and science</title>
     <link>https://paweljw.github.io/tags/aliens/</link>
-    <description>Recent content in Aliens on Shenanigans! - a blog on programming, technology and science</description>
+    <description>Recent content in aliens on Shenanigans! - a blog on programming, technology and science</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
@@ -18,9 +18,7 @@
       <pubDate>Sun, 28 May 2017 15:47:59 +0200</pubDate>
       
       <guid>https://paweljw.github.io/2017/05/saturday-project-alien-generator-in-javascript/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;ve been studying ES6 a lot lately. Here&amp;rsquo;s a fun little project that we can do with it over an hour or so on a Saturday: an alien generator!&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;I&amp;rsquo;ve been studying ES6 a lot lately. Here&amp;rsquo;s a fun little project that we can do with it over an hour or so on a Saturday: an alien generator!&lt;/p&gt;</description>
     </item>
     
   </channel>

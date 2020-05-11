@@ -1,91 +1,105 @@
-
-
-  
-    
-  
-
-
-  
-
-
-
-
-  
-
-
-  
-
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
     
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.40.3">
-    <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.68.3 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="author" content="Paweł J. Wal">
+<meta name="keywords" content=", development, ruby, ruby on rails, es6, javascript, electronics, arduino, science">
+<meta name="description" content="Last time we’ve seen each other, we’ve just deployed our Rails 5.1 API app. Time to put an end to this! A front end, of course.">
+
+
+<meta property="og:description" content="Last time we’ve seen each other, we’ve just deployed our Rails 5.1 API app. Time to put an end to this! A front end, of course.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue.js front end app, part 1: Setting up the app">
+<meta name="twitter:title" content="Vue.js front end app, part 1: Setting up the app">
+<meta property="og:url" content="https://paweljw.github.io/2017/09/vue.js-front-end-app-part-1-setting-up-the-app/">
+<meta property="twitter:url" content="https://paweljw.github.io/2017/09/vue.js-front-end-app-part-1-setting-up-the-app/">
+<meta property="og:site_name" content="Shenanigans! - a blog on programming, technology and science">
+<meta property="og:description" content="Last time we’ve seen each other, we’ve just deployed our Rails 5.1 API app. Time to put an end to this! A front end, of course.">
+<meta name="twitter:description" content="Last time we’ve seen each other, we’ve just deployed our Rails 5.1 API app. Time to put an end to this! A front end, of course.">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2017-09-07T17:00:00">
+  
+  
+    <meta property="article:modified_time" content="2017-09-07T17:00:00">
+  
+  
+  
+  
+    
+      <meta property="article:tag" content="follow me">
+    
+      <meta property="article:tag" content="javascript">
+    
+      <meta property="article:tag" content="es6">
+    
+      <meta property="article:tag" content="vue.js">
+    
+      <meta property="article:tag" content="vue-frontend-series">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+  <meta name="twitter:site" content="@paweljwal">
+
+
+  <meta name="twitter:creator" content="@paweljwal">
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://paweljw.github.io/media/tools.jpg">
+  <meta property="twitter:image" content="https://paweljw.github.io/media/tools.jpg">
+
+
+
+
+  <meta property="og:image" content="https://www.gravatar.com/avatar/5a78de40753ba5abf8fcf3a46c748d53?s=640">
+  <meta property="twitter:image" content="https://www.gravatar.com/avatar/5a78de40753ba5abf8fcf3a46c748d53?s=640">
+
+
     <title>Vue.js front end app, part 1: Setting up the app</title>
-    <meta name="author" content="Paweł J. Wal">
-    <meta name="keywords" content=", development, ruby, ruby on rails, es6, javascript, electronics, arduino, science">
 
     <link rel="icon" href="https://paweljw.github.io/favicon.png">
     
 
     
-    <meta name="description" content="Last time we’ve seen each other, we’ve just deployed our Rails 5.1 API app. Time to put an end to this! A front end, of course.
 
-">
-    <meta property="og:description" content="Last time we’ve seen each other, we’ve just deployed our Rails 5.1 API app. Time to put an end to this! A front end, of course.
-
-">
-    <meta property="og:type" content="blog">
-    <meta property="og:title" content="Vue.js front end app, part 1: Setting up the app">
-    <meta property="og:url" content="/2017/09/vue.js-front-end-app-part-1-setting-up-the-app/">
-    <meta property="og:site_name" content="Shenanigans! - a blog on programming, technology and science">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Vue.js front end app: Basic tools and setup">
-    <meta name="twitter:description" content="Last time we’ve seen each other, we’ve just deployed our Rails 5.1 API app. Time to put an end to this! A front end, of course.
-
-">
-    
-      <meta name="twitter:creator" content="@paweljwal">
-    
-    
+    <link rel="canonical" href="https://paweljw.github.io/2017/09/vue.js-front-end-app-part-1-setting-up-the-app/">
 
     
-    
-
-    
-      <meta property="og:image" content="//www.gravatar.com/avatar/5a78de40753ba5abf8fcf3a46c748d53?s=640">
-    
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
     
     
-      <meta property="og:image" content="https://paweljw.github.io/media/tools.jpg">
-    
-    
-
-    
-
-    
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.css" />
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" />
-    
-    
-    <link rel="stylesheet" href="https://paweljw.github.io/css/style-u6mk0ojoywresbx8iepslrmmhl4stuhrsxuwhkpwrkrx7mryjcaimasnk4pi.min.css" />
+    <link rel="stylesheet" href="https://paweljw.github.io/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
     
     
 
     
       
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-51524008-2', 'auto');
-ga('send', 'pageview');
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-51524008-2', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
 
     
@@ -96,8 +110,8 @@ ga('send', 'pageview');
     <div id="blog">
       <header id="header" data-behavior="5">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
-  <div class="header-title" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap; width: 70%; max-height: 55px; margin: 0 auto; display: block">
-    <a class="header-title-link" href="https://paweljw.github.io/"  style="text-overflow: ellipsis">Shenanigans! - a blog on programming, technology and science</a>
+  <div class="header-title">
+    <a class="header-title-link" href="https://paweljw.github.io/">Shenanigans! - a blog on programming, technology and science</a>
   </div>
   
     
@@ -107,7 +121,7 @@ ga('send', 'pageview');
     
     
       
-        <img class="header-picture" src="//www.gravatar.com/avatar/5a78de40753ba5abf8fcf3a46c748d53?s=90" alt="" />
+        <img class="header-picture" src="https://www.gravatar.com/avatar/5a78de40753ba5abf8fcf3a46c748d53?s=90" alt="Author&#39;s picture" />
       
     
     </a>
@@ -119,7 +133,7 @@ ga('send', 'pageview');
     
       <div class="sidebar-profile">
         <a href="https://paweljw.github.io/#about">
-          <img class="sidebar-profile-picture" src="//www.gravatar.com/avatar/5a78de40753ba5abf8fcf3a46c748d53?s=110" alt="" />
+          <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/5a78de40753ba5abf8fcf3a46c748d53?s=110" alt="Author&#39;s picture" />
         </a>
         <h4 class="sidebar-profile-name">Paweł J. Wal</h4>
         
@@ -169,12 +183,13 @@ ga('send', 'pageview');
     </a>
   </li>
 
+
     </ul>
     <ul class="sidebar-buttons">
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://linkedin.com/in/pawe%c5%82-wal-a478a785" target="_blank">
+      <a class="sidebar-button-link " href="https://linkedin.com/in/pawe%c5%82-wal" target="_blank" rel="noopener">
     
       <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
       
@@ -184,7 +199,7 @@ ga('send', 'pageview');
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://github.com/paweljw" target="_blank">
+      <a class="sidebar-button-link " href="https://github.com/paweljw" target="_blank" rel="noopener">
     
       <i class="sidebar-button-icon fa fa-lg fa-github"></i>
       
@@ -194,13 +209,14 @@ ga('send', 'pageview');
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://twitter.com/paweljwal" target="_blank">
+      <a class="sidebar-button-link " href="https://twitter.com/paweljwal" target="_blank" rel="noopener">
     
       <i class="sidebar-button-icon fa fa-lg fa-twitter"></i>
       
       <span class="sidebar-button-desc">@paweljwal</span>
     </a>
   </li>
+
 
     </ul>
     <ul class="sidebar-buttons">
@@ -215,6 +231,7 @@ ga('send', 'pageview');
     </a>
   </li>
 
+
     </ul>
   </div>
 </nav>
@@ -223,7 +240,7 @@ ga('send', 'pageview');
   <div class="post-header-cover
               text-left
               "
-       style="background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('/media/tools.jpg'); background-size: cover"
+       style="background-image:url('/media/tools.jpg')"
        data-behavior="5">
     
       <div class="post-header main-content-wrap text-left">
@@ -232,10 +249,11 @@ ga('send', 'pageview');
       Vue.js front end app, part 1: Setting up the app
     </h1>
   
-  <div class="postShorten-meta post-meta">
   
-    <time itemprop="datePublished" datetime="2017-09-07T17:00:00&#43;02:00">
-      
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2017-09-07T17:00:00&#43;02:00">
+        
   
   
   
@@ -243,11 +261,10 @@ ga('send', 'pageview');
     2017-09-07
   
 
-    </time>
-  
-  
-
-</div>
+      </time>
+    
+    
+  </div>
 
 </div>
     
@@ -264,15 +281,9 @@ ga('send', 'pageview');
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
               <p>Last time we’ve seen each other, we’ve just deployed our Rails 5.1 API app. Time to put an end to this! A <em>front</em> end, of course.</p>
-
-<p></p>
-
 <p><em>We&rsquo;ll be using a Rails API backend which we&rsquo;ve made in a previous series of posts, <a href="https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/">check it out</a>!</em></p>
-
 <p>In this part we&rsquo;ll go over the basics: how to get everything related to Vue.js installed, how to set up our app, and how the different bits and pieces fit together. This might seem like starting a step lower than my Rails series - and it is, since I&rsquo;ve done a lot with Rails previously but I&rsquo;m just starting with Vue. If you&rsquo;re already a pro, this part might be safe to skip, and if you&rsquo;re just starting like me - we&rsquo;ll do it together!</p>
-
 <p><em>In this series, the following articles have been posted:</em></p>
-
 <ul>
 <li><a href="https://paweljw.github.io/2017/09/vue.js-front-end-app-part-1-setting-up-the-app/">Part 1: Setting up the app</a></li>
 <li><a href="https://paweljw.github.io/2017/09/vue.js-front-end-app-part-2-design-is-not-hard/">Part 2: Design is (not) hard</a></li>
@@ -281,91 +292,59 @@ ga('send', 'pageview');
 <li><a href="https://paweljw.github.io/2018/01/vue.js-front-end-app-part-5-data-presentation/">Part 5: Data presentation</a></li>
 <li><a href="https://paweljw.github.io/2018/04/vue.js-front-end-app-part-6-deploying-to-s3/">Part 6: Deploying to S3</a></li>
 </ul>
-
 <h2 id="but-first-thanks">But first: thanks!</h2>
-
 <p>Many people have shown their support for this series by explaining some concepts to me, tweeting, opening issues and pull requests on GitHub - at this point the back end app really is <em>ours</em>, not just mine. Even more people have posted links to my articles all over the internet. While doing research for this new series, I’ve even stumbled upon a <a href="https://twitter.com/paweljwal/status/904819908848091137">Stack Overflow answer</a> linking back to my posts!</p>
-
 <p>In the past month since the first series ended, people have e-mailed me, tweeted at me, DMed me, posted comments on Disqus - basically contacted me in every way except slinging a letter-wrapped brick through my window - to ask when is the next part coming. I originally hoped to just keep on trucking right after the Rails series, but then offline life happened. Sorry.</p>
-
 <p>I’m amazed, overwhelmed and humbled by the response the Rails series got. From the bottom of my heart - thank you, everyone, for making all of this happen. You rock.</p>
-
 <p>Okay, okay. I’m done being emotional. Let’s get <del>dangerous</del> <em>technical</em>.</p>
-
-<h2 id="the-basics-node-js-npm-and-nvm">The basics: Node.js, NPM and NVM</h2>
-
+<h2 id="the-basics-nodejs-npm-and-nvm">The basics: Node.js, NPM and NVM</h2>
 <p>Especially for modern languages, I like to keep my runtime versions separated. In my Ruby work this is actually a necessity - I’m frequently dealing with a lot of different projects which run on different interpreter versions. In about 90% of those the Ruby version cannot be bumped simply, whether because I cannot make such a decision single-handedly, or because the project priorities currently do not include allocating engineering time required to roll out new environments with updated Ruby. This is why for years I’ve been using <a href="https://rvm.io">RVM</a>, though I’ve switched to <a href="https://github.com/rbenv/rbenv">rbenv</a> in the past year or so.</p>
-
 <p>Naturally, when going into a new (for me) language I tend to sniff around the community and ecosystem for similar tools. The tool that does this with Node.js is called, somewhat unimaginatively, Node.js Version Manager, or <a href="https://github.com/creationix/nvm">NVM</a> for short. This GitHub link has installation instructions.</p>
-
 <p>There’s a caveat: NVM does not currently support Windows. If developing on Windows is your thing, alternatives such as <a href="https://github.com/coreybutler/nvm-windows">nvm-windows</a> and <a href="https://github.com/marcelklehr/nodist">nodist</a> exist. Since I don’t do any development on Windows, aside from developing my hand-eye coordination, I don’t know how well they work or indeed whether they work at all. Sorry 😔</p>
-
 <p>After installing NVM, installing Node.js and NPM is as easy as:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ nvm install stable
 $ nvm use stable
 $ node -v
 v8.4.0
 $ npm -v
-<span style="color:#40a070">5</span>.4.1</code></pre></div>
-<h2 id="vue-js-cli">Vue.js CLI</h2>
-
+5.4.1
+</code></pre></div><h2 id="vuejs-cli">Vue.js CLI</h2>
 <p>We&rsquo;re going for the full Vue.js development experience. We&rsquo;re going to be using ES2015 (a.k.a. ES6) - there&rsquo;s no reason not to give ourselves all that <code>import</code> and <code>class</code> goodnes to play with.</p>
-
 <p>Then again, we&rsquo;ll want our code to run in browsers which do not support ES6 fully yet&hellip; and the sheer amount of <em>thinking</em> required to figure out <a href="https://kangax.github.io/compat-table/es6/">which browsers support which features of ES6</a> can make your head spin. I don&rsquo;t know about you, but I like my head non-spinny, so we definitely want <a href="http://babeljs.io">Babel</a> in the mix. If you don&rsquo;t know what Babel is - it&rsquo;s pretty complex, but the short-and-innacurate of it is it&rsquo;s a translator. It takes ES6 and converts it to older-style JavaScript thus magically (<a href="http://babeljs.io/docs/usage/caveats/">caveats</a> apply) making it work in older browsers.</p>
-
 <p>We&rsquo;ll also want one-command bundling of all those files that we&rsquo;ll make into one file that we can deploy, and tests, and&hellip; oh my, this is starting to look complicated, isn&rsquo;t it.</p>
-
 <p>Thankfully we don&rsquo;t need to bang out all that boilerplate code. There&rsquo;s a tool called <a href="https://github.com/vuejs/vue-cli">Vue.js CLI</a> that&rsquo;ll do most of that not-heavy-but-boring lifting for us.</p>
-
 <p>Since we already have Node.js and NPM installed, installing the CLI is as easy as:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ npm install --global vue-cli</code></pre></div>
-<p>The basic syntax for app initialization is <code>vue init [template-name] [app-name]</code>. There are several vue-provided templates, and you can check them all out at <a href="https://github.com/vuejs-templates">github.com/vuejs-templates</a>. The template that sets up all the goodies we&rsquo;ve talked about above is called <code>webpack</code>, so we can initialize our application like this:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ vue init webpack bookstore-frontend</code></pre></div>
-<p>The CLI asks us a couple of questions - what the app name should be (again), some description and who&rsquo;s the author. Then we get into some technical details.</p>
-
-<script type="text/javascript" src="https://asciinema.org/a/B1K9LL4MKw0Cfldf3UPi7J3Q7.js" id="asciicast-B1K9LL4MKw0Cfldf3UPi7J3Q7" async></script>
-
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ npm install --global vue-cli
+</code></pre></div><p>The basic syntax for app initialization is <code>vue init [template-name] [app-name]</code>. There are several vue-provided templates, and you can check them all out at <a href="https://github.com/vuejs-templates">github.com/vuejs-templates</a>. The template that sets up all the goodies we&rsquo;ve talked about above is called <code>webpack</code>, so we can initialize our application like this:</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ vue init webpack bookstore-frontend
+</code></pre></div><p>The CLI asks us a couple of questions - what the app name should be (again), some description and who&rsquo;s the author. Then we get into some technical details.</p>
+<!-- raw HTML omitted -->
 <ul>
 <li>Do we want vue-router? Yes we do, and we&rsquo;ll talk about the basics of it in a bit.</li>
 <li>Do we want ESLint? Also yes, this will keep us honest and our code great! I use <a href="https://standardjs.com">StandardJS</a> for all my JS work. The others IMHO are &ldquo;StandardJS, but we pulled out some parts and put in some new ones&rdquo; - if you&rsquo;re working alone, try and experiment a bit with different st</li>
 <li>Do we want to unit-test with Karma and Mocha? Of course we want to test!</li>
 <li>Do we want to test end-to-end with Nightwatch? You&rsquo;ll notice that I&rsquo;ve answered &ldquo;No&rdquo; here. I feel like end-to-end testing might be out of scope for this series, and if we want to revisit it in the future, we can easily add it ourselves later.</li>
 </ul>
-
 <p>The app is all generated now, so we can go ahead and install all the dependencies. Go get yourself something to drink - this&rsquo;ll take a <em>while</em> on a fresh Node.js install (depending largely on your network speed, hard drive throughput and, ocasionally, current moon phase).</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ <span style="color:#007020">cd</span> bookstore-frontend
-$ npm install</code></pre></div>
-<p>When that&rsquo;s done, we can run</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ npm run dev</code></pre></div>
-<p>to start the development server. On my machine, this also opens the default browser to port 8080 on localhost, where the dev server listens. If everything went well, you should be able to feast your eyes on this:</p>
-
-
-<figure>
-    <a href="https://paweljw.github.io/media/npm_run_dev.png">
-        <img src="https://paweljw.github.io/media/npm_run_dev.png" alt="Hold on, that&#39;s not a bookstore." />
-    </a>
-    
-    <figcaption>
-        <p>
-        Hold on, that&#39;s not a bookstore.
-        
-            
-        
-        </p> 
-    </figcaption>
-    
+$ npm install
+</code></pre></div><p>When that&rsquo;s done, we can run</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ npm run dev
+</code></pre></div><p>to start the development server. On my machine, this also opens the default browser to port 8080 on localhost, where the dev server listens. If everything went well, you should be able to feast your eyes on this:</p>
+<figure><a href="https://paweljw.github.io/media/npm_run_dev.png">
+    <img src="https://paweljw.github.io/media/npm_run_dev.png"
+         alt="Hold on, that&amp;rsquo;s not a bookstore."/> </a><figcaption>
+            <p>Hold on, that&rsquo;s not a bookstore.</p>
+        </figcaption>
 </figure>
 
-
-<h2 id="wait-so-what-s-showing-this">Wait, so what&rsquo;s showing this?</h2>
-
+<h2 id="wait-so-whats-showing-this">Wait, so what&rsquo;s showing this?</h2>
 <p>I thought you&rsquo;d never ask! Let&rsquo;s look at the directory structure Vue.js CLI generated for us.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ tree .</code></pre></div>
-<p>*Hits Ctrl+C after 30s of scrolling* okay, just <em>how many</em> lines are you trying to print here, <code>tree</code>?</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ tree .
+</code></pre></div><p>*Hits Ctrl+C after 30s of scrolling* okay, just <em>how many</em> lines are you trying to print here, <code>tree</code>?</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ tree . | wc -l
-   <span style="color:#40a070">21376</span></code></pre></div>
-<p><em>Ruh roh, Shaggy</em>. That&rsquo;s a <em>ton</em> of files. Did the CLI really generate all those?</p>
-
+   <span style="color:#40a070">21376</span>
+</code></pre></div><p><em>Ruh roh, Shaggy</em>. That&rsquo;s a <em>ton</em> of files. Did the CLI really generate all those?</p>
 <p>Not really. Much like Bundler works in vendor mode, <code>npm install</code> directed NPM to download and store local copies of all the necessary packages in the <code>node_modules</code> folder within our app&rsquo;s directory. Let&rsquo;s just direct <code>tree</code> to skip all that.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ tree . -I <span style="color:#4070a0">&#34;node_modules&#34;</span>
 .
@@ -406,8 +385,8 @@ $ npm install</code></pre></div>
         └── specs
             └── Hello.spec.js
 
-<span style="color:#40a070">10</span> directories, <span style="color:#40a070">26</span> files</code></pre></div>
-<p>Phew! That&rsquo;s much more manageable. But we can trim this down even further - the <code>build</code> and <code>config</code> directories are not of interest to us for now, we&rsquo;ll get to those a bit later. Let&rsquo;s drop those too.</p>
+<span style="color:#40a070">10</span> directories, <span style="color:#40a070">26</span> files
+</code></pre></div><p>Phew! That&rsquo;s much more manageable. But we can trim this down even further - the <code>build</code> and <code>config</code> directories are not of interest to us for now, we&rsquo;ll get to those a bit later. Let&rsquo;s drop those too.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ tree . -I <span style="color:#4070a0">&#34;node_modules|build|config&#34;</span>
 .
 ├── README.md
@@ -431,9 +410,8 @@ $ npm install</code></pre></div>
         └── specs
             └── Hello.spec.js
 
-<span style="color:#40a070">8</span> directories, <span style="color:#40a070">12</span> files</code></pre></div>
-<p>Okay, lovely! Let&rsquo;s see what we have here:</p>
-
+<span style="color:#40a070">8</span> directories, <span style="color:#40a070">12</span> files
+</code></pre></div><p>Okay, lovely! Let&rsquo;s see what we have here:</p>
 <ul>
 <li>A README.md - this baby is GitHub-ready.</li>
 <li>An index.html which is used as the &ldquo;HTML entry-point&rdquo; of our app. This is the basic HTML template that our app gets loaded into when it&rsquo;s built. If for some reason we decided to pull something from CDN, like Bootstrap, we could place the references in there.</li>
@@ -453,15 +431,11 @@ src
 └── router
     └── index.js
 
-<span style="color:#40a070">3</span> directories, <span style="color:#40a070">5</span> files</code></pre></div>
-<p><code>main.js</code> is the actual entry point for our Vue application. It imports <code>Vue</code>, <code>App</code> and the <code>router</code>, and mounts the Vue app to the HTML template in <code>index.html</code>.</p>
-
+<span style="color:#40a070">3</span> directories, <span style="color:#40a070">5</span> files
+</code></pre></div><p><code>main.js</code> is the actual entry point for our Vue application. It imports <code>Vue</code>, <code>App</code> and the <code>router</code>, and mounts the Vue app to the HTML template in <code>index.html</code>.</p>
 <p><code>App.vue</code> is what gets first loaded - it&rsquo;s our base <em>component</em>. We also have a child component in <code>Hello</code> (so that&rsquo;s what it was!).</p>
-
 <h3 id="what-are-components">What are components?</h3>
-
 <p><a href="https://vuejs.org/v2/guide/components.html">Components</a> are the building blocks of a Vue.js application. They are used similarly to HTML tags in Vue.js templates. Each component has its own template (made by mixing HTML and Vue.js markup), its code and it can have a style, which can be scoped so that it only affects the particular component.</p>
-
 <p>Since we&rsquo;re running the <code>webpack</code> scaffolding template, we&rsquo;re set up to use &ldquo;single-file templates&rdquo;. These take the three parts mentioned above - template, code and style - and jam them into a single file with a <code>.vue</code> extension. Let&rsquo;s take a peek at what our <code>App</code> component looks like.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#062873;font-weight:bold">template</span>&gt;
   &lt;<span style="color:#062873;font-weight:bold">div</span> <span style="color:#4070a0">id</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;app&#34;</span>&gt;
@@ -485,25 +459,18 @@ src
   <span style="color:#007020;font-weight:bold">color</span>: <span style="color:#40a070">#2c3e50</span>;
   <span style="color:#007020;font-weight:bold">margin-top</span>: <span style="color:#40a070">60</span><span style="color:#902000">px</span>;
 }
-&lt;/<span style="color:#062873;font-weight:bold">style</span>&gt;</code></pre></div>
-<p>The three parts are clearly separated: the <code>&lt;template&gt;</code> at the top delimits our template&rsquo;s code, the <code>&lt;script&gt;</code> contains the logic and <code>&lt;style&gt;</code> is just CSS. We should keep in mind that this component&rsquo;s style is not <code>scoped</code>, so it will affect everything that is nested within <code>App</code>.</p>
-
+&lt;/<span style="color:#062873;font-weight:bold">style</span>&gt;
+</code></pre></div><p>The three parts are clearly separated: the <code>&lt;template&gt;</code> at the top delimits our template&rsquo;s code, the <code>&lt;script&gt;</code> contains the logic and <code>&lt;style&gt;</code> is just CSS. We should keep in mind that this component&rsquo;s style is not <code>scoped</code>, so it will affect everything that is nested within <code>App</code>.</p>
 <p>In the script we can see that a component should export a default object. There&rsquo;s not much in there, just a name. This is the name that components can be referenced in templates; if we were to nest <code>App</code> somewhere, we could say <code>&lt;app&gt;&lt;/app&gt;</code> in our template and it&rsquo;d get embedded there. Since <code>App</code> is a top-level component, we don&rsquo;t want to do it, but the name is required nonetheless.</p>
-
 <p>Looking at the template we notice that it is not congruent with what we see in our browser. There&rsquo;s the logo, all right, but where&rsquo;s all the text below? The answer lies in the <code>&lt;router-view&gt;</code> tag below.</p>
-
 <p>It does not look like regular HTML, so it must be a component. Also we did not define a component by that name (and we don&rsquo;t see it anywhere in <code>src</code>). But we did use vue-router, so this is probably what provides this component.</p>
-
 <p>All that means that we need to dig into the router configuration now to unravel what is going on here.</p>
-
 <h3 id="vue-router">vue-router</h3>
-
 <p>Where is our router config? Let&rsquo;s look at the imports in main.js again:</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#60a0b0;font-style:italic">// ...
 </span><span style="color:#60a0b0;font-style:italic"></span><span style="color:#007020;font-weight:bold">import</span> router from <span style="color:#4070a0">&#39;./router&#39;</span>
 <span style="color:#60a0b0;font-style:italic">// ...
-</span><span style="color:#60a0b0;font-style:italic"></span></code></pre></div>
-<p>Since <code>./router.js</code> does not exist, it follows that <code>./router/index.js</code> is loaded here. Let&rsquo;s take a peek.</p>
+</span></code></pre></div><p>Since <code>./router.js</code> does not exist, it follows that <code>./router/index.js</code> is loaded here. Let&rsquo;s take a peek.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#007020;font-weight:bold">import</span> Vue from <span style="color:#4070a0">&#39;vue&#39;</span>
 <span style="color:#007020;font-weight:bold">import</span> Router from <span style="color:#4070a0">&#39;vue-router&#39;</span>
 <span style="color:#007020;font-weight:bold">import</span> Hello from <span style="color:#4070a0">&#39;@/components/Hello&#39;</span>
@@ -519,9 +486,7 @@ Vue.use(Router)
     }
   ]
 })
-</code></pre></div>
-<p>Even if we don&rsquo;t know how everything here works, we can infer enough. So far, the routes only say &ldquo;when path is /, load component Hello&rdquo;. The name is for named routes, which are easy to link to - think of it like of path helpers in Rails. We&rsquo;ll go over this in much more detail when laying out the routing structure for our app in a future episode.</p>
-
+</code></pre></div><p>Even if we don&rsquo;t know how everything here works, we can infer enough. So far, the routes only say &ldquo;when path is /, load component Hello&rdquo;. The name is for named routes, which are easy to link to - think of it like of path helpers in Rails. We&rsquo;ll go over this in much more detail when laying out the routing structure for our app in a future episode.</p>
 <p>Okay, &ldquo;load component Hello&rdquo;. What&rsquo;s in Hello?</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#062873;font-weight:bold">template</span>&gt;
   &lt;<span style="color:#062873;font-weight:bold">div</span> <span style="color:#4070a0">class</span><span style="color:#666">=</span><span style="color:#4070a0">&#34;hello&#34;</span>&gt;
@@ -575,13 +540,10 @@ Vue.use(Router)
 <span style="color:#062873;font-weight:bold">a</span> {
   <span style="color:#007020;font-weight:bold">color</span>: <span style="color:#40a070">#42b983</span>;
 }
-&lt;/<span style="color:#062873;font-weight:bold">style</span>&gt;</code></pre></div>
-<p>Jackpot. These are all the links we saw in the browser. But wait a minute - there&rsquo;s no logo here!</p>
-
+&lt;/<span style="color:#062873;font-weight:bold">style</span>&gt;
+</code></pre></div><p>Jackpot. These are all the links we saw in the browser. But wait a minute - there&rsquo;s no logo here!</p>
 <p>vue-router doesn&rsquo;t just load a component - it loads the component into the <code>&lt;router-view&gt;</code> placeholder in a top level component. Whatever we define in <code>App</code> will always wrap what is in the component that router loaded - think of it like the <code>application</code> layout in Rails, and <code>&lt;router-view&gt;</code> as akin to <code>yield</code> in that layout.</p>
-
 <p>What does this component do? Nothing much, apparently - it does have its own <code>scoped</code> style and a single piece of data - <code>msg</code> - being displayed in the header.</p>
-
 <p>If there&rsquo;s one nice feature about the development server that we&rsquo;re running, it&rsquo;s the live regeneration of the app views. If we change the <code>&lt;script&gt;</code> section of <code>Hello.vue</code> to say, e.g.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#007020;font-weight:bold">export</span> <span style="color:#007020;font-weight:bold">default</span> {
   name<span style="color:#666">:</span> <span style="color:#4070a0">&#39;hello&#39;</span>,
@@ -591,146 +553,103 @@ Vue.use(Router)
     }
   }
 }
-</code></pre></div>
-<p>the browser will show this <em>immediately after saving</em> the file - no reloads there:</p>
-
-
-<figure>
-    <a href="https://paweljw.github.io/media/hello.png">
-        <img src="https://paweljw.github.io/media/hello.png" alt="Hello!" />
-    </a>
-    
-    <figcaption>
-        <p>
-        Hello!
-        
-            
-        
-        </p> 
-    </figcaption>
-    
+</code></pre></div><p>the browser will show this <em>immediately after saving</em> the file - no reloads there:</p>
+<figure><a href="https://paweljw.github.io/media/hello.png">
+    <img src="https://paweljw.github.io/media/hello.png"
+         alt="Hello!"/> </a><figcaption>
+            <p>Hello!</p>
+        </figcaption>
 </figure>
 
-
-<h2 id="what-s-next">What&rsquo;s next?</h2>
-
+<h2 id="whats-next">What&rsquo;s next?</h2>
 <p>When we were designing our Rails API app, we took a little bit of time before typing a single line of code to <a href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-2-modeling-reality/">think about the reality we were trying to model</a> and how to express it in code. That&rsquo;s of course done now and we don&rsquo;t need to do this again for the front end, at least not to the same extent.</p>
-
 <p>Remember the key things we learned about Vue, though:</p>
-
 <ul>
 <li>Vue applications are (largely) composed of components.</li>
 <li>Components are reusable and nestable.</li>
 </ul>
-
 <p>Therefore it seems pretty obvious that we can have our components as fine-grained, or as broad, as we would like them to be. It&rsquo;ll be a fine balancing act to split them finely enough that they have a single responsibility each - identically to how we observe SRP in Ruby and other OOP. We&rsquo;ll also need to keep ourselves in check to not split too much, lest we end up in infinite component tree hell.</p>
-
 <p>Of course we could just go ahead guns blazing, but then we&rsquo;d just probably make a mess of things and simply cost ourselves more time than we saved on proper design. Therefore next time (in a week or two) we&rsquo;ll take a bit of a breather from the code itself and spend a little time designing our app.</p>
-
 <p>In order to avoid wasting time later we&rsquo;ll throw together a quick mock-up of the few screens we need and see how they can be cut neatly into components. We&rsquo;ll also talk about the process of mocking up itself as well, such as what tools you can use (and why you don&rsquo;t need any). Finally we will touch very lightly on some issues we can run into when dealing with UI and UX.</p>
-
 <p>As always, the code for this part is available on GitHub at <a href="https://github.com/paweljw/bookstore-frontend/releases/tag/part-1">paweljw/bookstore-frontend</a>.</p>
-
 <p>See you in <a href="https://paweljw.github.io/2017/09/vue.js-front-end-app-part-2-design-is-not-hard/">part 2</a>!</p>
-
-<hr />
-
+<hr>
 <p>Top image credit: Biser Todorov via <a href="https://commons.wikimedia.org/wiki/File:Rusty_tools.JPG">https://commons.wikimedia.org/wiki/File:Rusty_tools.JPG</a> (CC-BY 3.0)</p>
               
             </div>
           </div>
           <div id="post-footer" class="post-footer main-content-wrap">
-            <div id="i-like-beer" style="text-align: center; margin: 0 auto; display: block; color: #999; font-size: 90%">
-  <hr/>
-  <br/>
-  <p>Hey there! I hope you found the post above useful. If you feel it's worth it, and are capable of doing so, please consider <a href="https://paypal.me/paweljw">buying me a beer</a> through PayPal, or tweet <a href="https://twitter.com/paweljwal">@paweljwal</a> if you want to grab one offline when you're in Kraków, MA, Poland.</p>
-  <small>If you want to remove this text with your adblocker, the selector is <code>#i-like-beer</code>.</small>
-  <hr/>
-</div>
             
               
                 
                 
                   <div class="post-footer-tags">
-                    <span class="text-color-light text-small"></span><br/>
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/follow-me/">follow me</a>
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io/tags/follow-me/">follow me</a>
 
-  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/javascript/">javascript</a>
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io/tags/javascript/">javascript</a>
 
-  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/es6/">es6</a>
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io/tags/es6/">es6</a>
 
-  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/vue.js/">vue.js</a>
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io/tags/vue.js/">vue.js</a>
 
-  <a class="tag tag--primary tag--small" href="https://paweljw.github.io//tags/vue-frontend-series/">vue-frontend-series</a>
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io/tags/vue-frontend-series/">vue-frontend-series</a>
 
                   </div>
                 
               
             
             <div class="post-actions-wrap">
-  <nav>
-    <ul class="post-actions post-action-nav">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/09/saturday-project-temperature-and-humidity-meter-with-onion-omega2-/" data-tooltip="Saturday project: temperature and humidity meter with Onion Omega2&#43;">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-5-deploying-with-confidence/" data-tooltip="Rails 5.1 API app, part 5: Deploying with confidence">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
       
-        <li class="post-action">
-          
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/09/saturday-project-temperature-and-humidity-meter-with-onion-omega2-/" data-tooltip="Saturday project: temperature and humidity meter with Onion Omega2&#43;">
-          
-            <i class="fa fa-angle-left"></i>
-            <span class="hide-xs hide-sm text-small icon-ml"></span>
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
           </a>
         </li>
+        
+      
+      
         <li class="post-action">
-          
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-5-deploying-with-confidence/" data-tooltip="Rails 5.1 API app, part 5: Deploying with confidence">
-          
-            <span class="hide-xs hide-sm text-small icon-mr"></span>
-            <i class="fa fa-angle-right"></i>
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
           </a>
         </li>
       
-    </ul>
-  </nav>
-  <ul class="post-actions post-action-share">
-    
-      <li class="post-action hide-lg hide-md hide-sm">
-        <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
-          <i class="fa fa-share-alt"></i>
-        </a>
-      </li>
-      <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2017%2f09%2fvue.js-front-end-app-part-1-setting-up-the-app%2f">
-          <i class="fa fa-google-plus"></i>
-        </a>
-      </li>
-      <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2017%2f09%2fvue.js-front-end-app-part-1-setting-up-the-app%2f">
-          <i class="fa fa-facebook-official"></i>
-        </a>
-      </li>
-      <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2017%2f09%2fvue.js-front-end-app-part-1-setting-up-the-app%2f">
-          <i class="fa fa-twitter"></i>
-        </a>
-      </li>
-    
-    
       <li class="post-action">
-        <a class="post-action-btn btn btn--default" href="#disqus_thread">
-          <i class="fa fa-comment-o"></i>
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
         </a>
       </li>
-    
-    <li class="post-action">
-      
-        <a class="post-action-btn btn btn--default" href="#">
-      
-        <i class="fa fa-list"></i>
-      </a>
-    </li>
-  </ul>
+    </ul>
+  
 </div>
-
 
             
               
@@ -743,94 +662,68 @@ Vue.use(Router)
         </article>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
-    Created by <a href="https://github.com/paweljw">Paweł J. Wal</a> | <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
+    &copy; 2020 <a href="https://github.com/paweljw">Paweł J. Wal</a>. All Rights Reserved
   </span>
 </footer>
 
       </div>
       <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
         <div class="post-actions-wrap">
-  <nav>
-    <ul class="post-actions post-action-nav">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/09/saturday-project-temperature-and-humidity-meter-with-onion-omega2-/" data-tooltip="Saturday project: temperature and humidity meter with Onion Omega2&#43;">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-5-deploying-with-confidence/" data-tooltip="Rails 5.1 API app, part 5: Deploying with confidence">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
       
-        <li class="post-action">
-          
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/09/saturday-project-temperature-and-humidity-meter-with-onion-omega2-/" data-tooltip="Saturday project: temperature and humidity meter with Onion Omega2&#43;">
-          
-            <i class="fa fa-angle-left"></i>
-            <span class="hide-xs hide-sm text-small icon-ml"></span>
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
           </a>
         </li>
+        
+      
+      
         <li class="post-action">
-          
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-5-deploying-with-confidence/" data-tooltip="Rails 5.1 API app, part 5: Deploying with confidence">
-          
-            <span class="hide-xs hide-sm text-small icon-mr"></span>
-            <i class="fa fa-angle-right"></i>
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
           </a>
         </li>
       
-    </ul>
-  </nav>
-  <ul class="post-actions post-action-share">
-    
-      <li class="post-action hide-lg hide-md hide-sm">
-        <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
-          <i class="fa fa-share-alt"></i>
-        </a>
-      </li>
-      <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2017%2f09%2fvue.js-front-end-app-part-1-setting-up-the-app%2f">
-          <i class="fa fa-google-plus"></i>
-        </a>
-      </li>
-      <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2017%2f09%2fvue.js-front-end-app-part-1-setting-up-the-app%2f">
-          <i class="fa fa-facebook-official"></i>
-        </a>
-      </li>
-      <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2017%2f09%2fvue.js-front-end-app-part-1-setting-up-the-app%2f">
-          <i class="fa fa-twitter"></i>
-        </a>
-      </li>
-    
-    
       <li class="post-action">
-        <a class="post-action-btn btn btn--default" href="#disqus_thread">
-          <i class="fa fa-comment-o"></i>
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
         </a>
       </li>
-    
-    <li class="post-action">
-      
-        <a class="post-action-btn btn btn--default" href="#">
-      
-        <i class="fa fa-list"></i>
-      </a>
-    </li>
-  </ul>
+    </ul>
+  
 </div>
-
 
       </div>
       <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
   <ul class="share-options">
-    <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fpaweljw.github.io%2f2017%2f09%2fvue.js-front-end-app-part-1-setting-up-the-app%2f">
-        <i class="fa fa-google-plus"></i><span></span>
-      </a>
-    </li>
-    <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fpaweljw.github.io%2f2017%2f09%2fvue.js-front-end-app-part-1-setting-up-the-app%2f">
-        <i class="fa fa-facebook-official"></i><span></span>
-      </a>
-    </li>
-    <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fpaweljw.github.io%2f2017%2f09%2fvue.js-front-end-app-part-1-setting-up-the-app%2f">
-        <i class="fa fa-twitter"></i><span></span>
-      </a>
-    </li>
+    
   </ul>
 </div>
 <div id="share-options-mask" class="share-options-mask"></div>
@@ -842,7 +735,7 @@ Vue.use(Router)
       <i class="fa fa-remove"></i>
     </div>
     
-      <img id="about-card-picture" src="//www.gravatar.com/avatar/5a78de40753ba5abf8fcf3a46c748d53?s=110" alt="" />
+      <img id="about-card-picture" src="https://www.gravatar.com/avatar/5a78de40753ba5abf8fcf3a46c748d53?s=110" alt="Author&#39;s picture" />
     
     <h4 id="about-card-name">Paweł J. Wal</h4>
     
@@ -865,261 +758,40 @@ Vue.use(Router)
   </div>
 </div>
 
-    <div id="algolia-search-modal" class="modal-container">
-  <div class="modal">
-    <div class="modal-header">
-      <span class="close-button"><i class="fa fa-close"></i></span>
-      <a href="https://algolia.com" target="_blank" class="searchby-algolia text-color-light link-unstyled">
-        <span class="searchby-algolia-text text-color-light text-small">by</span>
-        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
-      </a>
-      <i class="search-icon fa fa-search"></i>
-      <form id="algolia-search-form">
-        <input type="text" id="algolia-search-input" name="search"
-          class="form-control input--large search-input" placeholder="" />
-      </form>
-    </div>
-    <div class="modal-body">
-      <div class="no-result text-color-light text-center"></div>
-      <div class="results">
-        
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://paweljw.github.io/2018/05/ruby-vs-elixir-an-api-battle-royale/">
-                <h3 class="media-heading">Ruby vs Elixir: an API battle royale</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  May 5, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p><em>&ldquo;Ruby&rsquo;s dying, man&rdquo;</em>, they keep telling me. <em>&ldquo;Besides, it&rsquo;s OOP, and that&rsquo;s so 2013, functional programming is all the rage now. Oh, and there&rsquo;s this new kid on the blog, it&rsquo;s called Elixir. It&rsquo;s functional programming for the avid Rubyist!&rdquo;</em></p>
+    
 
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://paweljw.github.io/2018/04/vue.js-front-end-app-part-6-deploying-to-s3/">
-                <h3 class="media-heading">Vue.js front end app, part 6: Deploying to S3</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Apr 4, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>In this final episode of the series, we&rsquo;ll take a look at deploying our Single Page Application to Amazon Web Services Simple Storage Service (or S3).</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://paweljw.github.io/2018/01/vue.js-front-end-app-part-5-data-presentation/">
-                <h3 class="media-heading">Vue.js front end app, part 5: Data presentation</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jan 1, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>New year, new <del>you</del> blog post! In this long overdue part we&rsquo;ll strengthen our command of loading data from the server and take a look at presenting it.</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://paweljw.github.io/2017/10/vue.js-front-end-app-part-4-keeping-state-with-vuex/">
-                <h3 class="media-heading">Vue.js front end app, part 4: Keeping state with Vuex</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Oct 10, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>Last time we built an <a href="https://paweljw.github.io/2017/09/vue.js-front-end-app-part-3-authentication/">authentication mechanism</a> with a pretty glaring bug - you can just set the <code>token</code> in <code>localStorage</code> to whatever and it&rsquo;ll let you in. We need to actually read the token, and persist what we&rsquo;ve read so we don&rsquo;t have to do it over and over.</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://paweljw.github.io/2017/09/vue.js-front-end-app-part-3-authentication/">
-                <h3 class="media-heading">Vue.js front end app, part 3: Authentication</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Sep 9, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>In this part we&rsquo;ll allow the user to log in to our frontend app, using the <a href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-4-authentication-and-authorization/">auth mechanism</a> we&rsquo;ve built on the back end earlier. A lot of topics in this one, so jump right in!</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://paweljw.github.io/2017/09/vue.js-front-end-app-part-2-design-is-not-hard/">
-                <h3 class="media-heading">Vue.js front end app, part 2: Design is (not) hard</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Sep 9, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>Now that we have our environment running, the app is initialized, and we know a little bit about what&rsquo;s going on in there, it&rsquo;s time to take a little bit of time to design our front end.</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://paweljw.github.io/2017/09/saturday-project-temperature-and-humidity-meter-with-onion-omega2-/">
-                <h3 class="media-heading">Saturday project: temperature and humidity meter with Onion Omega2&#43;</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Sep 9, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>Quick thing I threw together in about an hour: an IoT temperature and humidity meter!</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://paweljw.github.io/2017/09/vue.js-front-end-app-part-1-setting-up-the-app/">
-                <h3 class="media-heading">Vue.js front end app, part 1: Setting up the app</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Sep 9, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>Last time we’ve seen each other, we’ve just deployed our Rails 5.1 API app. Time to put an end to this! A <em>front</em> end, of course.</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-5-deploying-with-confidence/">
-                <h3 class="media-heading">Rails 5.1 API app, part 5: Deploying with confidence</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jul 7, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>In this final part of our Rails API app series we&rsquo;ll talk about specs, code coverage, continuous integration and deployment - and how to be certain your application is working.</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://paweljw.github.io/2017/07/rails-5.1-api-app-part-4-authentication-and-authorization/">
-                <h3 class="media-heading">Rails 5.1 API app, part 4: Authentication and authorization</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jul 7, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>Time to deal with authenticating users in our bookstore application.</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-      </div>
-    </div>
-    <div class="modal-footer">
-      <p class="results-count text-medium"
-         data-message-zero=""
-         data-message-one=""
-         data-message-other="">
-         21 posts found
-      </p>
-    </div>
-  </div>
-</div>
     
   
     
-    <div id="cover" style="background-image:url('https://paweljw.github.io/images/cover2.jpeg');"></div>
+      <div id="cover" style="background-image:url('https://paweljw.github.io/images/cover2.jpeg');"></div>
+    
   
 
 
     
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
 
 
-<script src="https://paweljw.github.io/js/script-wl33z0n6ocaypepiqrazthtivfrliqijej4rq8ek8gvrv1awftmgjuv8k4zc.min.js"></script>
+<script src="https://paweljw.github.io/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
 
-<script>
-$(document).ready(function() {
-  hljs.configure({ classPrefix: '', useBR: false });
-  $('pre.code-highlight').each(function(i, block) {
-    var code = "";
-    hljs.highlightAuto(block.innerText).value.split(/\r\n|\r|\n/).forEach(function(line) {
-      code += "<span class=\"line\">" + line + "</span><br>";
-    });
-    if (code.length > 0) {
-      block.innerHTML = code;  
-    }
-  });
-  $('pre > code').each(function(i, block) {
-    $(this).addClass('codeblock');
-    hljs.highlightBlock(block);
-  });
-});
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
 </script>
+
 
   
     
@@ -1146,7 +818,6 @@ $(document).ready(function() {
       </script>
     
   
-
 
 
 
