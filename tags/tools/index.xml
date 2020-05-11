@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tools on Shenanigans! - a blog on programming, technology and science</title>
+    <link>https://paweljw.github.io/tags/tools/</link>
+    <description>Recent content in tools on Shenanigans! - a blog on programming, technology and science</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
+    <lastBuildDate>Mon, 11 May 2020 00:00:00 +0200</lastBuildDate>
+    
+	<atom:link href="https://paweljw.github.io/tags/tools/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Things I use: tmux</title>
+      <link>https://paweljw.github.io/2020/05/things-i-use-tmux/</link>
+      <pubDate>Mon, 11 May 2020 00:00:00 +0200</pubDate>
+      
+      <guid>https://paweljw.github.io/2020/05/things-i-use-tmux/</guid>
+      <description>&lt;p&gt;&lt;code&gt;tmux&lt;/code&gt; is an absolutely fantastic piece of software, and one I use daily - even to write this blog! So, here&amp;rsquo;s my short letter of appreciation to &lt;code&gt;tmux&lt;/code&gt;.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

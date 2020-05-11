@@ -3,12 +3,42 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://paweljw.github.io/tags/elixir/</loc>
-    <lastmod>2018-05-11T22:00:00+02:00</lastmod>
+    <loc>https://paweljw.github.io/tags/i-use-this/</loc>
+    <lastmod>2020-05-11T00:00:00+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://paweljw.github.io/post/</loc>
+    <lastmod>2020-05-11T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://paweljw.github.io/</loc>
+    <lastmod>2020-05-11T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://paweljw.github.io/tags/</loc>
+    <lastmod>2020-05-11T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://paweljw.github.io/2020/05/things-i-use-tmux/</loc>
+    <lastmod>2020-05-11T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://paweljw.github.io/tags/tmux/</loc>
+    <lastmod>2020-05-11T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://paweljw.github.io/tags/tools/</loc>
+    <lastmod>2020-05-11T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://paweljw.github.io/tags/elixir/</loc>
     <lastmod>2018-05-11T22:00:00+02:00</lastmod>
   </url>
   
@@ -19,16 +49,6 @@
   
   <url>
     <loc>https://paweljw.github.io/2018/05/ruby-vs-elixir-an-api-battle-royale/</loc>
-    <lastmod>2018-05-11T22:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://paweljw.github.io/</loc>
-    <lastmod>2018-05-11T22:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://paweljw.github.io/tags/</loc>
     <lastmod>2018-05-11T22:00:00+02:00</lastmod>
   </url>
   
