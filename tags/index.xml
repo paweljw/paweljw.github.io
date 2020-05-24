@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Mon, 11 May 2020 00:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Sun, 24 May 2020 00:00:00 +0200</lastBuildDate>
     
 	<atom:link href="https://paweljw.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,9 +15,27 @@
     <item>
       <title>i-use-this</title>
       <link>https://paweljw.github.io/tags/i-use-this/</link>
-      <pubDate>Mon, 11 May 2020 00:00:00 +0200</pubDate>
+      <pubDate>Sun, 24 May 2020 00:00:00 +0200</pubDate>
       
       <guid>https://paweljw.github.io/tags/i-use-this/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tools</title>
+      <link>https://paweljw.github.io/tags/tools/</link>
+      <pubDate>Sun, 24 May 2020 00:00:00 +0200</pubDate>
+      
+      <guid>https://paweljw.github.io/tags/tools/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tridactyl</title>
+      <link>https://paweljw.github.io/tags/tridactyl/</link>
+      <pubDate>Sun, 24 May 2020 00:00:00 +0200</pubDate>
+      
+      <guid>https://paweljw.github.io/tags/tridactyl/</guid>
       <description></description>
     </item>
     
@@ -27,15 +45,6 @@
       <pubDate>Mon, 11 May 2020 00:00:00 +0200</pubDate>
       
       <guid>https://paweljw.github.io/tags/tmux/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>tools</title>
-      <link>https://paweljw.github.io/tags/tools/</link>
-      <pubDate>Mon, 11 May 2020 00:00:00 +0200</pubDate>
-      
-      <guid>https://paweljw.github.io/tags/tools/</guid>
       <description></description>
     </item>
     

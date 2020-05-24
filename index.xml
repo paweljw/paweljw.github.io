@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Mon, 11 May 2020 00:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Sun, 24 May 2020 00:00:00 +0200</lastBuildDate>
     
 	<atom:link href="https://paweljw.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Things I use: Tridactyl</title>
+      <link>https://paweljw.github.io/2020/05/things-i-use-tridactyl/</link>
+      <pubDate>Sun, 24 May 2020 00:00:00 +0200</pubDate>
+      
+      <guid>https://paweljw.github.io/2020/05/things-i-use-tridactyl/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;m on a quest of sorts, a quest for max home row time for my fingers. I&amp;rsquo;m using various tricks to make my computer easier to operate without ever touching a mouse. Enter &lt;a href=&#34;https://github.com/tridactyl/tridactyl&#34;&gt;Tridactyl&lt;/a&gt;, vim-like navigation for your Firefox.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Things I use: tmux</title>
