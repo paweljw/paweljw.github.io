@@ -1,16 +1,34 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on Shenanigans! - a blog on programming, technology and science</title>
+    <title>Tags on Shenanigans!</title>
     <link>https://paweljw.github.io/tags/</link>
-    <description>Recent content in Tags on Shenanigans! - a blog on programming, technology and science</description>
+    <description>Recent content in Tags on Shenanigans!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Sun, 24 May 2020 00:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Sat, 30 May 2020 00:00:00 +0200</lastBuildDate>
     
 	<atom:link href="https://paweljw.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>home-server</title>
+      <link>https://paweljw.github.io/tags/home-server/</link>
+      <pubDate>Sat, 30 May 2020 00:00:00 +0200</pubDate>
+      
+      <guid>https://paweljw.github.io/tags/home-server/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ubuntu</title>
+      <link>https://paweljw.github.io/tags/ubuntu/</link>
+      <pubDate>Sat, 30 May 2020 00:00:00 +0200</pubDate>
+      
+      <guid>https://paweljw.github.io/tags/ubuntu/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>i-use-this</title>

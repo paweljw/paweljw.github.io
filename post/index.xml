@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Shenanigans! - a blog on programming, technology and science</title>
+    <title>Posts on Shenanigans!</title>
     <link>https://paweljw.github.io/post/</link>
-    <description>Recent content in Posts on Shenanigans! - a blog on programming, technology and science</description>
+    <description>Recent content in Posts on Shenanigans!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Sun, 24 May 2020 00:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Sat, 30 May 2020 00:00:00 +0200</lastBuildDate>
     
 	<atom:link href="https://paweljw.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Homeserver Upgrade, Part 0: The Plan</title>
+      <link>https://paweljw.github.io/2020/05/homeserver-upgrade-part-0-the-plan/</link>
+      <pubDate>Sat, 30 May 2020 00:00:00 +0200</pubDate>
+      
+      <guid>https://paweljw.github.io/2020/05/homeserver-upgrade-part-0-the-plan/</guid>
+      <description>&lt;p&gt;Around September last year the fourth memory card in a row failed in the Raspberry Pi 3 that powered my home setup. I canvassed the house for parts, threw together a Frankenstein-style monstrosity, built what became &lt;a href=&#34;https://github.com/paweljw/jarvis&#34;&gt;Jarvis&lt;/a&gt; on it and called it a day. Since then the use case expanded - so it&amp;rsquo;s time for an upgrade.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Things I use: Tridactyl</title>

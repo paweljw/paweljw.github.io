@@ -1,7 +1,7 @@
 baseURL = "https://paweljw.github.io/"
 languageCode = "en-us"
 defaultContentLanguage = "en-us"
-title = "Shenanigans! - a blog on programming, technology and science"
+title = "Shenanigans!"
 theme = "hugo-tranquilpeak-theme"
 publishDir = "../"
 disqusShortname = "paweljw-github-io"
