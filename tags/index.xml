@@ -7,10 +7,28 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Sat, 30 May 2020 00:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Fri, 23 Oct 2020 00:00:00 +0200</lastBuildDate>
     
 	<atom:link href="https://paweljw.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>electronics</title>
+      <link>https://paweljw.github.io/tags/electronics/</link>
+      <pubDate>Fri, 23 Oct 2020 00:00:00 +0200</pubDate>
+      
+      <guid>https://paweljw.github.io/tags/electronics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pomidor</title>
+      <link>https://paweljw.github.io/tags/pomidor/</link>
+      <pubDate>Fri, 23 Oct 2020 00:00:00 +0200</pubDate>
+      
+      <guid>https://paweljw.github.io/tags/pomidor/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>home-server</title>
@@ -189,15 +207,6 @@
       <pubDate>Sat, 23 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>https://paweljw.github.io/tags/design/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>electronics</title>
-      <link>https://paweljw.github.io/tags/electronics/</link>
-      <pubDate>Sun, 17 Sep 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://paweljw.github.io/tags/electronics/</guid>
       <description></description>
     </item>
     

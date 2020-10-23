@@ -3,27 +3,42 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://paweljw.github.io/tags/electronics/</loc>
+    <lastmod>2020-10-23T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://paweljw.github.io/2020/10/making-pomidor-a-pomodoro-timer/</loc>
+    <lastmod>2020-10-23T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://paweljw.github.io/tags/pomidor/</loc>
+    <lastmod>2020-10-23T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://paweljw.github.io/post/</loc>
+    <lastmod>2020-10-23T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://paweljw.github.io/</loc>
+    <lastmod>2020-10-23T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://paweljw.github.io/tags/</loc>
+    <lastmod>2020-10-23T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://paweljw.github.io/tags/home-server/</loc>
     <lastmod>2020-05-30T00:00:00+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://paweljw.github.io/2020/05/homeserver-upgrade-part-0-the-plan/</loc>
-    <lastmod>2020-05-30T00:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://paweljw.github.io/post/</loc>
-    <lastmod>2020-05-30T00:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://paweljw.github.io/</loc>
-    <lastmod>2020-05-30T00:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://paweljw.github.io/tags/</loc>
     <lastmod>2020-05-30T00:00:00+02:00</lastmod>
   </url>
   
@@ -160,11 +175,6 @@
   <url>
     <loc>https://paweljw.github.io/2017/09/vue.js-front-end-app-part-2-design-is-not-hard/</loc>
     <lastmod>2017-09-23T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://paweljw.github.io/tags/electronics/</loc>
-    <lastmod>2017-09-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
