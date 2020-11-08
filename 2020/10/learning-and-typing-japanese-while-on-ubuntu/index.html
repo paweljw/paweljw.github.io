@@ -8,18 +8,22 @@
 <meta name="generator" content="Hugo 0.68.3 with theme Tranquilpeak 0.4.7-BETA">
 <meta name="author" content="Paweł J. Wal">
 <meta name="keywords" content=", development, ruby, ruby on rails, es6, javascript, electronics, arduino, science">
-<meta name="description" content="I made an electronic Pomodoro timer from scratch. Read on for a story on software, PCB design, production and assembly, with a sprinkling of inevitable catastrophe.">
+<meta name="description" content="I&rsquo;m a native speaker of Polish. But I&rsquo;m also a developer, so most of my computers are set to English language (for ease of searching the Web when something breaks) with Polish formats and keyboard layouts (so my dates are 08/11, my hours are 13:05 and I can type zażółć gęślą jaźń whenever I want to).
+I added a third language to the mix, and things got&hellip; weird.">
 
 
-<meta property="og:description" content="I made an electronic Pomodoro timer from scratch. Read on for a story on software, PCB design, production and assembly, with a sprinkling of inevitable catastrophe.">
+<meta property="og:description" content="I&rsquo;m a native speaker of Polish. But I&rsquo;m also a developer, so most of my computers are set to English language (for ease of searching the Web when something breaks) with Polish formats and keyboard layouts (so my dates are 08/11, my hours are 13:05 and I can type zażółć gęślą jaźń whenever I want to).
+I added a third language to the mix, and things got&hellip; weird.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Making Pomidor, a Pomodoro timer">
-<meta name="twitter:title" content="Making Pomidor, a Pomodoro timer">
-<meta property="og:url" content="https://paweljw.github.io/2020/10/making-pomidor-a-pomodoro-timer/">
-<meta property="twitter:url" content="https://paweljw.github.io/2020/10/making-pomidor-a-pomodoro-timer/">
+<meta property="og:title" content="Learning (and Typing) Japanese While on Ubuntu">
+<meta name="twitter:title" content="Learning (and Typing) Japanese While on Ubuntu">
+<meta property="og:url" content="https://paweljw.github.io/2020/10/learning-and-typing-japanese-while-on-ubuntu/">
+<meta property="twitter:url" content="https://paweljw.github.io/2020/10/learning-and-typing-japanese-while-on-ubuntu/">
 <meta property="og:site_name" content="Shenanigans!">
-<meta property="og:description" content="I made an electronic Pomodoro timer from scratch. Read on for a story on software, PCB design, production and assembly, with a sprinkling of inevitable catastrophe.">
-<meta name="twitter:description" content="I made an electronic Pomodoro timer from scratch. Read on for a story on software, PCB design, production and assembly, with a sprinkling of inevitable catastrophe.">
+<meta property="og:description" content="I&rsquo;m a native speaker of Polish. But I&rsquo;m also a developer, so most of my computers are set to English language (for ease of searching the Web when something breaks) with Polish formats and keyboard layouts (so my dates are 08/11, my hours are 13:05 and I can type zażółć gęślą jaźń whenever I want to).
+I added a third language to the mix, and things got&hellip; weird.">
+<meta name="twitter:description" content="I&rsquo;m a native speaker of Polish. But I&rsquo;m also a developer, so most of my computers are set to English language (for ease of searching the Web when something breaks) with Polish formats and keyboard layouts (so my dates are 08/11, my hours are 13:05 and I can type zażółć gęślą jaźń whenever I want to).
+I added a third language to the mix, and things got&hellip; weird.">
 <meta property="og:locale" content="en-us">
 
   
@@ -32,9 +36,9 @@
   
   
     
-      <meta property="article:tag" content="electronics">
+      <meta property="article:tag" content="linux">
     
-      <meta property="article:tag" content="pomidor">
+      <meta property="article:tag" content="locale">
     
   
 
@@ -52,8 +56,8 @@
 
 
 
-  <meta property="og:image" content="https://paweljw.github.io/media/pomidor/boards.jpg">
-  <meta property="twitter:image" content="https://paweljw.github.io/media/pomidor/boards.jpg">
+  <meta property="og:image" content="https://paweljw.github.io/media/locales.jpg">
+  <meta property="twitter:image" content="https://paweljw.github.io/media/locales.jpg">
 
 
 
@@ -62,14 +66,14 @@
   <meta property="twitter:image" content="https://www.gravatar.com/avatar/5a78de40753ba5abf8fcf3a46c748d53?s=640">
 
 
-    <title>Making Pomidor, a Pomodoro timer</title>
+    <title>Learning (and Typing) Japanese While on Ubuntu</title>
 
     <link rel="icon" href="https://paweljw.github.io/favicon.png">
     
 
     
 
-    <link rel="canonical" href="https://paweljw.github.io/2020/10/making-pomidor-a-pomodoro-timer/">
+    <link rel="canonical" href="https://paweljw.github.io/2020/10/learning-and-typing-japanese-while-on-ubuntu/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -234,13 +238,13 @@ if (!doNotTrack) {
   <div class="post-header-cover
               text-left
               "
-       style="background-image:url('/media/pomidor/boards.jpg')"
+       style="background-image:url('/media/locales.jpg')"
        data-behavior="5">
     
       <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      Making Pomidor, a Pomodoro timer
+      Learning (and Typing) Japanese While on Ubuntu
     </h1>
   
   
@@ -274,54 +278,49 @@ if (!doNotTrack) {
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>I made an electronic Pomodoro timer from scratch. Read on for a story on software, PCB design, production and assembly, with a sprinkling of inevitable catastrophe.</p>
-<p>Working from home is easy for some, harder for others. I&rsquo;m&hellip; <em>undecided</em> as to where I place on this spectrum. Some days WFH is a blessing, I&rsquo;m insanely productive and very comfortable. Other days I can&rsquo;t focus for beans.</p>
-<p>While researching various focusing techniques I was reminded of <a href="https://en.wikipedia.org/wiki/Pomodoro_Technique">Pomodoro</a>. I last tried it as a study aid, as it was intended, at university. It didn&rsquo;t really work too well for me back then, so I dropped it and never came back to it.</p>
-<p>I quickly installed a browser extension and got cracking. And <em>it worked</em>. The cycle of focus-pause-focus worked really well for me this time around. It also forced me to make good plans of attack for everything I did, split it up into blocks of ~30min. It also felt better than just having a timer count up. When I look at a timer and it says 2 hours and progress has been slow, I feel guilty. Pomodoro timer is always counting <em>down</em> towards a reward: a break, a cup of tea, a snack, a longing look outside.</p>
-<p>Also forced longer breaks every so often helped my back pain, by pure virtue of reminding me that I <em>need to take breaks and stretch every once in a while</em>.</p>
-<p>So, I installed an extension, it works, I&rsquo;m happy, blogpost over. Right? Well, no, obviously wrong, come on.</p>
-<h2 id="prototyping-pomidor">Prototyping Pomidor</h2>
-<p>I decided to build a physical object for Pomodoro tracking. Something I could interact with and somewhat more importantly, that didn&rsquo;t have to live in my browser. I&rsquo;m doing more pure backend development than web development recently, so it&rsquo;d be nice to reclaim Chrome&rsquo;s pile of RAM every now and again.</p>
-<p>I had a vague concept of a box - kind of like a smaller alarm clock - with a single button up top and an LCD in the front. The idea was that a press on the button will start/pause/continue the Pomodoro or break period. I also decided on turning off the display after a few seconds from the last interaction so it does not draw my attention (ooh, shiny).</p>
-<p>Also around this point, I decided on a name: &ldquo;pomidor&rdquo; means &ldquo;tomato&rdquo; in Polish, exactly like &ldquo;pomodoro&rdquo; in Italian.</p>
-<p>This is what an evening of prototyping got me:</p>
-<figure><a href="https://paweljw.github.io/media/pomidor/mess.jpg">
-    <img src="https://paweljw.github.io/media/pomidor/mess.jpg"/> </a>
+              <p>I&rsquo;m a native speaker of Polish. But I&rsquo;m also a developer, so most of my computers are set to English language (for ease of searching the Web when something breaks) with Polish formats and keyboard layouts (so my dates are 08/11, my hours are 13:05 and I can type <em>zażółć gęślą jaźń</em> whenever I want to).</p>
+<p>I added a third language to the mix, and things got&hellip; weird.</p>
+<h2 id="im-turning-japanesehttpswwwyoutubecomwatchviwwwm2wwmww"><a href="https://www.youtube.com/watch?v=IWWwM2wwMww">I&rsquo;m turning Japanese</a></h2>
+<p>This all started with me deciding on a fun goal for myself, at least for the next little while: instead of learning yet another new programming language, why not an <em>actual</em> language? I already do well with English and I can hold my own in Spanish (though perhaps not a deep conversation). But with these I&rsquo;ve had a series of unfair advantages:</p>
+<ul>
+<li>My parents had the foresight (and means) to get me tutored in English from age 6,</li>
+<li>I was born after the democratic transformation in Poland, so I was free to immerse myself in Western (English-language) culture,</li>
+<li>I had free access to the internet through a PC of my own from about age 8,</li>
+<li>I took Spanish in school so I was forced to learn enough to pass my classes, and</li>
+<li>Spanish is <a href="https://blog.busuu.com/easiest-language-to-learn/">dead easy to learn</a> anyway.</li>
+</ul>
+<p>How about something actually challenging? Like something from the list of <a href="https://unbabel.com/blog/japanese-finnish-or-chinese-the-10-hardest-languages-for-english-speakers-to-learn/">hardest languages to learn</a> for a change? I could of course go straight for Mandarin Chinese, but I did want some return on the time and effort. And I have very little motivation to learn Chinese: I&rsquo;m not that interested in Chinese culture (nothing against it, just not my cup of tea), and most things I would use Chinese for - which is shopping - are all localized by now.</p>
+<p>On the other hand, I&rsquo;m deeply interested in Japanese culture. And while the more mainstream examples of media from over there are available translated - either oficially or by fans - some of the more niche content isn&rsquo;t. And when I&rsquo;m talking about media, I mean manga and anime. I&rsquo;m a nerd, I&rsquo;m fully aware, put down the pitchforks.</p>
+<p>So&hellip; Japanese it is.</p>
+<h2 id="ha-ha-i-cant-draw">Ha ha, I can&rsquo;t draw</h2>
+<p>A big part of learning a language is - at least for me - being able to look up words that I come upon in things I learn from. I also want to not only read, but also write Japanese - most of it by hand for now, so I can get it into my muscles, but at least some input has to be on a computer.</p>
+<p>I briefly experimented with <a href="https://fishsoup.net/software/kanjipad/">KanjiPad</a>. It&rsquo;s supposed to work like this: you draw your best approximation of a character in a box, and it uses handwriting recognition and a few more tricks to give you the actual character for it. There are at least two big problems with this:</p>
+<ul>
+<li>in my experience, it does much better for kanji (the Chinese characters used to represent meaning) than for kana (the two phonetic syllabaries), and</li>
+<li>I can&rsquo;t draw with my mouse for <em>beans</em>.</li>
+</ul>
+<p>Not to mention this does nothing for my muscle memory <em>anyway</em>: I won&rsquo;t learn the proper stroke order, sizing, spacing etc by scribbling lines with my mouse.</p>
+<p>Then I started wondering how do actual Japanese people deal with this? Do Japanese keyboards exist?</p>
+<figure><a href="https://paweljw.github.io/media/japanese-keyboard.jpg">
+    <img src="https://paweljw.github.io/media/japanese-keyboard.jpg"/> </a>
 </figure>
 
-<p>And it works&hellip; surprisingly well. There are quite a few kinks in the software, especially around debouncing the button, but it does what it&rsquo;s supposed to do: Pomodoros like crazy.</p>
-<p>The software lives over here: <a href="https://github.com/paweljw/pomidor">paweljw/pomidor</a>. You may note that it&rsquo;s an Arduino sketch (.ino), but an Arduino seems conspicuously absent from the photo. Well&hellip; a real Arduino certainly is, but that ATmega328P chip can be loaded with an Arduino bootloader. It&rsquo;s not optimal, but I didn&rsquo;t feel like messing with avr-gcc and wanted to leverage niceties like a pre-built library for LCD manipulation. Some constraints to keep in mind if you wanted to replicate it: the bootloader is large, Arduino sketches compile to rather large hexes, and you need an ISP to load anything onto an ATmega this way.</p>
-<h2 id="making-it-permanent">Making it permanent</h2>
-<p>Having something working, I decided to get a PCB made for it. I designed the circuit over at <a href="https://easyeda.com">EasyEDA</a>. It&rsquo;s more or less intuitive to use, but I&rsquo;d save myself a ton of hassle if I read their tutorials first. <code>RTFM</code> is forever it seems.</p>
-<figure><a href="https://paweljw.github.io/media/pomidor/schematic.png">
-    <img src="https://paweljw.github.io/media/pomidor/schematic.png"/> </a>
+<p>Oh. Yeah, I suppose this makes sense. But this is still not great - for one, the placement of characters on this layout has about as much sense as QWERTY: I suppose they&rsquo;re placed by their commonness, but they are completely unrelated to the Roman characters on the same keys. Effectively this would just mean learning a third mapping between sounds and characters. Not fun, not great.</p>
+<h2 id="anthy-all-in-one-package">Anthy: all-in-one package</h2>
+<p>Then I found out about <a href="https://en.wikipedia.org/wiki/Anthy">Anthy</a>. I&rsquo;d love to actually credit the source - I&rsquo;ve got a funny feeling it was a random find on one of the Stack Exchange sites - but I can&rsquo;t remember not find it again.</p>
+<p>Anyway, Anthy does something magic. It lets me type in the sounds I hear the syllables in the word make as Roman characters, and converts them to either hiragana or katakana, depending on the setting. It also registers a few keyboard shortcuts, so I can have Roman characters converted to hiragana, katakana, or not converted at all.</p>
+<p>For example: in &ldquo;Roman mode&rdquo;, it just comes out &ldquo;osake&rdquo;. In hiragana mode, it comes out おさけ。In &ldquo;Roman mode&rdquo;, it comes out &ldquo;chari&rdquo;. In katakana mode, it comes out チャリ. <em>Magic</em>.</p>
+<p>And the magic doesn&rsquo;t stop there. If I type the characters for &ldquo;kame&rdquo;, so &ldquo;かめ&rdquo;, and press space, I get a dropdown allowing conversion to &ldquo;亀&rdquo;, so the kanji for &ldquo;turtle&rdquo;. That&rsquo;s even more magical, and will perhaps come in handy once I get anywhere close to learning kanji.</p>
+<figure><a href="https://paweljw.github.io/media/learning-japanese.jpg">
+    <img src="https://paweljw.github.io/media/learning-japanese.jpg"/> </a>
 </figure>
 
-<p>And while designing it, I did something stupid. I didn&rsquo;t commit fully to a finalized board, instead placing a slot for an ISP connection and generally trying to make it something halfway between a devboard and Pomidor itself. Obviously, I didn&rsquo;t know it was stupid when I did so, so I happily generated a Gerber file, sent it over to <a href="https://jlcpcb.com">JLCPCB</a> and waited for my boards.</p>
-<p>A couple weeks later they arrived in the mail, and looked just peachy:</p>
-<figure><a href="https://paweljw.github.io/media/pomidor/boards.jpg">
-    <img src="https://paweljw.github.io/media/pomidor/boards.jpg"/> </a>
-</figure>
-
-<p>I collected the parts, heated up my soldering station, burned my fingers once or twice and assembled one.</p>
-<figure><a href="https://paweljw.github.io/media/pomidor/assembled.jpg">
-    <img src="https://paweljw.github.io/media/pomidor/assembled.jpg"/> </a>
-</figure>
-
-<p>It didn&rsquo;t work.</p>
-<p>Now the more electrically-inclined amongst you have been yelling &ldquo;of <em>course</em>, ya dolt!&rdquo; about since the schematic. It&rsquo;s wrong: it&rsquo;s missing a button which is normally pulled up by R1, but it still has R1, putting the ATmega328P in permanent reset.</p>
-<p>Thankfully, that&rsquo;s <em>somewhat</em> fixable: by replacing it with a 0 ohm resistor (a wire would also work) I got the chip to boot.</p>
-<figure><a href="https://paweljw.github.io/media/pomidor/fix.jpg">
-    <img src="https://paweljw.github.io/media/pomidor/fix.jpg"/> </a>
-</figure>
-
-<p>However, that obviously ruins the programming circuit: as the RST line is forcibly pulled high, I&rsquo;d have to cut that resistor out every time I wanted to reprogram the board - the ISP has no way to reset the chip on its own terms. Oh well, it works, good enough.</p>
-<p>Or is it&hellip;</p>
-<h2 id="the-follow-through">The follow-through</h2>
-<p>The original plan was to make a 3D-printed case for it, slap that board in and just use it even in it&rsquo;s broken state. But as I shared my design fail on some private channels, a few people asked me about kits. As in, would I be willing to sell them a board, a set of parts and the case so they could put one together.</p>
-<p>Say of me what you will, I&rsquo;m not known for shipping broken hardware. (Software doesn&rsquo;t count!)</p>
-<p>So this story continues: I already prototyped a v2 circuit. It also got a few more &ldquo;user-oriented&rdquo; features: a DIP switch for selecting Pomodoro period and break length, switches for power and sound, and an actual USB port for power. I also included a voltage regulator (since it won&rsquo;t be powered off of a power supply I know and trust), and nixed all the development related headers and wiring.</p>
-<p>I&rsquo;ll share more about Pomidor v2 as that stage draws closer to completion - I figure since I&rsquo;ll have to make assembly instructions anyway, why not make a post of that as well? :)</p>
+<p>This all installed in Ubuntu as an alternate input method, so I can use Alt+Super+Backspace to move between Polish keyboard and Anthy. It makes for a nice, if ocasionally confusing experience (e.g. if I&rsquo;m trying to input my password having left it in hiragana mode and forgotten).</p>
+<h2 id="but-you-said-learning-on-ubuntu-too">But you said &ldquo;learning on Ubuntu&rdquo;, too</h2>
+<p>Not much of that is happening yet 😳 I wish it was, but I ran into a few microphone-related issues trying to run <a href="https://www.duolingo.com/">Duolingo</a> on Chromium - and it&rsquo;s my primary learning tool. I&rsquo;ll probably circle back to that eventually, but for now the iOS experience from Duolingo is quite sufficient for my (scant) level. And there are other things like calligraphy training which are not well suited to being done on a computer.</p>
+<p>One of the things I&rsquo;m looking forward to somewhere down the line is <a href="http://www.bolthole.com/kdrill/">KDrill</a>, which is a kanji flashcard-like program. This will probably come in handy when I&rsquo;m into the kanji stage of learning and physical flashcards are no longer feasible.</p>
+<hr>
+<p>Cover photo by <a href="https://unsplash.com/@heftiba?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Toa Heftiba</a> on <a href="https://unsplash.com/s/photos/indoor?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText%22%3EUnsplash">Unsplash</a></p>
               
             </div>
           </div>
@@ -333,9 +332,9 @@ if (!doNotTrack) {
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">TAGGED IN</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://paweljw.github.io/tags/electronics/">electronics</a>
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io/tags/linux/">linux</a>
 
-  <a class="tag tag--primary tag--small" href="https://paweljw.github.io/tags/pomidor/">pomidor</a>
+  <a class="tag tag--primary tag--small" href="https://paweljw.github.io/tags/locale/">locale</a>
 
                   </div>
                 
@@ -348,7 +347,7 @@ if (!doNotTrack) {
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2020/10/learning-and-typing-japanese-while-on-ubuntu/" data-tooltip="Learning (and Typing) Japanese While on Ubuntu">
+                <a class="post-action-btn btn btn--disabled">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -356,7 +355,7 @@ if (!doNotTrack) {
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2020/05/homeserver-upgrade-part-0-the-plan/" data-tooltip="Homeserver Upgrade, Part 0: The Plan">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2020/10/making-pomidor-a-pomodoro-timer/" data-tooltip="Making Pomidor, a Pomodoro timer">
               
                   <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                   <i class="fa fa-angle-right"></i>
@@ -406,7 +405,7 @@ if (!doNotTrack) {
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2020/10/learning-and-typing-japanese-while-on-ubuntu/" data-tooltip="Learning (and Typing) Japanese While on Ubuntu">
+                <a class="post-action-btn btn btn--disabled">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -414,7 +413,7 @@ if (!doNotTrack) {
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2020/05/homeserver-upgrade-part-0-the-plan/" data-tooltip="Homeserver Upgrade, Part 0: The Plan">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://paweljw.github.io/2020/10/making-pomidor-a-pomodoro-timer/" data-tooltip="Making Pomidor, a Pomodoro timer">
               
                   <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                   <i class="fa fa-angle-right"></i>
