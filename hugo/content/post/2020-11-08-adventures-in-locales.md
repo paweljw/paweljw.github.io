@@ -1,5 +1,5 @@
 ---
-date: "2020-10-23T00:00:00+02:00"
+date: "2020-11-08T00:00:00+02:00"
 title: "Learning (and Typing) Japanese While on Ubuntu"
 coverImage: /media/locales.jpg
 tags:
@@ -10,9 +10,7 @@ draft: false
 twitterTitle: "Learning (and Typing) Japanese While on Ubuntu"
 ---
 
-I'm a native speaker of Polish. But I'm also a developer, so most of my computers are set to English language (for ease of searching the Web when something breaks) with Polish formats and keyboard layouts (so my dates are 08/11, my hours are 13:05 and I can type _zażółć gęślą jaźń_ whenever I want to).
-
-I added a third language to the mix, and things got... weird.
+I'm a native speaker of Polish. But I'm also a developer, so most of my computers are set to English language (for ease of searching the Web when something breaks) with Polish formats and keyboard layouts (so my dates are 08/11, my hours are 13:05 and I can type _zażółć gęślą jaźń_ whenever I want to). Now I've added a third language to the mix.
 
 <!--more-->
 
