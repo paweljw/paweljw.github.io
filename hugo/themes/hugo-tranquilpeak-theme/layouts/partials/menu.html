@@ -1,7 +1,11 @@
 {{ range .menu }}
   <li class="sidebar-button">
     {{ if and (or (in .URL "://") (in .URL "mailto:") (in .URL "tel:") (in .URL "callto:") (in .URL "skype:")) (not (in .URL (printf "%s" $.root.Site.BaseURL))) }}
-      <a class="sidebar-button-link {{ if eq .Identifier "search" }}open-algolia-search{{ end }}" href="{{ .URL | safeURL }}" target="_blank" rel="noopener">
+      {{ if (in .URL "paweljw.al/@pjw") }}
+        <a class="sidebar-button-link {{ if eq .Identifier "search" }}open-algolia-search{{ end }}" href="{{ .URL | safeURL }}" target="_blank" rel="me">
+      {{ else  }}
+        <a class="sidebar-button-link {{ if eq .Identifier "search" }}open-algolia-search{{ end }}" href="{{ .URL | safeURL }}" target="_blank" rel="noopener">
+      {{ end }}
     {{ else }}
       <a class="sidebar-button-link {{ if eq .Identifier "search" }}open-algolia-search{{ end }}" href="{{ .URL | relLangURL }}">
     {{ end }}

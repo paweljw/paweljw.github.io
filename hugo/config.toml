@@ -30,7 +30,7 @@ copyright = "This work is licensed under a Creative Commons Attribution-ShareAli
   # Overwritten by your gravatar image if `author.gravatarEmail` is filled
   picture = "https://cdn1.iconfinder.com/data/icons/ninja-things-1/1772/ninja-simple-512.png"
   # Your Twitter username without the @. E.g : thibaudlepretre
-  twitter = "paweljwal"
+  # twitter = "paweljwal"
   # Your google plus profile id. E.g : +ThibaudLepretre or 114625208755123718311
   # googlePlus = "+ThibaudLepretre"
 
@@ -74,10 +74,10 @@ copyright = "This work is licensed under a Creative Commons Attribution-ShareAli
   url = "https://linkedin.com/in/paweł-wal"
 [[menu.links]]
   weight = 0
-  identifier = "twitter"
-  name = "@paweljwal"
-  pre = "<i class=\"sidebar-button-icon fa fa-lg fa-twitter\"></i>"
-  url = "https://twitter.com/paweljwal"
+  identifier = "mastodon"
+  name = "@pjw@paweljw.al"
+  pre = "<i class=\"sidebar-button-icon fa fa-lg fa-bullhorn\"></i>"
+  url = "https://paweljw.al/@pjw"
 
 [[menu.misc]]
   weight = 0
