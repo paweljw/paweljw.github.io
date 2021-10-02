@@ -2,22 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>aws on Shenanigans!</title>
-    <link>https://paweljw.github.io/tags/aws/</link>
+    <link>https://paweljw.al/tags/aws/</link>
     <description>Recent content in aws on Shenanigans!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Tue, 03 Apr 2018 13:00:00 +0200</lastBuildDate>
-    
-	<atom:link href="https://paweljw.github.io/tags/aws/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 03 Apr 2018 13:00:00 +0200</lastBuildDate><atom:link href="https://paweljw.al/tags/aws/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vue.js front end app, part 6: Deploying to S3</title>
-      <link>https://paweljw.github.io/2018/04/vue.js-front-end-app-part-6-deploying-to-s3/</link>
+      <link>https://paweljw.al/2018/04/vue.js-front-end-app-part-6-deploying-to-s3/</link>
       <pubDate>Tue, 03 Apr 2018 13:00:00 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/2018/04/vue.js-front-end-app-part-6-deploying-to-s3/</guid>
+      <guid>https://paweljw.al/2018/04/vue.js-front-end-app-part-6-deploying-to-s3/</guid>
       <description>&lt;p&gt;In this final episode of the series, we&amp;rsquo;ll take a look at deploying our Single Page Application to Amazon Web Services Simple Storage Service (or S3).&lt;/p&gt;</description>
     </item>
     

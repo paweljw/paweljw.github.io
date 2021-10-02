@@ -2,32 +2,28 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>vuex on Shenanigans!</title>
-    <link>https://paweljw.github.io/tags/vuex/</link>
+    <link>https://paweljw.al/tags/vuex/</link>
     <description>Recent content in vuex on Shenanigans!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Sat, 06 Jan 2018 00:00:00 +0200</lastBuildDate>
-    
-	<atom:link href="https://paweljw.github.io/tags/vuex/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 06 Jan 2018 00:00:00 +0200</lastBuildDate><atom:link href="https://paweljw.al/tags/vuex/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vue.js front end app, part 5: Data presentation</title>
-      <link>https://paweljw.github.io/2018/01/vue.js-front-end-app-part-5-data-presentation/</link>
+      <link>https://paweljw.al/2018/01/vue.js-front-end-app-part-5-data-presentation/</link>
       <pubDate>Sat, 06 Jan 2018 00:00:00 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/2018/01/vue.js-front-end-app-part-5-data-presentation/</guid>
+      <guid>https://paweljw.al/2018/01/vue.js-front-end-app-part-5-data-presentation/</guid>
       <description>&lt;p&gt;New year, new &lt;del&gt;you&lt;/del&gt; blog post! In this long overdue part we&amp;rsquo;ll strengthen our command of loading data from the server and take a look at presenting it.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Vue.js front end app, part 4: Keeping state with Vuex</title>
-      <link>https://paweljw.github.io/2017/10/vue.js-front-end-app-part-4-keeping-state-with-vuex/</link>
+      <link>https://paweljw.al/2017/10/vue.js-front-end-app-part-4-keeping-state-with-vuex/</link>
       <pubDate>Sat, 28 Oct 2017 14:00:00 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/2017/10/vue.js-front-end-app-part-4-keeping-state-with-vuex/</guid>
-      <description>&lt;p&gt;Last time we built an &lt;a href=&#34;https://paweljw.github.io/2017/09/vue.js-front-end-app-part-3-authentication/&#34;&gt;authentication mechanism&lt;/a&gt; with a pretty glaring bug - you can just set the &lt;code&gt;token&lt;/code&gt; in &lt;code&gt;localStorage&lt;/code&gt; to whatever and it&amp;rsquo;ll let you in. We need to actually read the token, and persist what we&amp;rsquo;ve read so we don&amp;rsquo;t have to do it over and over.&lt;/p&gt;</description>
+      <guid>https://paweljw.al/2017/10/vue.js-front-end-app-part-4-keeping-state-with-vuex/</guid>
+      <description>&lt;p&gt;Last time we built an &lt;a href=&#34;https://paweljw.al/2017/09/vue.js-front-end-app-part-3-authentication/&#34;&gt;authentication mechanism&lt;/a&gt; with a pretty glaring bug - you can just set the &lt;code&gt;token&lt;/code&gt; in &lt;code&gt;localStorage&lt;/code&gt; to whatever and it&amp;rsquo;ll let you in. We need to actually read the token, and persist what we&amp;rsquo;ve read so we don&amp;rsquo;t have to do it over and over.&lt;/p&gt;</description>
     </item>
     
   </channel>

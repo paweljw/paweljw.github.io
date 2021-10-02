@@ -2,22 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>linux on Shenanigans!</title>
-    <link>https://paweljw.github.io/tags/linux/</link>
+    <link>https://paweljw.al/tags/linux/</link>
     <description>Recent content in linux on Shenanigans!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Sun, 08 Nov 2020 00:00:00 +0200</lastBuildDate>
-    
-	<atom:link href="https://paweljw.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 08 Nov 2020 00:00:00 +0200</lastBuildDate><atom:link href="https://paweljw.al/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Learning (and Typing) Japanese While on Ubuntu</title>
-      <link>https://paweljw.github.io/2020/11/learning-and-typing-japanese-while-on-ubuntu/</link>
+      <link>https://paweljw.al/2020/11/learning-and-typing-japanese-while-on-ubuntu/</link>
       <pubDate>Sun, 08 Nov 2020 00:00:00 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/2020/11/learning-and-typing-japanese-while-on-ubuntu/</guid>
+      <guid>https://paweljw.al/2020/11/learning-and-typing-japanese-while-on-ubuntu/</guid>
       <description>&lt;p&gt;I&amp;rsquo;m a native speaker of Polish. But I&amp;rsquo;m also a developer, so most of my computers are set to English language (for ease of searching the Web when something breaks) with Polish formats and keyboard layouts (so my dates are 08/11, my hours are 13:05 and I can type &lt;em&gt;zażółć gęślą jaźń&lt;/em&gt; whenever I want to). Now I&amp;rsquo;ve added a third language to the mix.&lt;/p&gt;</description>
     </item>
     

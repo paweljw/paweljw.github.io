@@ -2,22 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>music on Shenanigans!</title>
-    <link>https://paweljw.github.io/tags/music/</link>
+    <link>https://paweljw.al/tags/music/</link>
     <description>Recent content in music on Shenanigans!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Sat, 28 Feb 2015 21:17:45 +0200</lastBuildDate>
-    
-	<atom:link href="https://paweljw.github.io/tags/music/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 28 Feb 2015 21:17:45 +0200</lastBuildDate><atom:link href="https://paweljw.al/tags/music/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Ultrasonic theremin</title>
-      <link>https://paweljw.github.io/2015/02/ultrasonic-theremin/</link>
+      <link>https://paweljw.al/2015/02/ultrasonic-theremin/</link>
       <pubDate>Sat, 28 Feb 2015 21:17:45 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/2015/02/ultrasonic-theremin/</guid>
+      <guid>https://paweljw.al/2015/02/ultrasonic-theremin/</guid>
       <description>&lt;p&gt;I’ve been wanting to construct an instrument in the spirit of a theremin for quite a while. Of course, I have neither the skills to construct a proper theremin, nor the time to master them. What I do have is an Arduino board, some sensors and a couple of spare parts.&lt;/p&gt;</description>
     </item>
     

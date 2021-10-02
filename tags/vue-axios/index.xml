@@ -2,23 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>vue-axios on Shenanigans!</title>
-    <link>https://paweljw.github.io/tags/vue-axios/</link>
+    <link>https://paweljw.al/tags/vue-axios/</link>
     <description>Recent content in vue-axios on Shenanigans!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Sat, 30 Sep 2017 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://paweljw.github.io/tags/vue-axios/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 30 Sep 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://paweljw.al/tags/vue-axios/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vue.js front end app, part 3: Authentication</title>
-      <link>https://paweljw.github.io/2017/09/vue.js-front-end-app-part-3-authentication/</link>
+      <link>https://paweljw.al/2017/09/vue.js-front-end-app-part-3-authentication/</link>
       <pubDate>Sat, 30 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://paweljw.github.io/2017/09/vue.js-front-end-app-part-3-authentication/</guid>
-      <description>&lt;p&gt;In this part we&amp;rsquo;ll allow the user to log in to our frontend app, using the &lt;a href=&#34;https://paweljw.github.io/2017/07/rails-5.1-api-app-part-4-authentication-and-authorization/&#34;&gt;auth mechanism&lt;/a&gt; we&amp;rsquo;ve built on the back end earlier. A lot of topics in this one, so jump right in!&lt;/p&gt;</description>
+      <guid>https://paweljw.al/2017/09/vue.js-front-end-app-part-3-authentication/</guid>
+      <description>&lt;p&gt;In this part we&amp;rsquo;ll allow the user to log in to our frontend app, using the &lt;a href=&#34;https://paweljw.al/2017/07/rails-5.1-api-app-part-4-authentication-and-authorization/&#34;&gt;auth mechanism&lt;/a&gt; we&amp;rsquo;ve built on the back end earlier. A lot of topics in this one, so jump right in!&lt;/p&gt;</description>
     </item>
     
   </channel>

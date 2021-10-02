@@ -2,328 +2,324 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Shenanigans!</title>
-    <link>https://paweljw.github.io/tags/</link>
+    <link>https://paweljw.al/tags/</link>
     <description>Recent content in Tags on Shenanigans!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Sun, 08 Nov 2020 00:00:00 +0200</lastBuildDate>
-    
-	<atom:link href="https://paweljw.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 08 Nov 2020 00:00:00 +0200</lastBuildDate><atom:link href="https://paweljw.al/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>linux</title>
-      <link>https://paweljw.github.io/tags/linux/</link>
+      <link>https://paweljw.al/tags/linux/</link>
       <pubDate>Sun, 08 Nov 2020 00:00:00 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/tags/linux/</guid>
+      <guid>https://paweljw.al/tags/linux/</guid>
       <description></description>
     </item>
     
     <item>
       <title>locale</title>
-      <link>https://paweljw.github.io/tags/locale/</link>
+      <link>https://paweljw.al/tags/locale/</link>
       <pubDate>Sun, 08 Nov 2020 00:00:00 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/tags/locale/</guid>
+      <guid>https://paweljw.al/tags/locale/</guid>
       <description></description>
     </item>
     
     <item>
       <title>electronics</title>
-      <link>https://paweljw.github.io/tags/electronics/</link>
+      <link>https://paweljw.al/tags/electronics/</link>
       <pubDate>Fri, 23 Oct 2020 00:00:00 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/tags/electronics/</guid>
+      <guid>https://paweljw.al/tags/electronics/</guid>
       <description></description>
     </item>
     
     <item>
       <title>pomidor</title>
-      <link>https://paweljw.github.io/tags/pomidor/</link>
+      <link>https://paweljw.al/tags/pomidor/</link>
       <pubDate>Fri, 23 Oct 2020 00:00:00 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/tags/pomidor/</guid>
+      <guid>https://paweljw.al/tags/pomidor/</guid>
       <description></description>
     </item>
     
     <item>
       <title>home-server</title>
-      <link>https://paweljw.github.io/tags/home-server/</link>
+      <link>https://paweljw.al/tags/home-server/</link>
       <pubDate>Sat, 30 May 2020 00:00:00 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/tags/home-server/</guid>
+      <guid>https://paweljw.al/tags/home-server/</guid>
       <description></description>
     </item>
     
     <item>
       <title>ubuntu</title>
-      <link>https://paweljw.github.io/tags/ubuntu/</link>
+      <link>https://paweljw.al/tags/ubuntu/</link>
       <pubDate>Sat, 30 May 2020 00:00:00 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/tags/ubuntu/</guid>
+      <guid>https://paweljw.al/tags/ubuntu/</guid>
       <description></description>
     </item>
     
     <item>
       <title>i-use-this</title>
-      <link>https://paweljw.github.io/tags/i-use-this/</link>
+      <link>https://paweljw.al/tags/i-use-this/</link>
       <pubDate>Sun, 24 May 2020 00:00:00 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/tags/i-use-this/</guid>
+      <guid>https://paweljw.al/tags/i-use-this/</guid>
       <description></description>
     </item>
     
     <item>
       <title>tools</title>
-      <link>https://paweljw.github.io/tags/tools/</link>
+      <link>https://paweljw.al/tags/tools/</link>
       <pubDate>Sun, 24 May 2020 00:00:00 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/tags/tools/</guid>
+      <guid>https://paweljw.al/tags/tools/</guid>
       <description></description>
     </item>
     
     <item>
       <title>tridactyl</title>
-      <link>https://paweljw.github.io/tags/tridactyl/</link>
+      <link>https://paweljw.al/tags/tridactyl/</link>
       <pubDate>Sun, 24 May 2020 00:00:00 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/tags/tridactyl/</guid>
+      <guid>https://paweljw.al/tags/tridactyl/</guid>
       <description></description>
     </item>
     
     <item>
       <title>tmux</title>
-      <link>https://paweljw.github.io/tags/tmux/</link>
+      <link>https://paweljw.al/tags/tmux/</link>
       <pubDate>Mon, 11 May 2020 00:00:00 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/tags/tmux/</guid>
+      <guid>https://paweljw.al/tags/tmux/</guid>
       <description></description>
     </item>
     
     <item>
       <title>elixir</title>
-      <link>https://paweljw.github.io/tags/elixir/</link>
+      <link>https://paweljw.al/tags/elixir/</link>
       <pubDate>Fri, 11 May 2018 22:00:00 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/tags/elixir/</guid>
+      <guid>https://paweljw.al/tags/elixir/</guid>
       <description></description>
     </item>
     
     <item>
       <title>ruby</title>
-      <link>https://paweljw.github.io/tags/ruby/</link>
+      <link>https://paweljw.al/tags/ruby/</link>
       <pubDate>Fri, 11 May 2018 22:00:00 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/tags/ruby/</guid>
+      <guid>https://paweljw.al/tags/ruby/</guid>
       <description></description>
     </item>
     
     <item>
       <title>aws</title>
-      <link>https://paweljw.github.io/tags/aws/</link>
+      <link>https://paweljw.al/tags/aws/</link>
       <pubDate>Tue, 03 Apr 2018 13:00:00 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/tags/aws/</guid>
+      <guid>https://paweljw.al/tags/aws/</guid>
       <description></description>
     </item>
     
     <item>
       <title>es6</title>
-      <link>https://paweljw.github.io/tags/es6/</link>
+      <link>https://paweljw.al/tags/es6/</link>
       <pubDate>Tue, 03 Apr 2018 13:00:00 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/tags/es6/</guid>
+      <guid>https://paweljw.al/tags/es6/</guid>
       <description></description>
     </item>
     
     <item>
       <title>follow me</title>
-      <link>https://paweljw.github.io/tags/follow-me/</link>
+      <link>https://paweljw.al/tags/follow-me/</link>
       <pubDate>Tue, 03 Apr 2018 13:00:00 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/tags/follow-me/</guid>
+      <guid>https://paweljw.al/tags/follow-me/</guid>
       <description></description>
     </item>
     
     <item>
       <title>javascript</title>
-      <link>https://paweljw.github.io/tags/javascript/</link>
+      <link>https://paweljw.al/tags/javascript/</link>
       <pubDate>Tue, 03 Apr 2018 13:00:00 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/tags/javascript/</guid>
+      <guid>https://paweljw.al/tags/javascript/</guid>
       <description></description>
     </item>
     
     <item>
       <title>s3</title>
-      <link>https://paweljw.github.io/tags/s3/</link>
+      <link>https://paweljw.al/tags/s3/</link>
       <pubDate>Tue, 03 Apr 2018 13:00:00 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/tags/s3/</guid>
+      <guid>https://paweljw.al/tags/s3/</guid>
       <description></description>
     </item>
     
     <item>
       <title>vue-frontend-series</title>
-      <link>https://paweljw.github.io/tags/vue-frontend-series/</link>
+      <link>https://paweljw.al/tags/vue-frontend-series/</link>
       <pubDate>Tue, 03 Apr 2018 13:00:00 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/tags/vue-frontend-series/</guid>
+      <guid>https://paweljw.al/tags/vue-frontend-series/</guid>
       <description></description>
     </item>
     
     <item>
       <title>vue.js</title>
-      <link>https://paweljw.github.io/tags/vue.js/</link>
+      <link>https://paweljw.al/tags/vue.js/</link>
       <pubDate>Tue, 03 Apr 2018 13:00:00 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/tags/vue.js/</guid>
+      <guid>https://paweljw.al/tags/vue.js/</guid>
       <description></description>
     </item>
     
     <item>
       <title>vuex</title>
-      <link>https://paweljw.github.io/tags/vuex/</link>
+      <link>https://paweljw.al/tags/vuex/</link>
       <pubDate>Sat, 06 Jan 2018 00:00:00 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/tags/vuex/</guid>
+      <guid>https://paweljw.al/tags/vuex/</guid>
       <description></description>
     </item>
     
     <item>
       <title>frontend</title>
-      <link>https://paweljw.github.io/tags/frontend/</link>
+      <link>https://paweljw.al/tags/frontend/</link>
       <pubDate>Sat, 30 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://paweljw.github.io/tags/frontend/</guid>
+      <guid>https://paweljw.al/tags/frontend/</guid>
       <description></description>
     </item>
     
     <item>
       <title>vue-axios</title>
-      <link>https://paweljw.github.io/tags/vue-axios/</link>
+      <link>https://paweljw.al/tags/vue-axios/</link>
       <pubDate>Sat, 30 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://paweljw.github.io/tags/vue-axios/</guid>
+      <guid>https://paweljw.al/tags/vue-axios/</guid>
       <description></description>
     </item>
     
     <item>
       <title>vue-router</title>
-      <link>https://paweljw.github.io/tags/vue-router/</link>
+      <link>https://paweljw.al/tags/vue-router/</link>
       <pubDate>Sat, 30 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://paweljw.github.io/tags/vue-router/</guid>
+      <guid>https://paweljw.al/tags/vue-router/</guid>
       <description></description>
     </item>
     
     <item>
       <title>design</title>
-      <link>https://paweljw.github.io/tags/design/</link>
+      <link>https://paweljw.al/tags/design/</link>
       <pubDate>Sat, 23 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://paweljw.github.io/tags/design/</guid>
+      <guid>https://paweljw.al/tags/design/</guid>
       <description></description>
     </item>
     
     <item>
       <title>saturdayproject</title>
-      <link>https://paweljw.github.io/tags/saturdayproject/</link>
+      <link>https://paweljw.al/tags/saturdayproject/</link>
       <pubDate>Sun, 17 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://paweljw.github.io/tags/saturdayproject/</guid>
+      <guid>https://paweljw.al/tags/saturdayproject/</guid>
       <description></description>
     </item>
     
     <item>
       <title>api</title>
-      <link>https://paweljw.github.io/tags/api/</link>
+      <link>https://paweljw.al/tags/api/</link>
       <pubDate>Sat, 29 Jul 2017 15:00:00 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/tags/api/</guid>
+      <guid>https://paweljw.al/tags/api/</guid>
       <description></description>
     </item>
     
     <item>
       <title>rails</title>
-      <link>https://paweljw.github.io/tags/rails/</link>
+      <link>https://paweljw.al/tags/rails/</link>
       <pubDate>Sat, 29 Jul 2017 15:00:00 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/tags/rails/</guid>
+      <guid>https://paweljw.al/tags/rails/</guid>
       <description></description>
     </item>
     
     <item>
       <title>rails-api-series</title>
-      <link>https://paweljw.github.io/tags/rails-api-series/</link>
+      <link>https://paweljw.al/tags/rails-api-series/</link>
       <pubDate>Sat, 29 Jul 2017 15:00:00 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/tags/rails-api-series/</guid>
+      <guid>https://paweljw.al/tags/rails-api-series/</guid>
       <description></description>
     </item>
     
     <item>
       <title>fuse.js</title>
-      <link>https://paweljw.github.io/tags/fuse.js/</link>
+      <link>https://paweljw.al/tags/fuse.js/</link>
       <pubDate>Thu, 15 Jun 2017 15:47:42 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/tags/fuse.js/</guid>
+      <guid>https://paweljw.al/tags/fuse.js/</guid>
       <description></description>
     </item>
     
     <item>
       <title>monsters</title>
-      <link>https://paweljw.github.io/tags/monsters/</link>
+      <link>https://paweljw.al/tags/monsters/</link>
       <pubDate>Sun, 11 Jun 2017 11:48:27 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/tags/monsters/</guid>
+      <guid>https://paweljw.al/tags/monsters/</guid>
       <description></description>
     </item>
     
     <item>
       <title>aliens</title>
-      <link>https://paweljw.github.io/tags/aliens/</link>
+      <link>https://paweljw.al/tags/aliens/</link>
       <pubDate>Sun, 28 May 2017 15:47:59 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/tags/aliens/</guid>
+      <guid>https://paweljw.al/tags/aliens/</guid>
       <description></description>
     </item>
     
     <item>
       <title>cats</title>
-      <link>https://paweljw.github.io/tags/cats/</link>
+      <link>https://paweljw.al/tags/cats/</link>
       <pubDate>Tue, 28 Feb 2017 21:02:24 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/tags/cats/</guid>
+      <guid>https://paweljw.al/tags/cats/</guid>
       <description></description>
     </item>
     
     <item>
       <title>science</title>
-      <link>https://paweljw.github.io/tags/science/</link>
+      <link>https://paweljw.al/tags/science/</link>
       <pubDate>Tue, 28 Feb 2017 21:02:24 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/tags/science/</guid>
+      <guid>https://paweljw.al/tags/science/</guid>
       <description></description>
     </item>
     
     <item>
       <title>arduino</title>
-      <link>https://paweljw.github.io/tags/arduino/</link>
+      <link>https://paweljw.al/tags/arduino/</link>
       <pubDate>Sat, 28 Feb 2015 21:17:45 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/tags/arduino/</guid>
+      <guid>https://paweljw.al/tags/arduino/</guid>
       <description></description>
     </item>
     
     <item>
       <title>music</title>
-      <link>https://paweljw.github.io/tags/music/</link>
+      <link>https://paweljw.al/tags/music/</link>
       <pubDate>Sat, 28 Feb 2015 21:17:45 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/tags/music/</guid>
+      <guid>https://paweljw.al/tags/music/</guid>
       <description></description>
     </item>
     

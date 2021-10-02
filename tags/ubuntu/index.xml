@@ -2,22 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ubuntu on Shenanigans!</title>
-    <link>https://paweljw.github.io/tags/ubuntu/</link>
+    <link>https://paweljw.al/tags/ubuntu/</link>
     <description>Recent content in ubuntu on Shenanigans!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Sat, 30 May 2020 00:00:00 +0200</lastBuildDate>
-    
-	<atom:link href="https://paweljw.github.io/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 30 May 2020 00:00:00 +0200</lastBuildDate><atom:link href="https://paweljw.al/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Homeserver Upgrade, Part 0: The Plan</title>
-      <link>https://paweljw.github.io/2020/05/homeserver-upgrade-part-0-the-plan/</link>
+      <link>https://paweljw.al/2020/05/homeserver-upgrade-part-0-the-plan/</link>
       <pubDate>Sat, 30 May 2020 00:00:00 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/2020/05/homeserver-upgrade-part-0-the-plan/</guid>
+      <guid>https://paweljw.al/2020/05/homeserver-upgrade-part-0-the-plan/</guid>
       <description>&lt;p&gt;Around September last year the fourth memory card in a row failed in the Raspberry Pi 3 that powered my home setup. I canvassed the house for parts, threw together a Frankenstein-style monstrosity, built what became &lt;a href=&#34;https://github.com/paweljw/jarvis&#34;&gt;Jarvis&lt;/a&gt; on it and called it a day. Since then the use case expanded - so it&amp;rsquo;s time for an upgrade.&lt;/p&gt;</description>
     </item>
     

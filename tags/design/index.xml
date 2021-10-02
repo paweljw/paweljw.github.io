@@ -2,22 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>design on Shenanigans!</title>
-    <link>https://paweljw.github.io/tags/design/</link>
+    <link>https://paweljw.al/tags/design/</link>
     <description>Recent content in design on Shenanigans!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Sat, 23 Sep 2017 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://paweljw.github.io/tags/design/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 23 Sep 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://paweljw.al/tags/design/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vue.js front end app, part 2: Design is (not) hard</title>
-      <link>https://paweljw.github.io/2017/09/vue.js-front-end-app-part-2-design-is-not-hard/</link>
+      <link>https://paweljw.al/2017/09/vue.js-front-end-app-part-2-design-is-not-hard/</link>
       <pubDate>Sat, 23 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://paweljw.github.io/2017/09/vue.js-front-end-app-part-2-design-is-not-hard/</guid>
+      <guid>https://paweljw.al/2017/09/vue.js-front-end-app-part-2-design-is-not-hard/</guid>
       <description>&lt;p&gt;Now that we have our environment running, the app is initialized, and we know a little bit about what&amp;rsquo;s going on in there, it&amp;rsquo;s time to take a little bit of time to design our front end.&lt;/p&gt;</description>
     </item>
     

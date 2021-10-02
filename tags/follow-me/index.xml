@@ -2,122 +2,118 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>follow me on Shenanigans!</title>
-    <link>https://paweljw.github.io/tags/follow-me/</link>
+    <link>https://paweljw.al/tags/follow-me/</link>
     <description>Recent content in follow me on Shenanigans!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Tue, 03 Apr 2018 13:00:00 +0200</lastBuildDate>
-    
-	<atom:link href="https://paweljw.github.io/tags/follow-me/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 03 Apr 2018 13:00:00 +0200</lastBuildDate><atom:link href="https://paweljw.al/tags/follow-me/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vue.js front end app, part 6: Deploying to S3</title>
-      <link>https://paweljw.github.io/2018/04/vue.js-front-end-app-part-6-deploying-to-s3/</link>
+      <link>https://paweljw.al/2018/04/vue.js-front-end-app-part-6-deploying-to-s3/</link>
       <pubDate>Tue, 03 Apr 2018 13:00:00 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/2018/04/vue.js-front-end-app-part-6-deploying-to-s3/</guid>
+      <guid>https://paweljw.al/2018/04/vue.js-front-end-app-part-6-deploying-to-s3/</guid>
       <description>&lt;p&gt;In this final episode of the series, we&amp;rsquo;ll take a look at deploying our Single Page Application to Amazon Web Services Simple Storage Service (or S3).&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Vue.js front end app, part 5: Data presentation</title>
-      <link>https://paweljw.github.io/2018/01/vue.js-front-end-app-part-5-data-presentation/</link>
+      <link>https://paweljw.al/2018/01/vue.js-front-end-app-part-5-data-presentation/</link>
       <pubDate>Sat, 06 Jan 2018 00:00:00 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/2018/01/vue.js-front-end-app-part-5-data-presentation/</guid>
+      <guid>https://paweljw.al/2018/01/vue.js-front-end-app-part-5-data-presentation/</guid>
       <description>&lt;p&gt;New year, new &lt;del&gt;you&lt;/del&gt; blog post! In this long overdue part we&amp;rsquo;ll strengthen our command of loading data from the server and take a look at presenting it.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Vue.js front end app, part 4: Keeping state with Vuex</title>
-      <link>https://paweljw.github.io/2017/10/vue.js-front-end-app-part-4-keeping-state-with-vuex/</link>
+      <link>https://paweljw.al/2017/10/vue.js-front-end-app-part-4-keeping-state-with-vuex/</link>
       <pubDate>Sat, 28 Oct 2017 14:00:00 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/2017/10/vue.js-front-end-app-part-4-keeping-state-with-vuex/</guid>
-      <description>&lt;p&gt;Last time we built an &lt;a href=&#34;https://paweljw.github.io/2017/09/vue.js-front-end-app-part-3-authentication/&#34;&gt;authentication mechanism&lt;/a&gt; with a pretty glaring bug - you can just set the &lt;code&gt;token&lt;/code&gt; in &lt;code&gt;localStorage&lt;/code&gt; to whatever and it&amp;rsquo;ll let you in. We need to actually read the token, and persist what we&amp;rsquo;ve read so we don&amp;rsquo;t have to do it over and over.&lt;/p&gt;</description>
+      <guid>https://paweljw.al/2017/10/vue.js-front-end-app-part-4-keeping-state-with-vuex/</guid>
+      <description>&lt;p&gt;Last time we built an &lt;a href=&#34;https://paweljw.al/2017/09/vue.js-front-end-app-part-3-authentication/&#34;&gt;authentication mechanism&lt;/a&gt; with a pretty glaring bug - you can just set the &lt;code&gt;token&lt;/code&gt; in &lt;code&gt;localStorage&lt;/code&gt; to whatever and it&amp;rsquo;ll let you in. We need to actually read the token, and persist what we&amp;rsquo;ve read so we don&amp;rsquo;t have to do it over and over.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Vue.js front end app, part 3: Authentication</title>
-      <link>https://paweljw.github.io/2017/09/vue.js-front-end-app-part-3-authentication/</link>
+      <link>https://paweljw.al/2017/09/vue.js-front-end-app-part-3-authentication/</link>
       <pubDate>Sat, 30 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://paweljw.github.io/2017/09/vue.js-front-end-app-part-3-authentication/</guid>
-      <description>&lt;p&gt;In this part we&amp;rsquo;ll allow the user to log in to our frontend app, using the &lt;a href=&#34;https://paweljw.github.io/2017/07/rails-5.1-api-app-part-4-authentication-and-authorization/&#34;&gt;auth mechanism&lt;/a&gt; we&amp;rsquo;ve built on the back end earlier. A lot of topics in this one, so jump right in!&lt;/p&gt;</description>
+      <guid>https://paweljw.al/2017/09/vue.js-front-end-app-part-3-authentication/</guid>
+      <description>&lt;p&gt;In this part we&amp;rsquo;ll allow the user to log in to our frontend app, using the &lt;a href=&#34;https://paweljw.al/2017/07/rails-5.1-api-app-part-4-authentication-and-authorization/&#34;&gt;auth mechanism&lt;/a&gt; we&amp;rsquo;ve built on the back end earlier. A lot of topics in this one, so jump right in!&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Vue.js front end app, part 2: Design is (not) hard</title>
-      <link>https://paweljw.github.io/2017/09/vue.js-front-end-app-part-2-design-is-not-hard/</link>
+      <link>https://paweljw.al/2017/09/vue.js-front-end-app-part-2-design-is-not-hard/</link>
       <pubDate>Sat, 23 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://paweljw.github.io/2017/09/vue.js-front-end-app-part-2-design-is-not-hard/</guid>
+      <guid>https://paweljw.al/2017/09/vue.js-front-end-app-part-2-design-is-not-hard/</guid>
       <description>&lt;p&gt;Now that we have our environment running, the app is initialized, and we know a little bit about what&amp;rsquo;s going on in there, it&amp;rsquo;s time to take a little bit of time to design our front end.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Vue.js front end app, part 1: Setting up the app</title>
-      <link>https://paweljw.github.io/2017/09/vue.js-front-end-app-part-1-setting-up-the-app/</link>
+      <link>https://paweljw.al/2017/09/vue.js-front-end-app-part-1-setting-up-the-app/</link>
       <pubDate>Thu, 07 Sep 2017 17:00:00 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/2017/09/vue.js-front-end-app-part-1-setting-up-the-app/</guid>
+      <guid>https://paweljw.al/2017/09/vue.js-front-end-app-part-1-setting-up-the-app/</guid>
       <description>&lt;p&gt;Last time we’ve seen each other, we’ve just deployed our Rails 5.1 API app. Time to put an end to this! A &lt;em&gt;front&lt;/em&gt; end, of course.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Rails 5.1 API app, part 5: Deploying with confidence</title>
-      <link>https://paweljw.github.io/2017/07/rails-5.1-api-app-part-5-deploying-with-confidence/</link>
+      <link>https://paweljw.al/2017/07/rails-5.1-api-app-part-5-deploying-with-confidence/</link>
       <pubDate>Sat, 29 Jul 2017 15:00:00 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/2017/07/rails-5.1-api-app-part-5-deploying-with-confidence/</guid>
+      <guid>https://paweljw.al/2017/07/rails-5.1-api-app-part-5-deploying-with-confidence/</guid>
       <description>&lt;p&gt;In this final part of our Rails API app series we&amp;rsquo;ll talk about specs, code coverage, continuous integration and deployment - and how to be certain your application is working.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Rails 5.1 API app, part 4: Authentication and authorization</title>
-      <link>https://paweljw.github.io/2017/07/rails-5.1-api-app-part-4-authentication-and-authorization/</link>
+      <link>https://paweljw.al/2017/07/rails-5.1-api-app-part-4-authentication-and-authorization/</link>
       <pubDate>Sat, 22 Jul 2017 17:00:00 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/2017/07/rails-5.1-api-app-part-4-authentication-and-authorization/</guid>
+      <guid>https://paweljw.al/2017/07/rails-5.1-api-app-part-4-authentication-and-authorization/</guid>
       <description>&lt;p&gt;Time to deal with authenticating users in our bookstore application.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Rails 5.1 API app, part 3: API versioning</title>
-      <link>https://paweljw.github.io/2017/07/rails-5.1-api-app-part-3-api-versioning/</link>
+      <link>https://paweljw.al/2017/07/rails-5.1-api-app-part-3-api-versioning/</link>
       <pubDate>Tue, 18 Jul 2017 15:00:00 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/2017/07/rails-5.1-api-app-part-3-api-versioning/</guid>
+      <guid>https://paweljw.al/2017/07/rails-5.1-api-app-part-3-api-versioning/</guid>
       <description>&lt;p&gt;We have two more things to tackle before our Rails API app is an MVP: namespacing the controllers and creating an authentication mechanism. We&amp;rsquo;ll tackle namespacing the controllers in this article - it might seem wordy, but it&amp;rsquo;s for a good reason.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Rails 5.1 API app, part 2: Modeling reality</title>
-      <link>https://paweljw.github.io/2017/07/rails-5.1-api-app-part-2-modeling-reality/</link>
+      <link>https://paweljw.al/2017/07/rails-5.1-api-app-part-2-modeling-reality/</link>
       <pubDate>Sat, 15 Jul 2017 15:00:00 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/2017/07/rails-5.1-api-app-part-2-modeling-reality/</guid>
+      <guid>https://paweljw.al/2017/07/rails-5.1-api-app-part-2-modeling-reality/</guid>
       <description>&lt;p&gt;Oh yeah. Now we&amp;rsquo;re going &lt;em&gt;hardcore&lt;/em&gt;. Well, not really.&lt;/p&gt;
 &lt;p&gt;While Rails embraces a continuously changing data model, it&amp;rsquo;s always good to stop and think for a minute about the domain we&amp;rsquo;re trying to magically lockwithin an app. We&amp;rsquo;re building a bookstore. So what&amp;rsquo;s in one?&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Rails 5.1 API app, part 1: Setting up a Rails API app</title>
-      <link>https://paweljw.github.io/2017/07/rails-5.1-api-app-part-1-setting-up-a-rails-api-app/</link>
+      <link>https://paweljw.al/2017/07/rails-5.1-api-app-part-1-setting-up-a-rails-api-app/</link>
       <pubDate>Tue, 11 Jul 2017 15:26:57 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/2017/07/rails-5.1-api-app-part-1-setting-up-a-rails-api-app/</guid>
-      <description>&lt;p&gt;It&amp;rsquo;s time to continue with our foray into Rails API app with Vue.js frontend! In &lt;a href=&#34;https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/&#34;&gt;Part 0&lt;/a&gt; we discussed what technology we&amp;rsquo;ll be using and why - I highly recommend you read through it if you haven&amp;rsquo;t already. Now it&amp;rsquo;s time to get our Rails on.&lt;/p&gt;</description>
+      <guid>https://paweljw.al/2017/07/rails-5.1-api-app-part-1-setting-up-a-rails-api-app/</guid>
+      <description>&lt;p&gt;It&amp;rsquo;s time to continue with our foray into Rails API app with Vue.js frontend! In &lt;a href=&#34;https://paweljw.al/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/&#34;&gt;Part 0&lt;/a&gt; we discussed what technology we&amp;rsquo;ll be using and why - I highly recommend you read through it if you haven&amp;rsquo;t already. Now it&amp;rsquo;s time to get our Rails on.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Rails 5.1 API with Vue.js frontend, part 0: stack choices</title>
-      <link>https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/</link>
+      <link>https://paweljw.al/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/</link>
       <pubDate>Sat, 08 Jul 2017 15:26:57 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/</guid>
+      <guid>https://paweljw.al/2017/07/rails-5.1-api-with-vue.js-frontend-part-0-stack-choices/</guid>
       <description>I&amp;rsquo;ve been rather busy lately, and my progress in learning Vue.js has slowed down. However, I think that I&amp;rsquo;m ready to dive into making something more resembling a real application than Monster Hunter and GalaxyQuest.
 I believe that you learn best when your objective is teaching it to somebody else. Therefore, over the next couple of weeks I&amp;rsquo;ll be making and refining a simple bookstore app1, using Rails 5.1 for the API backend, and vue.</description>
     </item>

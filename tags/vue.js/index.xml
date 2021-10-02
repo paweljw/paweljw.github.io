@@ -2,86 +2,82 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>vue.js on Shenanigans!</title>
-    <link>https://paweljw.github.io/tags/vue.js/</link>
+    <link>https://paweljw.al/tags/vue.js/</link>
     <description>Recent content in vue.js on Shenanigans!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Tue, 03 Apr 2018 13:00:00 +0200</lastBuildDate>
-    
-	<atom:link href="https://paweljw.github.io/tags/vue.js/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 03 Apr 2018 13:00:00 +0200</lastBuildDate><atom:link href="https://paweljw.al/tags/vue.js/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vue.js front end app, part 6: Deploying to S3</title>
-      <link>https://paweljw.github.io/2018/04/vue.js-front-end-app-part-6-deploying-to-s3/</link>
+      <link>https://paweljw.al/2018/04/vue.js-front-end-app-part-6-deploying-to-s3/</link>
       <pubDate>Tue, 03 Apr 2018 13:00:00 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/2018/04/vue.js-front-end-app-part-6-deploying-to-s3/</guid>
+      <guid>https://paweljw.al/2018/04/vue.js-front-end-app-part-6-deploying-to-s3/</guid>
       <description>&lt;p&gt;In this final episode of the series, we&amp;rsquo;ll take a look at deploying our Single Page Application to Amazon Web Services Simple Storage Service (or S3).&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Vue.js front end app, part 5: Data presentation</title>
-      <link>https://paweljw.github.io/2018/01/vue.js-front-end-app-part-5-data-presentation/</link>
+      <link>https://paweljw.al/2018/01/vue.js-front-end-app-part-5-data-presentation/</link>
       <pubDate>Sat, 06 Jan 2018 00:00:00 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/2018/01/vue.js-front-end-app-part-5-data-presentation/</guid>
+      <guid>https://paweljw.al/2018/01/vue.js-front-end-app-part-5-data-presentation/</guid>
       <description>&lt;p&gt;New year, new &lt;del&gt;you&lt;/del&gt; blog post! In this long overdue part we&amp;rsquo;ll strengthen our command of loading data from the server and take a look at presenting it.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Vue.js front end app, part 4: Keeping state with Vuex</title>
-      <link>https://paweljw.github.io/2017/10/vue.js-front-end-app-part-4-keeping-state-with-vuex/</link>
+      <link>https://paweljw.al/2017/10/vue.js-front-end-app-part-4-keeping-state-with-vuex/</link>
       <pubDate>Sat, 28 Oct 2017 14:00:00 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/2017/10/vue.js-front-end-app-part-4-keeping-state-with-vuex/</guid>
-      <description>&lt;p&gt;Last time we built an &lt;a href=&#34;https://paweljw.github.io/2017/09/vue.js-front-end-app-part-3-authentication/&#34;&gt;authentication mechanism&lt;/a&gt; with a pretty glaring bug - you can just set the &lt;code&gt;token&lt;/code&gt; in &lt;code&gt;localStorage&lt;/code&gt; to whatever and it&amp;rsquo;ll let you in. We need to actually read the token, and persist what we&amp;rsquo;ve read so we don&amp;rsquo;t have to do it over and over.&lt;/p&gt;</description>
+      <guid>https://paweljw.al/2017/10/vue.js-front-end-app-part-4-keeping-state-with-vuex/</guid>
+      <description>&lt;p&gt;Last time we built an &lt;a href=&#34;https://paweljw.al/2017/09/vue.js-front-end-app-part-3-authentication/&#34;&gt;authentication mechanism&lt;/a&gt; with a pretty glaring bug - you can just set the &lt;code&gt;token&lt;/code&gt; in &lt;code&gt;localStorage&lt;/code&gt; to whatever and it&amp;rsquo;ll let you in. We need to actually read the token, and persist what we&amp;rsquo;ve read so we don&amp;rsquo;t have to do it over and over.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Vue.js front end app, part 3: Authentication</title>
-      <link>https://paweljw.github.io/2017/09/vue.js-front-end-app-part-3-authentication/</link>
+      <link>https://paweljw.al/2017/09/vue.js-front-end-app-part-3-authentication/</link>
       <pubDate>Sat, 30 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://paweljw.github.io/2017/09/vue.js-front-end-app-part-3-authentication/</guid>
-      <description>&lt;p&gt;In this part we&amp;rsquo;ll allow the user to log in to our frontend app, using the &lt;a href=&#34;https://paweljw.github.io/2017/07/rails-5.1-api-app-part-4-authentication-and-authorization/&#34;&gt;auth mechanism&lt;/a&gt; we&amp;rsquo;ve built on the back end earlier. A lot of topics in this one, so jump right in!&lt;/p&gt;</description>
+      <guid>https://paweljw.al/2017/09/vue.js-front-end-app-part-3-authentication/</guid>
+      <description>&lt;p&gt;In this part we&amp;rsquo;ll allow the user to log in to our frontend app, using the &lt;a href=&#34;https://paweljw.al/2017/07/rails-5.1-api-app-part-4-authentication-and-authorization/&#34;&gt;auth mechanism&lt;/a&gt; we&amp;rsquo;ve built on the back end earlier. A lot of topics in this one, so jump right in!&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Vue.js front end app, part 2: Design is (not) hard</title>
-      <link>https://paweljw.github.io/2017/09/vue.js-front-end-app-part-2-design-is-not-hard/</link>
+      <link>https://paweljw.al/2017/09/vue.js-front-end-app-part-2-design-is-not-hard/</link>
       <pubDate>Sat, 23 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://paweljw.github.io/2017/09/vue.js-front-end-app-part-2-design-is-not-hard/</guid>
+      <guid>https://paweljw.al/2017/09/vue.js-front-end-app-part-2-design-is-not-hard/</guid>
       <description>&lt;p&gt;Now that we have our environment running, the app is initialized, and we know a little bit about what&amp;rsquo;s going on in there, it&amp;rsquo;s time to take a little bit of time to design our front end.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Vue.js front end app, part 1: Setting up the app</title>
-      <link>https://paweljw.github.io/2017/09/vue.js-front-end-app-part-1-setting-up-the-app/</link>
+      <link>https://paweljw.al/2017/09/vue.js-front-end-app-part-1-setting-up-the-app/</link>
       <pubDate>Thu, 07 Sep 2017 17:00:00 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/2017/09/vue.js-front-end-app-part-1-setting-up-the-app/</guid>
+      <guid>https://paweljw.al/2017/09/vue.js-front-end-app-part-1-setting-up-the-app/</guid>
       <description>&lt;p&gt;Last time we’ve seen each other, we’ve just deployed our Rails 5.1 API app. Time to put an end to this! A &lt;em&gt;front&lt;/em&gt; end, of course.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Saturday Project: GalaxyQuest - fuzzily searching github stars</title>
-      <link>https://paweljw.github.io/2017/06/saturday-project-galaxyquest-fuzzily-searching-github-stars/</link>
+      <link>https://paweljw.al/2017/06/saturday-project-galaxyquest-fuzzily-searching-github-stars/</link>
       <pubDate>Thu, 15 Jun 2017 15:47:42 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/2017/06/saturday-project-galaxyquest-fuzzily-searching-github-stars/</guid>
+      <guid>https://paweljw.al/2017/06/saturday-project-galaxyquest-fuzzily-searching-github-stars/</guid>
       <description>&lt;p&gt;&lt;em&gt;Okay, Thursday project. It&amp;rsquo;s my day off this week, what can I do.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;I&amp;rsquo;m still on this Vue.js kick, so while studying Components, I built myself a little app.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Saturday Project: Monster Hunting with Vue.js</title>
-      <link>https://paweljw.github.io/2017/06/saturday-project-monster-hunting-with-vue.js/</link>
+      <link>https://paweljw.al/2017/06/saturday-project-monster-hunting-with-vue.js/</link>
       <pubDate>Sun, 11 Jun 2017 11:48:27 +0200</pubDate>
       
-      <guid>https://paweljw.github.io/2017/06/saturday-project-monster-hunting-with-vue.js/</guid>
+      <guid>https://paweljw.al/2017/06/saturday-project-monster-hunting-with-vue.js/</guid>
       <description>&lt;p&gt;I&amp;rsquo;m studying Vue.js right now - here&amp;rsquo;s a simple app that I made in the process.&lt;/p&gt;</description>
     </item>
     
